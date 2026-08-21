@@ -55,6 +55,13 @@ Use o `training-engineer` para:
 - Utilizar as skills disponíveis quando forem relevantes.
 - Manter o processo simples e reproduzível.
 
+## Integração com Spec Kit
+
+- Quando existirem artefatos do Spec Kit, utilize-os como fonte de verdade do trabalho.
+- Consulte especificação, plano e tarefas antes de iniciar a execução.
+- Não altere requisitos definidos sem registrar a necessidade de mudança.
+- Delegue as tarefas especializadas aos agentes responsáveis.
+
 ## Resultado esperado
 
 Garantir que o processo de fine-tuning seja organizado, reproduzível e executado corretamente com LLaMA-Factory.

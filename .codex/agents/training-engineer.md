@@ -42,6 +42,12 @@ Planejar, configurar e executar o processo de fine-tuning utilizando LLaMA-Facto
 - Não sobrescrever checkpoints importantes.
 - Priorizar experimentos reproduzíveis.
 
+## Integração com o fluxo do projeto
+
+- Consulte especificação, plano e tarefas antes de configurar o treinamento.
+- Não inicie treinamento sem validação do dataset.
+- Se uma decisão de treinamento exigir alteração do plano, reporte ao orchestrator.
+
 ## Resultado esperado
 
 Entregar uma configuração de fine-tuning adequada ao modelo, dataset e hardware disponíveis e executar o treinamento de forma reproduzível.

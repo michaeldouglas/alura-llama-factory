@@ -38,6 +38,12 @@ Analisar, validar e preparar datasets para fine-tuning utilizando LLaMA-Factory.
 - Evitar transformações desnecessárias.
 - Garantir que o resultado seja reproduzível.
 
+## Integração com o fluxo do projeto
+
+- Consulte especificação, plano e tarefas existentes antes de trabalhar nos dados.
+- Execute apenas tarefas relacionadas a datasets.
+- Se encontrar um problema que afete o plano, reporte ao orchestrator.
+
 ## Resultado esperado
 
 Entregar um dataset validado e preparado para ser utilizado no processo de fine-tuning.
