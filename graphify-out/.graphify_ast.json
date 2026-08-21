@@ -1,0 +1,558 @@
+{
+  "nodes": [
+    {
+      "id": "specify_scripts_powershell_check_prerequisites",
+      "label": "check-prerequisites.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/check-prerequisites.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common",
+      "label": "common.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_find_specifyroot",
+      "label": "Find-SpecifyRoot()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_resolve_specifyinitdir",
+      "label": "Resolve-SpecifyInitDir()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L39",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_reporoot",
+      "label": "Get-RepoRoot()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L79",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_currentbranch",
+      "label": "Get-CurrentBranch()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L98",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_save_featurejson",
+      "label": "Save-FeatureJson()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L114",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_featurepathsenv",
+      "label": "Get-FeaturePathsEnv()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L160",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_test_fileexists",
+      "label": "Test-FileExists()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L240",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_test_dirhasfiles",
+      "label": "Test-DirHasFiles()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L251",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_invokeseparator",
+      "label": "Get-InvokeSeparator()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L268",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_format_speckitcommand",
+      "label": "Format-SpecKitCommand()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L302",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_python3command",
+      "label": "Get-Python3Command()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L322",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_normalizedpriority",
+      "label": "Get-NormalizedPriority()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L335",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_sortedextensionids",
+      "label": "Get-SortedExtensionIds()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L352",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_resolve_template",
+      "label": "Resolve-Template()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L416",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_common_resolve_templatecontent",
+      "label": "Resolve-TemplateContent()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L515",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature",
+      "label": "create-new-feature.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_get_highestnumberfromspecs",
+      "label": "Get-HighestNumberFromSpecs()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L53",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_test_specprefixinuse",
+      "label": "Test-SpecPrefixInUse()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L71",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
+      "label": "ConvertTo-CleanBranchName()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_get_fittedbranchname",
+      "label": "Get-FittedBranchName()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L92",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_get_branchname",
+      "label": "Get-BranchName()",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L123",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_resolve_template",
+      "label": "resolve-template.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/resolve-template.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_setup_plan",
+      "label": "setup-plan.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/setup-plan.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "specify_scripts_powershell_setup_tasks",
+      "label": "setup-tasks.ps1",
+      "file_type": "code",
+      "source_file": ".specify/scripts/powershell/setup-tasks.ps1",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "pkg_alura_llama_factory",
+      "label": "alura-llama-factory",
+      "file_type": "code",
+      "type": "package",
+      "ecosystem": "python",
+      "source_file": "pyproject.toml",
+      "source_location": "L1",
+      "version": "0.1.0",
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_find_specifyroot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_resolve_specifyinitdir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_reporoot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_currentbranch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_save_featurejson",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_featurepathsenv",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_test_fileexists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L240",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_test_dirhasfiles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L251",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_invokeseparator",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L268",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_format_speckitcommand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_python3command",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L322",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_normalizedpriority",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L335",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_get_sortedextensionids",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L352",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_resolve_template",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L416",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common",
+      "target": "specify_scripts_powershell_common_resolve_templatecontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L515",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_reporoot",
+      "target": "specify_scripts_powershell_common_resolve_specifyinitdir",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_reporoot",
+      "target": "specify_scripts_powershell_common_find_specifyroot",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_featurepathsenv",
+      "target": "specify_scripts_powershell_common_get_reporoot",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L169",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_featurepathsenv",
+      "target": "specify_scripts_powershell_common_get_currentbranch",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_featurepathsenv",
+      "target": "specify_scripts_powershell_common_save_featurejson",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L187",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_format_speckitcommand",
+      "target": "specify_scripts_powershell_common_get_invokeseparator",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L308",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_get_sortedextensionids",
+      "target": "specify_scripts_powershell_common_get_normalizedpriority",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L397",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_resolve_template",
+      "target": "specify_scripts_powershell_common_get_normalizedpriority",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L454",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_resolve_template",
+      "target": "specify_scripts_powershell_common_get_sortedextensionids",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L496",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_resolve_templatecontent",
+      "target": "specify_scripts_powershell_common_get_normalizedpriority",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L566",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_resolve_templatecontent",
+      "target": "specify_scripts_powershell_common_get_python3command",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L594",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_common_resolve_templatecontent",
+      "target": "specify_scripts_powershell_common_get_sortedextensionids",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/common.ps1",
+      "source_location": "L716",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature",
+      "target": "specify_scripts_powershell_create_new_feature_get_highestnumberfromspecs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature",
+      "target": "specify_scripts_powershell_create_new_feature_test_specprefixinuse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature",
+      "target": "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature",
+      "target": "specify_scripts_powershell_create_new_feature_get_fittedbranchname",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature",
+      "target": "specify_scripts_powershell_create_new_feature_get_branchname",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "specify_scripts_powershell_create_new_feature_get_branchname",
+      "target": "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
+      "source_location": "L164",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "failed_sources": []
+}

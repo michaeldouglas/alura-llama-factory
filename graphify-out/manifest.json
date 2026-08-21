@@ -1,0 +1,86 @@
+{
+  ".codex/hooks.json": {
+    "mtime": 1787354209.398895,
+    "seen": 1787355298.9275382,
+    "ast_hash": "d8e3e5aeb085285a47b94f4ee0576869",
+    "semantic_hash": "d8e3e5aeb085285a47b94f4ee0576869"
+  },
+  ".specify/init-options.json": {
+    "mtime": 1787349791.781483,
+    "seen": 1787355298.9275422,
+    "ast_hash": "e793a1922f5abfac9c5fcfef0314ab92",
+    "semantic_hash": "e793a1922f5abfac9c5fcfef0314ab92"
+  },
+  ".specify/integration.json": {
+    "mtime": 1787349791.6682878,
+    "seen": 1787355298.9275439,
+    "ast_hash": "44951600f8d587893eee03a66e40f840",
+    "semantic_hash": "44951600f8d587893eee03a66e40f840"
+  },
+  ".specify/integrations/codex.manifest.json": {
+    "mtime": 1787349791.662471,
+    "seen": 1787355298.9275444,
+    "ast_hash": "c7a875ad42a3a73bbb2a15a4319a921d",
+    "semantic_hash": "c7a875ad42a3a73bbb2a15a4319a921d"
+  },
+  ".specify/integrations/speckit.manifest.json": {
+    "mtime": 1787349791.742175,
+    "seen": 1787355298.927545,
+    "ast_hash": "f83d7704ddb0d5f0713ca12daf886411",
+    "semantic_hash": "f83d7704ddb0d5f0713ca12daf886411"
+  },
+  ".specify/memory/.constitution-template.json": {
+    "mtime": 1787349791.787062,
+    "seen": 1787355298.927546,
+    "ast_hash": "7e3332a78cec1722b4351c6bf52dfc51",
+    "semantic_hash": "7e3332a78cec1722b4351c6bf52dfc51"
+  },
+  ".specify/scripts/powershell/check-prerequisites.ps1": {
+    "mtime": 1787349791.7002,
+    "seen": 1787355298.927547,
+    "ast_hash": "7d15cf39fa334944408f85393b48cfc8",
+    "semantic_hash": "7d15cf39fa334944408f85393b48cfc8"
+  },
+  ".specify/scripts/powershell/common.ps1": {
+    "mtime": 1787349791.7002,
+    "seen": 1787355298.927548,
+    "ast_hash": "4d8bbd77fb40ed63ccc3cdf05da87c0f",
+    "semantic_hash": "4d8bbd77fb40ed63ccc3cdf05da87c0f"
+  },
+  ".specify/scripts/powershell/create-new-feature.ps1": {
+    "mtime": 1787349791.7079673,
+    "seen": 1787355298.927549,
+    "ast_hash": "fad051375e6dcd47030cc49188472fe1",
+    "semantic_hash": "fad051375e6dcd47030cc49188472fe1"
+  },
+  ".specify/scripts/powershell/resolve-template.ps1": {
+    "mtime": 1787349791.7079673,
+    "seen": 1787355298.9275496,
+    "ast_hash": "645ad018c6297df6e23949ac3e915749",
+    "semantic_hash": "645ad018c6297df6e23949ac3e915749"
+  },
+  ".specify/scripts/powershell/setup-plan.ps1": {
+    "mtime": 1787349791.7168221,
+    "seen": 1787355298.9275503,
+    "ast_hash": "02abf0794256a7423782adc760f0e0ca",
+    "semantic_hash": "02abf0794256a7423782adc760f0e0ca"
+  },
+  ".specify/scripts/powershell/setup-tasks.ps1": {
+    "mtime": 1787349791.721657,
+    "seen": 1787355298.9275515,
+    "ast_hash": "2d69077c635fb433441d259bf3cd6075",
+    "semantic_hash": "2d69077c635fb433441d259bf3cd6075"
+  },
+  ".specify/workflows/workflow-registry.json": {
+    "mtime": 1787349791.781483,
+    "seen": 1787355298.9275525,
+    "ast_hash": "433750df11a3bd20e47433dc2a9b787f",
+    "semantic_hash": "433750df11a3bd20e47433dc2a9b787f"
+  },
+  "pyproject.toml": {
+    "mtime": 1787349490.424681,
+    "seen": 1787355298.927553,
+    "ast_hash": "10a86904ec4ebe19130b3259c8a9e6e5",
+    "semantic_hash": "10a86904ec4ebe19130b3259c8a9e6e5"
+  }
+}

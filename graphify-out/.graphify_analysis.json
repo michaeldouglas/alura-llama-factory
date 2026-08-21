@@ -1,0 +1,150 @@
+{
+  "communities": {
+    "0": [
+      "specify_scripts_powershell_create_new_feature",
+      "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
+      "specify_scripts_powershell_create_new_feature_get_branchname",
+      "specify_scripts_powershell_create_new_feature_get_fittedbranchname",
+      "specify_scripts_powershell_create_new_feature_get_highestnumberfromspecs",
+      "specify_scripts_powershell_create_new_feature_test_specprefixinuse"
+    ],
+    "1": [
+      "specify_scripts_powershell_common",
+      "specify_scripts_powershell_common_format_speckitcommand",
+      "specify_scripts_powershell_common_get_invokeseparator",
+      "specify_scripts_powershell_common_test_dirhasfiles",
+      "specify_scripts_powershell_common_test_fileexists"
+    ],
+    "2": [
+      "specify_scripts_powershell_common_get_normalizedpriority",
+      "specify_scripts_powershell_common_get_python3command",
+      "specify_scripts_powershell_common_get_sortedextensionids",
+      "specify_scripts_powershell_common_resolve_template",
+      "specify_scripts_powershell_common_resolve_templatecontent"
+    ],
+    "3": [
+      "specify_scripts_powershell_common_find_specifyroot",
+      "specify_scripts_powershell_common_get_reporoot",
+      "specify_scripts_powershell_common_resolve_specifyinitdir"
+    ],
+    "4": [
+      "specify_scripts_powershell_common_get_currentbranch",
+      "specify_scripts_powershell_common_get_featurepathsenv",
+      "specify_scripts_powershell_common_save_featurejson"
+    ],
+    "5": [
+      "pkg_alura_llama_factory"
+    ],
+    "6": [
+      "specify_scripts_powershell_check_prerequisites"
+    ],
+    "7": [
+      "specify_scripts_powershell_resolve_template"
+    ],
+    "8": [
+      "specify_scripts_powershell_setup_plan"
+    ],
+    "9": [
+      "specify_scripts_powershell_setup_tasks"
+    ]
+  },
+  "cohesion": {
+    "0": 0.4,
+    "1": 0.5,
+    "2": 0.6,
+    "3": 0.6666666666666666,
+    "4": 0.6666666666666666,
+    "5": 1.0,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "specify_scripts_powershell_common_get_normalizedpriority",
+      "label": "Get-NormalizedPriority()",
+      "degree": 4
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_sortedextensionids",
+      "label": "Get-SortedExtensionIds()",
+      "degree": 4
+    },
+    {
+      "id": "specify_scripts_powershell_common_resolve_templatecontent",
+      "label": "Resolve-TemplateContent()",
+      "degree": 4
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_reporoot",
+      "label": "Get-RepoRoot()",
+      "degree": 4
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_featurepathsenv",
+      "label": "Get-FeaturePathsEnv()",
+      "degree": 4
+    },
+    {
+      "id": "specify_scripts_powershell_common_resolve_template",
+      "label": "Resolve-Template()",
+      "degree": 3
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
+      "label": "ConvertTo-CleanBranchName()",
+      "degree": 2
+    },
+    {
+      "id": "specify_scripts_powershell_create_new_feature_get_branchname",
+      "label": "Get-BranchName()",
+      "degree": 2
+    },
+    {
+      "id": "specify_scripts_powershell_common_format_speckitcommand",
+      "label": "Format-SpecKitCommand()",
+      "degree": 2
+    },
+    {
+      "id": "specify_scripts_powershell_common_get_invokeseparator",
+      "label": "Get-InvokeSeparator()",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Get-FeaturePathsEnv()",
+      "target": "Get-RepoRoot()",
+      "source_files": [
+        ".specify/scripts/powershell/common.ps1",
+        ".specify/scripts/powershell/common.ps1"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 3 → community 4"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Get-RepoRoot()` connect `Community 3` to `Community 1`, `Community 4`?",
+      "why": "High betweenness centrality (0.005) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Get-FeaturePathsEnv()` connect `Community 4` to `Community 1`, `Community 3`?",
+      "why": "High betweenness centrality (0.005) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Resolve-TemplateContent()` connect `Community 2` to `Community 1`?",
+      "why": "High betweenness centrality (0.003) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `alura-llama-factory` to the rest of the system?",
+      "why": "1 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}
