@@ -1,12 +1,13 @@
-model = "gpt-5.6-sol"
+model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
 model_verbosity = "medium"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
+service_tier = "flex"
 
 
 [agents]
 enabled = true
 max_concurrent_threads_per_session = 4
-default_subagent_model = "gpt-5.6-sol"
+default_subagent_model = "gpt-5.6-luna"
 default_subagent_reasoning_effort = "high"

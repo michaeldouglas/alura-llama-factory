@@ -4,7 +4,7 @@
 
 **Prerequisites**: `spec.md`, `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, Constitution 1.1.0
 
-**Current gate**: G0-B approves planning and provisional candidates. G0-C authorizes only versioned scaffolding, guardrails and read-only inspection through the G1 review. Every later operational task remains closed until its named gate.
+**Current gate**: G1-OP-V4 was explicitly approved by the owner on 2026-08-22 for resuming the existing external environment and installing the exact v4 lock with 18 additional Windows XPU/Intel oneMKL wheels. Model, dataset, data preparation, inference, baseline, dry validation and training remain closed until their named gates.
 
 **Tests**: Tests are included because the approved plan requires deterministic schema, lineage, isolation, parsing, metrics, runtime and no-overwrite validation.
 
@@ -62,9 +62,9 @@
 
 ### Gated operational implementation for User Story 1
 
-- [ ] T019 [US1] Record the owner's G1-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g1-op.json
-- [ ] T020 [US1] Implement isolated CPython 3.12 environment creation and locked installation logic without executing it in experiments/001-resource-efficient-finetune/scripts/create_environment.ps1
-- [ ] T021 [US1] After approved G1-OP only, execute experiments/001-resource-efficient-finetune/scripts/create_environment.ps1 and preserve its package-resolution evidence
+- [X] T019 [US1] Record the owner's G1-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g1-op.json
+- [X] T020 [US1] Implement isolated CPython 3.12 environment creation and locked installation logic without executing it in experiments/001-resource-efficient-finetune/scripts/create_environment.ps1
+- [X] T021 [US1] After approved G1-OP-V4 only, execute experiments/001-resource-efficient-finetune/scripts/create_environment.ps1 and preserve its package-resolution evidence
 - [ ] T022 [US1] Implement dependency, LLaMA-Factory and synthetic XPU validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1
 - [ ] T023 [US1] After T021 only, execute experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1 and record G2 READY or BLOCKED in experiments/001-resource-efficient-finetune/reports/runtime-g2.json
 - [ ] T024 [US1] Have the orchestrator record the G2 review and exact model download size, cache path and G2-OP request in experiments/001-resource-efficient-finetune/reports/runtime-g2-review.md
@@ -217,9 +217,21 @@ The presence or implementation of a task is not authorization to execute an oper
 
 **Purpose**: Close the G1 metadata gap under the owner's narrow HTTPS GET/HEAD authorization. This phase must complete before T019 and does not authorize environment creation or installation.
 
-- [X] T070 [US1] Record the exact metadata-only authorization, endpoint allowlist, allowed HTTP methods, permitted outputs and prohibited payload/actions in experiments/001-resource-efficient-finetune/manifests/gates/g1-metadata.json per FR-010 (missing)
-- [X] T071 [US1] Implement and test fail-closed metadata resolution that rejects non-allowlisted hosts, non-GET/HEAD methods and package payload downloads in experiments/001-resource-efficient-finetune/scripts/resolve_package_metadata.py and experiments/001-resource-efficient-finetune/tests/test_package_metadata_resolution.py per plan: locked dependencies (missing)
-- [X] T072 [US1] Execute the metadata-only resolver and write immutable CPython identity, dependency candidates, hashes, sizes, compatibility evidence and transfer/cache/install estimates or explicit unresolved evidence to experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock.json per G1-OP evidence (missing)
-- [X] T073 [US1] Have the orchestrator review the metadata lock and record READY, BLOCKED or NEEDS_AUTHORIZATION before T019 in experiments/001-resource-efficient-finetune/reports/runtime-metadata-review.md per Constitution II and G1 (missing)
+- [X] T070 [US1] Record the exact G1-METADATA-2 authorization, endpoint allowlist, allowed HTTP methods, permitted outputs and prohibited payload/actions in experiments/001-resource-efficient-finetune/manifests/gates/g1-metadata-2.json per FR-010
+- [X] T071 [US1] Implement and test fail-closed recursive metadata resolution that rejects non-allowlisted hosts, non-GET/HEAD methods and package payload downloads in experiments/001-resource-efficient-finetune/scripts/resolve_package_metadata.py and experiments/001-resource-efficient-finetune/tests/test_package_metadata_resolution.py
+- [X] T072 [US1] Execute the metadata-only resolver and write immutable CPython identity, dependency candidates, hashes, sizes, compatibility evidence and transfer/cache/install estimates or explicit unresolved evidence to experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-v2.json
+- [X] T073 [US1] Have the orchestrator review the G1-METADATA-2 lock and record READY, BLOCKED or NEEDS_AUTHORIZATION before T019 in experiments/001-resource-efficient-finetune/reports/runtime-metadata-review-g1-metadata-2.md per Constitution II and G1
+- [X] T074 [US1] Record the owner's 2026-08-22 authorization and the explicit `omegaconf==2.0.6` remediation candidate in the Spec Kit and governance manifest
+- [X] T075 [US1] Add a fail-closed exact-version override interface to the metadata resolver and test normalization, stability and constraint enforcement in experiments/001-resource-efficient-finetune/scripts/resolve_package_metadata.py and experiments/001-resource-efficient-finetune/tests/test_package_metadata_resolution.py
+- [X] T076 [US1] Execute the metadata-only resolver with `omegaconf==2.0.6` and write the versioned candidate lock to experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-omegaconf-2.0.6.json without overwriting the prior blocked lock
+- [X] T077 [US1] Fix legacy wildcard lower-bound handling such as `PyYAML (>=5.1.*)` in the metadata resolver and add a regression test without relaxing the wheel-only policy
+- [X] T078 [US1] Execute the corrected metadata-only resolver with `omegaconf==2.0.6` and write the immutable v2 candidate lock to experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-omegaconf-2.0.6-v2.json
+- [X] T079 [US1] Have the orchestrator review the revised v2 lock and record the G1-OP proposal boundary or remaining blocker in experiments/001-resource-efficient-finetune/reports/runtime-metadata-review-g1-metadata-2-omegaconf-2.0.6.md
+- [X] T080 [US1] Preserve the partial G1-OP installation evidence and block completion when `uv pip check` finds platform-specific XPU requirements absent from the approved lock
+- [X] T081 [US1] Extend metadata resolution with the Windows XPU Intel/oneMKL runtime graph and the pinned `pytorch-triton-xpu==3.5.0` wheel candidate
+- [X] T082 [US1] Generate the v3 metadata lock with the platform-specific XPU runtime set; the only remaining failure was the index filename normalization for `pytorch-triton-xpu`
+- [X] T083 [US1] Fix XPU index filename normalization for hyphen/underscore package names and regression-check the `pytorch-triton-xpu` candidate
+- [X] T084 [US1] Generate the v4 metadata lock with the platform-specific XPU runtime set before requesting revised G1-OP approval
+- [X] T085 [US1] Obtain explicit owner approval for the v4 lock hash, 18 additional XPU runtime packages, transfer estimate and existing external environment path
 
-**Checkpoint**: T019 remains closed unless T073 concludes that a complete, owner-reviewable G1-OP proposal can be formulated. Metadata resolution never implies installation authority.
+**Checkpoint**: T019 remains closed unless T079 concludes that a complete, owner-reviewable G1-OP proposal can be formulated. Metadata resolution never implies installation authority.

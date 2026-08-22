@@ -189,6 +189,32 @@ The numeric mapping is `0→negativo`, `1→neutro`, `2→positivo`. Source revi
 - Full fine-tuning: rejected as inconsistent with the low-resource objective.
 - QLoRA: not selected because the Intel Arc/bitsandbytes path is not established for this machine.
 
+## Decision 9 — Wheel-only OmegaConf remediation
+
+**Decision**: Evaluate `omegaconf==2.0.6` as an experiment-level dependency override in a new
+metadata-only lock, while preserving the LLaMA-Factory v0.9.5 source revision and the previous
+blocked lock.
+
+**Rationale**:
+
+- The unpinned latest OmegaConf candidate selected by the first recursive resolver introduced
+  `antlr4-python3-runtime==4.9.*`, for which no CPython 3.12/Windows wheel was available.
+- The owner explicitly authorized this narrow remediation on 2026-08-22.
+- The candidate exposes a universal wheel and does not introduce the blocked `antlr4` dependency
+  in official package metadata; installed runtime behavior remains an empirical G2 question.
+
+**Alternatives considered**:
+
+- Install the `antlr4` source distribution: rejected because source builds are prohibited by the
+  current runtime policy.
+- Change Python, use CPU, WSL2, or remote compute: rejected because each would materially change
+  the approved experiment scope or violate the local-only resource policy.
+
 ## Research Conclusion
 
-No implementation ambiguity remains. The owner accepted the selected model and dataset as **provisional candidates** at Gate G0-B. This decision does not accept the dataset terms for retrieval and does not authorize any operational action. The next transition is read-only G1 environment review followed, if satisfactory, by a separate G1-OP authorization request. Data retrieval, model retrieval, environment installation, preparation, dry validation and training remain unauthorized.
+No implementation ambiguity remains for the metadata remediation. The owner accepted the selected model
+and dataset as **provisional candidates** at Gate G0-B and authorized only the new wheel-only dependency
+review described in Decision 9. This decision does not accept the dataset terms for retrieval and does
+not authorize any operational action. The next transition after a successful lock review is a separate
+G1-OP authorization request. Data retrieval, model retrieval, environment installation, preparation,
+dry validation and training remain unauthorized.

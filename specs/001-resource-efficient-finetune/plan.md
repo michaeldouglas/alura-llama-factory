@@ -1,10 +1,10 @@
 # Implementation Plan: Resource-Efficient First Fine-Tuning Experiment
 
-**Branch**: `feature/harness` | **Feature ID**: `001-resource-efficient-finetune` | **Date**: 2026-08-21 | **Spec**: [spec.md](spec.md)
+**Branch**: `feature/harness-completo` | **Feature ID**: `001-resource-efficient-finetune` | **Date**: 2026-08-21 | **Spec**: [spec.md](spec.md)
 
 **Input**: Approved feature specification from `specs/001-resource-efficient-finetune/spec.md`
 
-**Gate State**: G0-B and G0-C are approved. The first metadata-only resolution completed within its authorization, but T073 returned `NEEDS_AUTHORIZATION`: a second metadata gate is required for the PyTorch CDN and recursive transitive resolution before G1-OP can be formulated. Environment creation, dependency installation, model retrieval, dataset retrieval, data preparation, inference, dry validation and training remain unauthorized.
+**Gate State**: G1-OP-V4 was approved by the owner on 2026-08-22 for the exact v4 lock and the 18 additional Windows XPU/Intel oneMKL runtimes. The approved external CPython 3.12.12 environment now has all 121 locked requirements plus pinned LLaMA-Factory; `uv pip check` passes and the post-install XPU probe detects one device. G2, model retrieval, dataset retrieval, data preparation, inference, baseline, dry validation and training remain unauthorized.
 
 ## Summary
 
@@ -16,7 +16,7 @@ The implementation follows the constitutional order: approve sources and environ
 
 **Language/Version**: CPython 3.12 x64 for the training environment; PowerShell for Windows orchestration. The existing project setting of Python 3.14 is not used for training because LlamaFactory v0.9.5 publishes tested classifiers only through Python 3.13.
 
-**Primary Dependencies**: LlamaFactory v0.9.5 (`7af909522a951e3ad9f022ea6f88b6755257eaa5`); PyTorch XPU 2.9.1, torchvision XPU 0.24.1, torchaudio XPU 2.9.1; compatible, locked releases of Transformers, Datasets, Accelerate, PEFT and TRL within LlamaFactory v0.9.5 constraints; scikit-learn for accuracy and macro-F1.
+**Primary Dependencies**: LlamaFactory v0.9.5 (`7af909522a951e3ad9f022ea6f88b6755257eaa5`); PyTorch XPU 2.9.1, torchvision XPU 0.24.1, torchaudio XPU 2.9.1; `omegaconf==2.0.6` as an experiment-level wheel-only compatibility candidate; compatible, locked releases of Transformers, Datasets, Accelerate, PEFT and TRL within LlamaFactory v0.9.5 constraints; scikit-learn for accuracy and macro-F1.
 
 **Storage**: Versioned manifests, configuration proposals, validation reports and evaluation summaries under `experiments/001-resource-efficient-finetune/`. Non-versioned model cache, source data, derived data, environment cache, checkpoints and logs under `%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/`, with unique run identifiers and no overwrite.
 
@@ -68,6 +68,8 @@ The complete evidence, rationale and alternatives are recorded in [research.md](
 5. Use stable Windows XPU wheels as the candidate runtime and require synthetic XPU verification before retrieving model weights.
 6. Keep LoRA SFT only as a provisional direction. The `training-engineer` chooses and justifies the final strategy after the dataset is declared ready.
 7. Preserve the original validation and test splits. Use validation only for development decisions and freeze test for final baseline-versus-adapter comparison.
+8. Evaluate `omegaconf==2.0.6` through a new metadata-only lock because the unpinned latest release selected by the first resolver introduced a source-only CPython 3.12/Windows dependency. Treat the pin as provisional until G2 runtime validation passes.
+9. Resolve the Windows XPU wheel's platform-specific Intel/oneMKL dependencies from its installed wheel metadata and official package metadata before declaring G1-OP complete.
 
 ## Phase 1: Design
 
@@ -135,6 +137,7 @@ experiments/001-resource-efficient-finetune/
 |---|---|---|---|
 | G0-B — plan and source decision | Exact model/dataset revisions, licenses, terms and documented risks are reviewed | Orchestrator + experiment owner | Approves the approach and candidates only; allows requests for separate operational authorizations |
 | G0-C — non-operational implementation | Owner approves versioned scaffolding, guardrails and read-only inspections while explicitly excluding installation, retrieval, data preparation, inference, dry validation and training | Experiment owner | Allows implementation through the G1 read-only review only |
+| G1-METADATA-2 remediation — dependency candidate | Owner-approved metadata-only review of the explicit OmegaConf override, with wheel/hash/size and transitive graph evidence | Orchestrator | Allows formulation of a revised G1-OP proposal only; does not authorize installation |
 | G1 — environment identity | Complete read-only Windows build/channel, driver, Python, uv, RAM/commit and storage record | Orchestrator | Allows owner review of the dependency-installation proposal |
 | G1-OP — dependency installation authorization | Owner explicitly approves the exact environment location, package set, network access and expected disk impact | Experiment owner | Allows creation of the isolated environment and dependency installation |
 | G2 — dependency/runtime | Locked stable wheels, clean dependency check, LlamaFactory environment report, XPU synthetic smoke tests | Orchestrator | Allows owner review of the model-retrieval proposal |

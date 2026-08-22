@@ -1,12 +1,17 @@
 # Feature Specification: Resource-Efficient First Fine-Tuning Experiment
 
-**Feature Branch**: `feature/harness` (repository branch); Spec Kit feature identifier: `001-resource-efficient-finetune`
+**Feature Branch**: `feature/harness-completo` (repository branch); Spec Kit feature identifier: `001-resource-efficient-finetune`
 
 **Created**: 2026-08-21
 
 **Status**: Approved (Gate G0)
 
 **Approved**: 2026-08-21 by the experiment owner; approval covers requirements only and does not authorize installation, artifact retrieval, or training.
+
+**Runtime remediation authorization**: 2026-08-22, the experiment owner authorized a metadata-only
+review of a wheel-backed OmegaConf version to remediate the CPython 3.12/Windows dependency blocker.
+This authorization does not authorize environment creation, package installation, artifact retrieval,
+data preparation, inference, dry validation, or training.
 
 **Input**: User description: "Quero fazer um fine-tuning com LLaMA-Factory. Como é apenas um primeiro experimento, quero usar um modelo pequeno e um dataset simples para que o treinamento seja rápido e consuma poucos recursos. Prepare e conduza o processo para mim."
 
@@ -110,6 +115,19 @@ As the experiment owner, I want a concise before-and-after evaluation and a comp
 - **FR-018**: Secrets, credentials, private data, model weights, caches, and generated checkpoints MUST NOT be added to version control; their approved non-versioned locations MUST be documented before retrieval or generation.
 - **FR-019**: The prompt, template, label definitions, parsing rule, evaluation set, and scoring procedure MUST be frozen before recording the unchanged base result and MUST remain unchanged for final evaluation.
 - **FR-020**: The experiment MUST run only on the confirmed local machine, incur no external-compute charge, use a base model with no more than 1.5 billion parameters, and limit the authorized principal training run to 60 minutes of elapsed time. If these limits are not feasible, the experiment MUST be reported as blocked rather than moved to paid or remote compute.
+- **FR-021**: When a direct LLaMA-Factory dependency is unpinned and its newest compatible release introduces a target-incompatible transitive dependency, the process MAY evaluate an explicitly pinned, stable, wheel-backed alternative in a metadata-only lock. The alternative MUST preserve the LLaMA-Factory source revision, satisfy the declared dependency constraint, record its version, hashes, sizes and rationale, and remain subject to G2 runtime compatibility validation before installation or training.
+- **FR-022**: The final runtime lock MUST include platform-specific runtime dependencies declared by the selected accelerator wheels, and the installed environment MUST pass dependency consistency checks before G2 can be declared ready. A PyPI metadata record for a different platform variant MUST NOT be treated as complete evidence for an XPU wheel.
+
+### Approved Runtime Remediation
+
+- The target remains CPython 3.12 x64 on Windows.
+- The LLaMA-Factory v0.9.5 source revision remains unchanged.
+- The metadata-only candidate to evaluate is `omegaconf==2.0.6`, selected because the official
+  package metadata exposes a universal wheel and no `antlr4-python3-runtime` dependency for that
+  release.
+- This is a compatibility candidate, not a runtime-readiness decision. G2 MUST validate the
+  installed LLaMA-Factory environment and OmegaConf behavior before the experiment proceeds.
+- The previous blocked lock remains immutable and must not be overwritten.
 
 ### Classification Policy
 

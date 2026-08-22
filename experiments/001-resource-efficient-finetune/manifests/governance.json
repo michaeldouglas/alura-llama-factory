@@ -4,7 +4,7 @@
     "version": "1.1.0"
   },
   "feature_id": "001-resource-efficient-finetune",
-  "repository_branch": "feature/harness",
+  "repository_branch": "feature/harness-completo",
   "source_of_truth": {
     "plan": "specs/001-resource-efficient-finetune/plan.md",
     "specification": "specs/001-resource-efficient-finetune/spec.md",
@@ -35,6 +35,65 @@
         "dataset_retrieval",
         "data_preparation",
         "inference",
+        "dry_validation",
+        "training"
+      ]
+    },
+    {
+      "approved_at": "2026-08-22",
+      "decision": "APPROVED",
+      "gate_id": "G1-METADATA-2-REMEDIATION",
+      "scope": "metadata-only review of explicit omegaconf==2.0.6 wheel-backed dependency override",
+      "explicitly_excluded": [
+        "environment_creation",
+        "dependency_installation",
+        "model_retrieval",
+        "dataset_retrieval",
+        "data_preparation",
+        "inference",
+        "dry_validation",
+        "training"
+      ]
+    },
+    {
+      "approved_at": "2026-08-22",
+      "decision": "APPROVED",
+      "gate_id": "G1-OP",
+      "scope": "Create the isolated CPython 3.12.12 environment and install the exact G1 metadata lock v2.",
+      "lock_path": "experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-omegaconf-2.0.6-v2.json",
+      "environment_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/environments/py312-xpu",
+      "explicitly_excluded": [
+        "source_dependency_builds",
+        "silent_cpu_fallback",
+        "model_retrieval",
+        "dataset_retrieval",
+        "data_preparation",
+        "inference",
+        "run_baseline",
+        "dry_validation",
+        "training"
+      ]
+    },
+    {
+      "approved_at": "2026-08-22",
+      "decision": "APPROVED",
+      "gate_id": "G1-OP-V4",
+      "scope": "Resume the existing isolated CPython 3.12.12 environment and install the exact v4 metadata lock with the 18 additional Windows XPU/Intel oneMKL runtime wheels.",
+      "supersedes": "experiments/001-resource-efficient-finetune/manifests/gates/g1-op.json",
+      "lock_path": "experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-omegaconf-2.0.6-xpu-v4.json",
+      "lock_sha256": "E4C14B7F81B30B8D5958AC26D7CBB033E8BADF20FA56041DF87231AD1E04BD5A",
+      "environment_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/environments/py312-xpu",
+      "resolved_requirement_count": 121,
+      "known_additional_transfer_bytes": 728159800,
+      "known_total_transfer_bytes": 1665242560,
+      "additional_package_count": 18,
+      "resume_partial_environment": true,
+      "explicitly_excluded": [
+        "model_retrieval",
+        "dataset_retrieval",
+        "data_preparation",
+        "inference",
+        "run_baseline",
         "dry_validation",
         "training"
       ]
