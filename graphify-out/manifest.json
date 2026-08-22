@@ -82,5 +82,155 @@
     "seen": 1787355298.927553,
     "ast_hash": "10a86904ec4ebe19130b3259c8a9e6e5",
     "semantic_hash": "10a86904ec4ebe19130b3259c8a9e6e5"
+  },
+  ".agents/skills/dataset-preparation/SKILL.md": {
+    "mtime": 1787352032.7984006,
+    "seen": 1787356589.3505375,
+    "ast_hash": "9a1b67d132fb9e36d23d04b0fdfa3067",
+    "semantic_hash": "9a1b67d132fb9e36d23d04b0fdfa3067"
+  },
+  ".agents/skills/fine-tuning-strategy/SKILL.md": {
+    "mtime": 1787352039.8196716,
+    "seen": 1787356589.3505385,
+    "ast_hash": "29db84d24178e7b7a4d2aec5b1d2b981",
+    "semantic_hash": "29db84d24178e7b7a4d2aec5b1d2b981"
+  },
+  ".agents/skills/llama-factory/SKILL.md": {
+    "mtime": 1787352044.2387981,
+    "seen": 1787356589.3505392,
+    "ast_hash": "4134fb24d2a008d5640e8744847f7816",
+    "semantic_hash": "4134fb24d2a008d5640e8744847f7816"
+  },
+  ".agents/skills/speckit-analyze/SKILL.md": {
+    "mtime": 1787349791.6054163,
+    "seen": 1787356589.3505397,
+    "ast_hash": "d4c06d6854c67e7003fc45f5f09c00b5",
+    "semantic_hash": "d4c06d6854c67e7003fc45f5f09c00b5"
+  },
+  ".agents/skills/speckit-checklist/SKILL.md": {
+    "mtime": 1787349791.649387,
+    "seen": 1787356589.3505406,
+    "ast_hash": "8a3c353e9fab06453e160cb0669fa579",
+    "semantic_hash": "8a3c353e9fab06453e160cb0669fa579"
+  },
+  ".agents/skills/speckit-clarify/SKILL.md": {
+    "mtime": 1787349791.6214266,
+    "seen": 1787356589.350541,
+    "ast_hash": "7d1ff2092f0caa6bbb3e21a43f2563e0",
+    "semantic_hash": "7d1ff2092f0caa6bbb3e21a43f2563e0"
+  },
+  ".agents/skills/speckit-constitution/SKILL.md": {
+    "mtime": 1787349791.6214266,
+    "seen": 1787356589.3505416,
+    "ast_hash": "235ff05bd4cc8dc1963b023d75530b1a",
+    "semantic_hash": "235ff05bd4cc8dc1963b023d75530b1a"
+  },
+  ".agents/skills/speckit-converge/SKILL.md": {
+    "mtime": 1787349791.6386414,
+    "seen": 1787356589.350542,
+    "ast_hash": "95c3e60d138c7178e5775f1857f0d69c",
+    "semantic_hash": "95c3e60d138c7178e5775f1857f0d69c"
+  },
+  ".agents/skills/speckit-implement/SKILL.md": {
+    "mtime": 1787349791.6214266,
+    "seen": 1787356589.350543,
+    "ast_hash": "a3efaedc4d54ac3608e62965490d914e",
+    "semantic_hash": "a3efaedc4d54ac3608e62965490d914e"
+  },
+  ".agents/skills/speckit-plan/SKILL.md": {
+    "mtime": 1787349791.6428807,
+    "seen": 1787356589.3505435,
+    "ast_hash": "c3c3de90822d4ee76dda0b14651adf0b",
+    "semantic_hash": "c3c3de90822d4ee76dda0b14651adf0b"
+  },
+  ".agents/skills/speckit-specify/SKILL.md": {
+    "mtime": 1787349791.6545382,
+    "seen": 1787356589.3505442,
+    "ast_hash": "95c1231299ee5d46629e02c1a09350c3",
+    "semantic_hash": "95c1231299ee5d46629e02c1a09350c3"
+  },
+  ".agents/skills/speckit-tasks/SKILL.md": {
+    "mtime": 1787349791.6545382,
+    "seen": 1787356589.350545,
+    "ast_hash": "ea8f6459e5818fd7663bfb8075bb36b5",
+    "semantic_hash": "ea8f6459e5818fd7663bfb8075bb36b5"
+  },
+  ".agents/skills/speckit-taskstoissues/SKILL.md": {
+    "mtime": 1787349791.662471,
+    "seen": 1787356589.3505456,
+    "ast_hash": "288dffbe8b8e85a2aad33820591c39e8",
+    "semantic_hash": "288dffbe8b8e85a2aad33820591c39e8"
+  },
+  ".codex/agents/dataset-specialist.md": {
+    "mtime": 1787350717.9484982,
+    "seen": 1787356589.3505464,
+    "ast_hash": "47d3a8f912dd9ec9c9a1440b8701034b",
+    "semantic_hash": "47d3a8f912dd9ec9c9a1440b8701034b"
+  },
+  ".codex/agents/orchestrator.md": {
+    "mtime": 1787350519.0451856,
+    "seen": 1787356589.3505473,
+    "ast_hash": "ca89c16cbfd6d1a69e37a840c68149bd",
+    "semantic_hash": "ca89c16cbfd6d1a69e37a840c68149bd"
+  },
+  ".codex/agents/training-engineer.md": {
+    "mtime": 1787350754.564468,
+    "seen": 1787356589.3505478,
+    "ast_hash": "00f9f0d22c1406d2690424b91e9ec2f3",
+    "semantic_hash": "00f9f0d22c1406d2690424b91e9ec2f3"
+  },
+  ".specify/memory/constitution.md": {
+    "mtime": 1787352831.9071803,
+    "seen": 1787356589.3505483,
+    "ast_hash": "c4d95acdf955b90cfdb9c5ad601737f8",
+    "semantic_hash": "c4d95acdf955b90cfdb9c5ad601737f8"
+  },
+  ".specify/templates/checklist-template.md": {
+    "mtime": 1787349791.721657,
+    "seen": 1787356589.3505487,
+    "ast_hash": "8db5de52d1a7ff0b14ad9058082f5bd1",
+    "semantic_hash": "8db5de52d1a7ff0b14ad9058082f5bd1"
+  },
+  ".specify/templates/constitution-template.md": {
+    "mtime": 1787349791.721657,
+    "seen": 1787356589.3505495,
+    "ast_hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "semantic_hash": "dcefb6b60e7cb3db2e966977b6f02f18"
+  },
+  ".specify/templates/plan-template.md": {
+    "mtime": 1787349791.7319367,
+    "seen": 1787356589.3505502,
+    "ast_hash": "e523538f050018022309e2884ac55fc8",
+    "semantic_hash": "e523538f050018022309e2884ac55fc8"
+  },
+  ".specify/templates/spec-template.md": {
+    "mtime": 1787349791.7319367,
+    "seen": 1787356589.350551,
+    "ast_hash": "45ac8538bc1220324c9f0d610145b53f",
+    "semantic_hash": "45ac8538bc1220324c9f0d610145b53f"
+  },
+  ".specify/templates/tasks-template.md": {
+    "mtime": 1787349791.7319367,
+    "seen": 1787356589.3505514,
+    "ast_hash": "4248112e7b9d05e79eda00cf8e5b9bb0",
+    "semantic_hash": "4248112e7b9d05e79eda00cf8e5b9bb0"
+  },
+  ".specify/workflows/speckit/workflow.yml": {
+    "mtime": 1787349576.601062,
+    "seen": 1787356589.350552,
+    "ast_hash": "06fd89e478bb8e0e668917a5f02f9055",
+    "semantic_hash": "06fd89e478bb8e0e668917a5f02f9055"
+  },
+  "AGENTS.md": {
+    "mtime": 1787354582.6878157,
+    "seen": 1787356589.3505526,
+    "ast_hash": "21816f55365e9b6d4a6b3360b7423fa5",
+    "semantic_hash": "21816f55365e9b6d4a6b3360b7423fa5"
+  },
+  "README.md": {
+    "mtime": 1787349490.424681,
+    "seen": 1787356589.3505533,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   }
 }

@@ -1,6 +1,94 @@
 {
   "communities": {
     "0": [
+      "_agents_skills_dataset_preparation_skill_dataset_preparation",
+      "_agents_skills_dataset_preparation_skill_dataset_validation",
+      "_agents_skills_dataset_preparation_skill_original_dataset_immutability",
+      "_agents_skills_dataset_preparation_skill_transformation_audit_trail",
+      "_agents_skills_llama_factory_skill_training_configuration_validation",
+      "_codex_agents_dataset_specialist_dataset_readiness_report",
+      "_codex_agents_dataset_specialist_dataset_specialist",
+      "_codex_agents_orchestrator_orchestrator",
+      "_codex_agents_orchestrator_specialized_delegation",
+      "_codex_agents_training_engineer_authorized_training_execution",
+      "_codex_agents_training_engineer_resource_capacity_assessment",
+      "_codex_agents_training_engineer_training_engineer",
+      "_specify_memory_constitution_alura_llama_factory_constitution",
+      "_specify_memory_constitution_dataset_integrity_before_training",
+      "_specify_memory_constitution_governance",
+      "_specify_memory_constitution_orchestration_and_specialized_skills",
+      "_specify_memory_constitution_quality_gate_flow",
+      "_specify_memory_constitution_resource_oriented_strategy",
+      "_specify_memory_constitution_spec_kit_before_implementation",
+      "agents_fine_tuning_harness",
+      "agents_graphify_knowledge_graph",
+      "agents_spec_kit_source_of_truth",
+      "agents_specialized_agent_delegation"
+    ],
+    "1": [
+      "_agents_skills_speckit_analyze_skill_cross_artifact_consistency_analysis",
+      "_agents_skills_speckit_analyze_skill_speckit_analyze",
+      "_agents_skills_speckit_converge_skill_append_only_gap_closure",
+      "_agents_skills_speckit_converge_skill_speckit_converge",
+      "_agents_skills_speckit_implement_skill_dependency_ordered_task_execution",
+      "_agents_skills_speckit_implement_skill_speckit_implement",
+      "_agents_skills_speckit_plan_skill_research_then_design_planning",
+      "_agents_skills_speckit_plan_skill_speckit_plan",
+      "_agents_skills_speckit_tasks_skill_speckit_tasks",
+      "_agents_skills_speckit_tasks_skill_story_organized_task_decomposition",
+      "_agents_skills_speckit_taskstoissues_skill_deduplicated_github_issue_conversion",
+      "_agents_skills_speckit_taskstoissues_skill_speckit_taskstoissues",
+      "_specify_templates_plan_template_constitution_gated_planning",
+      "_specify_templates_plan_template_implementation_plan_template",
+      "_specify_templates_spec_template_feature_specification_template",
+      "_specify_templates_spec_template_independently_testable_prioritized_user_stories",
+      "_specify_templates_tasks_template_phased_dependency_ordered_delivery",
+      "_specify_templates_tasks_template_task_list_template",
+      "_specify_workflows_speckit_workflow_full_sdd_cycle_workflow",
+      "_specify_workflows_speckit_workflow_review_gated_spec_driven_development"
+    ],
+    "2": [
+      "specify_scripts_powershell_common",
+      "specify_scripts_powershell_common_find_specifyroot",
+      "specify_scripts_powershell_common_format_speckitcommand",
+      "specify_scripts_powershell_common_get_currentbranch",
+      "specify_scripts_powershell_common_get_featurepathsenv",
+      "specify_scripts_powershell_common_get_invokeseparator",
+      "specify_scripts_powershell_common_get_normalizedpriority",
+      "specify_scripts_powershell_common_get_python3command",
+      "specify_scripts_powershell_common_get_reporoot",
+      "specify_scripts_powershell_common_get_sortedextensionids",
+      "specify_scripts_powershell_common_resolve_specifyinitdir",
+      "specify_scripts_powershell_common_resolve_template",
+      "specify_scripts_powershell_common_resolve_templatecontent",
+      "specify_scripts_powershell_common_save_featurejson",
+      "specify_scripts_powershell_common_test_dirhasfiles",
+      "specify_scripts_powershell_common_test_fileexists"
+    ],
+    "3": [
+      "_agents_skills_fine_tuning_strategy_skill_fine_tuning_strategy",
+      "_agents_skills_fine_tuning_strategy_skill_lora",
+      "_agents_skills_fine_tuning_strategy_skill_qlora",
+      "_agents_skills_fine_tuning_strategy_skill_resource_aware_hyperparameter_selection",
+      "_agents_skills_fine_tuning_strategy_skill_supervised_fine_tuning",
+      "_agents_skills_fine_tuning_strategy_skill_validated_dataset_prerequisite",
+      "_agents_skills_llama_factory_skill_checkpoint_preservation",
+      "_agents_skills_llama_factory_skill_llama_factory",
+      "_agents_skills_llama_factory_skill_reproducible_configuration",
+      "_specify_memory_constitution_llama_factory_canonical_interface",
+      "_specify_memory_constitution_reproducible_registered_experiments"
+    ],
+    "4": [
+      "_agents_skills_speckit_checklist_skill_speckit_checklist",
+      "_agents_skills_speckit_checklist_skill_unit_tests_for_requirements_writing",
+      "_agents_skills_speckit_clarify_skill_incremental_spec_clarification",
+      "_agents_skills_speckit_clarify_skill_speckit_clarify",
+      "_agents_skills_speckit_specify_skill_speckit_specify",
+      "_agents_skills_speckit_specify_skill_technology_agnostic_feature_specification",
+      "_specify_templates_checklist_template_custom_checklist_template",
+      "_specify_templates_checklist_template_reviewer_owned_marker_semantics"
+    ],
+    "5": [
       "specify_scripts_powershell_create_new_feature",
       "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
       "specify_scripts_powershell_create_new_feature_get_branchname",
@@ -8,143 +96,180 @@
       "specify_scripts_powershell_create_new_feature_get_highestnumberfromspecs",
       "specify_scripts_powershell_create_new_feature_test_specprefixinuse"
     ],
-    "1": [
-      "specify_scripts_powershell_common",
-      "specify_scripts_powershell_common_format_speckitcommand",
-      "specify_scripts_powershell_common_get_invokeseparator",
-      "specify_scripts_powershell_common_test_dirhasfiles",
-      "specify_scripts_powershell_common_test_fileexists"
-    ],
-    "2": [
-      "specify_scripts_powershell_common_get_normalizedpriority",
-      "specify_scripts_powershell_common_get_python3command",
-      "specify_scripts_powershell_common_get_sortedextensionids",
-      "specify_scripts_powershell_common_resolve_template",
-      "specify_scripts_powershell_common_resolve_templatecontent"
-    ],
-    "3": [
-      "specify_scripts_powershell_common_find_specifyroot",
-      "specify_scripts_powershell_common_get_reporoot",
-      "specify_scripts_powershell_common_resolve_specifyinitdir"
-    ],
-    "4": [
-      "specify_scripts_powershell_common_get_currentbranch",
-      "specify_scripts_powershell_common_get_featurepathsenv",
-      "specify_scripts_powershell_common_save_featurejson"
-    ],
-    "5": [
-      "pkg_alura_llama_factory"
-    ],
     "6": [
-      "specify_scripts_powershell_check_prerequisites"
+      "_agents_skills_speckit_constitution_skill_semantic_versioned_governance",
+      "_agents_skills_speckit_constitution_skill_speckit_constitution",
+      "_specify_templates_constitution_template_core_principles_and_governance",
+      "_specify_templates_constitution_template_project_constitution_template"
     ],
     "7": [
-      "specify_scripts_powershell_resolve_template"
+      "pkg_alura_llama_factory"
     ],
     "8": [
-      "specify_scripts_powershell_setup_plan"
+      "readme_project_readme"
     ],
     "9": [
+      "specify_scripts_powershell_check_prerequisites"
+    ],
+    "10": [
+      "specify_scripts_powershell_resolve_template"
+    ],
+    "11": [
+      "specify_scripts_powershell_setup_plan"
+    ],
+    "12": [
       "specify_scripts_powershell_setup_tasks"
     ]
   },
   "cohesion": {
-    "0": 0.4,
-    "1": 0.5,
-    "2": 0.6,
-    "3": 0.6666666666666666,
-    "4": 0.6666666666666666,
-    "5": 1.0,
-    "6": 1.0,
+    "0": 0.17786561264822134,
+    "1": 0.12105263157894737,
+    "2": 0.225,
+    "3": 0.2545454545454545,
+    "4": 0.2857142857142857,
+    "5": 0.4,
+    "6": 0.5,
     "7": 1.0,
     "8": 1.0,
-    "9": 1.0
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0
   },
   "gods": [
     {
-      "id": "specify_scripts_powershell_common_get_normalizedpriority",
-      "label": "Get-NormalizedPriority()",
-      "degree": 4
+      "id": "_agents_skills_llama_factory_skill_llama_factory",
+      "label": "LLaMA-Factory",
+      "degree": 14
     },
     {
-      "id": "specify_scripts_powershell_common_get_sortedextensionids",
-      "label": "Get-SortedExtensionIds()",
-      "degree": 4
+      "id": "_codex_agents_training_engineer_training_engineer",
+      "label": "Training Engineer",
+      "degree": 10
     },
     {
-      "id": "specify_scripts_powershell_common_resolve_templatecontent",
-      "label": "Resolve-TemplateContent()",
-      "degree": 4
+      "id": "agents_fine_tuning_harness",
+      "label": "Fine-Tuning Harness",
+      "degree": 10
     },
     {
-      "id": "specify_scripts_powershell_common_get_reporoot",
-      "label": "Get-RepoRoot()",
-      "degree": 4
+      "id": "_agents_skills_fine_tuning_strategy_skill_fine_tuning_strategy",
+      "label": "Fine-Tuning Strategy",
+      "degree": 9
     },
     {
-      "id": "specify_scripts_powershell_common_get_featurepathsenv",
-      "label": "Get-FeaturePathsEnv()",
-      "degree": 4
+      "id": "_codex_agents_dataset_specialist_dataset_specialist",
+      "label": "Dataset Specialist",
+      "degree": 9
     },
     {
-      "id": "specify_scripts_powershell_common_resolve_template",
-      "label": "Resolve-Template()",
-      "degree": 3
+      "id": "_codex_agents_orchestrator_orchestrator",
+      "label": "Orchestrator",
+      "degree": 9
     },
     {
-      "id": "specify_scripts_powershell_create_new_feature_convertto_cleanbranchname",
-      "label": "ConvertTo-CleanBranchName()",
-      "degree": 2
+      "id": "_specify_memory_constitution_alura_llama_factory_constitution",
+      "label": "Alura LLaMA-Factory Constitution",
+      "degree": 8
     },
     {
-      "id": "specify_scripts_powershell_create_new_feature_get_branchname",
-      "label": "Get-BranchName()",
-      "degree": 2
+      "id": "_agents_skills_dataset_preparation_skill_dataset_validation",
+      "label": "Dataset Validation",
+      "degree": 7
     },
     {
-      "id": "specify_scripts_powershell_common_format_speckitcommand",
-      "label": "Format-SpecKitCommand()",
-      "degree": 2
+      "id": "_agents_skills_dataset_preparation_skill_dataset_preparation",
+      "label": "Dataset Preparation",
+      "degree": 6
     },
     {
-      "id": "specify_scripts_powershell_common_get_invokeseparator",
-      "label": "Get-InvokeSeparator()",
-      "degree": 2
+      "id": "_specify_memory_constitution_quality_gate_flow",
+      "label": "Fine-Tuning Quality Gate Flow",
+      "degree": 6
     }
   ],
   "surprises": [
     {
-      "source": "Get-FeaturePathsEnv()",
-      "target": "Get-RepoRoot()",
+      "source": "Spec Kit Before Implementation",
+      "target": "Spec Kit Source of Truth",
       "source_files": [
-        ".specify/scripts/powershell/common.ps1",
-        ".specify/scripts/powershell/common.ps1"
+        ".specify/memory/constitution.md",
+        "AGENTS.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `Spec Kit Before Implementation` unexpectedly reaches hub `Spec Kit Source of Truth`"
+    },
+    {
+      "source": "Orchestration and Specialized Skills",
+      "target": "Fine-Tuning Strategy",
+      "source_files": [
+        ".specify/memory/constitution.md",
+        ".agents/skills/fine-tuning-strategy/SKILL.md"
       ],
       "confidence": "EXTRACTED",
-      "relation": "calls",
-      "note": "Bridges community 3 → community 4"
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Fine-Tuning Harness",
+      "target": "Fine-Tuning Strategy",
+      "source_files": [
+        "AGENTS.md",
+        ".agents/skills/fine-tuning-strategy/SKILL.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Dataset Specialist",
+      "target": "LLaMA-Factory",
+      "source_files": [
+        ".codex/agents/dataset-specialist.md",
+        ".agents/skills/llama-factory/SKILL.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Orchestrator",
+      "target": "LLaMA-Factory",
+      "source_files": [
+        ".codex/agents/orchestrator.md",
+        ".agents/skills/llama-factory/SKILL.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories; bridges separate communities"
     }
   ],
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `Get-RepoRoot()` connect `Community 3` to `Community 1`, `Community 4`?",
-      "why": "High betweenness centrality (0.005) - this node is a cross-community bridge."
+      "question": "Why does `LLaMA-Factory` connect `Fine-Tuning Strategy Runtime` to `Fine-Tuning Governance Harness`?",
+      "why": "High betweenness centrality (0.042) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `Get-FeaturePathsEnv()` connect `Community 4` to `Community 1`, `Community 3`?",
-      "why": "High betweenness centrality (0.005) - this node is a cross-community bridge."
+      "question": "Why does `Speckit Specify` connect `Requirements Quality Workflow` to `Spec Kit Delivery Workflow`?",
+      "why": "High betweenness centrality (0.028) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `Resolve-TemplateContent()` connect `Community 2` to `Community 1`?",
-      "why": "High betweenness centrality (0.003) - this node is a cross-community bridge."
+      "question": "Why does `Full SDD Cycle Workflow` connect `Spec Kit Delivery Workflow` to `Requirements Quality Workflow`?",
+      "why": "High betweenness centrality (0.027) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
-      "question": "What connects `alura-llama-factory` to the rest of the system?",
-      "why": "1 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "question": "What connects `alura-llama-factory`, `Dataset Readiness Report`, `Constitution Governance` to the rest of the system?",
+      "why": "7 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Spec Kit Delivery Workflow` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.12105263157894737 - nodes in this community are weakly interconnected."
     }
   ]
 }
