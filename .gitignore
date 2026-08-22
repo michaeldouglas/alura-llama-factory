@@ -209,6 +209,18 @@ tempCodeRunnerFile.py
 # PyPI configuration file
 .pypirc
 
+# Fine-tuning heavy and local artifacts (must stay outside version control)
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+experiments/**/environments/
+experiments/**/cache/
+experiments/**/dataset-source/
+experiments/**/data-derived/
+experiments/**/runs/
+
 # Marimo
 marimo/_static/
 marimo/_lsp/

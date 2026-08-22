@@ -1,0 +1,43 @@
+{
+  "constitution": {
+    "path": ".specify/memory/constitution.md",
+    "version": "1.1.0"
+  },
+  "feature_id": "001-resource-efficient-finetune",
+  "repository_branch": "feature/harness",
+  "source_of_truth": {
+    "plan": "specs/001-resource-efficient-finetune/plan.md",
+    "specification": "specs/001-resource-efficient-finetune/spec.md",
+    "tasks": "specs/001-resource-efficient-finetune/tasks.md"
+  },
+  "gate_decisions": [
+    {
+      "approved_at": "2026-08-21",
+      "decision": "APPROVED",
+      "gate_id": "G0",
+      "scope": "requirements only"
+    },
+    {
+      "approved_at": "2026-08-21",
+      "decision": "APPROVED",
+      "gate_id": "G0-B",
+      "scope": "plan and provisional source candidates only"
+    },
+    {
+      "approved_at": "2026-08-21",
+      "decision": "APPROVED",
+      "gate_id": "G0-C",
+      "scope": "versioned scaffolding, guardrails and read-only inspection only",
+      "explicitly_excluded": [
+        "environment_creation",
+        "dependency_installation",
+        "model_retrieval",
+        "dataset_retrieval",
+        "data_preparation",
+        "inference",
+        "dry_validation",
+        "training"
+      ]
+    }
+  ]
+}
