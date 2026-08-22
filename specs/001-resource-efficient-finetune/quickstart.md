@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-21
 
-**Current state**: Gates G0-B and G0-C approved on 2026-08-21. G1 read-only review completed with `NEEDS_AUTHORIZATION`; metadata resolution is not yet authorized. Do not run network metadata resolution, environment creation, installation, retrieval, data preparation, inference, baseline, dry validation or training commands.
+**Current state**: Initial G1 metadata-only resolution completed and T073 returned `NEEDS_AUTHORIZATION`. `download-r2.pytorch.org` and recursive transitive resolution are not authorized yet. Do not run further network metadata resolution, environment creation, installation, retrieval, data preparation, inference, baseline, dry validation or training commands.
 
 This guide defines how the implemented experiment will be validated. Commands under a closed gate are examples for the future implementation and are not authorization to execute them.
 

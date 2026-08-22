@@ -4,7 +4,7 @@
 
 **Input**: Approved feature specification from `specs/001-resource-efficient-finetune/spec.md`
 
-**Gate State**: G0-B approved by the experiment owner on 2026-08-21 for the plan and provisional source candidates only. G0-C approved on 2026-08-21 for versioned scaffolding, guardrails and read-only inspection only. G1 review returned `NEEDS_AUTHORIZATION`: metadata resolution must be separately authorized before G1-OP can be formulated. Environment creation, dependency installation, model retrieval, dataset retrieval, data preparation, inference, dry validation and training remain unauthorized.
+**Gate State**: G0-B and G0-C are approved. The first metadata-only resolution completed within its authorization, but T073 returned `NEEDS_AUTHORIZATION`: a second metadata gate is required for the PyTorch CDN and recursive transitive resolution before G1-OP can be formulated. Environment creation, dependency installation, model retrieval, dataset retrieval, data preparation, inference, dry validation and training remain unauthorized.
 
 ## Summary
 

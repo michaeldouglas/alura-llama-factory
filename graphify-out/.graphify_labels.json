@@ -20,7 +20,7 @@
   "18": "validate_heavy_artifact_path",
   "19": "manifest_utils.py",
   "20": "validate_gate_document",
-  "21": "Research: Resource-Efficient First Fine-Tuning Experiment",
+  "21": "resolve_package_metadata.py",
   "22": "Environment G1 Review",
   "23": "Resource-Efficient First Fine-Tuning Experiment",
   "24": "RuntimeResolutionTests",
@@ -28,5 +28,7 @@
   "26": "stop-conditions.md",
   "27": "__init__.py",
   "28": "inspect_environment.ps1",
-  "29": "resolve_runtime.ps1"
+  "29": "resolve_runtime.ps1",
+  "30": "Quickstart Validation Guide: Resource-Efficient First Fine-Tuning Experiment",
+  "31": "Runtime Metadata Review — T073"
 }

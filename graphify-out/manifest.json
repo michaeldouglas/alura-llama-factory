@@ -360,15 +360,15 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/plan.md": {
-    "mtime": 1787361344.215408,
-    "seen": 1787361365.2430658,
-    "ast_hash": "8e91ea54fa1598d193bd4a09eb52c45b",
+    "mtime": 1787362319.530198,
+    "seen": 1787362383.427372,
+    "ast_hash": "d4485680e54331622971b9a2fe9a541c",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/quickstart.md": {
-    "mtime": 1787361344.2174516,
-    "seen": 1787361365.2430665,
-    "ast_hash": "2333f07bfae2a678f87818b54c044ca7",
+    "mtime": 1787362319.5312078,
+    "seen": 1787362383.4273727,
+    "ast_hash": "86f42a23c783912fc9f183c81e6a3b40",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/research.md": {
@@ -384,9 +384,39 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/tasks.md": {
-    "mtime": 1787361344.2174516,
-    "seen": 1787361365.2430687,
-    "ast_hash": "c446342214f94cbd7a9e02f823b2e17e",
+    "mtime": 1787362319.5324395,
+    "seen": 1787362383.4273748,
+    "ast_hash": "b556cbe9cd13e0d25cd363d83cfdd9d6",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g1-metadata.json": {
+    "mtime": 1787361889.4537857,
+    "seen": 1787362383.4273298,
+    "ast_hash": "ad05d5a938ea68a784079210cc7c03ff",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock.json": {
+    "mtime": 1787362036.0634806,
+    "seen": 1787362383.4273326,
+    "ast_hash": "b091c9d7787b94b8fc565ccd9dbd86ef",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/resolve_package_metadata.py": {
+    "mtime": 1787361967.4611936,
+    "seen": 1787362383.4273405,
+    "ast_hash": "815896599eafc4bff14e254ebb1e7b1c",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/tests/test_package_metadata_resolution.py": {
+    "mtime": 1787361889.4559863,
+    "seen": 1787362383.4273455,
+    "ast_hash": "8d67619207d1035f1484f7a388c60cb3",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/runtime-metadata-review.md": {
+    "mtime": 1787362319.5324395,
+    "seen": 1787362383.4273686,
+    "ast_hash": "c3548836caa0bd1528c5c634562be439",
     "semantic_hash": ""
   }
 }
