@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-21
 
-**Current state**: The first G1-METADATA-2 lock remains preserved as `BLOCKED` because `antlr4-python3-runtime==4.9.*` has no compatible CPython 3.12/Windows wheel. The owner-authorized remediation lock using `omegaconf==2.0.6` is complete, G1-OP-V4 was approved and the external runtime installation completed with 121 locked requirements. `uv pip check` passes. Model or dataset retrieval, data preparation, inference, baseline, dry validation and training remain closed until their later gates.
+**Current state**: The first G1-METADATA-2 lock remains preserved as `BLOCKED` because `antlr4-python3-runtime==4.9.*` has no compatible CPython 3.12/Windows wheel. The owner-authorized remediation lock using `omegaconf==2.0.6` is complete, G1-OP-V4 was approved, the external runtime installation completed with 121 locked requirements, and G2 is `READY` after the synthetic XPU smoke suite. G2-OP remains pending for the exact Qwen revision, external cache and 999,604,126-byte model estimate. Dataset retrieval, data preparation, inference, baseline, dry validation and training remain closed.
 
 This guide defines how the implemented experiment will be validated. Commands under a closed gate are examples for the future implementation and are not authorization to execute them.
 
@@ -48,7 +48,7 @@ After installation authority is granted, implementation will provide:
 ```powershell
 powershell -File experiments/001-resource-efficient-finetune/scripts/inspect_environment.ps1
 powershell -File experiments/001-resource-efficient-finetune/scripts/resolve_runtime.ps1 -DryRun
-powershell -File experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1
+powershell -File experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1 -OutputPath experiments/001-resource-efficient-finetune/reports/runtime-g2-v2.json
 ```
 
 Expected evidence:

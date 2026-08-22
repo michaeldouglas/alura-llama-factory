@@ -11,7 +11,8 @@ This directory contains only versioned governance, validation code, manifests, c
 - G1-METADATA-2 remediation: owner-authorized metadata-only review of `omegaconf==2.0.6`; revised lock and orchestrator review are tracked separately and do not authorize installation.
 - G1-METADATA-2 remediation review: `READY_FOR_G1_OP_REVIEW`; the v4 lock is complete and preserves the wheel-only `omegaconf==2.0.6` compatibility choice.
 - G1-OP-V4: `APPROVED` and `COMPLETED`; the external CPython 3.12.12 environment contains all 121 locked requirements, including the 18 Windows XPU/Intel oneMKL wheels, plus pinned LLaMA-Factory. `uv pip check` passes.
-- G2 and every later operational gate: closed. Model and dataset retrieval, data preparation, inference, baseline, dry validation and training have not been authorized.
+- G2: `READY`; the runtime smoke suite passed with one XPU device and finite synthetic forward/backward/optimizer results. See `reports/runtime-g2-v2.json` and `reports/runtime-g2-review.md`.
+- G2-OP and every later operational gate: closed. Model and dataset retrieval, data preparation, inference, baseline, dry validation and training have not been authorized.
 
 No script in this directory grants authority by itself. Gate records must be validated before an operational action. Environment creation, dependency installation, model or dataset retrieval, data preparation, inference, dry validation and training are currently prohibited.
 

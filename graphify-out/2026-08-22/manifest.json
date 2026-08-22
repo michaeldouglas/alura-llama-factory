@@ -234,9 +234,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "experiments/001-resource-efficient-finetune/manifests/governance.json": {
-    "mtime": 1787418623.6002312,
-    "seen": 1787419355.2807698,
-    "ast_hash": "d8b2e6da5c31cdb33012c8947a359e82",
+    "mtime": 1787419584.918962,
+    "seen": 1787419836.6252444,
+    "ast_hash": "23c41a8109a48ee1b604cd1b0d5f9ab9",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/manifests/runtime-proposal.json": {
@@ -306,9 +306,9 @@
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/tests/test_gate_validation.py": {
-    "mtime": 1787418623.60306,
-    "seen": 1787419355.280787,
-    "ast_hash": "d28667386a391672fa3c6ba0eed8492b",
+    "mtime": 1787419584.918962,
+    "seen": 1787419836.6252608,
+    "ast_hash": "dc2f4f6157e93f286bdfc2a134d25422",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/README.md": {
-    "mtime": 1787419341.1314552,
-    "seen": 1787419355.2808092,
-    "ast_hash": "7117453515fcbd850c554b239b76d04e",
+    "mtime": 1787419816.6957607,
+    "seen": 1787419836.625284,
+    "ast_hash": "391ee718e571516c022e792cbd2de82d",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/reports/environment-g1-review.md": {
@@ -360,15 +360,15 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/plan.md": {
-    "mtime": 1787419341.1304,
-    "seen": 1787419355.2808163,
-    "ast_hash": "8b2c68a95c8c0064f1993f2339099fc2",
+    "mtime": 1787419816.6952553,
+    "seen": 1787419836.625291,
+    "ast_hash": "d34d4331c6d6e8a0ace3122bdb1a3b62",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/quickstart.md": {
-    "mtime": 1787418623.60306,
-    "seen": 1787419355.2808168,
-    "ast_hash": "3ad9a3ae7aaa9b791a0b6fb8b10867f1",
+    "mtime": 1787419816.69677,
+    "seen": 1787419836.6252918,
+    "ast_hash": "97e76d9d79e94dd8431841abec234979",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/research.md": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/tasks.md": {
-    "mtime": 1787419341.1287005,
-    "seen": 1787419355.2808192,
-    "ast_hash": "a9b10de8a952ea8385bbacfcefa5a866",
+    "mtime": 1787419584.918962,
+    "seen": 1787419836.6252937,
+    "ast_hash": "e116aedd5403dd4cb65ddf88212662ab",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/manifests/gates/g1-metadata.json": {
@@ -486,15 +486,21 @@
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/scripts/create_environment.ps1": {
-    "mtime": 1787418751.9136705,
-    "seen": 1787419355.2807813,
-    "ast_hash": "5dc9d330baf90f6145138a350f6549de",
+    "mtime": 1787419584.918962,
+    "seen": 1787419836.6252549,
+    "ast_hash": "0efcff0d514340382ffe320161d903dd",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/reports/g1-op-partial-installation.md": {
-    "mtime": 1787419341.1268795,
-    "seen": 1787419355.2808108,
-    "ast_hash": "f03600d2811d974ecdd8d705b6b9b84a",
+    "mtime": 1787419816.6957607,
+    "seen": 1787419836.6252854,
+    "ast_hash": "ba88666016efc1dea4abfa50922b2767",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g1-op-v4.json": {
+    "mtime": 1787419584.91785,
+    "seen": 1787419836.6252415,
+    "ast_hash": "b27e7c65a1fdc96d74f6dbbaa42fe7e7",
     "semantic_hash": ""
   }
 }

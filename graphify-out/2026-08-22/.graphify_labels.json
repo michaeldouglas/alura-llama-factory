@@ -12,11 +12,11 @@
   "10": "resolve-template.ps1",
   "11": "setup-plan.ps1",
   "12": "setup-tasks.ps1",
-  "13": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+  "13": "Quickstart Validation Guide: Resource-Efficient First Fine-Tuning Experiment",
   "14": "Tasks: Resource-Efficient First Fine-Tuning Experiment",
   "15": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
   "16": "required",
-  "17": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
+  "17": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
   "18": "validate_heavy_artifact_path",
   "19": "manifest_utils.py",
   "20": "validate_gate_document",
@@ -33,5 +33,6 @@
   "31": "Runtime Metadata Review — T073",
   "32": "Runtime Metadata Review — G1-METADATA-2",
   "33": "G1-OP Partial Installation Review",
-  "34": "create_environment.ps1"
+  "34": "create_environment.ps1",
+  "35": "Research: Resource-Efficient First Fine-Tuning Experiment"
 }

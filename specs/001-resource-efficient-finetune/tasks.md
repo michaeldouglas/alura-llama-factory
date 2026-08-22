@@ -4,7 +4,7 @@
 
 **Prerequisites**: `spec.md`, `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, Constitution 1.1.0
 
-**Current gate**: G1-OP-V4 was explicitly approved by the owner on 2026-08-22 for resuming the existing external environment and installing the exact v4 lock with 18 additional Windows XPU/Intel oneMKL wheels. Model, dataset, data preparation, inference, baseline, dry validation and training remain closed until their named gates.
+**Current gate**: G1-OP-V4 completed and G2 is `READY` after the local runtime smoke validation. G2-OP remains pending owner approval for the exact Qwen revision, Apache-2.0 use, external cache path and 999,604,126-byte retrieval estimate. Dataset, data preparation, inference, baseline, dry validation and training remain closed until their named gates.
 
 **Tests**: Tests are included because the approved plan requires deterministic schema, lineage, isolation, parsing, metrics, runtime and no-overwrite validation.
 
@@ -65,9 +65,9 @@
 - [X] T019 [US1] Record the owner's G1-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g1-op.json
 - [X] T020 [US1] Implement isolated CPython 3.12 environment creation and locked installation logic without executing it in experiments/001-resource-efficient-finetune/scripts/create_environment.ps1
 - [X] T021 [US1] After approved G1-OP-V4 only, execute experiments/001-resource-efficient-finetune/scripts/create_environment.ps1 and preserve its package-resolution evidence
-- [ ] T022 [US1] Implement dependency, LLaMA-Factory and synthetic XPU validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1
-- [ ] T023 [US1] After T021 only, execute experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1 and record G2 READY or BLOCKED in experiments/001-resource-efficient-finetune/reports/runtime-g2.json
-- [ ] T024 [US1] Have the orchestrator record the G2 review and exact model download size, cache path and G2-OP request in experiments/001-resource-efficient-finetune/reports/runtime-g2-review.md
+- [X] T022 [US1] Implement dependency, LLaMA-Factory and synthetic XPU validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1
+- [X] T023 [US1] After T021 only, execute experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1 and record G2 READY or BLOCKED in experiments/001-resource-efficient-finetune/reports/runtime-g2-v2.json
+- [X] T024 [US1] Have the orchestrator record the G2 review and exact model download size, cache path and G2-OP request in experiments/001-resource-efficient-finetune/reports/runtime-g2-review.md
 - [ ] T025 [US1] Record the owner's G2-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g2-op.json
 - [ ] T026 [US1] Implement pinned-model retrieval and hash verification without executing it in experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py
 - [ ] T027 [US1] After approved G2-OP only, execute experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py and record file hashes in experiments/001-resource-efficient-finetune/manifests/model-source.json
