@@ -4,7 +4,7 @@
 
 **Input**: Approved feature specification from `specs/001-resource-efficient-finetune/spec.md`
 
-**Gate State**: G1-OP-V4 is complete and G2 is `READY`: the approved external CPython 3.12.12 environment has all 121 locked requirements plus pinned LLaMA-Factory; `uv pip check` and the synthetic XPU smoke suite pass. G2-OP is pending owner approval for the exact Qwen revision, Apache-2.0 use, external cache and 999,604,126-byte model retrieval estimate. Dataset, data preparation, inference, baseline, dry validation and training remain unauthorized.
+**Gate State**: G1-OP-V4, G2 and G2-OP are complete for the pinned Qwen model source. The approved external environment passes dependency and synthetic XPU checks, and the ten model files were retrieved with exact size/hash evidence. Dataset retrieval, data preparation, model loading, inference, baseline, dry validation and training remain unauthorized.
 
 ## Summary
 

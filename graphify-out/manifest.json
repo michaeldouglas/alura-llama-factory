@@ -234,9 +234,9 @@
     "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
   },
   "experiments/001-resource-efficient-finetune/manifests/governance.json": {
-    "mtime": 1787419584.918962,
-    "seen": 1787419836.6252444,
-    "ast_hash": "23c41a8109a48ee1b604cd1b0d5f9ab9",
+    "mtime": 1787440466.0449681,
+    "seen": 1787440497.9822466,
+    "ast_hash": "9ff615e5683a5b5fbfbf958690c305e2",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/manifests/runtime-proposal.json": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/README.md": {
-    "mtime": 1787434018.8078563,
-    "seen": 1787434042.1092846,
-    "ast_hash": "3fcdb62395c5fe11981ff08162856dd2",
+    "mtime": 1787440466.0419676,
+    "seen": 1787440497.982471,
+    "ast_hash": "2591695f489cb9c6509d93f01f37874b",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/reports/environment-g1-review.md": {
@@ -360,15 +360,15 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/plan.md": {
-    "mtime": 1787434018.8068483,
-    "seen": 1787434042.109292,
-    "ast_hash": "fbddbadb07098da91f2c8996daa3cd1d",
+    "mtime": 1787434793.2495763,
+    "seen": 1787434815.4838808,
+    "ast_hash": "592ac3c289c637d951e249c90524574a",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/quickstart.md": {
-    "mtime": 1787434026.0492132,
-    "seen": 1787434042.1092927,
-    "ast_hash": "7b986bbcaea8f345e506ce430d699a4a",
+    "mtime": 1787434793.253755,
+    "seen": 1787434815.4838812,
+    "ast_hash": "3fa6f18353a816edf035e630a2d2a957",
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/research.md": {
@@ -384,9 +384,9 @@
     "semantic_hash": ""
   },
   "specs/001-resource-efficient-finetune/tasks.md": {
-    "mtime": 1787434018.8053446,
-    "seen": 1787434042.1092947,
-    "ast_hash": "f83dcccb2caaa0f447ecacb96e121c36",
+    "mtime": 1787440445.583515,
+    "seen": 1787440497.9824884,
+    "ast_hash": "26192dbac04ef691a70684a1d8062c07",
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/manifests/gates/g1-metadata.json": {
@@ -534,9 +534,141 @@
     "semantic_hash": ""
   },
   "experiments/001-resource-efficient-finetune/reports/runtime-g2-review.md": {
-    "mtime": 1787434018.8053446,
-    "seen": 1787434042.109287,
-    "ast_hash": "621085aa0f5f70b4cb37909bfc6f89ca",
+    "mtime": 1787434799.3069317,
+    "seen": 1787434815.4838753,
+    "ast_hash": "ac9158eaae90dfc616d749b1c12b4ef9",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g2-op.json": {
+    "mtime": 1787434405.5926814,
+    "seen": 1787434815.483826,
+    "ast_hash": "9f5d22c6fded2e6f1bf29b0ec1e118c5",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/model-source.json": {
+    "mtime": 1787434666.4327228,
+    "seen": 1787434815.483829,
+    "ast_hash": "9f3debddecde1b26b9fc19444a1b8a68",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py": {
+    "mtime": 1787434719.4713833,
+    "seen": 1787434815.4838421,
+    "ast_hash": "1f45d82e38893a57d82a0017942b24d0",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/tests/test_model_retrieval.py": {
+    "mtime": 1787434405.5965388,
+    "seen": 1787434815.4838507,
+    "ast_hash": "ec6ef63fe7c72bebd4136d3fe5a9493e",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/dataset-source.json": {
+    "mtime": 1787435810.4976444,
+    "seen": 1787435871.0494525,
+    "ast_hash": "7f9cdd7c6082ba3313490e201f5c6ce3",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g3.json": {
+    "mtime": 1787435756.0034568,
+    "seen": 1787435871.0494614,
+    "ast_hash": "5853a13bc0cf3525b1b8e26e5c1c7265",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/fetch_dataset_source.ps1": {
+    "mtime": 1787435799.5015943,
+    "seen": 1787435871.0494773,
+    "ast_hash": "197bf229acb01c1a42a7f17fad43c85a",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/data-compliance-g3.md": {
+    "mtime": 1787435841.7230809,
+    "seen": 1787435871.049511,
+    "ast_hash": "7ede65e7a9fd8b18e634f24ebe763bd5",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/dataset-validation-g4.json": {
+    "mtime": 1787437019.8710988,
+    "seen": 1787437268.6317596,
+    "ast_hash": "28e02bbcca2fde735025bff9ecd1f9cf",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py": {
+    "mtime": 1787436919.5971253,
+    "seen": 1787437268.6317887,
+    "ast_hash": "5e53260305225902b3485aabe7a50794",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/data-readiness-g4.md": {
+    "mtime": 1787437249.6339397,
+    "seen": 1787437268.63182,
+    "ast_hash": "14142c33235c967995143c4621b7589c",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/dataset-info.json": {
+    "mtime": 1787438362.4091835,
+    "seen": 1787438619.9148757,
+    "ast_hash": "563e1427dc6ec0104c484841c9965722",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g4-remediation.json": {
+    "mtime": 1787437838.9758213,
+    "seen": 1787438619.9148881,
+    "ast_hash": "4e848b22b066377becd29e676c9fcf3c",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py": {
+    "mtime": 1787437822.7910788,
+    "seen": 1787438619.9149122,
+    "ast_hash": "d954f6034d98d395e17e5505d3338c8d",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/tests/test_dataset_preparation.py": {
+    "mtime": 1787437822.7910788,
+    "seen": 1787438619.914919,
+    "ast_hash": "3ed0eb60a4b79397ee1ef32894923130",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/data-remediation-g4.md": {
+    "mtime": 1787438362.4091835,
+    "seen": 1787438619.914952,
+    "ast_hash": "40b5297c4a0b7c09cd00c047793a117e",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/manifests/gates/g4-derived.json": {
+    "mtime": 1787439248.7249572,
+    "seen": 1787440497.9822433,
+    "ast_hash": "430f161d96f32918feac6ed76bb6ce26",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/compatibility-g5.json": {
+    "mtime": 1787440390.6227565,
+    "seen": 1787440497.9824088,
+    "ast_hash": "635f642731b651f3789388cd3e455c92",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py": {
+    "mtime": 1787440363.764378,
+    "seen": 1787440497.982436,
+    "ast_hash": "af0b715b5793209b71aa1b13586235a6",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/configs/sft-lora-proposal.yaml": {
+    "mtime": 1787440363.7623758,
+    "seen": 1787440497.9824717,
+    "ast_hash": "8dc0d995454aba1fa72b8ee4ed8fa1c1",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/data-readiness-g4-derived.md": {
+    "mtime": 1787439248.7249572,
+    "seen": 1787440497.9824736,
+    "ast_hash": "5c5d7f094a0b42363d76c079ef688196",
+    "semantic_hash": ""
+  },
+  "experiments/001-resource-efficient-finetune/reports/strategy-g5.md": {
+    "mtime": 1787440445.5825138,
+    "seen": 1787440497.9824822,
+    "ast_hash": "8cd78bd7d073f60010e3de47c95e6432",
     "semantic_hash": ""
   }
 }

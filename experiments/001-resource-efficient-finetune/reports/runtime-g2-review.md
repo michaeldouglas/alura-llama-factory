@@ -50,5 +50,12 @@ The owner must separately approve all of the following before T027:
 - the external cache path above and no-overwrite behavior;
 - the approved Hugging Face metadata/payload endpoints used by the retrieval script.
 
-Until that approval is recorded in `manifests/gates/g2-op.json`, model retrieval, tokenizer
-retrieval, model loading, inference, dataset access and training remain blocked.
+Before that approval was recorded in `manifests/gates/g2-op.json`, model retrieval, tokenizer
+retrieval, model loading, inference, dataset access and training remained blocked.
+
+## G2-OP completion
+
+The owner approved G2-OP on 2026-08-22. The ten approved files were retrieved and independently
+verified in [model-source.json](../manifests/model-source.json): `999,604,126` bytes total, with
+SHA-256 recorded for every file and the Apache-2.0 license marker verified. The model was not
+loaded, and dataset retrieval, data preparation, inference and training remain unperformed.

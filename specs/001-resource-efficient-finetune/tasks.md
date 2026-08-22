@@ -4,7 +4,7 @@
 
 **Prerequisites**: `spec.md`, `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, Constitution 1.1.0
 
-**Current gate**: G1-OP-V4 completed and G2 is `READY` after the local runtime smoke validation. G2-OP remains pending owner approval for the exact Qwen revision, Apache-2.0 use, external cache path and 999,604,126-byte retrieval estimate. Dataset, data preparation, inference, baseline, dry validation and training remain closed until their named gates.
+**Current gate**: G1-OP-V4, G2 and G2-OP are complete for the pinned Qwen model source. The ten-file model manifest contains exact sizes and SHA-256 hashes in the approved external cache. Dataset retrieval, data preparation, model loading, inference, baseline, dry validation and training remain closed until their named gates.
 
 **Tests**: Tests are included because the approved plan requires deterministic schema, lineage, isolation, parsing, metrics, runtime and no-overwrite validation.
 
@@ -68,9 +68,9 @@
 - [X] T022 [US1] Implement dependency, LLaMA-Factory and synthetic XPU validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1
 - [X] T023 [US1] After T021 only, execute experiments/001-resource-efficient-finetune/scripts/validate_runtime.ps1 and record G2 READY or BLOCKED in experiments/001-resource-efficient-finetune/reports/runtime-g2-v2.json
 - [X] T024 [US1] Have the orchestrator record the G2 review and exact model download size, cache path and G2-OP request in experiments/001-resource-efficient-finetune/reports/runtime-g2-review.md
-- [ ] T025 [US1] Record the owner's G2-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g2-op.json
-- [ ] T026 [US1] Implement pinned-model retrieval and hash verification without executing it in experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py
-- [ ] T027 [US1] After approved G2-OP only, execute experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py and record file hashes in experiments/001-resource-efficient-finetune/manifests/model-source.json
+- [X] T025 [US1] Record the owner's G2-OP decision and enforce a hard stop when absent or rejected in experiments/001-resource-efficient-finetune/manifests/gates/g2-op.json
+- [X] T026 [US1] Implement pinned-model retrieval and hash verification without executing it in experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py
+- [X] T027 [US1] After approved G2-OP only, execute experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py and record file hashes in experiments/001-resource-efficient-finetune/manifests/model-source.json
 
 **Checkpoint**: US1 is complete only when the experiment is technically reviewable; a rejected authorization produces a documented BLOCKED result without fallback.
 
@@ -92,19 +92,20 @@
 
 ### Implementation for User Story 2
 
-- [ ] T033 [US2] Have the dataset-specialist use dataset-preparation to document CC BY 3.0, applicable X/Twitter terms, privacy risks, storage path and exact G3 request in experiments/001-resource-efficient-finetune/reports/data-compliance-g3.md
-- [ ] T034 [US2] Record the owner's terms acceptance and dataset retrieval decision, blocking access when absent or rejected, in experiments/001-resource-efficient-finetune/manifests/gates/g3.json
-- [ ] T035 [US2] Implement pinned dataset retrieval without executing it in experiments/001-resource-efficient-finetune/scripts/fetch_dataset_source.ps1
-- [ ] T036 [US2] After approved G3 only, execute experiments/001-resource-efficient-finetune/scripts/fetch_dataset_source.ps1 without transformation
-- [ ] T037 [US2] Make the retrieved source read-only and record revision, LFS identities, byte sizes and SHA-256 hashes in experiments/001-resource-efficient-finetune/manifests/dataset-source.json
-- [ ] T038 [US2] Implement dataset validation without reading source data yet in experiments/001-resource-efficient-finetune/scripts/validate_dataset.py
-- [ ] T039 [US2] After T037 only, execute experiments/001-resource-efficient-finetune/scripts/validate_dataset.py and record counts, labels, lengths, language, duplicates, PII and sensitive-content findings
-- [ ] T040 [US2] Implement separate derived-data and row-lineage creation without executing it in experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py
-- [ ] T041 [US2] After validation passes only, execute experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py to create separate train, validation, frozen-test and lineage artifacts
-- [ ] T042 [US2] Register the derived Alpaca schema without source text in experiments/001-resource-efficient-finetune/manifests/dataset-info.json
-- [ ] T043 [US2] Have the dataset-specialist issue the quantified G4 DATA_READY or DATA_BLOCKED decision in experiments/001-resource-efficient-finetune/reports/data-readiness-g4.md
+- [X] T033 [US2] Have the dataset-specialist use dataset-preparation to document CC BY 3.0, applicable X/Twitter terms, privacy risks, storage path and exact G3 request in experiments/001-resource-efficient-finetune/reports/data-compliance-g3.md
+- [X] T034 [US2] Record the owner's terms acceptance and dataset retrieval decision, blocking access when absent or rejected, in experiments/001-resource-efficient-finetune/manifests/gates/g3.json
+- [X] T035 [US2] Implement pinned dataset retrieval without executing it in experiments/001-resource-efficient-finetune/scripts/fetch_dataset_source.ps1
+- [X] T036 [US2] After approved G3 only, execute experiments/001-resource-efficient-finetune/scripts/fetch_dataset_source.ps1 without transformation
+- [X] T037 [US2] Make the retrieved source read-only and record revision, LFS identities, byte sizes and SHA-256 hashes in experiments/001-resource-efficient-finetune/manifests/dataset-source.json
+- [X] T038 [US2] Implement dataset validation without reading source data yet in experiments/001-resource-efficient-finetune/scripts/validate_dataset.py
+- [X] T039 [US2] After T037 only, execute experiments/001-resource-efficient-finetune/scripts/validate_dataset.py and record counts, labels, lengths, language, duplicates, PII and sensitive-content findings
+- [X] T040 [US2] Implement separate derived-data and row-lineage creation without executing it in experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py
+- [X] T041 [US2] After the approved G4 remediation gate, execute experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py to create separate train, validation, frozen-test and lineage artifacts
+- [X] T042 [US2] Register the derived Alpaca schema without source text in experiments/001-resource-efficient-finetune/manifests/dataset-info.json
+- [X] T043 [US2] Have the dataset-specialist issue the quantified G4 DATA_READY or DATA_BLOCKED decision in experiments/001-resource-efficient-finetune/reports/data-readiness-g4.md
+- [X] T043a [US2] Register the separately prepared candidate's DATA_READY decision without replacing the original G4 DATA_BLOCKED source decision in experiments/001-resource-efficient-finetune/manifests/gates/g4-derived.json and experiments/001-resource-efficient-finetune/reports/data-readiness-g4-derived.md
 
-**Checkpoint**: The `training-engineer` remains inactive unless T043 is DATA_READY.
+**Checkpoint**: The `training-engineer` remains inactive unless the prepared candidate gate `G4-DERIVED` is `DATA_READY`; the original source gate remains separately recorded as `DATA_BLOCKED`.
 
 ---
 
@@ -122,11 +123,11 @@
 
 ### Implementation for User Story 3
 
-- [ ] T047 [US3] After DATA_READY only, have the training-engineer use fine-tuning-strategy and llama-factory to justify all settings in experiments/001-resource-efficient-finetune/reports/strategy-g5.md
-- [ ] T048 [US3] Create the proposed but non-authorized LLaMA-Factory configuration in experiments/001-resource-efficient-finetune/configs/sft-lora-proposal.yaml
-- [ ] T049 [US3] Implement model, tokenizer, template, dataset and config validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py
-- [ ] T050 [US3] Execute experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py without principal training and preserve its evidence
-- [ ] T051 [US3] Have the orchestrator perform the first G6 license, privacy, cost, hash, schema, no-overwrite and Constitution review in experiments/001-resource-efficient-finetune/reports/config-review-g6.md
+- [X] T047 [US3] After DATA_READY only, have the training-engineer use fine-tuning-strategy and llama-factory to justify all settings in experiments/001-resource-efficient-finetune/reports/strategy-g5.md
+- [X] T048 [US3] Create the proposed but non-authorized LLaMA-Factory configuration in experiments/001-resource-efficient-finetune/configs/sft-lora-proposal.yaml
+- [X] T049 [US3] Implement model, tokenizer, template, dataset and config validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py
+- [X] T050 [US3] Execute experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py without principal training and preserve its evidence
+- [X] T051 [US3] Have the orchestrator perform the first G6 license, privacy, cost, hash, schema, no-overwrite and Constitution review in experiments/001-resource-efficient-finetune/reports/config-review-g6.md
 - [ ] T052 [US3] Implement frozen-baseline and microbatch dry validation without executing it in experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py
 - [ ] T053 [US3] After T051 passes only, have the training-engineer execute experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py and record baseline and forward-loss-backward evidence
 - [ ] T054 [US3] Freeze configuration, environment, input, run, path, estimate and stop-condition hashes in experiments/001-resource-efficient-finetune/manifests/execution-proposal.json

@@ -2,7 +2,7 @@
 
 **Date**: 2026-08-21
 
-**Current state**: The first G1-METADATA-2 lock remains preserved as `BLOCKED` because `antlr4-python3-runtime==4.9.*` has no compatible CPython 3.12/Windows wheel. The owner-authorized remediation lock using `omegaconf==2.0.6` is complete, G1-OP-V4 was approved, the external runtime installation completed with 121 locked requirements, and G2 is `READY` after the synthetic XPU smoke suite. G2-OP remains pending for the exact Qwen revision, external cache and 999,604,126-byte model estimate. Dataset retrieval, data preparation, inference, baseline, dry validation and training remain closed.
+**Current state**: The first G1-METADATA-2 lock remains preserved as `BLOCKED` because `antlr4-python3-runtime==4.9.*` has no compatible CPython 3.12/Windows wheel. The owner-authorized remediation lock using `omegaconf==2.0.6` is complete, G1-OP-V4 and G2 passed, and G2-OP completed retrieval of the exact ten-file Qwen revision with size/hash evidence. The model remains unloaded. Dataset retrieval, data preparation, inference, baseline, dry validation and training remain closed.
 
 This guide defines how the implemented experiment will be validated. Commands under a closed gate are examples for the future implementation and are not authorization to execute them.
 
