@@ -227,6 +227,12 @@
     "ast_hash": "21816f55365e9b6d4a6b3360b7423fa5",
     "semantic_hash": ""
   },
+  "README.md": {
+    "mtime": 1787364403.687755,
+    "seen": 1787413903.418375,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
   "experiments/001-resource-efficient-finetune/manifests/governance.json": {
     "mtime": 1787440580.9607766,
     "seen": 1787442040.8065045,
@@ -887,100 +893,178 @@
     "ast_hash": "7d772beb4cc1f97e36a7f30af1a08510",
     "semantic_hash": ""
   },
+  "EscutIA/treinamentoModelo/README.md": {
+    "mtime": 1787449481.3326936,
+    "seen": 1787450284.0327501,
+    "ast_hash": "657a1c4a2bf6f136c26de62cac1ce7ec",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/baixar_modelo.py": {
+    "mtime": 1787448802.898873,
+    "seen": 1787448823.6534207,
+    "ast_hash": "e2a68253b0d6a8c50516f69c11c61afc",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/preparar_dataset.py": {
+    "mtime": 1787448780.3550544,
+    "seen": 1787448823.653422,
+    "ast_hash": "ae87890b9a9ac49ebdedaa6030042ab6",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/testar_modelo.py": {
+    "mtime": 1787448746.5128586,
+    "seen": 1787448823.6534228,
+    "ast_hash": "ee1582b71d2f4312757e2271bb6c3d2c",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/treinar.py": {
+    "mtime": 1787448963.4971695,
+    "seen": 1787448981.881514,
+    "ast_hash": "f3896c4a14ba9ecae3ab5428aa061432",
+    "semantic_hash": ""
+  },
   "EscutIA/README.md": {
-    "mtime": 1787499682.2035706,
-    "seen": 1787499749.302582,
-    "ast_hash": "104b8bf8355443f8c4c63a729b42f519",
+    "mtime": 1787449656.688994,
+    "seen": 1787450284.0327477,
+    "ast_hash": "91a1c5114f7400bec37aad8f12077251",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/01_inspecionar_dataset.py": {
-    "mtime": 1787499682.2333536,
-    "seen": 1787499749.3022883,
-    "ast_hash": "58ea5d184b26326fe75ed0ed442cd4c4",
+  "EscutIA/treinamentoModelo/config/sft-lora-template.yaml": {
+    "mtime": 1787448643.049369,
+    "seen": 1787448823.6535099,
+    "ast_hash": "404288d19e27658131603f8dd04e472c",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/02_validar_schema.py": {
-    "mtime": 1787499682.234319,
-    "seen": 1787499749.3022933,
-    "ast_hash": "a3ed5f74a428cea99f5532cdcfdf0d76",
+  "EscutIA/treinamentoModelo/requirements.txt": {
+    "mtime": 1787448643.0318573,
+    "seen": 1787448823.6535106,
+    "ast_hash": "840dcf535e2af3e803cffd7c3401173a",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/03_organizar_registros.py": {
-    "mtime": 1787499682.2449784,
-    "seen": 1787499749.3022964,
-    "ast_hash": "3657508efea7290b82c5decbd1ad0597",
+  "EscutIA/site/.eslintrc.json": {
+    "mtime": 1787449899.680201,
+    "seen": 1787450284.032647,
+    "ast_hash": "5cc89077d438e3d0d0a8308ab7e06a5a",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/04_limpar_normalizar.py": {
-    "mtime": 1787499682.2449784,
-    "seen": 1787499749.3022985,
-    "ast_hash": "380c54f09e84812ef8ad99ab97a16ba3",
+  "EscutIA/site/app/layout.tsx": {
+    "mtime": 1787450221.8289754,
+    "seen": 1787450284.032648,
+    "ast_hash": "26a9195b258f9d06981c5f5031cc5646",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/05_remover_duplicidades.py": {
-    "mtime": 1787499682.2473512,
-    "seen": 1787499749.3023007,
-    "ast_hash": "847c304857164b49e81ee372f92a50a5",
+  "EscutIA/site/app/page.tsx": {
+    "mtime": 1787450221.842283,
+    "seen": 1787450284.032649,
+    "ast_hash": "a6333d8879773609e4b34702f7d684bf",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/06_verificar_conteudo.py": {
-    "mtime": 1787499682.2508142,
-    "seen": 1787499749.3023024,
-    "ast_hash": "ebd2cf82cd637c1d5abd8e7b142fe648",
+  "EscutIA/site/components/About.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326495,
+    "ast_hash": "7764526cfd61828e4743b45e859b1914",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/07_dividir_dataset.py": {
-    "mtime": 1787499682.2508142,
-    "seen": 1787499749.3023045,
-    "ast_hash": "57d31dfe75e115ce9ff1292c1a32aa59",
+  "EscutIA/site/components/CTA.tsx": {
+    "mtime": 1787450221.8524344,
+    "seen": 1787450284.0326505,
+    "ast_hash": "4b3209cc24964c27256205f055f21f61",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/08_verificar_vazamento.py": {
-    "mtime": 1787499682.2528365,
-    "seen": 1787499749.3023057,
-    "ast_hash": "ecd3c3c1393464234cc7d0d692bd5339",
+  "EscutIA/site/components/ChatPreview.tsx": {
+    "mtime": 1787450221.8484237,
+    "seen": 1787450284.0326514,
+    "ast_hash": "697b96a7155c4df4172b6e94f2dd87dc",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/09_congelar_avaliacao.py": {
-    "mtime": 1787499682.2528365,
-    "seen": 1787499749.3023076,
-    "ast_hash": "18860d39fe8b4d25598047e0cb9e50bd",
+  "EscutIA/site/components/Features.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326524,
+    "ast_hash": "170b10a1064ae20a26ebe064a84876c5",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/10_converter_llamafactory.py": {
-    "mtime": 1787499682.2583902,
-    "seen": 1787499749.302309,
-    "ast_hash": "478d673adf5b75d5ba77eaa5db3fff1c",
+  "EscutIA/site/components/Footer.tsx": {
+    "mtime": 1787450221.8524344,
+    "seen": 1787450284.0326533,
+    "ast_hash": "2d93c6496561f87a800ecc1129fdde2b",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/11_validar_dataset_final.py": {
-    "mtime": 1787499710.297652,
-    "seen": 1787499749.3023107,
-    "ast_hash": "b553a06d11d6bed1195099cd77060e16",
+  "EscutIA/site/components/Header.tsx": {
+    "mtime": 1787450221.846419,
+    "seen": 1787450284.032654,
+    "ast_hash": "21e26a5789435a73253cfd7252ccba55",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/scripts/_comum.py": {
-    "mtime": 1787499710.297652,
-    "seen": 1787499749.3023124,
-    "ast_hash": "59a81e13ccbfb526c628e7990f0fabfd",
+  "EscutIA/site/components/Hero.tsx": {
+    "mtime": 1787450221.8484237,
+    "seen": 1787450284.0326548,
+    "ast_hash": "eb08dc770e1cf5d5b77ca094a91e9958",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/README.md": {
-    "mtime": 1787499682.260406,
-    "seen": 1787499749.3025846,
-    "ast_hash": "8505a77d024635922597096471ea4326",
+  "EscutIA/site/components/HowItWorks.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326557,
+    "ast_hash": "d994252cdbf7a6c89f2ee76d210d3da8",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/dados/original/README.md": {
-    "mtime": 1787499682.2191947,
-    "seen": 1787499749.3025863,
-    "ast_hash": "f1baf88db5b75addd20da20731449697",
+  "EscutIA/site/components/Safety.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326562,
+    "ast_hash": "2b8b6242c97efb4e7526fc02cfea1e27",
     "semantic_hash": ""
   },
-  "EscutIA/dataset/requirements.txt": {
-    "mtime": 1787499682.212517,
-    "seen": 1787499749.3025882,
-    "ast_hash": "3748b95355763f4c3d9ec182ca4347b6",
+  "EscutIA/site/next.config.mjs": {
+    "mtime": 1787449899.7221293,
+    "seen": 1787450284.032657,
+    "ast_hash": "21958f5752add43cc47ab0ff5172cd46",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/package.json": {
+    "mtime": 1787449900.3793883,
+    "seen": 1787450284.0326576,
+    "ast_hash": "f57f499e672c18ff35a0d2e1f2f0f09a",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/postcss.config.mjs": {
+    "mtime": 1787449899.7349675,
+    "seen": 1787450284.0326602,
+    "ast_hash": "b7941c02b947e17ae32f67ae7e664ec8",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/tailwind.config.ts": {
+    "mtime": 1787450221.846419,
+    "seen": 1787450284.0326607,
+    "ast_hash": "1e784a080a78c669596689b9de165721",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/tsconfig.json": {
+    "mtime": 1787449900.3793883,
+    "seen": 1787450284.0326614,
+    "ast_hash": "570e85507d1fb0c609255b9a0aa95595",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/README.md": {
+    "mtime": 1787450311.737303,
+    "seen": 1787450320.8189797,
+    "ast_hash": "89cf79508fcd474d2aab7b7ecfad19ab",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/ENTENDENDO_O_PROJETO.md": {
+    "mtime": 1787449451.7060785,
+    "seen": 1787450284.0327497,
+    "ast_hash": "4d9b86583400e84b241410b2a11c9b20",
+    "semantic_hash": ""
+  },
+  "EscutIA/logo.png": {
+    "mtime": 1787449608.238673,
+    "seen": 1787450284.0327744,
+    "ast_hash": "2f813f897835bc838fedb8233a1dfe9f",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/public/logo.png": {
+    "mtime": 1787449608.238673,
+    "seen": 1787450284.032775,
+    "ast_hash": "2f813f897835bc838fedb8233a1dfe9f",
     "semantic_hash": ""
   }
 }
