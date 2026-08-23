@@ -1,0 +1,22 @@
+# Ambiente recomendado: Python 3.12 x64.
+# Para Intel XPU, instale primeiro a distribuição PyTorch/XPU compatível
+# com a máquina e só depois instale este arquivo.
+
+-r ../dataset/requirements.txt
+
+# Runtime de treinamento
+torch>=2.2,<3
+transformers>=4.45,<5
+datasets>=2.20,<4
+peft>=0.12,<1
+accelerate>=0.34,<2
+trl>=0.10,<1
+llamafactory==0.9.5
+
+# Carregamento de modelos e adapters
+huggingface_hub>=0.24,<1
+safetensors>=0.4,<1
+sentencepiece>=0.2,<1
+protobuf>=4,<6
+
+# QLoRA e bitsandbytes não fazem parte desta etapa.
