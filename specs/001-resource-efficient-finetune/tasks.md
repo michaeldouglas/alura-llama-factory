@@ -4,7 +4,7 @@
 
 **Prerequisites**: `spec.md`, `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, Constitution 1.1.0
 
-**Current gate**: G1-OP-V4, G2 and G2-OP are complete for the pinned Qwen model source. The ten-file model manifest contains exact sizes and SHA-256 hashes in the approved external cache. Dataset retrieval, data preparation, model loading, inference, baseline, dry validation and training remain closed until their named gates.
+**Current gate**: G1-OP-V4, G2/G2-OP, G3, G4-DERIVED, G5 and G6 dry validation are complete for the pinned Qwen model source and derived candidate. The baseline is preserved in `reports/benchmark-g6.json`; principal training remains closed until T054/T055 produce a matching execution proposal and exact G7 authorization.
 
 **Tests**: Tests are included because the approved plan requires deterministic schema, lineage, isolation, parsing, metrics, runtime and no-overwrite validation.
 
@@ -128,13 +128,13 @@
 - [X] T049 [US3] Implement model, tokenizer, template, dataset and config validation without executing it in experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py
 - [X] T050 [US3] Execute experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py without principal training and preserve its evidence
 - [X] T051 [US3] Have the orchestrator perform the first G6 license, privacy, cost, hash, schema, no-overwrite and Constitution review in experiments/001-resource-efficient-finetune/reports/config-review-g6.md
-- [ ] T052 [US3] Implement frozen-baseline and microbatch dry validation without executing it in experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py
-- [ ] T053 [US3] After T051 passes only, have the training-engineer execute experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py and record baseline and forward-loss-backward evidence
-- [ ] T054 [US3] Freeze configuration, environment, input, run, path, estimate and stop-condition hashes in experiments/001-resource-efficient-finetune/manifests/execution-proposal.json
-- [ ] T055 [US3] Record the owner's exact G7 run authorization and block absent, stale or mismatched approval in experiments/001-resource-efficient-finetune/manifests/gates/g7.json
-- [ ] T056 [US3] Implement guarded principal execution without running it in experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1
-- [ ] T057 [US3] After valid G7 only, have the training-engineer execute experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1 exactly once
-- [ ] T058 [US3] Preserve status, timestamps, logs, metrics, checkpoints, memory, duration, interruptions and deviations in experiments/001-resource-efficient-finetune/manifests/experiment-run.json
+- [X] T052 [US3] Implement frozen-baseline and microbatch dry validation without executing it in experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py
+- [X] T053 [US3] After T051 passes only, have the training-engineer execute experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py and record baseline and forward-loss-backward evidence
+- [X] T054 [US3] Freeze configuration, environment, input, run, path, estimate and stop-condition hashes in experiments/001-resource-efficient-finetune/manifests/execution-proposal.json
+- [X] T055 [US3] Record the owner's exact G7 run authorization and block absent, stale or mismatched approval in experiments/001-resource-efficient-finetune/manifests/gates/g7.json
+- [X] T056 [US3] Implement guarded principal execution without running it in experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1
+- [X] T057 [US3] After valid G7 only, have the training-engineer execute experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1 exactly once
+- [X] T058 [US3] Preserve status, timestamps, logs, metrics, checkpoints, memory, duration, interruptions and deviations in experiments/001-resource-efficient-finetune/manifests/experiment-run.json
 
 **Checkpoint**: US3 completes with one preserved COMPLETED, FAILED or STOPPED run record; no implicit retry is allowed.
 

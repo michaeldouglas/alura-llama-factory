@@ -2,7 +2,7 @@
   "0": "LLaMA-Factory",
   "1": "Speckit Analyze",
   "2": "common.ps1",
-  "3": "required",
+  "3": "properties",
   "4": "required",
   "5": "create-new-feature.ps1",
   "6": "Speckit Constitution",
@@ -16,7 +16,7 @@
   "14": "Tasks: Resource-Efficient First Fine-Tuning Experiment",
   "15": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
   "16": "G4 remediation — derived dataset review",
-  "17": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
+  "17": "main",
   "18": "validate_heavy_artifact_path",
   "19": "fetch_model_source.py",
   "20": "validate_gate_document",
@@ -42,5 +42,11 @@
   "40": "Revisão de conformidade de dados — G3",
   "41": "fetch_dataset_source.ps1",
   "42": "prepare_dataset.py",
-  "43": "G4 — Data readiness report"
+  "43": "G4 — Data readiness report",
+  "44": "validate_model_compatibility.py",
+  "45": "required",
+  "46": "manifest_utils.py",
+  "47": "G5 — Estratégia e viabilidade",
+  "48": "G4-DERIVED — Data readiness decision",
+  "49": "G6 — Configuration and governance review"
 }

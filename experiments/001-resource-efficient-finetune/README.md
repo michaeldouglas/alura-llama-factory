@@ -18,10 +18,14 @@ This directory contains only versioned governance, validation code, manifests, c
 - G4-REMEDIATION: `APPROVED`; the separately authorized transformation-v1 candidate was created outside the repository with redaction, exclusion reasons and row lineage. The candidate is `DERIVED_CANDIDATE_READY`; the original G4 remains `DATA_BLOCKED` and training is still closed.
 - G4-DERIVED: `DATA_READY` for the prepared candidate only; the original source decision remains `DATA_BLOCKED`. This readiness permits the next strategy and compatibility review, not model loading or training.
 - G5: strategy and non-operational compatibility review are `READY`; the Qwen config/tokenizer, Qwen template, Alpaca schema, external paths, runtime and XPU metadata passed without deserializing weights. See `reports/strategy-g5.md` and `reports/compatibility-g5.json`.
-- G6: `READY_FOR_DRY_VALIDATION`; license, privacy, cost, hashes, schema, no-overwrite and Constitution review passed. Only the representative microbatch/frozen-baseline validation is open; principal training remains unauthorized.
-- Data preparation is complete for the candidate only. Inference, baseline, dry validation and training remain closed until the candidate is reviewed by the later execution gates.
+- G6 review: `READY_FOR_DRY_VALIDATION`; license, privacy, cost, hashes, schema, no-overwrite and Constitution review passed.
+- G6 dry validation: `PASS`; the approved Qwen weights were loaded on the single XPU, one representative microbatch produced finite forward/backward values without optimizer update, and the deterministic frozen subset produced the preserved base baseline in `reports/benchmark-g6.json` and `manifests/gates/g6-validation.json`.
+- G7: `BLOCKED_MISSING_EXACT_OWNER_AUTHORIZATION`; the fail-closed record is present in `manifests/gates/g7.json`. Principal training, checkpoint creation and adapter generation remain closed until the owner records exact matching authorization.
+- Execution proposal: `PROPOSAL_ONLY`; configuration, runtime, input hashes, frozen evaluation selection, outputs, estimate and stop conditions are frozen in `manifests/execution-proposal.json`. It does not authorize execution.
+- G7 execution: `FAILED` before the first training step with exit code `1` because the Windows `datasets` cache lock path exceeded the OS path limit (`WinError 206`). The single-run policy is preserved; there was no optimizer step or checkpoint, and retry is blocked pending a new materially reviewed proposal.
+- Corrective proposal v3: `PROPOSAL_ONLY`; the verified 8.3 external cache alias produces a simulated 237-character lock path. It is recorded in `configs/sft-lora-proposal-v3.yaml`, `manifests/execution-proposal-v3.json` and blocked by `manifests/gates/g7-v3.json` until exact owner authorization.
 
-No script in this directory grants authority by itself. Gate records must be validated before an operational action. Environment creation, model retrieval and the approved derived-data preparation are complete under their gates; inference, dry validation and training remain prohibited while the original G4 is `DATA_BLOCKED` and later execution gates are absent.
+No script in this directory grants authority by itself. Gate records must be validated before an operational action. Environment creation, model retrieval, derived-data preparation and G6 dry validation are complete under their gates; the original G4 remains `DATA_BLOCKED`, and principal training remains prohibited while G7 is absent.
 
 ## Versioned layout
 

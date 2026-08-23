@@ -371,6 +371,126 @@
       "source_location": "L14"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_encode_messages",
+      "label": "encode_messages()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "encode_messages()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_external_root",
+      "label": "external_root()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "external_root()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_load_json",
+      "label": "load_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "load_json()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_macro_f1",
+      "label": "macro_f1()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "macro_f1()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L88"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L130"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_repo_root",
+      "label": "repo_root()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "repo_root()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "label": "select_frozen_subset()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "select_frozen_subset()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L100"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_file",
+      "label": "sha256_file()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "sha256_file()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_json",
+      "label": "sha256_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "sha256_json()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L59"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sync_xpu",
+      "label": "sync_xpu()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "sync_xpu()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L69"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_scripts_path_guards_approved_root_from_environment",
       "label": "approved_root_from_environment()",
       "_callable": true,
@@ -2108,78 +2228,6 @@
       "source_location": "L1"
     },
     {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements",
-      "label": "requirements.md",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "requirements.md",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements_content_quality",
-      "label": "Content Quality",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "content quality",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L7"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements_feature_readiness",
-      "label": "Feature Readiness",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "feature readiness",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L25"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements_notes",
-      "label": "Notes",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "notes",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L32"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements_requirement_completeness",
-      "label": "Requirement Completeness",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "requirement completeness",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L14"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_checklists_requirements_specification_quality_checklist_resource_efficient_first_fine_tuning_experiment",
-      "label": "Specification Quality Checklist: Resource-Efficient First Fine-Tuning Experiment",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "specification quality checklist: resource-efficient first fine-tuning experiment",
-      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
-      "source_location": "L1"
-    },
-    {
       "id": "specs_001_resource_efficient_finetune_data_model",
       "label": "data-model.md",
       "_origin": "ast",
@@ -2348,6 +2396,210 @@
       "source_location": "L1"
     },
     {
+      "id": "specs_001_resource_efficient_finetune_plan_complexity_tracking",
+      "label": "Complexity Tracking",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "complexity tracking",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L154"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_constitution_check",
+      "label": "Constitution Check",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "constitution check",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L35"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_data_design",
+      "label": "Data design",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "data design",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L76"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_documentation_for_this_feature",
+      "label": "Documentation for this feature",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentation for this feature",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L90"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_gate_sequence_after_plan_approval",
+      "label": "Gate Sequence After Plan Approval",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "gate sequence after plan approval",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L134"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_implementation_plan_resource_efficient_first_fine_tuning_experiment",
+      "label": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "implementation plan: resource-efficient first fine-tuning experiment",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_interfaces",
+      "label": "Interfaces",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "interfaces",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L80"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_phase_0_research_decisions",
+      "label": "Phase 0: Research Decisions",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "phase 0: research decisions",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L60"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_phase_1_design",
+      "label": "Phase 1: Design",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "phase 1: design",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L74"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_planned_non_versioned_local_assets",
+      "label": "Planned non-versioned local assets",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "planned non-versioned local assets",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L115"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_planned_versioned_experiment_assets",
+      "label": "Planned versioned experiment assets",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "planned versioned experiment assets",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L104"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_post_design_re_check",
+      "label": "Post-design re-check",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "post-design re-check",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L56"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_pre_research_evaluation",
+      "label": "Pre-research evaluation",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "pre-research evaluation",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L39"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_project_structure",
+      "label": "Project Structure",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "project structure",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L88"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_summary",
+      "label": "Summary",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "summary",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_technical_context",
+      "label": "Technical Context",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "technical context",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L15"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_plan_validation_guide",
+      "label": "Validation guide",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "validation guide",
+      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "source_location": "L84"
+    },
+    {
       "id": "specs_001_resource_efficient_finetune_quickstart",
       "label": "quickstart.md",
       "_origin": "ast",
@@ -2490,18 +2742,6 @@
       "norm_label": "stop conditions",
       "source_file": "specs/001-resource-efficient-finetune/quickstart.md",
       "source_location": "L145"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_spec",
-      "label": "spec.md",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "spec.md",
-      "source_file": "specs/001-resource-efficient-finetune/spec.md",
-      "source_location": "L1"
     },
     {
       "id": "specs_001_resource_efficient_finetune_tasks",
@@ -2790,6 +3030,90 @@
       "norm_label": "tests for user story 4",
       "source_file": "specs/001-resource-efficient-finetune/tasks.md",
       "source_location": "L149"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements",
+      "label": "requirements.md",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "requirements.md",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements_content_quality",
+      "label": "Content Quality",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "content quality",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L7"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements_feature_readiness",
+      "label": "Feature Readiness",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "feature readiness",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L25"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements_notes",
+      "label": "Notes",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "notes",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L32"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements_requirement_completeness",
+      "label": "Requirement Completeness",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "requirement completeness",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L14"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_checklists_requirements_specification_quality_checklist_resource_efficient_first_fine_tuning_experiment",
+      "label": "Specification Quality Checklist: Resource-Efficient First Fine-Tuning Experiment",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "specification quality checklist: resource-efficient first fine-tuning experiment",
+      "source_file": "specs/001-resource-efficient-finetune/checklists/requirements.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "specs_001_resource_efficient_finetune_spec",
+      "label": "spec.md",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "spec.md",
+      "source_file": "specs/001-resource-efficient-finetune/spec.md",
+      "source_location": "L1"
     },
     {
       "id": "specs_001_resource_efficient_finetune_spec_approved_runtime_remediation",
@@ -3092,208 +3416,48 @@
       "source_location": "L44"
     },
     {
-      "id": "specs_001_resource_efficient_finetune_plan_complexity_tracking",
-      "label": "Complexity Tracking",
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "label": "benchmark_microbatch.py",
       "_origin": "ast",
       "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "complexity tracking",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L154"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_constitution_check",
-      "label": "Constitution Check",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "constitution check",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L35"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_data_design",
-      "label": "Data design",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "data design",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L76"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_documentation_for_this_feature",
-      "label": "Documentation for this feature",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentation for this feature",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L90"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_gate_sequence_after_plan_approval",
-      "label": "Gate Sequence After Plan Approval",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "gate sequence after plan approval",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L134"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_implementation_plan_resource_efficient_first_fine_tuning_experiment",
-      "label": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "implementation plan: resource-efficient first fine-tuning experiment",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "benchmark_microbatch.py",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
       "source_location": "L1"
     },
     {
-      "id": "specs_001_resource_efficient_finetune_plan_interfaces",
-      "label": "Interfaces",
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "label": "Any",
       "_origin": "ast",
       "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "interfaces",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L80"
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "specs_001_resource_efficient_finetune_plan_phase_0_research_decisions",
-      "label": "Phase 0: Research Decisions",
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "label": "Path",
       "_origin": "ast",
       "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "phase 0: research decisions",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L60"
+      "community_name": "main",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "specs_001_resource_efficient_finetune_plan_phase_1_design",
-      "label": "Phase 1: Design",
+      "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_rationale_1",
+      "label": "G6 representative microbatch and frozen-baseline validation. This is\u2026",
       "_origin": "ast",
       "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "phase 1: design",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L74"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_planned_non_versioned_local_assets",
-      "label": "Planned non-versioned local assets",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "planned non-versioned local assets",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L115"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_planned_versioned_experiment_assets",
-      "label": "Planned versioned experiment assets",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "planned versioned experiment assets",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L104"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_post_design_re_check",
-      "label": "Post-design re-check",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "post-design re-check",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L56"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_pre_research_evaluation",
-      "label": "Pre-research evaluation",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "pre-research evaluation",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L39"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_project_structure",
-      "label": "Project Structure",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "project structure",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L88"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_summary",
-      "label": "Summary",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "summary",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_technical_context",
-      "label": "Technical Context",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "technical context",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L15"
-    },
-    {
-      "id": "specs_001_resource_efficient_finetune_plan_validation_guide",
-      "label": "Validation guide",
-      "_origin": "ast",
-      "community": 17,
-      "community_name": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "validation guide",
-      "source_file": "specs/001-resource-efficient-finetune/plan.md",
-      "source_location": "L84"
+      "community_name": "main",
+      "file_type": "rationale",
+      "norm_label": "g6 representative microbatch and frozen-baseline validation. this is...",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L1"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_scripts_path_guards",
@@ -3919,7 +4083,7 @@
       "node_kind": "heading",
       "norm_label": "non-versioned layout",
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L33"
+      "source_location": "L37"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_readme_resource_efficient_first_fine_tuning_experiment",
@@ -3943,7 +4107,7 @@
       "node_kind": "heading",
       "norm_label": "versioned layout",
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L25"
+      "source_location": "L29"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution",
@@ -4091,17 +4255,6 @@
       "source_location": "L11"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_decision_enum",
-      "label": "enum",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "enum",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_definitions_gatedecision",
       "label": "gateDecision",
       "_origin": "ast",
@@ -4179,17 +4332,6 @@
       "source_location": "L11"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_decision",
-      "label": "decision",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "decision",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_gate_id",
       "label": "gate_id",
       "_origin": "ast",
@@ -4210,17 +4352,6 @@
       "norm_label": "scope_hash",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L10"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_readiness_enum",
-      "label": "enum",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "enum",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_scope_hash_pattern",
@@ -4245,17 +4376,6 @@
       "source_location": "L10"
     },
     {
-      "id": "ref_approved",
-      "label": "APPROVED",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "approved",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "ref_approved_at",
       "label": "approved_at",
       "_origin": "ast",
@@ -4278,17 +4398,6 @@
       "source_location": "L5"
     },
     {
-      "id": "ref_blocked",
-      "label": "BLOCKED",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "blocked",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "ref_decision",
       "label": "decision",
       "_origin": "ast",
@@ -4309,50 +4418,6 @@
       "norm_label": "gate_id",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L5"
-    },
-    {
-      "id": "ref_needs_authorization",
-      "label": "NEEDS_AUTHORIZATION",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "needs_authorization",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_observed",
-      "label": "OBSERVED",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "observed",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_ready",
-      "label": "READY",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "ready",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_rejected",
-      "label": "REJECTED",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "rejected",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
     },
     {
       "id": "ref_scope_hash",
@@ -5735,6 +5800,17 @@
       "source_location": "L1"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_decision_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_definitions_environmentprofile",
       "label": "environmentProfile",
       "_origin": "ast",
@@ -5790,6 +5866,17 @@
       "source_location": "L18"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_decision",
+      "label": "decision",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "code",
+      "norm_label": "decision",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_inspection_mode",
       "label": "inspection_mode",
       "_origin": "ast",
@@ -5821,6 +5908,39 @@
       "norm_label": "readiness",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L19"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_readiness_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_approved",
+      "label": "APPROVED",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "approved",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "ref_blocked",
+      "label": "BLOCKED",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "blocked",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
     },
     {
       "id": "ref_captured_at",
@@ -5878,6 +5998,28 @@
       "source_location": "L15"
     },
     {
+      "id": "ref_needs_authorization",
+      "label": "NEEDS_AUTHORIZATION",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "needs_authorization",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_observed",
+      "label": "OBSERVED",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "observed",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
       "id": "ref_operating_system",
       "label": "operating_system",
       "_origin": "ast",
@@ -5931,6 +6073,28 @@
       "norm_label": "readiness",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L15"
+    },
+    {
+      "id": "ref_ready",
+      "label": "READY",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "ready",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_rejected",
+      "label": "REJECTED",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "rejected",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
     },
     {
       "id": "ref_storage",
@@ -6248,6 +6412,78 @@
       "source_location": "L17"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6",
+      "label": "config-review-g6.md",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "config-review-g6.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6_authorization_boundary",
+      "label": "Authorization boundary",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "authorization boundary",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L40"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "label": "G6 \u2014 Configuration and governance review",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "g6 \u2014 configuration and governance review",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6_hashes_reviewed",
+      "label": "Hashes reviewed",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "hashes reviewed",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6_review_checks",
+      "label": "Review checks",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "review checks",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_config_review_g6_reviewed_identity",
+      "label": "Reviewed identity",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "G6 \u2014 Configuration and governance review",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "reviewed identity",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L8"
+    },
+    {
       "id": "specify_scripts_powershell_create_new_feature",
       "label": "create-new-feature.ps1",
       "_origin": "ast",
@@ -6312,6 +6548,99 @@
       "norm_label": "test-specprefixinuse()",
       "source_file": ".specify/scripts/powershell/create-new-feature.ps1",
       "source_location": "L71"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_run_result_g7",
+      "label": "run-result-g7.md",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "G7 \u2014 Principal run result",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "run-result-g7.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_run_result_g7_cause",
+      "label": "Cause",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "G7 \u2014 Principal run result",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "cause",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L19"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_run_result_g7_g7_principal_run_result",
+      "label": "G7 \u2014 Principal run result",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "G7 \u2014 Principal run result",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "g7 \u2014 principal run result",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_run_result_g7_next_decision",
+      "label": "Next decision",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "G7 \u2014 Principal run result",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "next decision",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_run_result_g7_preserved_result",
+      "label": "Preserved result",
+      "_origin": "ast",
+      "community": 50,
+      "community_name": "G7 \u2014 Principal run result",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "preserved result",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment",
+      "label": "run_authorized_experiment.ps1",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "run_authorized_experiment.ps1",
+      "file_type": "code",
+      "norm_label": "run_authorized_experiment.ps1",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_get_sha256",
+      "label": "Get-Sha256()",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "run_authorized_experiment.ps1",
+      "file_type": "code",
+      "norm_label": "get-sha256()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
+      "source_location": "L17"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_save_manifest",
+      "label": "Save-Manifest()",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "run_authorized_experiment.ps1",
+      "file_type": "code",
+      "norm_label": "save-manifest()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
+      "source_location": "L21"
     },
     {
       "id": "pkg_alura_llama_factory",
@@ -7345,6 +7674,162 @@
     }
   ],
   "links": [
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_external_root",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_repo_root",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_load_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_external_root",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_file",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sync_xpu",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L211",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_encode_messages",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_macro_f1",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L279",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L282",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_repo_root",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
     {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_allowlistedredirecthandler_redirect_request",
       "target": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_validate_url",
@@ -9794,6 +10279,18 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_load_gate",
       "target": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_py_any",
       "relation": "references",
@@ -11138,6 +11635,66 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_load_json",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_file",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_json",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sync_xpu",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_allowlistedredirecthandler_redirect_request",
       "target": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_py_any",
       "relation": "references",
@@ -11615,6 +12172,30 @@
       "context": "parameter_type",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py",
       "source_location": "L508",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_encode_messages",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_load_json",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -12347,7 +12928,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L25",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -12358,7 +12939,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L33",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -12370,6 +12951,61 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_config_review_g6",
+      "target": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "target": "experiments_001_resource_efficient_finetune_reports_config_review_g6_review_checks",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "target": "experiments_001_resource_efficient_finetune_reports_config_review_g6_hashes_reviewed",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "target": "experiments_001_resource_efficient_finetune_reports_config_review_g6_authorization_boundary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_config_review_g6_g6_configuration_and_governance_review",
+      "target": "experiments_001_resource_efficient_finetune_reports_config_review_g6_reviewed_identity",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/config-review-g6.md",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -12802,6 +13438,50 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_reports_run_result_g7",
+      "target": "experiments_001_resource_efficient_finetune_reports_run_result_g7_g7_principal_run_result",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_run_result_g7_g7_principal_run_result",
+      "target": "experiments_001_resource_efficient_finetune_reports_run_result_g7_preserved_result",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_run_result_g7_g7_principal_run_result",
+      "target": "experiments_001_resource_efficient_finetune_reports_run_result_g7_cause",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_run_result_g7_g7_principal_run_result",
+      "target": "experiments_001_resource_efficient_finetune_reports_run_result_g7_next_decision",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/run-result-g7.md",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_reports_runtime_g2_review",
       "target": "experiments_001_resource_efficient_finetune_reports_runtime_g2_review_runtime_g2_review",
       "relation": "contains",
@@ -13162,6 +13842,116 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/reports/strategy-g5.md",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_repo_root",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_external_root",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_file",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sha256_json",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_load_json",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_sync_xpu",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_encode_messages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_macro_f1",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -14097,6 +14887,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/scripts/resolve_package_metadata.py",
       "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment",
+      "target": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_get_sha256",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment",
+      "target": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_save_manifest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -16399,6 +17211,17 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_rationale_1",
+      "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_rationale_1",
       "target": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source",
       "relation": "rationale_for",
@@ -16660,6 +17483,30 @@
       "confidence_score": 1.0,
       "source_file": "specs/001-resource-efficient-finetune/plan.md",
       "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_main",
+      "target": "counter",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
+      "target": "counter",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -18264,5 +19111,5 @@
       "source_file": ".specify/memory/constitution.md"
     }
   ],
-  "built_at_commit": "240efed31ef66bb686dc68342d6d0013e565b7d0"
+  "built_at_commit": "83d1918be950210807c3dce080d97236e146fb13"
 }

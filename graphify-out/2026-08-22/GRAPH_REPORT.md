@@ -1,16 +1,16 @@
 # Graph Report - alura-llama-factory  (2026-08-22)
 
 ## Corpus Check
-- 105 files · ~208,693 words
+- 117 files · ~216,676 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 558 nodes · 861 edges · 44 communities (34 shown, 10 thin omitted)
+- 620 nodes · 988 edges · 50 communities (40 shown, 10 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 38 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `240efed3`
+- Built from commit: `83d1918b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,7 +18,7 @@
 - LLaMA-Factory
 - Speckit Analyze
 - common.ps1
-- required
+- properties
 - required
 - create-new-feature.ps1
 - Speckit Constitution
@@ -28,7 +28,7 @@
 - Tasks: Resource-Efficient First Fine-Tuning Experiment
 - Feature Specification: Resource-Efficient First Fine-Tuning Experiment
 - G4 remediation — derived dataset review
-- Implementation Plan: Resource-Efficient First Fine-Tuning Experiment
+- main
 - validate_heavy_artifact_path
 - fetch_model_source.py
 - validate_gate_document
@@ -52,18 +52,24 @@
 - fetch_dataset_source.ps1
 - prepare_dataset.py
 - G4 — Data readiness report
+- validate_model_compatibility.py
+- required
+- manifest_utils.py
+- G5 — Estratégia e viabilidade
+- G4-DERIVED — Data readiness decision
+- G6 — Configuration and governance review
 
 ## God Nodes (most connected - your core abstractions)
 1. `main()` - 27 edges
 2. `LLaMA-Factory` - 14 edges
 3. `required` - 13 edges
 4. `validate_gate_document()` - 13 edges
-5. `MetadataClient` - 12 edges
-6. `Data Model: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
-7. `Tasks: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
-8. `SourceRow` - 11 edges
-9. `resolve_requirement()` - 11 edges
-10. `main()` - 11 edges
+5. `main()` - 12 edges
+6. `MetadataClient` - 12 edges
+7. `main()` - 12 edges
+8. `Data Model: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
+9. `Tasks: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
+10. `SourceRow` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Spec Kit Before Implementation` --conceptually_related_to--> `Spec Kit Source of Truth`  [INFERRED]
@@ -88,7 +94,7 @@
 - **Core Spec Kit Artifact Chain** — _specify_templates_spec_template_feature_specification_template, _specify_templates_plan_template_implementation_plan_template, _specify_templates_tasks_template_task_list_template [INFERRED 0.95]
 - **Reproducible Experiment Controls** — _specify_memory_constitution_reproducible_registered_experiments, _agents_skills_dataset_preparation_skill_transformation_audit_trail, _agents_skills_llama_factory_skill_reproducible_configuration, _agents_skills_llama_factory_skill_checkpoint_preservation, _codex_agents_training_engineer_training_engineer, _codex_agents_orchestrator_orchestrator [INFERRED 0.95]
 
-## Communities (44 total, 10 thin omitted)
+## Communities (50 total, 10 thin omitted)
 
 ### Community 0 - "LLaMA-Factory"
 Cohesion: 0.12
@@ -102,9 +108,9 @@ Nodes (28): Cross-Artifact Consistency Analysis, Speckit Analyze, Speckit Checkl
 Cohesion: 0.23
 Nodes (13): Find-SpecifyRoot(), Format-SpecKitCommand(), Get-CurrentBranch(), Get-FeaturePathsEnv(), Get-InvokeSeparator(), Get-NormalizedPriority(), Get-Python3Command(), Get-RepoRoot() (+5 more)
 
-### Community 3 - "required"
-Cohesion: 0.04
-Nodes (49): type, items, type, uniqueItems, enum, environmentProfile, gateDecision, properties (+41 more)
+### Community 3 - "properties"
+Cohesion: 0.07
+Nodes (29): type, items, type, uniqueItems, enum, gateDecision, type, properties (+21 more)
 
 ### Community 4 - "required"
 Cohesion: 0.09
@@ -115,8 +121,8 @@ Cohesion: 0.50
 Nodes (4): Semantic-Versioned Governance, Speckit Constitution, Core Principles and Governance, Project Constitution Template
 
 ### Community 13 - "Data Model: Resource-Efficient First Fine-Tuning Experiment"
-Cohesion: 0.08
-Nodes (23): Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview, EnvironmentProfile, EvaluationRecord, ExecutionProposal, ExperimentRun, ExperimentSpecification (+15 more)
+Cohesion: 0.05
+Nodes (40): Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview, EnvironmentProfile, EvaluationRecord, ExecutionProposal, ExperimentRun, ExperimentSpecification (+32 more)
 
 ### Community 14 - "Tasks: Resource-Efficient First Fine-Tuning Experiment"
 Cohesion: 0.08
@@ -130,17 +136,17 @@ Nodes (21): Content Quality, Feature Readiness, Notes, Requirement Completeness,
 Cohesion: 0.22
 Nodes (8): Counts before and after, Duplicate resolution, G4 remediation — derived dataset review, Limits, Redactions, Scope and authorization, Transformation criteria, Validation and decision
 
-### Community 17 - "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment"
-Cohesion: 0.12
-Nodes (17): Complexity Tracking, Constitution Check, Data design, Documentation for this feature, Gate Sequence After Plan Approval, Implementation Plan: Resource-Efficient First Fine-Tuning Experiment, Interfaces, Phase 0: Research Decisions (+9 more)
+### Community 17 - "main"
+Cohesion: 0.35
+Nodes (13): encode_messages(), external_root(), load_json(), macro_f1(), main(), Any, Path, G6 representative microbatch and frozen-baseline validation. This is… (+5 more)
 
 ### Community 18 - "validate_heavy_artifact_path"
 Cohesion: 0.24
 Nodes (11): approved_root_from_environment(), _is_within(), _normalized(), PathPolicyError, Path, ValueError, Path protections for heavy and generated experiment artifacts., Raised when an artifact path violates experiment policy. (+3 more)
 
 ### Community 19 - "fetch_model_source.py"
-Cohesion: 0.13
-Nodes (26): AllowlistedRedirectHandler, download_file(), load_gate(), main(), Any, Path, RuntimeError, Retrieve one pinned model revision with fail-closed metadata, size and hash… (+18 more)
+Cohesion: 0.25
+Nodes (15): AllowlistedRedirectHandler, download_file(), load_gate(), main(), Any, Path, RuntimeError, Retrieve one pinned model revision with fail-closed metadata, size and hash… (+7 more)
 
 ### Community 20 - "validate_gate_document"
 Cohesion: 0.22
@@ -198,8 +204,32 @@ Nodes (50): Counter, assess_language(), build_derived_record(), canonical_json()
 Cohesion: 0.29
 Nodes (6): Dataset-specialist review, Decision basis, G4 — Data readiness report, Quantified findings, Reproducibility and limitations, Source identity
 
+### Community 44 - "validate_model_compatibility.py"
+Cohesion: 0.27
+Nodes (21): canonical_json(), check_file_hash(), is_within(), load_json(), main(), path_is_external(), Any, Path (+13 more)
+
+### Community 45 - "required"
+Cohesion: 0.10
+Nodes (20): environmentProfile, properties, required, const, const, inspection_mode, operational_actions_performed, readiness (+12 more)
+
+### Community 46 - "manifest_utils.py"
+Cohesion: 0.24
+Nodes (11): canonical_json(), Any, Path, Deterministic manifest helpers with no implicit overwrite., Return stable UTF-8 JSON text suitable for hashing., Create a JSON manifest atomically enough for a single local process; never…, sha256_bytes(), sha256_file() (+3 more)
+
+### Community 47 - "G5 — Estratégia e viabilidade"
+Cohesion: 0.15
+Nodes (12): Dataset validado usado na proposta, Estratégia proposta, G5 — Estratégia e viabilidade, Hardware e runtime observados, Hiperparâmetros completos e justificativas, Limitações e próximos gates, Memória, duração e envelope, Modelo base (+4 more)
+
+### Community 48 - "G4-DERIVED — Data readiness decision"
+Cohesion: 0.40
+Nodes (4): Decision boundary, G4-DERIVED — Data readiness decision, Identity and storage, Readiness evidence
+
+### Community 49 - "G6 — Configuration and governance review"
+Cohesion: 0.33
+Nodes (5): Authorization boundary, G6 — Configuration and governance review, Hashes reviewed, Review checks, Reviewed identity
+
 ## Knowledge Gaps
-- **177 isolated node(s):** `$schema`, `gate_id`, `decision`, `approved_at`, `scope_hash` (+172 more)
+- **194 isolated node(s):** `$schema`, `gate_id`, `decision`, `approved_at`, `scope_hash` (+189 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -207,16 +237,16 @@ Nodes (6): Dataset-specialist review, Decision basis, G4 — Data readiness repo
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `validate_gate_document()` connect `validate_gate_document` to `prepare_dataset.py`, `resolve_package_metadata.py`?**
-  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Why does `load_authorization_gate()` connect `resolve_package_metadata.py` to `validate_gate_document`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **Why does `definitions` connect `required` to `required`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
+- **Why does `validate_dataset()` connect `validate_model_compatibility.py` to `prepare_dataset.py`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
 - **What connects `$schema`, `gate_id`, `decision` to the rest of the system?**
-  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _194 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `LLaMA-Factory` be split into smaller, more focused modules?**
   _Cohesion score 0.12477718360071301 - nodes in this community are weakly interconnected._
 - **Should `Speckit Analyze` be split into smaller, more focused modules?**
   _Cohesion score 0.08994708994708994 - nodes in this community are weakly interconnected._
-- **Should `required` be split into smaller, more focused modules?**
-  _Cohesion score 0.04081632653061224 - nodes in this community are weakly interconnected._
+- **Should `properties` be split into smaller, more focused modules?**
+  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._
