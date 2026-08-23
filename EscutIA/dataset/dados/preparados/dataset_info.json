@@ -7,6 +7,13 @@
       "response": "output"
     }
   },
+  "escutia_treino_conversacional": {
+    "file_name": "escutia_train_conversacional.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    }
+  },
   "escutia_validacao": {
     "file_name": "escutia_validation.json",
     "columns": {
@@ -15,12 +22,26 @@
       "response": "output"
     }
   },
+  "escutia_validacao_conversacional": {
+    "file_name": "escutia_validation_conversacional.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
+    }
+  },
   "escutia_avaliacao": {
     "file_name": "escutia_evaluation.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
       "response": "output"
+    }
+  },
+  "escutia_avaliacao_conversacional": {
+    "file_name": "escutia_evaluation_conversacional.json",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "messages"
     }
   }
 }

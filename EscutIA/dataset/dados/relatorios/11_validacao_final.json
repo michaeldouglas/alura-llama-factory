@@ -1,6 +1,6 @@
 {
   "passo": 11,
-  "decisao": "PRONTO_PARA_TREINAMENTO",
+  "decisao": "DATA_READY_FOR_SFT",
   "resultados": [
     {
       "checagem": "schema_treino",
@@ -19,6 +19,24 @@
       "status": "PASS",
       "registros": 612,
       "erros": []
+    },
+    {
+      "checagem": "conversacional_treino",
+      "status": "PASS",
+      "registros": 1833,
+      "erros": 0
+    },
+    {
+      "checagem": "conversacional_validacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": 0
+    },
+    {
+      "checagem": "conversacional_avaliacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": 0
     },
     {
       "checagem": "isolamento_treino_x_validacao",

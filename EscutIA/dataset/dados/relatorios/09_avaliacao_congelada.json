@@ -1,7 +1,7 @@
 {
   "passo": 9,
   "arquivo": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\preparados\\avaliacao_congelada.jsonl",
-  "sha256": "f6ece7e82b70a21f74b8d00fc8cd363ee3f1f110cfbabcbfb442294bb3e943cd",
+  "sha256": "948a8c4568b0b0eefd97f532a071c1d7af24aa9650fbebc6ba77ac351013e801",
   "registros": 612,
-  "congelado_em_utc": "2026-08-23T18:14:49.036563+00:00"
+  "congelado_em_utc": "2026-08-23T19:01:46.909657+00:00"
 }

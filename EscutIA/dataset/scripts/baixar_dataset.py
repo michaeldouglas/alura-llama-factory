@@ -13,10 +13,11 @@ OUTPUT_FILE = DATA_DIR / "dataset.csv"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
+DATASET_REPOSITORY = "cardiffnlp/tweet_sentiment_multilingual"
+DATASET_REVISION = "606156db529f327fd871515cccbe14dcbafef682"
 BASE_URL = (
-    "https://huggingface.co/datasets/"
-    "cardiffnlp/tweet_sentiment_multilingual/"
-    "resolve/main/data/portuguese"
+    f"https://huggingface.co/datasets/{DATASET_REPOSITORY}/"
+    f"resolve/{DATASET_REVISION}/data/portuguese"
 )
 
 
