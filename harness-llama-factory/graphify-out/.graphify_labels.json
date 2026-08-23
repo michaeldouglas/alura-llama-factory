@@ -2,7 +2,7 @@
   "0": "LLaMA-Factory",
   "1": "Speckit Analyze",
   "2": "common.ps1",
-  "3": "caminho",
+  "3": "Feature Specification: Resource-Efficient First Fine-Tuning Experiment",
   "4": "required",
   "5": "create-new-feature.ps1",
   "6": "Speckit Constitution",
@@ -14,7 +14,7 @@
   "12": "setup-tasks.ps1",
   "13": "Data Model: Resource-Efficient First Fine-Tuning Experiment",
   "14": "Tasks: Resource-Efficient First Fine-Tuning Experiment",
-  "15": "original/README.md",
+  "15": "required",
   "16": "G4 remediation — derived dataset review",
   "17": "main",
   "18": "validate_heavy_artifact_path",
@@ -34,7 +34,6 @@
   "32": "Runtime Metadata Review — G1-METADATA-2",
   "33": "G1-OP Partial Installation Review",
   "34": "create_environment.ps1",
-  "35": "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment",
   "36": "runtime_smoke.py",
   "37": "validate_runtime.ps1",
   "38": "RuntimeValidationScriptTests",
@@ -44,7 +43,7 @@
   "42": "prepare_dataset.py",
   "43": "G4 — Data readiness report",
   "44": "validate_model_compatibility.py",
-  "45": "required",
+  "45": "properties",
   "46": "validate_dataset.py",
   "47": "G5 — Estratégia e viabilidade",
   "48": "G4-DERIVED — Data readiness decision",
@@ -63,6 +62,5 @@
   "61": "Traceability and closure report",
   "62": "Quickstart validation",
   "63": "Repository safety scan",
-  "64": "graphify-update.md",
-  "65": "Os 11 passos"
+  "64": "graphify-update.md"
 }

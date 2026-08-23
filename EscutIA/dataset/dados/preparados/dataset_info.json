@@ -1,0 +1,26 @@
+{
+  "escutia_treino": {
+    "file_name": "escutia_train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+  "escutia_validacao": {
+    "file_name": "escutia_validation.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  },
+  "escutia_avaliacao": {
+    "file_name": "escutia_evaluation.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output"
+    }
+  }
+}

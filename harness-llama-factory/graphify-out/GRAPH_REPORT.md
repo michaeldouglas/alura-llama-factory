@@ -1,16 +1,16 @@
 # Graph Report - harness-llama-factory  (2026-08-23)
 
 ## Corpus Check
-- 159 files · ~226,361 words
+- 144 files · ~222,980 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 786 nodes · 1311 edges · 66 communities (48 shown, 18 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 44 edges (avg confidence: 0.87)
+- 711 nodes · 1132 edges · 64 communities (47 shown, 17 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `dc90d20c`
+- Built from commit: `4991cbb1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,7 +18,7 @@
 - LLaMA-Factory
 - Speckit Analyze
 - common.ps1
-- caminho
+- Feature Specification: Resource-Efficient First Fine-Tuning Experiment
 - required
 - create-new-feature.ps1
 - Speckit Constitution
@@ -26,7 +26,7 @@
 - Research: Resource-Efficient First Fine-Tuning Experiment
 - Data Model: Resource-Efficient First Fine-Tuning Experiment
 - Tasks: Resource-Efficient First Fine-Tuning Experiment
-- original/README.md
+- required
 - G4 remediation — derived dataset review
 - main
 - validate_heavy_artifact_path
@@ -44,7 +44,6 @@
 - Runtime Metadata Review — G1-METADATA-2
 - G1-OP Partial Installation Review
 - create_environment.ps1
-- Implementation Plan: Resource-Efficient First Fine-Tuning Experiment
 - runtime_smoke.py
 - RuntimeValidationScriptTests
 - ModelRetrievalTests
@@ -53,7 +52,7 @@
 - prepare_dataset.py
 - G4 — Data readiness report
 - validate_model_compatibility.py
-- required
+- properties
 - validate_dataset.py
 - G5 — Estratégia e viabilidade
 - G4-DERIVED — Data readiness decision
@@ -71,19 +70,18 @@
 - Quickstart validation
 - Repository safety scan
 - graphify-update.md
-- Os 11 passos
 
 ## God Nodes (most connected - your core abstractions)
 1. `main()` - 27 edges
-2. `caminho()` - 25 edges
-3. `escrever_json_sem_sobrescrever()` - 22 edges
-4. `ler_jsonl()` - 16 edges
-5. `SourceRow` - 14 edges
-6. `LLaMA-Factory` - 14 edges
-7. `required` - 13 edges
-8. `validate_gate_document()` - 13 edges
-9. `escrever_jsonl()` - 12 edges
-10. `main()` - 12 edges
+2. `SourceRow` - 14 edges
+3. `LLaMA-Factory` - 14 edges
+4. `required` - 13 edges
+5. `validate_gate_document()` - 13 edges
+6. `main()` - 12 edges
+7. `MetadataClient` - 12 edges
+8. `main()` - 12 edges
+9. `Data Model: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
+10. `Tasks: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Spec Kit Before Implementation` --conceptually_related_to--> `Spec Kit Source of Truth`  [INFERRED]
@@ -108,7 +106,7 @@
 - **Core Spec Kit Artifact Chain** — _specify_templates_spec_template_feature_specification_template, _specify_templates_plan_template_implementation_plan_template, _specify_templates_tasks_template_task_list_template [INFERRED 0.95]
 - **Reproducible Experiment Controls** — _specify_memory_constitution_reproducible_registered_experiments, _agents_skills_dataset_preparation_skill_transformation_audit_trail, _agents_skills_llama_factory_skill_reproducible_configuration, _agents_skills_llama_factory_skill_checkpoint_preservation, _codex_agents_training_engineer_training_engineer, _codex_agents_orchestrator_orchestrator [INFERRED 0.95]
 
-## Communities (66 total, 18 thin omitted)
+## Communities (64 total, 17 thin omitted)
 
 ### Community 0 - "LLaMA-Factory"
 Cohesion: 0.12
@@ -122,9 +120,9 @@ Nodes (28): Cross-Artifact Consistency Analysis, Speckit Analyze, Speckit Checkl
 Cohesion: 0.23
 Nodes (13): Find-SpecifyRoot(), Format-SpecKitCommand(), Get-CurrentBranch(), Get-FeaturePathsEnv(), Get-InvokeSeparator(), Get-NormalizedPriority(), Get-Python3Command(), Get-RepoRoot() (+5 more)
 
-### Community 3 - "caminho"
-Cohesion: 0.12
-Nodes (39): main(), Passo 1: observa o dataset sem alterar o arquivo original., main(), Passo 2: confirma a estrutura mínima do CSV original., main(), Passo 3: transforma cada linha no formato didático instrução/contexto/resposta., main(), Passo 4: limpa espaços e normaliza o texto, preservando rejeitados. (+31 more)
+### Community 3 - "Feature Specification: Resource-Efficient First Fine-Tuning Experiment"
+Cohesion: 0.09
+Nodes (21): Content Quality, Feature Readiness, Notes, Requirement Completeness, Specification Quality Checklist: Resource-Efficient First Fine-Tuning Experiment, Approved Runtime Remediation, Assumptions, Classification Policy (+13 more)
 
 ### Community 4 - "required"
 Cohesion: 0.09
@@ -139,12 +137,16 @@ Cohesion: 0.11
 Nodes (16): G2-OP completion, G2-OP request, Proposed model payload — metadata only, Runtime evidence, Runtime G2 Review, Decision 1 — Base model candidate, Decision 2 — Dataset candidate, Decision 3 — LlamaFactory revision (+8 more)
 
 ### Community 13 - "Data Model: Resource-Efficient First Fine-Tuning Experiment"
-Cohesion: 0.04
-Nodes (44): Content Quality, Feature Readiness, Notes, Requirement Completeness, Specification Quality Checklist: Resource-Efficient First Fine-Tuning Experiment, Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview (+36 more)
+Cohesion: 0.05
+Nodes (40): Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview, EnvironmentProfile, EvaluationRecord, ExecutionProposal, ExperimentRun, ExperimentSpecification (+32 more)
 
 ### Community 14 - "Tasks: Resource-Efficient First Fine-Tuning Experiment"
 Cohesion: 0.08
 Nodes (23): Authorized MVP Tranche, Dependencies & Execution Order, Gate Discipline, Gated operational implementation for User Story 1, Implementation for User Story 2, Implementation for User Story 3, Implementation for User Story 4, Implementation Strategy (+15 more)
+
+### Community 15 - "required"
+Cohesion: 0.10
+Nodes (20): environmentProfile, properties, required, const, const, inspection_mode, operational_actions_performed, readiness (+12 more)
 
 ### Community 16 - "G4 remediation — derived dataset review"
 Cohesion: 0.22
@@ -194,10 +196,6 @@ Nodes (5): Blocking finding, Decision and next action, Resolution evidence, Runt
 Cohesion: 0.33
 Nodes (5): Blocking finding, Evidence, G1-OP Partial Installation Review, Required decision, Superseded outcome after G1-OP-V4 approval
 
-### Community 35 - "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment"
-Cohesion: 0.12
-Nodes (17): Complexity Tracking, Constitution Check, Data design, Documentation for this feature, Gate Sequence After Plan Approval, Implementation Plan: Resource-Efficient First Fine-Tuning Experiment, Interfaces, Phase 0: Research Decisions (+9 more)
-
 ### Community 36 - "runtime_smoke.py"
 Cohesion: 0.53
 Nodes (5): cpu_probe(), identity(), main(), Read-only runtime smoke probes for the G2 environment gate., xpu_probe()
@@ -222,9 +220,9 @@ Nodes (6): Dataset-specialist review, Decision basis, G4 — Data readiness repo
 Cohesion: 0.27
 Nodes (21): canonical_json(), check_file_hash(), is_within(), load_json(), main(), path_is_external(), Any, Path (+13 more)
 
-### Community 45 - "required"
-Cohesion: 0.04
-Nodes (49): type, items, type, uniqueItems, enum, environmentProfile, gateDecision, properties (+41 more)
+### Community 45 - "properties"
+Cohesion: 0.07
+Nodes (29): type, items, type, uniqueItems, enum, gateDecision, type, properties (+21 more)
 
 ### Community 46 - "validate_dataset.py"
 Cohesion: 0.14
@@ -262,28 +260,24 @@ Nodes (4): Closure decision, Functional requirements, Success criteria, Traceabi
 Cohesion: 0.50
 Nodes (3): Applicable validations, Protected commands not repeated, Quickstart validation
 
-### Community 65 - "Os 11 passos"
-Cohesion: 0.09
-Nodes (20): 10. Converter para o formato do LLaMA-Factory, 11. Validar o dataset final, 1. Criar, selecionar ou importar o dataset, 2. Definir o schema dos exemplos, 3. Organizar instrução, contexto e resposta, 4. Limpar e normalizar os dados, 5. Remover duplicidades e exemplos inconsistentes, 6. Verificar dados sensíveis, incorretos ou fora do domínio (+12 more)
-
 ## Knowledge Gaps
-- **223 isolated node(s):** `$schema`, `gate_id`, `decision`, `approved_at`, `scope_hash` (+218 more)
+- **205 isolated node(s):** `$schema`, `gate_id`, `decision`, `approved_at`, `scope_hash` (+200 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `validate_gate_document()` connect `validate_gate_document` to `prepare_dataset.py`, `resolve_package_metadata.py`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `load_authorization_gate()` connect `resolve_package_metadata.py` to `validate_gate_document`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `main()` connect `prepare_dataset.py` to `validate_gate_document`, `validate_dataset.py`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
-- **Are the 11 inferred relationships involving `Counter` (e.g. with `main()` and `main()`) actually correct?**
-  _`Counter` has 11 INFERRED edges - model-reasoned connections that need verification._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `SourceRow` (e.g. with `DatasetConversionTests` and `DatasetPreparationTests`) actually correct?**
+  _`SourceRow` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `$schema`, `gate_id`, `decision` to the rest of the system?**
-  _223 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _205 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `LLaMA-Factory` be split into smaller, more focused modules?**
   _Cohesion score 0.12477718360071301 - nodes in this community are weakly interconnected._
 - **Should `Speckit Analyze` be split into smaller, more focused modules?**

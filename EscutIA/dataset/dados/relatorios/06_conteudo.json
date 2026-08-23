@@ -1,0 +1,27 @@
+{
+  "passo": 6,
+  "registros_com_alerta": 7,
+  "alertas": [
+    [
+      "termos_de_crise"
+    ],
+    [
+      "termos_de_crise"
+    ],
+    [
+      "termos_de_crise"
+    ],
+    [
+      "termos_de_crise"
+    ],
+    [
+      "telefone"
+    ],
+    [
+      "termos_de_crise"
+    ],
+    [
+      "termos_de_crise"
+    ]
+  ]
+}

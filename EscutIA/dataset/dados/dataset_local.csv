@@ -1,0 +1,31 @@
+id,texto,rotulo
+1,"Acordei animado e com vontade de começar o dia.",positivo
+2,"Foi muito bom conversar com meus amigos ontem.",positivo
+3,"Estou orgulhoso do resultado que consegui no trabalho.",positivo
+4,"Hoje encontrei uma solução para um problema difícil.",positivo
+5,"Sinto esperança de que as coisas vão melhorar.",positivo
+6,"Recebi uma mensagem carinhosa e fiquei contente.",positivo
+7,"Consegui descansar e estou me sentindo renovado.",positivo
+8,"Estou satisfeito com o progresso dos meus estudos.",positivo
+9,"Foi uma surpresa agradável encontrar minha família.",positivo
+10,"Terminei a tarefa e fiquei aliviado com o resultado.",positivo
+11,"O dia está normal e não tenho uma opinião forte.",neutro
+12,"Estou pensando no que farei durante o fim de semana.",neutro
+13,"A reunião aconteceu conforme o planejado.",neutro
+14,"Ainda estou avaliando as opções antes de decidir.",neutro
+15,"Recebi a informação e vou analisá-la com calma.",neutro
+16,"Hoje trabalhei nas atividades habituais.",neutro
+17,"Não sei dizer ainda como me sinto sobre isso.",neutro
+18,"A situação mudou pouco desde ontem.",neutro
+19,"Estou observando os acontecimentos antes de responder.",neutro
+20,"Tenho uma expectativa moderada para a próxima semana.",neutro
+21,"Estou preocupado com o resultado da prova.",negativo
+22,"Senti tristeza depois daquela conversa.",negativo
+23,"O problema no trabalho me deixou muito frustrado.",negativo
+24,"Estou cansado e sem energia para continuar hoje.",negativo
+25,"Fiquei decepcionado com a notícia.",negativo
+26,"Tenho medo de não conseguir cumprir o prazo.",negativo
+27,"A discussão me deixou irritado.",negativo
+28,"Estou com dificuldade para me concentrar nos estudos.",negativo
+29,"Sinto falta de alguém importante para mim.",negativo
+30,"A espera pela resposta está me deixando ansioso.",negativo

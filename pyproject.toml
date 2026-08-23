@@ -1,0 +1,18 @@
+[project]
+name = "alura-llama-factory"
+version = "0.1.0"
+description = "Projeto do curso Alura LLama Factory"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+ "datasets>=5.0.1",
+ "ipykernel>=7.3.0",
+ "jsonschema>=4.26.0",
+ "jupyter>=1.1.1",
+ "matplotlib>=3.11.1",
+ "numpy>=2.5.2",
+ "pandas>=3.0.5",
+ "scikit-learn>=1.9.0",
+ "scipy>=1.18.1",
+ "seaborn>=0.13.2",
+]

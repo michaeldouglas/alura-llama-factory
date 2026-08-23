@@ -1,0 +1,26 @@
+{
+  "passo": 7,
+  "seed": 42,
+  "quantidades": {
+    "treino": 1833,
+    "validacao": 612,
+    "avaliacao": 612
+  },
+  "rotulos": {
+    "treino": {
+      "negativo": 612,
+      "neutro": 610,
+      "positivo": 611
+    },
+    "validacao": {
+      "negativo": 204,
+      "neutro": 204,
+      "positivo": 204
+    },
+    "avaliacao": {
+      "negativo": 204,
+      "neutro": 204,
+      "positivo": 204
+    }
+  }
+}
