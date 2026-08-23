@@ -5,6 +5,7 @@
   "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822-v3",
   "stdout_log": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\runs\\g5-sft-lora-transformation-v1-20260822-v3\\logs\\principal-run-v3.stdout.log",
   "deviations": [],
+  "output_exists": true,
   "hard_stop_minutes": 60,
   "started_at_utc": "2026-08-23T00:15:57.7630776+00:00",
   "output_dir": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\runs\\g5-sft-lora-transformation-v1-20260822-v3",
@@ -26,10 +27,10 @@
     "g5_gate": "2403194c26163d944bc78e708ab7e581ae44d6df2f23a94cd8ef17087b1effc4",
     "g6_validation": "6e9df94e5f53216d65dc92e69d9f010adb0bb6496d3c34203f8295a5d150742e"
   },
-  "finished_at_utc": null,
+  "finished_at_utc": "2026-08-23T00:55:24.6079495+00:00",
   "previous_run_manifest": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\experiments\\001-resource-efficient-finetune\\manifests\\experiment-run.json",
-  "exit_code": null,
-  "status": "RUNNING",
+  "exit_code": 0,
+  "status": "COMPLETED",
   "stop_reason": null,
   "retry_allowed": false,
   "stderr_log": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\runs\\g5-sft-lora-transformation-v1-20260822-v3\\logs\\principal-run-v3.stderr.log"

@@ -23,7 +23,9 @@ This directory contains only versioned governance, validation code, manifests, c
 - G7: `BLOCKED_MISSING_EXACT_OWNER_AUTHORIZATION`; the fail-closed record is present in `manifests/gates/g7.json`. Principal training, checkpoint creation and adapter generation remain closed until the owner records exact matching authorization.
 - Execution proposal: `PROPOSAL_ONLY`; configuration, runtime, input hashes, frozen evaluation selection, outputs, estimate and stop conditions are frozen in `manifests/execution-proposal.json`. It does not authorize execution.
 - G7 execution: `FAILED` before the first training step with exit code `1` because the Windows `datasets` cache lock path exceeded the OS path limit (`WinError 206`). The single-run policy is preserved; there was no optimizer step or checkpoint, and retry is blocked pending a new materially reviewed proposal.
-- Corrective proposal v3: `PROPOSAL_ONLY`; the verified 8.3 external cache alias produces a simulated 237-character lock path. It is recorded in `configs/sft-lora-proposal-v3.yaml`, `manifests/execution-proposal-v3.json` and blocked by `manifests/gates/g7-v3.json` until exact owner authorization.
+- Corrective proposal v3: the verified 8.3 external cache alias produced a simulated 237-character lock path. It is recorded in `configs/sft-lora-proposal-v3.yaml`, `manifests/execution-proposal-v3.json` and was executed once under `manifests/gates/g7-v3.json`.
+- G7-V3 execution: `COMPLETED` in 39 minutes and 27 seconds; `checkpoint-448` and all run logs remain in the external v3 run directory.
+- G8: `SUCCESSFUL`; the adapter improved frozen-set macro-F1 from `0.4044` to `0.6891`, accuracy from `0.5000` to `0.6889`, and reduced invalid labels from `1.11%` to `0%`. See `reports/final-evaluation-g8.md` and `reports/evaluation-g8.json`.
 
 No script in this directory grants authority by itself. Gate records must be validated before an operational action. Environment creation, model retrieval, derived-data preparation and G6 dry validation are complete under their gates; the original G4 remains `DATA_BLOCKED`, and principal training remains prohibited while G7 is absent.
 

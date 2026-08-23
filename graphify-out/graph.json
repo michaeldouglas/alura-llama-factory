@@ -150,6 +150,19 @@
       "source_location": "L30"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests",
+      "label": "ManifestUtilsTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "manifestutilstests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "source_location": "L14"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_scripts_validate_gate_gatevalidationerror",
       "label": "GateValidationError",
       "_callable": true,
@@ -319,17 +332,17 @@
       "source_location": "L104"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
-      "label": "Row",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests",
+      "label": "DatasetConversionTests",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 42,
       "community_name": "prepare_dataset.py",
       "file_type": "code",
-      "norm_label": "row",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L70"
+      "norm_label": "datasetconversiontests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L19"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests",
@@ -358,17 +371,147 @@
       "source_location": "L39"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests",
-      "label": "ManifestUtilsTests",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
+      "label": "Row",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "manifestutilstests",
-      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "norm_label": "row",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests",
+      "label": "DatasetPolicyTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "datasetpolicytests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests",
+      "label": "DatasetSchemaTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "datasetschematests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
       "source_location": "L14"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests",
+      "label": "DatasetSourceTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "datasetsourcetests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests",
+      "label": "SplitIsolationTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "splitisolationtests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests",
+      "label": "MetricsTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "MetricsTests",
+      "file_type": "code",
+      "norm_label": "metricstests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests",
+      "label": "PredictionParserTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "load_evaluator",
+      "file_type": "code",
+      "norm_label": "predictionparsertests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests",
+      "label": "ReproducibilityTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "ReproducibilityTests",
+      "file_type": "code",
+      "norm_label": "reproducibilitytests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L10"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests",
+      "label": "LlamaFactoryCompatibilityTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "LlamaFactoryCompatibilityTests",
+      "file_type": "code",
+      "norm_label": "llamafactorycompatibilitytests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests",
+      "label": "ExecutionProposalTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "ExecutionProposalTests",
+      "file_type": "code",
+      "norm_label": "executionproposaltests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests",
+      "label": "RunGuardTests",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RunGuardTests",
+      "file_type": "code",
+      "norm_label": "runguardtests",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L10"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_encode_messages",
@@ -681,6 +824,90 @@
       "norm_label": "verify_metadata()",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py",
       "source_location": "L85"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_canonical_json",
+      "label": "canonical_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "canonical_json()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_bytes",
+      "label": "sha256_bytes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "sha256_bytes()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_file",
+      "label": "sha256_file()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "sha256_file()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_json",
+      "label": "sha256_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "sha256_json()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_write_json_new",
+      "label": "write_json_new()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "write_json_new()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_canonical_json_is_order_independent",
+      "label": ".test_canonical_json_is_order_independent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": ".test_canonical_json_is_order_independent()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_write_json_new_refuses_overwrite",
+      "label": ".test_write_json_new_refuses_overwrite()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": ".test_write_json_new_refuses_overwrite()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "source_location": "L21"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_scripts_validate_gate_validate_gate_document",
@@ -1679,172 +1906,28 @@
       "source_location": "L471"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_assess_language",
-      "label": "assess_language()",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_all_numeric_labels_map_to_the_frozen_portuguese_labels",
+      "label": ".test_all_numeric_labels_map_to_the_frozen_portuguese_labels()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
       "community_name": "prepare_dataset.py",
       "file_type": "code",
-      "norm_label": "assess_language()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L95"
+      "norm_label": ".test_all_numeric_labels_map_to_the_frozen_portuguese_labels()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L20"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_classify_content",
-      "label": "classify_content()",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_alpaca_schema_rejects_wrong_instruction_output_and_unredacted_pii",
+      "label": ".test_alpaca_schema_rejects_wrong_instruction_output_and_unredacted_pii()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
       "community_name": "prepare_dataset.py",
       "file_type": "code",
-      "norm_label": "classify_content()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L108"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_expected_files",
-      "label": "expected_files()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "expected_files()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L139"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_load_manifest",
-      "label": "load_manifest()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "load_manifest()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L114"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L402"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_normalize_text",
-      "label": "normalize_text()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "normalize_text()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L90"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_overlap_counts",
-      "label": "overlap_counts()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "overlap_counts()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L241"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_parse_args",
-      "label": "parse_args()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "parse_args()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L394"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_read_rows",
-      "label": "read_rows()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "read_rows()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L163"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_render_report",
-      "label": "render_report()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "render_report()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L340"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
-      "label": "sha256_text()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "sha256_text()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L86"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_source_root",
-      "label": "source_root()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "source_root()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L131"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_summarize",
-      "label": "summarize()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "summarize()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L277"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_validate_source_hashes",
-      "label": "validate_source_hashes()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "validate_source_hashes()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
-      "source_location": "L147"
+      "norm_label": ".test_alpaca_schema_rejects_wrong_instruction_output_and_unredacted_pii()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L30"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests_test_alpaca_schema_and_exact_instruction",
@@ -2111,88 +2194,580 @@
       "source_location": "L508"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_canonical_json",
-      "label": "canonical_json()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_assess_language",
+      "label": "assess_language()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "canonical_json()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L11"
+      "norm_label": "assess_language()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L95"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_bytes",
-      "label": "sha256_bytes()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_classify_content",
+      "label": "classify_content()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "sha256_bytes()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L16"
+      "norm_label": "classify_content()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L108"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_file",
-      "label": "sha256_file()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_expected_files",
+      "label": "expected_files()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "sha256_file()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L24"
+      "norm_label": "expected_files()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L139"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_sha256_json",
-      "label": "sha256_json()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_load_manifest",
+      "label": "load_manifest()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "sha256_json()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L20"
+      "norm_label": "load_manifest()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L114"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_write_json_new",
-      "label": "write_json_new()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "write_json_new()",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L32"
+      "norm_label": "main()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L402"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_canonical_json_is_order_independent",
-      "label": ".test_canonical_json_is_order_independent()",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_normalize_text",
+      "label": "normalize_text()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": ".test_canonical_json_is_order_independent()",
-      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "norm_label": "normalize_text()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_overlap_counts",
+      "label": "overlap_counts()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "overlap_counts()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L241"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_parse_args",
+      "label": "parse_args()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "parse_args()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L394"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_read_rows",
+      "label": "read_rows()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "read_rows()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L163"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_render_report",
+      "label": "render_report()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "render_report()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L340"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
+      "label": "sha256_text()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "sha256_text()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_source_root",
+      "label": "source_root()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "source_root()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L131"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_summarize",
+      "label": "summarize()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "summarize()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L277"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_validate_source_hashes",
+      "label": "validate_source_hashes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "validate_source_hashes()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L147"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests_test_privacy_sensitive_and_language_findings_are_aggregated",
+      "label": ".test_privacy_sensitive_and_language_findings_are_aggregated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": ".test_privacy_sensitive_and_language_findings_are_aggregated()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "label": "row()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "row()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests_test_required_fields_utf8_length_and_numeric_labels_are_checked",
+      "label": ".test_required_fields_utf8_length_and_numeric_labels_are_checked()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": ".test_required_fields_utf8_length_and_numeric_labels_are_checked()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
       "source_location": "L15"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_write_json_new_refuses_overwrite",
-      "label": ".test_write_json_new_refuses_overwrite()",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_manifest",
+      "label": "._manifest()",
       "_callable": true,
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": ".test_write_json_new_refuses_overwrite()",
-      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "norm_label": "._manifest()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "label": ".test_checksum_mismatch_and_non_pinned_revision_are_rejected()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": ".test_checksum_mismatch_and_non_pinned_revision_are_rejected()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L59"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "label": ".test_pinned_read_only_source_and_hashes_are_accepted()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": ".test_pinned_read_only_source_and_hashes_are_accepted()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "label": "row()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "row()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests_test_exact_normalized_and_near_duplicate_pairs_are_quantified",
+      "label": ".test_exact_normalized_and_near_duplicate_pairs_are_quantified()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": ".test_exact_normalized_and_near_duplicate_pairs_are_quantified()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_encode_prompt",
+      "label": "encode_prompt()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "encode_prompt()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_evaluate",
+      "label": "evaluate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "evaluate()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L104"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_external_root",
+      "label": "external_root()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "external_root()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_macro_f1",
+      "label": "macro_f1()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "macro_f1()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L140"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_parse_prediction",
+      "label": "parse_prediction()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "parse_prediction()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_repo_root",
+      "label": "repo_root()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "repo_root()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "label": "select_subset()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "select_subset()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_file",
+      "label": "sha256_file()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "sha256_file()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_json",
+      "label": "sha256_json()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "sha256_json()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "label": "summarize()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "summarize()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_metrics_load_evaluator",
+      "label": "load_evaluator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "MetricsTests",
+      "file_type": "code",
+      "norm_label": "load_evaluator()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L6"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests_test_macro_f1_perfect_and_regression",
+      "label": ".test_macro_f1_perfect_and_regression()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "MetricsTests",
+      "file_type": "code",
+      "norm_label": ".test_macro_f1_perfect_and_regression()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests_test_sc008_threshold_branches",
+      "label": ".test_sc008_threshold_branches()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "MetricsTests",
+      "file_type": "code",
+      "norm_label": ".test_sc008_threshold_branches()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_load_evaluator",
+      "label": "load_evaluator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "load_evaluator",
+      "file_type": "code",
+      "norm_label": "load_evaluator()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L6"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_exact_labels_and_invalid_outputs",
+      "label": ".test_exact_labels_and_invalid_outputs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "load_evaluator",
+      "file_type": "code",
+      "norm_label": ".test_exact_labels_and_invalid_outputs()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_summary_preserves_ordered_prediction_hash",
+      "label": ".test_summary_preserves_ordered_prediction_hash()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "load_evaluator",
+      "file_type": "code",
+      "norm_label": ".test_summary_preserves_ordered_prediction_hash()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests_test_checkpoint_hashes_match_external_files",
+      "label": ".test_checkpoint_hashes_match_external_files()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "ReproducibilityTests",
+      "file_type": "code",
+      "norm_label": ".test_checkpoint_hashes_match_external_files()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests_test_evaluation_record_has_identity_and_metrics",
+      "label": ".test_evaluation_record_has_identity_and_metrics()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "ReproducibilityTests",
+      "file_type": "code",
+      "norm_label": ".test_evaluation_record_has_identity_and_metrics()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_parser_accepts_only_one_exact_label",
+      "label": ".test_parser_accepts_only_one_exact_label()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "LlamaFactoryCompatibilityTests",
+      "file_type": "code",
+      "norm_label": ".test_parser_accepts_only_one_exact_label()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_registered_dataset_names_template_and_alpaca_schema_are_consistent",
+      "label": ".test_registered_dataset_names_template_and_alpaca_schema_are_consistent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "LlamaFactoryCompatibilityTests",
+      "file_type": "code",
+      "norm_label": ".test_registered_dataset_names_template_and_alpaca_schema_are_consistent()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
       "source_location": "L21"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_load_evaluator",
+      "label": "load_evaluator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "LlamaFactoryCompatibilityTests",
+      "file_type": "code",
+      "norm_label": "load_evaluator()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests_test_material_config_change_changes_identity_and_run_is_unique",
+      "label": ".test_material_config_change_changes_identity_and_run_is_unique()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "ExecutionProposalTests",
+      "file_type": "code",
+      "norm_label": ".test_material_config_change_changes_identity_and_run_is_unique()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests_test_v3_proposal_is_complete_and_matches_immutable_config_identity",
+      "label": ".test_v3_proposal_is_complete_and_matches_immutable_config_identity()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "ExecutionProposalTests",
+      "file_type": "code",
+      "norm_label": ".test_v3_proposal_is_complete_and_matches_immutable_config_identity()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests_test_authorized_runner_enforces_single_run_and_sixty_minute_stop",
+      "label": ".test_authorized_runner_enforces_single_run_and_sixty_minute_stop()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RunGuardTests",
+      "file_type": "code",
+      "norm_label": ".test_authorized_runner_enforces_single_run_and_sixty_minute_stop()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests_test_no_silent_fallback_and_collision_protection_are_recorded",
+      "label": ".test_no_silent_fallback_and_collision_protection_are_recorded()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RunGuardTests",
+      "file_type": "code",
+      "norm_label": ".test_no_silent_fallback_and_collision_protection_are_recorded()",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L23"
     },
     {
       "id": "specify_scripts_powershell_resolve_template",
@@ -3581,6 +4156,50 @@
       "source_location": ""
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils",
+      "label": "manifest_utils.py",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "manifest_utils.py",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_py_any",
+      "label": "Any",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils",
+      "label": "test_manifest_utils.py",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "code",
+      "norm_label": "test_manifest_utils.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "source_location": "L1"
+    },
+    {
       "id": "request",
       "label": "Request",
       "_origin": "ast",
@@ -3612,6 +4231,39 @@
       "norm_label": "raised when the approved source or payload does not match exactly.",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/fetch_model_source.py",
       "source_location": "L31"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_1",
+      "label": "Deterministic manifest helpers with no implicit overwrite.",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "rationale",
+      "norm_label": "deterministic manifest helpers with no implicit overwrite.",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_12",
+      "label": "Return stable UTF-8 JSON text suitable for hashing.",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "rationale",
+      "norm_label": "return stable utf-8 json text suitable for hashing.",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_33",
+      "label": "Create a JSON manifest atomically enough for a single local process; never\u2026",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "fetch_model_source.py",
+      "file_type": "rationale",
+      "norm_label": "create a json manifest atomically enough for a single local process; never...",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "source_location": "L33"
     },
     {
       "id": "specify_scripts_powershell_common",
@@ -4083,7 +4735,7 @@
       "node_kind": "heading",
       "norm_label": "non-versioned layout",
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L37"
+      "source_location": "L40"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_readme_resource_efficient_first_fine_tuning_experiment",
@@ -4107,7 +4759,7 @@
       "node_kind": "heading",
       "norm_label": "versioned layout",
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L29"
+      "source_location": "L32"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution",
@@ -4255,6 +4907,17 @@
       "source_location": "L11"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_decision_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_definitions_gatedecision",
       "label": "gateDecision",
       "_origin": "ast",
@@ -4332,6 +4995,17 @@
       "source_location": "L11"
     },
     {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_decision",
+      "label": "decision",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "decision",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_gate_id",
       "label": "gate_id",
       "_origin": "ast",
@@ -4352,6 +5026,17 @@
       "norm_label": "scope_hash",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L10"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_readiness_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_scope_hash_pattern",
@@ -4376,6 +5061,17 @@
       "source_location": "L10"
     },
     {
+      "id": "ref_approved",
+      "label": "APPROVED",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "approved",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "ref_approved_at",
       "label": "approved_at",
       "_origin": "ast",
@@ -4398,6 +5094,17 @@
       "source_location": "L5"
     },
     {
+      "id": "ref_blocked",
+      "label": "BLOCKED",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "blocked",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
+    },
+    {
       "id": "ref_decision",
       "label": "decision",
       "_origin": "ast",
@@ -4418,6 +5125,50 @@
       "norm_label": "gate_id",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L5"
+    },
+    {
+      "id": "ref_needs_authorization",
+      "label": "NEEDS_AUTHORIZATION",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "needs_authorization",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_observed",
+      "label": "OBSERVED",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "observed",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_ready",
+      "label": "READY",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "ready",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "ref_rejected",
+      "label": "REJECTED",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "rejected",
+      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
+      "source_location": "L8"
     },
     {
       "id": "ref_scope_hash",
@@ -5606,37 +6357,15 @@
       "source_location": ""
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
-      "label": "validate_dataset.py",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "label": "test_dataset_conversion.py",
       "_origin": "ast",
       "community": 42,
       "community_name": "prepare_dataset.py",
       "file_type": "code",
-      "norm_label": "validate_dataset.py",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "norm_label": "test_dataset_conversion.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
       "source_location": "L1"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_py_namespace",
-      "label": "Namespace",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "namespace",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
     },
     {
       "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation",
@@ -5658,17 +6387,6 @@
       "file_type": "rationale",
       "norm_label": "fail-closed, deterministic preparation of the approved external dataset. this...",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_rationale_1",
-      "label": "Read-only G4 validation for the pinned Portuguese source dataset. The validator\u2026",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "prepare_dataset.py",
-      "file_type": "rationale",
-      "norm_label": "read-only g4 validation for the pinned portuguese source dataset. the validator...",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
       "source_location": "L1"
     },
     {
@@ -5800,17 +6518,6 @@
       "source_location": "L1"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_decision_enum",
-      "label": "enum",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "enum",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_definitions_environmentprofile",
       "label": "environmentProfile",
       "_origin": "ast",
@@ -5866,17 +6573,6 @@
       "source_location": "L18"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_decision",
-      "label": "decision",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "decision",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "experiments_001_resource_efficient_finetune_manifests_schemas_properties_inspection_mode",
       "label": "inspection_mode",
       "_origin": "ast",
@@ -5908,39 +6604,6 @@
       "norm_label": "readiness",
       "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
       "source_location": "L19"
-    },
-    {
-      "id": "experiments_001_resource_efficient_finetune_manifests_schemas_readiness_enum",
-      "label": "enum",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "enum",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_approved",
-      "label": "APPROVED",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "approved",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "ref_blocked",
-      "label": "BLOCKED",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "blocked",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
     },
     {
       "id": "ref_captured_at",
@@ -5998,28 +6661,6 @@
       "source_location": "L15"
     },
     {
-      "id": "ref_needs_authorization",
-      "label": "NEEDS_AUTHORIZATION",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "needs_authorization",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_observed",
-      "label": "OBSERVED",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "observed",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
       "id": "ref_operating_system",
       "label": "operating_system",
       "_origin": "ast",
@@ -6075,28 +6716,6 @@
       "source_location": "L15"
     },
     {
-      "id": "ref_ready",
-      "label": "READY",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "ready",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "ref_rejected",
-      "label": "REJECTED",
-      "_origin": "ast",
-      "community": 45,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "rejected",
-      "source_file": "experiments/001-resource-efficient-finetune/manifests/schemas.json",
-      "source_location": "L8"
-    },
-    {
       "id": "ref_storage",
       "label": "storage",
       "_origin": "ast",
@@ -6119,81 +6738,103 @@
       "source_location": "L15"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils",
-      "label": "manifest_utils.py",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
+      "label": "validate_dataset.py",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "manifest_utils.py",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "norm_label": "validate_dataset.py",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
       "source_location": "L1"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_py_any",
-      "label": "Any",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_py_namespace",
+      "label": "Namespace",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "any",
+      "norm_label": "namespace",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_py_path",
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_py_path",
       "label": "Path",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils",
-      "label": "test_manifest_utils.py",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "label": "test_dataset_policy.py",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
       "file_type": "code",
-      "norm_label": "test_manifest_utils.py",
-      "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
+      "norm_label": "test_dataset_policy.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
       "source_location": "L1"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_1",
-      "label": "Deterministic manifest helpers with no implicit overwrite.",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema",
+      "label": "test_dataset_schema.py",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
-      "file_type": "rationale",
-      "norm_label": "deterministic manifest helpers with no implicit overwrite.",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "test_dataset_schema.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
       "source_location": "L1"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_12",
-      "label": "Return stable UTF-8 JSON text suitable for hashing.",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "label": "test_dataset_source.py",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
-      "file_type": "rationale",
-      "norm_label": "return stable utf-8 json text suitable for hashing.",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L12"
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "test_dataset_source.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_rationale_33",
-      "label": "Create a JSON manifest atomically enough for a single local process; never\u2026",
+      "id": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_py_path",
+      "label": "Path",
       "_origin": "ast",
       "community": 46,
-      "community_name": "manifest_utils.py",
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "label": "test_split_isolation.py",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
+      "file_type": "code",
+      "norm_label": "test_split_isolation.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_rationale_1",
+      "label": "Read-only G4 validation for the pinned Portuguese source dataset. The validator\u2026",
+      "_origin": "ast",
+      "community": 46,
+      "community_name": "validate_dataset.py",
       "file_type": "rationale",
-      "norm_label": "create a json manifest atomically enough for a single local process; never...",
-      "source_file": "experiments/001-resource-efficient-finetune/scripts/manifest_utils.py",
-      "source_location": "L33"
+      "norm_label": "read-only g4 validation for the pinned portuguese source dataset. the validator...",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_dataset.py",
+      "source_location": "L1"
     },
     {
       "id": "experiments_001_resource_efficient_finetune_reports_strategy_g5",
@@ -6641,6 +7282,365 @@
       "norm_label": "save-manifest()",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment.ps1",
       "source_location": "L21"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "label": "evaluate_frozen_set.py",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "evaluate_frozen_set.py",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "label": "Any",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_rationale_1",
+      "label": "G8 frozen base-versus-adapter evaluation. Uses the exact 90-record frozen\u2026",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "evaluate_frozen_set.py",
+      "file_type": "rationale",
+      "norm_label": "g8 frozen base-versus-adapter evaluation. uses the exact 90-record frozen...",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_metrics",
+      "label": "test_metrics.py",
+      "_origin": "ast",
+      "community": 53,
+      "community_name": "MetricsTests",
+      "file_type": "code",
+      "norm_label": "test_metrics.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser",
+      "label": "test_prediction_parser.py",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "load_evaluator",
+      "file_type": "code",
+      "norm_label": "test_prediction_parser.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8",
+      "label": "final-evaluation-g8.md",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "G8 \u2014 Final evaluation",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "final-evaluation-g8.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_frozen_comparison",
+      "label": "Frozen comparison",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "G8 \u2014 Final evaluation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "frozen comparison",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_g8_final_evaluation",
+      "label": "G8 \u2014 Final evaluation",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "G8 \u2014 Final evaluation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "g8 \u2014 final evaluation",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_reproducibility_and_scope",
+      "label": "Reproducibility and scope",
+      "_origin": "ast",
+      "community": 55,
+      "community_name": "G8 \u2014 Final evaluation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "reproducibility and scope",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_reproducibility",
+      "label": "test_reproducibility.py",
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "ReproducibilityTests",
+      "file_type": "code",
+      "norm_label": "test_reproducibility.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3",
+      "label": "run_authorized_experiment_v3.ps1",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "run_authorized_experiment_v3.ps1",
+      "file_type": "code",
+      "norm_label": "run_authorized_experiment_v3.ps1",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment_v3.ps1",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3_get_sha256",
+      "label": "Get-Sha256()",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "run_authorized_experiment_v3.ps1",
+      "file_type": "code",
+      "norm_label": "get-sha256()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment_v3.ps1",
+      "source_location": "L17"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3_save_manifest",
+      "label": "Save-Manifest()",
+      "_origin": "ast",
+      "community": 57,
+      "community_name": "run_authorized_experiment_v3.ps1",
+      "file_type": "code",
+      "norm_label": "save-manifest()",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment_v3.ps1",
+      "source_location": "L21"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility",
+      "label": "test_llamafactory_compatibility.py",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "LlamaFactoryCompatibilityTests",
+      "file_type": "code",
+      "norm_label": "test_llamafactory_compatibility.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal",
+      "label": "test_execution_proposal.py",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "ExecutionProposalTests",
+      "file_type": "code",
+      "norm_label": "test_execution_proposal.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_tests_test_run_guards",
+      "label": "test_run_guards.py",
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "RunGuardTests",
+      "file_type": "code",
+      "norm_label": "test_run_guards.py",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_traceability",
+      "label": "traceability.md",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "Traceability and closure report",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "traceability.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_traceability_closure_decision",
+      "label": "Closure decision",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "Traceability and closure report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "closure decision",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L49"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_traceability_functional_requirements",
+      "label": "Functional requirements",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "Traceability and closure report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "functional requirements",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_traceability_success_criteria",
+      "label": "Success criteria",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "Traceability and closure report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "success criteria",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L36"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_traceability_traceability_and_closure_report",
+      "label": "Traceability and closure report",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "Traceability and closure report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "traceability and closure report",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_quickstart_validation",
+      "label": "quickstart-validation.md",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Quickstart validation",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "quickstart-validation.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_applicable_validations",
+      "label": "Applicable validations",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Quickstart validation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "applicable validations",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L6"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_protected_commands_not_repeated",
+      "label": "Protected commands not repeated",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Quickstart validation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "protected commands not repeated",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_quickstart_validation",
+      "label": "Quickstart validation",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "Quickstart validation",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "quickstart validation",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_repository_safety",
+      "label": "repository-safety.md",
+      "_origin": "ast",
+      "community": 63,
+      "community_name": "Repository safety scan",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "repository-safety.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/repository-safety.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_repository_safety_commands_and_summary",
+      "label": "Commands and summary",
+      "_origin": "ast",
+      "community": 63,
+      "community_name": "Repository safety scan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "commands and summary",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/repository-safety.md",
+      "source_location": "L6"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_repository_safety_repository_safety_scan",
+      "label": "Repository safety scan",
+      "_origin": "ast",
+      "community": 63,
+      "community_name": "Repository safety scan",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "repository safety scan",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/repository-safety.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_graphify_update",
+      "label": "graphify-update.md",
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "graphify-update.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "graphify-update.md",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/graphify-update.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiments_001_resource_efficient_finetune_reports_graphify_update_graphify_update",
+      "label": "Graphify update",
+      "_origin": "ast",
+      "community": 64,
+      "community_name": "graphify-update.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "graphify update",
+      "source_file": "experiments/001-resource-efficient-finetune/reports/graphify-update.md",
+      "source_location": "L1"
     },
     {
       "id": "pkg_alura_llama_factory",
@@ -7828,6 +8828,174 @@
       "context": "call",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
       "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_evaluate",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_encode_prompt",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_external_root",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_repo_root",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_external_root",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_evaluate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L178",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_file",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_repo_root",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_parse_prediction",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_macro_f1",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_json",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -10063,6 +11231,114 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_all_numeric_labels_map_to_the_frozen_portuguese_labels",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_sourcerow",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_all_numeric_labels_map_to_the_frozen_portuguese_labels",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_build_derived_record",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_alpaca_schema_rejects_wrong_instruction_output_and_unredacted_pii",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_validate_derived_records",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests_test_privacy_sensitive_and_language_findings_are_aggregated",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests_test_privacy_sensitive_and_language_findings_are_aggregated",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_summarize",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_classify_content",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_assess_language",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests_test_alpaca_schema_and_exact_instruction",
       "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_sourcerow",
       "relation": "calls",
@@ -10147,6 +11423,126 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests_test_required_fields_utf8_length_and_numeric_labels_are_checked",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_read_rows",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_manifest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_validate_source_hashes",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_load_manifest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_manifest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_load_manifest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_source_root",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_validate_source_hashes",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_gate_validation_gatevalidationtests_test_accepts_exact_approved_scope",
       "target": "experiments_001_resource_efficient_finetune_scripts_validate_gate_validate_gate_document",
       "relation": "calls",
@@ -10207,6 +11603,30 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_parser_accepts_only_one_exact_label",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_load_evaluator",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_registered_dataset_names_template_and_alpaca_schema_are_consistent",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_load_evaluator",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_canonical_json_is_order_independent",
       "target": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_canonical_json",
       "relation": "calls",
@@ -10240,6 +11660,18 @@
       "context": "call",
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
       "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests_test_macro_f1_perfect_and_regression",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_metrics_load_evaluator",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -10279,6 +11711,90 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_exact_labels_and_invalid_outputs",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_load_evaluator",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_summary_preserves_ordered_prediction_hash",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_load_evaluator",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_normalize_text",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests_test_exact_normalized_and_near_duplicate_pairs_are_quantified",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests_test_exact_normalized_and_near_duplicate_pairs_are_quantified",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_overlap_counts",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
       "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_py_any",
       "relation": "references",
@@ -10288,6 +11804,42 @@
       "context": "generic_arg",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
       "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_encode_prompt",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -11371,6 +12923,102 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_build_derived_record",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_sourcerow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_validate_derived_records",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_assess_language",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_classify_content",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_summarize",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation",
       "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_build_derived_record",
       "relation": "imports",
@@ -11440,6 +13088,54 @@
       "context": "import",
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_preparation.py",
       "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_read_rows",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_load_manifest",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_source_root",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_validate_source_hashes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -11527,6 +13223,54 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_normalize_text",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_overlap_counts",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_row",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset_sha256_text",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source",
       "target": "experiments_001_resource_efficient_finetune_scripts_manifest_utils",
       "relation": "imports_from",
@@ -11575,6 +13319,30 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation",
       "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset",
       "relation": "imports_from",
@@ -11584,6 +13352,30 @@
       "context": "import",
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_preparation.py",
       "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -11632,6 +13424,18 @@
       "context": "import",
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_path_guards.py",
       "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_scripts_validate_dataset",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -11692,6 +13496,54 @@
       "context": "parameter_type",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
       "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_evaluate",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_file",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_json",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -12280,6 +14132,18 @@
       "context": "return_type",
       "source_file": "experiments/001-resource-efficient-finetune/scripts/validate_model_compatibility.py",
       "source_location": "L508",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_manifest",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_py_path",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "return_type",
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -12928,7 +14792,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L29",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -12939,7 +14803,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/README.md",
-      "source_location": "L37",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -13383,6 +15247,39 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8",
+      "target": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_g8_final_evaluation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_g8_final_evaluation",
+      "target": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_reproducibility_and_scope",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_g8_final_evaluation",
+      "target": "experiments_001_resource_efficient_finetune_reports_final_evaluation_g8_frozen_comparison",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_reports_g1_op_partial_installation",
       "target": "experiments_001_resource_efficient_finetune_reports_g1_op_partial_installation_g1_op_partial_installation_review",
       "relation": "contains",
@@ -13435,6 +15332,72 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/reports/g1-op-partial-installation.md",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_graphify_update",
+      "target": "experiments_001_resource_efficient_finetune_reports_graphify_update_graphify_update",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/graphify-update.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_quickstart_validation",
+      "target": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_quickstart_validation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_quickstart_validation",
+      "target": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_protected_commands_not_repeated",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_quickstart_validation",
+      "target": "experiments_001_resource_efficient_finetune_reports_quickstart_validation_applicable_validations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/quickstart-validation.md",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_repository_safety",
+      "target": "experiments_001_resource_efficient_finetune_reports_repository_safety_repository_safety_scan",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/repository-safety.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_repository_safety_repository_safety_scan",
+      "target": "experiments_001_resource_efficient_finetune_reports_repository_safety_commands_and_summary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/repository-safety.md",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -13845,6 +15808,50 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_reports_traceability",
+      "target": "experiments_001_resource_efficient_finetune_reports_traceability_traceability_and_closure_report",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_traceability_traceability_and_closure_report",
+      "target": "experiments_001_resource_efficient_finetune_reports_traceability_success_criteria",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_traceability_traceability_and_closure_report",
+      "target": "experiments_001_resource_efficient_finetune_reports_traceability_closure_decision",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_reports_traceability_traceability_and_closure_report",
+      "target": "experiments_001_resource_efficient_finetune_reports_traceability_functional_requirements",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/reports/traceability.md",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
       "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_select_frozen_subset",
       "relation": "contains",
@@ -13974,6 +15981,127 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/scripts/create_environment.ps1",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_evaluate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_repo_root",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_external_root",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_file",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_sha256_json",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_macro_f1",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_parse_prediction",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_encode_prompt",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -14912,6 +17040,28 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3",
+      "target": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3_get_sha256",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment_v3.ps1",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3",
+      "target": "experiments_001_resource_efficient_finetune_scripts_run_authorized_experiment_v3_save_manifest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/run_authorized_experiment_v3.ps1",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_runtime_smoke",
       "target": "experiments_001_resource_efficient_finetune_scripts_runtime_smoke_identity",
       "relation": "contains",
@@ -15374,6 +17524,39 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_row",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation",
       "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests",
       "relation": "contains",
@@ -15382,6 +17565,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_preparation.py",
       "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -15396,6 +17601,17 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_gate_validation",
       "target": "experiments_001_resource_efficient_finetune_tests_test_gate_validation_gatevalidationtests",
       "relation": "contains",
@@ -15407,6 +17623,28 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_load_evaluator",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils",
       "target": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests",
       "relation": "contains",
@@ -15415,6 +17653,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_metrics",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_metrics",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_metrics_load_evaluator",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -15462,6 +17722,50 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_load_evaluator",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_reproducibility",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_run_guards",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution",
       "target": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution_runtimeresolutiontests",
       "relation": "contains",
@@ -15481,6 +17785,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_runtime_validation.py",
       "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_row",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -16903,6 +19229,39 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_all_numeric_labels_map_to_the_frozen_portuguese_labels",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests_test_alpaca_schema_rejects_wrong_instruction_output_and_unredacted_pii",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_policy_datasetpolicytests_test_privacy_sensitive_and_language_findings_are_aggregated",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests",
       "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_preparation_datasetpreparationtests_test_redacts_handles_and_phones_without_changing_label_logic",
       "relation": "method",
@@ -16936,6 +19295,50 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_schema_datasetschematests_test_required_fields_utf8_length_and_numeric_labels_are_checked",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_manifest",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_pinned_read_only_source_and_hashes_are_accepted",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_dataset_source_datasetsourcetests_test_checksum_mismatch_and_non_pinned_revision_are_rejected",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_source.py",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_environment_profile_environmentprofiletests",
       "target": "experiments_001_resource_efficient_finetune_tests_test_environment_profile_environmentprofiletests_test_read_only_profile_is_complete",
       "relation": "method",
@@ -16944,6 +19347,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_environment_profile.py",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests_test_v3_proposal_is_complete_and_matches_immutable_config_identity",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_execution_proposal_executionproposaltests_test_material_config_change_changes_identity_and_run_is_unique",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -17002,6 +19427,28 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_registered_dataset_names_template_and_alpaca_schema_are_consistent",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_llamafactory_compatibility_llamafactorycompatibilitytests_test_parser_accepts_only_one_exact_label",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests",
       "target": "experiments_001_resource_efficient_finetune_tests_test_manifest_utils_manifestutilstests_test_canonical_json_is_order_independent",
       "relation": "method",
@@ -17021,6 +19468,28 @@
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/tests/test_manifest_utils.py",
       "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests_test_macro_f1_perfect_and_regression",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_metrics_metricstests_test_sc008_threshold_branches",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_metrics.py",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -17178,6 +19647,72 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_exact_labels_and_invalid_outputs",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_prediction_parser_predictionparsertests_test_summary_preserves_ordered_prediction_hash",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests_test_evaluation_record_has_identity_and_metrics",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_reproducibility_reproducibilitytests_test_checkpoint_hashes_match_external_files",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_reproducibility.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests_test_authorized_runner_enforces_single_run_and_sixty_minute_stop",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_run_guards_runguardtests_test_no_silent_fallback_and_collision_protection_are_recorded",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_run_guards.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution_runtimeresolutiontests",
       "target": "experiments_001_resource_efficient_finetune_tests_test_runtime_resolution_runtimeresolutiontests_test_script_contains_no_operational_command",
       "relation": "method",
@@ -17211,6 +19746,17 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests",
+      "target": "experiments_001_resource_efficient_finetune_tests_test_split_isolation_splitisolationtests_test_exact_normalized_and_near_duplicate_pairs_are_quantified",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_split_isolation.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch_rationale_1",
       "target": "experiments_001_resource_efficient_finetune_scripts_benchmark_microbatch",
       "relation": "rationale_for",
@@ -17218,6 +19764,17 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiments/001-resource-efficient-finetune/scripts/benchmark_microbatch.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_rationale_1",
+      "target": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
       "source_location": "L1",
       "weight": 1.0
     },
@@ -17510,6 +20067,30 @@
       "weight": 1.0
     },
     {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_select_subset",
+      "target": "counter",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_scripts_evaluate_frozen_set_summarize",
+      "target": "counter",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
       "source": "experiments_001_resource_efficient_finetune_scripts_fetch_model_source_main",
       "target": "experiments_001_resource_efficient_finetune_scripts_manifest_utils_write_json_new",
       "relation": "calls",
@@ -17794,6 +20375,17 @@
       "confidence_score": 0.95,
       "source_file": "experiments/001-resource-efficient-finetune/scripts/prepare_dataset.py",
       "source_location": "L689",
+      "weight": 0.8
+    },
+    {
+      "source": "experiments_001_resource_efficient_finetune_tests_test_dataset_conversion_datasetconversiontests",
+      "target": "experiments_001_resource_efficient_finetune_scripts_prepare_dataset_sourcerow",
+      "relation": "uses",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py",
+      "source_location": "L24",
       "weight": 0.8
     },
     {
@@ -19111,5 +21703,5 @@
       "source_file": ".specify/memory/constitution.md"
     }
   ],
-  "built_at_commit": "83d1918be950210807c3dce080d97236e146fb13"
+  "built_at_commit": "bddbbf17cc2d042e7af01e5a431680b65977abef"
 }

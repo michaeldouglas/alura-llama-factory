@@ -4,7 +4,7 @@
 
 **Prerequisites**: `spec.md`, `plan.md`, `research.md`, `data-model.md`, `quickstart.md`, Constitution 1.1.0
 
-**Current gate**: G1-OP-V4, G2/G2-OP, G3, G4-DERIVED, G5 and G6 dry validation are complete for the pinned Qwen model source and derived candidate. The baseline is preserved in `reports/benchmark-g6.json`; principal training remains closed until T054/T055 produce a matching execution proposal and exact G7 authorization.
+**Current gate**: G1-OP-V4 through G7-V3 completed, and G8 final evaluation is `SUCCESSFUL`. The adapter checkpoint remains external; the frozen base-versus-adapter evidence is preserved in `reports/evaluation-g8.json` and `manifests/evaluation-record.json`.
 
 **Tests**: Tests are included because the approved plan requires deterministic schema, lineage, isolation, parsing, metrics, runtime and no-overwrite validation.
 
@@ -84,11 +84,11 @@
 
 ### Tests for User Story 2
 
-- [ ] T028 [P] [US2] Test source immutability, pinned revision and checksum enforcement in experiments/001-resource-efficient-finetune/tests/test_dataset_source.py
-- [ ] T029 [P] [US2] Test required fields, UTF-8 decoding, length limits and numeric label validity in experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py
-- [ ] T030 [P] [US2] Test exact, normalized and near-duplicate split isolation in experiments/001-resource-efficient-finetune/tests/test_split_isolation.py
-- [ ] T031 [P] [US2] Test the 0-to-negativo, 1-to-neutro and 2-to-positivo transformation and Alpaca record schema in experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py
-- [ ] T032 [P] [US2] Test privacy, sensitive-content and Portuguese-scope finding aggregation in experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py
+- [X] T028 [P] [US2] Test source immutability, pinned revision and checksum enforcement in experiments/001-resource-efficient-finetune/tests/test_dataset_source.py
+- [X] T029 [P] [US2] Test required fields, UTF-8 decoding, length limits and numeric label validity in experiments/001-resource-efficient-finetune/tests/test_dataset_schema.py
+- [X] T030 [P] [US2] Test exact, normalized and near-duplicate split isolation in experiments/001-resource-efficient-finetune/tests/test_split_isolation.py
+- [X] T031 [P] [US2] Test the 0-to-negativo, 1-to-neutro and 2-to-positivo transformation and Alpaca record schema in experiments/001-resource-efficient-finetune/tests/test_dataset_conversion.py
+- [X] T032 [P] [US2] Test privacy, sensitive-content and Portuguese-scope finding aggregation in experiments/001-resource-efficient-finetune/tests/test_dataset_policy.py
 
 ### Implementation for User Story 2
 
@@ -117,9 +117,9 @@
 
 ### Tests for User Story 3
 
-- [ ] T044 [P] [US3] Test LLaMA-Factory dataset registration, template and exact-label parser compatibility in experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py
-- [ ] T045 [P] [US3] Test configuration completeness, material-change invalidation and unique run identity in experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py
-- [ ] T046 [P] [US3] Test the 60-minute stop condition, non-finite loss stop and no-silent-fallback policy in experiments/001-resource-efficient-finetune/tests/test_run_guards.py
+- [X] T044 [P] [US3] Test LLaMA-Factory dataset registration, template and exact-label parser compatibility in experiments/001-resource-efficient-finetune/tests/test_llamafactory_compatibility.py
+- [X] T045 [P] [US3] Test configuration completeness, material-change invalidation and unique run identity in experiments/001-resource-efficient-finetune/tests/test_execution_proposal.py
+- [X] T046 [P] [US3] Test the 60-minute stop condition, non-finite loss stop and no-silent-fallback policy in experiments/001-resource-efficient-finetune/tests/test_run_guards.py
 
 ### Implementation for User Story 3
 
@@ -148,16 +148,16 @@
 
 ### Tests for User Story 4
 
-- [ ] T059 [P] [US4] Test exact-label parsing, invalid-output accounting and deterministic ordering in experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py
-- [ ] T060 [P] [US4] Test accuracy, macro-F1 and both SC-008 threshold branches in experiments/001-resource-efficient-finetune/tests/test_metrics.py
-- [ ] T061 [P] [US4] Test reproduction-manifest completeness and checksum verification in experiments/001-resource-efficient-finetune/tests/test_reproducibility.py
+- [X] T059 [P] [US4] Test exact-label parsing, invalid-output accounting and deterministic ordering in experiments/001-resource-efficient-finetune/tests/test_prediction_parser.py
+- [X] T060 [P] [US4] Test accuracy, macro-F1 and both SC-008 threshold branches in experiments/001-resource-efficient-finetune/tests/test_metrics.py
+- [X] T061 [P] [US4] Test reproduction-manifest completeness and checksum verification in experiments/001-resource-efficient-finetune/tests/test_reproducibility.py
 
 ### Implementation for User Story 4
 
-- [ ] T062 [US4] Implement frozen-set base-versus-adapter evaluation without executing it in experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py
-- [ ] T063 [US4] Execute experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py with identical frozen inputs, prompt, template, parser and generation settings
-- [ ] T064 [US4] Record ordered prediction hashes, metrics, regressions and SC-008 outcome in experiments/001-resource-efficient-finetune/manifests/evaluation-record.json
-- [ ] T065 [US4] Have the orchestrator classify the experiment as SUCCESSFUL, UNSUCCESSFUL or BLOCKED in experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md
+- [X] T062 [US4] Implement frozen-set base-versus-adapter evaluation without executing it in experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py
+- [X] T063 [US4] Execute experiments/001-resource-efficient-finetune/scripts/evaluate_frozen_set.py with identical frozen inputs, prompt, template, parser and generation settings
+- [X] T064 [US4] Record ordered prediction hashes, metrics, regressions and SC-008 outcome in experiments/001-resource-efficient-finetune/manifests/evaluation-record.json
+- [X] T065 [US4] Have the orchestrator classify the experiment as SUCCESSFUL, UNSUCCESSFUL or BLOCKED in experiments/001-resource-efficient-finetune/reports/final-evaluation-g8.md
 
 **Checkpoint**: The result is interpretable and reproducible without versioning weights, source text, private data or checkpoints.
 
@@ -167,10 +167,10 @@
 
 **Purpose**: Validate traceability and documentation after the selected stories reach a terminal state.
 
-- [ ] T066 [P] Verify every functional requirement and success criterion has evidence or a documented blocker in experiments/001-resource-efficient-finetune/reports/traceability.md
-- [ ] T067 [P] Run repository-protection and secret/heavy-artifact scans and record only the summary in experiments/001-resource-efficient-finetune/reports/repository-safety.md
-- [ ] T068 Execute applicable quickstart validations and record pass, fail or not-authorized status in experiments/001-resource-efficient-finetune/reports/quickstart-validation.md
-- [ ] T069 Re-run Graphify after code changes and document refreshed experiment relationships in experiments/001-resource-efficient-finetune/reports/graphify-update.md
+- [X] T066 [P] Verify every functional requirement and success criterion has evidence or a documented blocker in experiments/001-resource-efficient-finetune/reports/traceability.md
+- [X] T067 [P] Run repository-protection and secret/heavy-artifact scans and record only the summary in experiments/001-resource-efficient-finetune/reports/repository-safety.md
+- [X] T068 Execute applicable quickstart validations and record pass, fail or not-authorized status in experiments/001-resource-efficient-finetune/reports/quickstart-validation.md
+- [X] T069 Re-run Graphify after code changes and document refreshed experiment relationships in experiments/001-resource-efficient-finetune/reports/graphify-update.md
 
 ---
 
