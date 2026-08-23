@@ -1,9 +1,9 @@
 {
   "passo": 1,
-  "arquivo": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\demo\\dataset\\dados\\dataset.csv",
-  "dataset_local": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\demo\\dataset\\dados\\dataset_local.csv",
-  "script_unificacao": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\demo\\dataset\\scripts\\baixar_dataset.py",
-  "sha256_dataset_local": "cc43388616841478d73dd42ab22b73575a92c6064e42a25368d16797406cfb31",
+  "arquivo": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\dataset.csv",
+  "dataset_local": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\dataset_local.csv",
+  "script_unificacao": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\scripts\\baixar_dataset.py",
+  "sha256_dataset_local": "f81b32c82a9984dc9b0d78cbbb1dc8ae96abcea4369bb15fbcedb2e6cb35bfb0",
   "sha256": "74c0c3b15ad86a6f54afb8fc9837d4e717f7894a4a9f85c5d58527705b70f81c",
   "registros": 3063,
   "campos": [
