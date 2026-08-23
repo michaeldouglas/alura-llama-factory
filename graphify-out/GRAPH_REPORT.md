@@ -1,16 +1,16 @@
 # Graph Report - alura-llama-factory  (2026-08-22)
 
 ## Corpus Check
-- 145 files · ~222,980 words
+- 170 files · ~255,700 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 712 nodes · 1132 edges · 65 communities (47 shown, 18 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.87)
+- 887 nodes · 1310 edges · 79 communities (57 shown, 22 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 34 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bddbbf17`
+- Built from commit: `7060ef71`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,7 +18,7 @@
 - LLaMA-Factory
 - Speckit Analyze
 - common.ps1
-- properties
+- preparar_dataset.py
 - required
 - create-new-feature.ps1
 - Speckit Constitution
@@ -44,7 +44,7 @@
 - Runtime Metadata Review — G1-METADATA-2
 - G1-OP Partial Installation Review
 - create_environment.ps1
-- Research: Resource-Efficient First Fine-Tuning Experiment
+- Implementation Plan: Resource-Efficient First Fine-Tuning Experiment
 - runtime_smoke.py
 - RuntimeValidationScriptTests
 - ModelRetrievalTests
@@ -71,18 +71,31 @@
 - Quickstart validation
 - Repository safety scan
 - graphify-update.md
+- ENTENDENDO_O_PROJETO — etapa de treinamento do modelo
+- testar_modelo.py
+- treinar.py
+- baixar_modelo.py
+- devDependencies
+- compilerOptions
+- page.tsx
+- layout.tsx
+- extends
+- EscutIA — site institucional
+- postcss.config.mjs
+- next.config.mjs
+- tailwind.config.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `main()` - 27 edges
-2. `SourceRow` - 14 edges
-3. `LLaMA-Factory` - 14 edges
-4. `required` - 13 edges
-5. `validate_gate_document()` - 13 edges
-6. `main()` - 12 edges
+2. `compilerOptions` - 15 edges
+3. `SourceRow` - 14 edges
+4. `LLaMA-Factory` - 14 edges
+5. `required` - 13 edges
+6. `validate_gate_document()` - 13 edges
 7. `MetadataClient` - 12 edges
 8. `main()` - 12 edges
-9. `Data Model: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
-10. `Tasks: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
+9. `ENTENDENDO_O_PROJETO — etapa de treinamento do modelo` - 12 edges
+10. `Data Model: Resource-Efficient First Fine-Tuning Experiment` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Spec Kit Before Implementation` --conceptually_related_to--> `Spec Kit Source of Truth`  [INFERRED]
@@ -107,7 +120,7 @@
 - **Core Spec Kit Artifact Chain** — _specify_templates_spec_template_feature_specification_template, _specify_templates_plan_template_implementation_plan_template, _specify_templates_tasks_template_task_list_template [INFERRED 0.95]
 - **Reproducible Experiment Controls** — _specify_memory_constitution_reproducible_registered_experiments, _agents_skills_dataset_preparation_skill_transformation_audit_trail, _agents_skills_llama_factory_skill_reproducible_configuration, _agents_skills_llama_factory_skill_checkpoint_preservation, _codex_agents_training_engineer_training_engineer, _codex_agents_orchestrator_orchestrator [INFERRED 0.95]
 
-## Communities (65 total, 18 thin omitted)
+## Communities (79 total, 22 thin omitted)
 
 ### Community 0 - "LLaMA-Factory"
 Cohesion: 0.12
@@ -121,9 +134,9 @@ Nodes (28): Cross-Artifact Consistency Analysis, Speckit Analyze, Speckit Checkl
 Cohesion: 0.23
 Nodes (13): Find-SpecifyRoot(), Format-SpecKitCommand(), Get-CurrentBranch(), Get-FeaturePathsEnv(), Get-InvokeSeparator(), Get-NormalizedPriority(), Get-Python3Command(), Get-RepoRoot() (+5 more)
 
-### Community 3 - "properties"
-Cohesion: 0.07
-Nodes (29): type, items, type, uniqueItems, enum, gateDecision, type, properties (+21 more)
+### Community 3 - "preparar_dataset.py"
+Cohesion: 0.38
+Nodes (9): download_sources(), is_portuguese(), main(), near_duplicate(), normalize(), prepare(), Counter, Baixa, valida e converte o dataset português para Alpaca SFT. (+1 more)
 
 ### Community 4 - "required"
 Cohesion: 0.09
@@ -135,7 +148,7 @@ Nodes (4): Semantic-Versioned Governance, Speckit Constitution, Core Principles 
 
 ### Community 13 - "Data Model: Resource-Efficient First Fine-Tuning Experiment"
 Cohesion: 0.05
-Nodes (40): Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview, EnvironmentProfile, EvaluationRecord, ExecutionProposal, ExperimentRun, ExperimentSpecification (+32 more)
+Nodes (39): G2-OP completion, G2-OP request, Proposed model payload — metadata only, Runtime evidence, Runtime G2 Review, Data Model: Resource-Efficient First Fine-Tuning Experiment, DatasetSource, Entity Overview (+31 more)
 
 ### Community 14 - "Tasks: Resource-Efficient First Fine-Tuning Experiment"
 Cohesion: 0.08
@@ -193,9 +206,9 @@ Nodes (5): Blocking finding, Decision and next action, Resolution evidence, Runt
 Cohesion: 0.33
 Nodes (5): Blocking finding, Evidence, G1-OP Partial Installation Review, Required decision, Superseded outcome after G1-OP-V4 approval
 
-### Community 35 - "Research: Resource-Efficient First Fine-Tuning Experiment"
-Cohesion: 0.11
-Nodes (16): G2-OP completion, G2-OP request, Proposed model payload — metadata only, Runtime evidence, Runtime G2 Review, Decision 1 — Base model candidate, Decision 2 — Dataset candidate, Decision 3 — LlamaFactory revision (+8 more)
+### Community 35 - "Implementation Plan: Resource-Efficient First Fine-Tuning Experiment"
+Cohesion: 0.12
+Nodes (17): Complexity Tracking, Constitution Check, Data design, Documentation for this feature, Gate Sequence After Plan Approval, Implementation Plan: Resource-Efficient First Fine-Tuning Experiment, Interfaces, Phase 0: Research Decisions (+9 more)
 
 ### Community 36 - "runtime_smoke.py"
 Cohesion: 0.53
@@ -210,8 +223,8 @@ Cohesion: 0.62
 Nodes (5): Assert-AllowedUri(), Get-G3File(), Get-RedirectUri(), Invoke-G3GetText(), Stop-G3()
 
 ### Community 42 - "prepare_dataset.py"
-Cohesion: 0.15
-Nodes (33): Counter, assess_language(), build_derived_record(), canonical_json(), duplicate_pair_summary(), expected_scope_hash(), jsonl_bytes(), lineage_record() (+25 more)
+Cohesion: 0.14
+Nodes (34): assess_language(), build_derived_record(), canonical_json(), duplicate_pair_summary(), expected_scope_hash(), jsonl_bytes(), lineage_record(), load_json() (+26 more)
 
 ### Community 43 - "G4 — Data readiness report"
 Cohesion: 0.29
@@ -222,12 +235,12 @@ Cohesion: 0.27
 Nodes (21): canonical_json(), check_file_hash(), is_within(), load_json(), main(), path_is_external(), Any, Path (+13 more)
 
 ### Community 45 - "required"
-Cohesion: 0.10
-Nodes (20): environmentProfile, properties, required, const, const, inspection_mode, operational_actions_performed, readiness (+12 more)
+Cohesion: 0.04
+Nodes (49): type, items, type, uniqueItems, enum, environmentProfile, gateDecision, properties (+41 more)
 
 ### Community 46 - "validate_dataset.py"
-Cohesion: 0.14
-Nodes (25): assess_language(), classify_content(), expected_files(), load_manifest(), main(), normalize_text(), overlap_counts(), parse_args() (+17 more)
+Cohesion: 0.15
+Nodes (24): assess_language(), classify_content(), load_manifest(), main(), normalize_text(), overlap_counts(), parse_args(), Namespace (+16 more)
 
 ### Community 47 - "G5 — Estratégia e viabilidade"
 Cohesion: 0.15
@@ -261,24 +274,60 @@ Nodes (4): Closure decision, Functional requirements, Success criteria, Traceabi
 Cohesion: 0.50
 Nodes (3): Applicable validations, Protected commands not repeated, Quickstart validation
 
+### Community 65 - "ENTENDENDO_O_PROJETO — etapa de treinamento do modelo"
+Cohesion: 0.05
+Nodes (37): 1. Modelo especializado, 2. Núcleo de conversa, 3. Agente EscutIA, 4. Encaminhamento humano, 5. Avaliação contínua, Como a EscutIA será construída, Documentação do projeto, EscutIA (+29 more)
+
+### Community 66 - "testar_modelo.py"
+Cohesion: 0.36
+Nodes (7): classify(), latest_checkpoint(), main(), parse_args(), Namespace, Path, Carrega o modelo base e o último adapter LoRA para inferência local.
+
+### Community 67 - "treinar.py"
+Cohesion: 0.43
+Nodes (7): checkpoint_number(), main(), parse_args(), Namespace, Path, Executa o treinamento SFT+LoRA do curso usando somente esta pasta., register_final_model()
+
+### Community 69 - "devDependencies"
+Cohesion: 0.06
+Nodes (32): dependencies, next, react, react-dom, devDependencies, eslint, eslint-config-next, postcss (+24 more)
+
+### Community 70 - "compilerOptions"
+Cohesion: 0.08
+Nodes (25): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+17 more)
+
+### Community 71 - "page.tsx"
+Cohesion: 0.12
+Nodes (13): About(), ChatPreview(), messages, CTA(), Features, Footer(), footerLinks, Header() (+5 more)
+
+### Community 72 - "layout.tsx"
+Cohesion: 0.40
+Nodes (3): geistMono, geistSans, metadata
+
+### Community 73 - "extends"
+Cohesion: 0.50
+Nodes (3): extends, next/core-web-vitals, next/typescript
+
+### Community 74 - "EscutIA — site institucional"
+Cohesion: 0.33
+Nodes (5): EscutIA — site institucional, Executar localmente, Organização, Posicionamento, Validar e gerar produção
+
 ## Knowledge Gaps
-- **206 isolated node(s):** `$schema`, `gate_id`, `decision`, `approved_at`, `scope_hash` (+201 more)
+- **293 isolated node(s):** `next/core-web-vitals`, `next/typescript`, `geistSans`, `geistMono`, `metadata` (+288 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `validate_gate_document()` connect `validate_gate_document` to `prepare_dataset.py`, `resolve_package_metadata.py`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
 - **Why does `load_authorization_gate()` connect `resolve_package_metadata.py` to `validate_gate_document`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
-- **Why does `main()` connect `prepare_dataset.py` to `validate_gate_document`, `validate_dataset.py`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `definitions` connect `required` to `required`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `SourceRow` (e.g. with `DatasetConversionTests` and `DatasetPreparationTests`) actually correct?**
   _`SourceRow` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `$schema`, `gate_id`, `decision` to the rest of the system?**
-  _206 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `next/core-web-vitals`, `next/typescript`, `geistSans` to the rest of the system?**
+  _293 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `LLaMA-Factory` be split into smaller, more focused modules?**
   _Cohesion score 0.12477718360071301 - nodes in this community are weakly interconnected._
 - **Should `Speckit Analyze` be split into smaller, more focused modules?**

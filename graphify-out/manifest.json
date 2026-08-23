@@ -892,5 +892,179 @@
     "seen": 1787447772.6480727,
     "ast_hash": "7d772beb4cc1f97e36a7f30af1a08510",
     "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/README.md": {
+    "mtime": 1787449481.3326936,
+    "seen": 1787450284.0327501,
+    "ast_hash": "657a1c4a2bf6f136c26de62cac1ce7ec",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/baixar_modelo.py": {
+    "mtime": 1787448802.898873,
+    "seen": 1787448823.6534207,
+    "ast_hash": "e2a68253b0d6a8c50516f69c11c61afc",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/preparar_dataset.py": {
+    "mtime": 1787448780.3550544,
+    "seen": 1787448823.653422,
+    "ast_hash": "ae87890b9a9ac49ebdedaa6030042ab6",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/testar_modelo.py": {
+    "mtime": 1787448746.5128586,
+    "seen": 1787448823.6534228,
+    "ast_hash": "ee1582b71d2f4312757e2271bb6c3d2c",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/scripts/treinar.py": {
+    "mtime": 1787448963.4971695,
+    "seen": 1787448981.881514,
+    "ast_hash": "f3896c4a14ba9ecae3ab5428aa061432",
+    "semantic_hash": ""
+  },
+  "EscutIA/README.md": {
+    "mtime": 1787449656.688994,
+    "seen": 1787450284.0327477,
+    "ast_hash": "91a1c5114f7400bec37aad8f12077251",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/config/sft-lora-template.yaml": {
+    "mtime": 1787448643.049369,
+    "seen": 1787448823.6535099,
+    "ast_hash": "404288d19e27658131603f8dd04e472c",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/requirements.txt": {
+    "mtime": 1787448643.0318573,
+    "seen": 1787448823.6535106,
+    "ast_hash": "840dcf535e2af3e803cffd7c3401173a",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/.eslintrc.json": {
+    "mtime": 1787449899.680201,
+    "seen": 1787450284.032647,
+    "ast_hash": "5cc89077d438e3d0d0a8308ab7e06a5a",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/app/layout.tsx": {
+    "mtime": 1787450221.8289754,
+    "seen": 1787450284.032648,
+    "ast_hash": "26a9195b258f9d06981c5f5031cc5646",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/app/page.tsx": {
+    "mtime": 1787450221.842283,
+    "seen": 1787450284.032649,
+    "ast_hash": "a6333d8879773609e4b34702f7d684bf",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/About.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326495,
+    "ast_hash": "7764526cfd61828e4743b45e859b1914",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/CTA.tsx": {
+    "mtime": 1787450221.8524344,
+    "seen": 1787450284.0326505,
+    "ast_hash": "4b3209cc24964c27256205f055f21f61",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/ChatPreview.tsx": {
+    "mtime": 1787450221.8484237,
+    "seen": 1787450284.0326514,
+    "ast_hash": "697b96a7155c4df4172b6e94f2dd87dc",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/Features.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326524,
+    "ast_hash": "170b10a1064ae20a26ebe064a84876c5",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/Footer.tsx": {
+    "mtime": 1787450221.8524344,
+    "seen": 1787450284.0326533,
+    "ast_hash": "2d93c6496561f87a800ecc1129fdde2b",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/Header.tsx": {
+    "mtime": 1787450221.846419,
+    "seen": 1787450284.032654,
+    "ast_hash": "21e26a5789435a73253cfd7252ccba55",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/Hero.tsx": {
+    "mtime": 1787450221.8484237,
+    "seen": 1787450284.0326548,
+    "ast_hash": "eb08dc770e1cf5d5b77ca094a91e9958",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/HowItWorks.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326557,
+    "ast_hash": "d994252cdbf7a6c89f2ee76d210d3da8",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/components/Safety.tsx": {
+    "mtime": 1787450221.8504303,
+    "seen": 1787450284.0326562,
+    "ast_hash": "2b8b6242c97efb4e7526fc02cfea1e27",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/next.config.mjs": {
+    "mtime": 1787449899.7221293,
+    "seen": 1787450284.032657,
+    "ast_hash": "21958f5752add43cc47ab0ff5172cd46",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/package.json": {
+    "mtime": 1787449900.3793883,
+    "seen": 1787450284.0326576,
+    "ast_hash": "f57f499e672c18ff35a0d2e1f2f0f09a",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/postcss.config.mjs": {
+    "mtime": 1787449899.7349675,
+    "seen": 1787450284.0326602,
+    "ast_hash": "b7941c02b947e17ae32f67ae7e664ec8",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/tailwind.config.ts": {
+    "mtime": 1787450221.846419,
+    "seen": 1787450284.0326607,
+    "ast_hash": "1e784a080a78c669596689b9de165721",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/tsconfig.json": {
+    "mtime": 1787449900.3793883,
+    "seen": 1787450284.0326614,
+    "ast_hash": "570e85507d1fb0c609255b9a0aa95595",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/README.md": {
+    "mtime": 1787450311.737303,
+    "seen": 1787450320.8189797,
+    "ast_hash": "89cf79508fcd474d2aab7b7ecfad19ab",
+    "semantic_hash": ""
+  },
+  "EscutIA/treinamentoModelo/ENTENDENDO_O_PROJETO.md": {
+    "mtime": 1787449451.7060785,
+    "seen": 1787450284.0327497,
+    "ast_hash": "4d9b86583400e84b241410b2a11c9b20",
+    "semantic_hash": ""
+  },
+  "EscutIA/logo.png": {
+    "mtime": 1787449608.238673,
+    "seen": 1787450284.0327744,
+    "ast_hash": "2f813f897835bc838fedb8233a1dfe9f",
+    "semantic_hash": ""
+  },
+  "EscutIA/site/public/logo.png": {
+    "mtime": 1787449608.238673,
+    "seen": 1787450284.032775,
+    "ast_hash": "2f813f897835bc838fedb8233a1dfe9f",
+    "semantic_hash": ""
   }
 }
