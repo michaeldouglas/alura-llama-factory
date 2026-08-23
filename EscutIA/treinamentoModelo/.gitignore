@@ -1,9 +1,0 @@
-.venv/
-models/
-data/source/
-data/derived/
-outputs/
-logs/
-runs/
-__pycache__/
-*.pyc

@@ -1,5 +1,0 @@
-export default function CTA() {
-  return (
-    <section id="conversar" className="pb-24 lg:pb-32"><div className="site-container"><div className="relative overflow-hidden rounded-[34px] bg-gradient-brand px-7 py-14 text-center text-white shadow-2xl shadow-pink/20 sm:px-12 sm:py-20"><div aria-hidden="true" className="absolute -left-10 -top-20 h-64 w-64 rounded-full border-[35px] border-white/15" /><div aria-hidden="true" className="absolute -bottom-24 -right-10 h-64 w-64 rounded-full bg-white/15 blur-2xl" /><div className="relative mx-auto max-w-2xl"><p className="text-sm font-black uppercase tracking-[0.15em] text-white/75">quando quiser, estamos aqui</p><h2 className="mt-5 text-4xl font-black tracking-[-0.04em] sm:text-5xl">Você não precisa guardar tudo para você.</h2><p className="mx-auto mt-5 max-w-lg text-lg leading-8 text-white/80">Quando quiser conversar, a EscutIA estará aqui.</p><a href="#inicio" className="mt-8 inline-flex rounded-full bg-white px-7 py-4 text-sm font-extrabold text-purple shadow-xl transition hover:-translate-y-1">Começar uma conversa <span aria-hidden="true" className="ml-2">↗</span></a></div></div></div></section>
-  );
-}
