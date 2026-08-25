@@ -28,4 +28,9 @@ EscutIA/fine_tuning_lora/outputs/logs/*
 !EscutIA/fine_tuning_lora/outputs/logs/.gitkeep
 EscutIA/fine_tuning_lora/outputs/checkpoints/*
 !EscutIA/fine_tuning_lora/outputs/checkpoints/.gitkeep
+
+# Experimentos locais do MLflow
+EscutIA/mlflow/*
+!EscutIA/mlflow/.gitkeep
+!EscutIA/mlflow/README.md
 *.log

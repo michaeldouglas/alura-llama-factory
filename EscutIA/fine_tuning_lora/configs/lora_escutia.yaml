@@ -46,7 +46,8 @@ save_only_model: false
 overwrite_output_dir: false
 logging_strategy: steps
 logging_steps: 10
-report_to: none
+report_to: mlflow
+run_name: lora_escutia
 
 output_dir: outputs/resultados/lora_escutia
 logging_dir: outputs/logs/lora_escutia
