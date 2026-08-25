@@ -51,4 +51,3 @@ report_to: mlflow
 run_name: lora_escutia_router
 
 output_dir: outputs/resultados/lora_escutia_router
-logging_dir: outputs/logs/lora_escutia_router

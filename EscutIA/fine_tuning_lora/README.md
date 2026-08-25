@@ -166,8 +166,6 @@ Accuracy, precision, recall e F1 não são calculados automaticamente nesta etap
 EscutIA/mlflow.db                              # banco dos experimentos
 EscutIA/mlflow-artifacts/                      # artefatos registrados pelo MLflow
 EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia_router/  # adapter LoRA e checkpoints
-EscutIA/fine_tuning_lora/outputs/logs/lora_escutia_router/        # logs do treinamento
-EscutIA/fine_tuning_lora/outputs/checkpoints/              # checkpoints separados
 ```
 
 O notebook de inferência (`Inferencia_LoRA_EscutIA.ipynb`) usa o adapter salvo em `outputs/resultados/lora_escutia_router`. Ele só deve ser executado depois que o treinamento terminar e os arquivos do adapter existirem. A saída deve ser encaminhada ao LLM principal, e não usada como resposta conversacional final.
