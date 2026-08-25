@@ -1,4 +1,5 @@
-# Configuração didática do primeiro experimento de SFT com LoRA.
+# Configuração didática do roteador de sentimentos do EscutIA.
+# O modelo recebe um texto e devolve somente JSON para ser consumido pelo LLM principal.
 # O treinamento só deve ser executado depois que o dataset tiver DATA_READY_FOR_SFT
 # e o ambiente/modelo tiverem sido validados.
 
@@ -47,7 +48,7 @@ overwrite_output_dir: false
 logging_strategy: steps
 logging_steps: 10
 report_to: mlflow
-run_name: lora_escutia
+run_name: lora_escutia_router
 
-output_dir: outputs/resultados/lora_escutia
-logging_dir: outputs/logs/lora_escutia
+output_dir: outputs/resultados/lora_escutia_router
+logging_dir: outputs/logs/lora_escutia_router

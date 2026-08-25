@@ -2,6 +2,8 @@
 
 Este diretório contém o notebook de treinamento LoRA, a configuração do modelo e os resultados gerados. O treinamento usa a GPU Intel Arc por meio do backend **XPU** do PyTorch e registra as métricas no MLflow.
 
+Nesta etapa, o LoRA não é o LLM conversacional principal. Ele funciona como um **roteador de sentimentos**: recebe um texto, classifica o sentimento e devolve somente um JSON que outro LLM pode consumir para decidir o próximo comportamento.
+
 ## Pré-requisitos
 
 - Windows x64
@@ -61,6 +63,24 @@ EscutIA/dataset/dados/relatorios/11_validacao_final.json
 
 O relatório precisa indicar `DATA_READY_FOR_SFT`. O notebook bloqueia o treinamento quando o dataset não está preparado ou aprovado.
 
+O contrato de saída treinado é:
+
+```json
+{"sentimento":"negativo|neutro|positivo"}
+```
+
+## Papel do modelo na arquitetura
+
+O fluxo esperado depois do treinamento é:
+
+1. A mensagem do usuário é enviada ao roteador LoRA.
+2. O roteador devolve o JSON com o sentimento.
+3. A aplicação valida o JSON.
+4. A aplicação envia o texto original e o sentimento para o LLM principal.
+5. O LLM principal gera a resposta conversacional final.
+
+O adapter treinado nesta pasta não deve tentar substituir o LLM principal nem gerar uma conversa completa. Ele deve ser tratado como um componente especializado e determinístico de classificação.
+
 ## 4. Iniciar o MLflow
 
 O MLflow armazena os experimentos em SQLite. Isso evita o erro do filesystem backend legado e mantém o banco separado do dataset.
@@ -105,7 +125,7 @@ Execute as células em ordem. O notebook:
 1. Localiza e valida o dataset preparado.
 2. Confere o gate `DATA_READY_FOR_SFT`.
 3. Carrega o modelo base do Hugging Face na primeira execução.
-4. Inicia o treinamento LoRA.
+4. Inicia o treinamento LoRA do roteador de sentimentos.
 5. Envia parâmetros e métricas para o experimento `escutia-lora` no MLflow.
 
 O notebook já configura automaticamente o mesmo banco SQLite usado pela interface do MLflow. Não é necessário definir manualmente `MLFLOW_TRACKING_URI` quando o treinamento é iniciado por esse notebook.
@@ -116,7 +136,7 @@ Com o treinamento em andamento:
 
 1. Acesse `http://127.0.0.1:5000`.
 2. Abra o experimento `escutia-lora`.
-3. Selecione a execução `lora_escutia`.
+3. Selecione a execução `lora_escutia_router`.
 4. Atualize a página para ver os novos registros.
 
 As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. O MLflow permite acompanhar, entre outros dados:
@@ -145,12 +165,12 @@ Accuracy, precision, recall e F1 não são calculados automaticamente nesta etap
 ```text
 EscutIA/mlflow.db                              # banco dos experimentos
 EscutIA/mlflow-artifacts/                      # artefatos registrados pelo MLflow
-EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia/  # adapter LoRA e checkpoints
-EscutIA/fine_tuning_lora/outputs/logs/lora_escutia/        # logs do treinamento
+EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia_router/  # adapter LoRA e checkpoints
+EscutIA/fine_tuning_lora/outputs/logs/lora_escutia_router/        # logs do treinamento
 EscutIA/fine_tuning_lora/outputs/checkpoints/              # checkpoints separados
 ```
 
-O notebook de inferência (`Inferencia_LoRA_EscutIA.ipynb`) usa o adapter salvo em `outputs/resultados/lora_escutia`. Ele só deve ser executado depois que o treinamento terminar e os arquivos do adapter existirem.
+O notebook de inferência (`Inferencia_LoRA_EscutIA.ipynb`) usa o adapter salvo em `outputs/resultados/lora_escutia_router`. Ele só deve ser executado depois que o treinamento terminar e os arquivos do adapter existirem. A saída deve ser encaminhada ao LLM principal, e não usada como resposta conversacional final.
 
 ## Se a máquina for diferente
 
