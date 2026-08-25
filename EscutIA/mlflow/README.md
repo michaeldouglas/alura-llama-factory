@@ -1,27 +1,26 @@
 # MLflow — EscutIA
 
-O MLflow acompanha cada treinamento LoRA como um experimento comparável. Ele mostra loss, learning rate, parâmetros, épocas, passos e duração enquanto o treinamento acontece.
+O MLflow acompanha cada treinamento LoRA como uma execução comparável. Ele mostra loss, learning rate, parâmetros, épocas, passos e duração enquanto o treinamento acontece.
 
-## 1. Instalar o ambiente
+## 1. Preparar o ambiente
 
-Na raiz do projeto:
+Na raiz do repositório:
 
 ```powershell
 cd C:\Users\mdbaa\development\alura\alura-llama-factory
 uv sync --native-tls
 ```
 
-Se o ambiente `.venv` já existir, o `uv sync` apenas confirma ou atualiza as dependências.
+O ambiente `.venv` contém o MLflow e as dependências usadas pelo notebook de fine-tuning.
 
-O projeto instala o PyTorch com suporte XPU para a GPU Intel Arc e o MLflow.
+## 2. Iniciar o MLflow
 
-## 2. Subir a interface do MLflow
-
-Na raiz do projeto, execute:
+Ainda na raiz do repositório, execute:
 
 ```powershell
 .venv\Scripts\mlflow.exe ui `
-  --backend-store-uri .\EscutIA\mlflow `
+  --backend-store-uri "sqlite:///./EscutIA/mlflow.db" `
+  --default-artifact-root ".\EscutIA\mlflow-artifacts" `
   --host 127.0.0.1 `
   --port 5000
 ```
@@ -32,39 +31,55 @@ Abra no navegador:
 http://127.0.0.1:5000
 ```
 
-Deixe esse terminal aberto durante o treinamento.
+Mantenha esse terminal aberto durante o treinamento. Não é necessário executar o notebook antes de iniciar o MLflow.
+
+O banco SQLite fica em `EscutIA/mlflow.db` e os artefatos ficam em `EscutIA/mlflow-artifacts`. O dataset continua em `EscutIA/dataset` e não deve ser colocado dentro do banco ou da pasta de artefatos.
 
 ## 3. Executar o treinamento
 
-Em outro terminal, na raiz do projeto, abra o Jupyter:
+Em outro terminal, na raiz do repositório:
 
 ```powershell
 cd C:\Users\mdbaa\development\alura\alura-llama-factory
 .venv\Scripts\jupyter.exe lab
 ```
 
-Abra `EscutIA\fine_tuning_lora\Fine_Tuning_LoRA_EscutIA.ipynb` e execute as células em ordem.
+Abra `EscutIA/fine_tuning_lora/Fine_Tuning_LoRA_EscutIA.ipynb` e execute as células em ordem.
 
-O notebook aponta automaticamente para esta pasta (`EscutIA\mlflow`). Não é necessário configurar a variável `MLFLOW_TRACKING_URI` manualmente.
+O notebook configura automaticamente `MLFLOW_TRACKING_URI` para o mesmo banco SQLite e usa o experimento `escutia-lora`. Não é necessário definir essa variável manualmente quando o treinamento é iniciado pelo notebook.
 
-## 4. Ver o treinamento em andamento
+## 4. Acompanhar uma execução
 
-1. Inicie o MLflow.
-2. Inicie o Jupyter.
-3. Execute o notebook de treinamento.
-4. Acesse `http://127.0.0.1:5000`.
-5. Abra o experimento `escutia-lora`.
+1. Acesse `http://127.0.0.1:5000`.
+2. Abra o experimento `escutia-lora`.
+3. Selecione a execução `lora_escutia`.
+4. Atualize a página para acompanhar as métricas.
 
-As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. Atualize a página para acompanhar novos registros.
-
-O adapter e os checkpoints continuam sendo salvos em:
+As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. O adapter e os checkpoints continuam sendo salvos em:
 
 ```text
-fine_tuning_lora/outputs/resultados/lora_escutia/
+EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia/
 ```
 
-O MLflow registra métricas e parâmetros; ele não substitui o `Inferencia_LoRA_EscutIA.ipynb`, que continua sendo usado para testar as respostas do modelo.
+Para o fluxo completo do treinamento, dataset, validações e inferência, consulte [`fine_tuning_lora/README.md`](../fine_tuning_lora/README.md).
 
-## Observação
+## Problemas comuns
 
-O treinamento interrompido antes desta configuração não aparece automaticamente no MLflow. Ele continua disponível em `fine_tuning_lora/outputs/`; apenas os treinamentos iniciados com esta configuração serão registrados como experimentos.
+### Erro sobre filesystem tracking backend
+
+Não use o diretório `EscutIA/mlflow` como valor de `--backend-store-uri`. Esse formato é o filesystem backend legado e pode ser bloqueado pelas versões atuais do MLflow. Use:
+
+```text
+sqlite:///./EscutIA/mlflow.db
+```
+
+### Nenhuma execução aparece
+
+Confirme que:
+
+- o notebook de treinamento foi executado até a célula que inicia o `llamafactory-cli`;
+- o experimento selecionado é `escutia-lora`;
+- a execução alcançou os primeiros passos de logging;
+- o MLflow UI está usando o mesmo arquivo `EscutIA/mlflow.db`.
+
+Treinamentos interrompidos antes da configuração SQLite não aparecem automaticamente no novo banco. Os outputs produzidos continuam em `EscutIA/fine_tuning_lora/outputs/`.
