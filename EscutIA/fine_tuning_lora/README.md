@@ -122,13 +122,23 @@ Com o treinamento em andamento:
 As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. O MLflow permite acompanhar, entre outros dados:
 
 - training loss;
-- evaluation loss, quando disponível;
+- evaluation loss ao final de cada época;
 - learning rate;
 - época e número de passos;
 - parâmetros da execução;
 - duração e status do treinamento.
 
+Depois que a célula de treinamento terminar, execute a célula `Registrar contexto e progresso no MLflow`. Ela complementa a execução com:
+
+- `training_percentage`, calculado a partir de `current_steps / total_steps`;
+- hash SHA-256 dos arquivos do dataset preparado;
+- decisão do gate de validação;
+- plataforma de hardware e estratégia `sft_lora`;
+- configuração YAML, relatório do gate e `trainer_log.jsonl` como artefatos.
+
 O MLflow acompanha o treinamento, mas não substitui o notebook nem salva o adapter no lugar dos outputs do LLaMA-Factory.
+
+Accuracy, precision, recall e F1 não são calculados automaticamente nesta etapa, porque o treinamento é SFT generativo. Essas métricas devem ser obtidas em uma avaliação separada com um conjunto de avaliação e um procedimento de geração/classificação definido.
 
 ## 7. Onde ficam os resultados
 

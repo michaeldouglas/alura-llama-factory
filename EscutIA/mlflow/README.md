@@ -55,7 +55,11 @@ O notebook configura automaticamente `MLFLOW_TRACKING_URI` para o mesmo banco SQ
 3. Selecione a execução `lora_escutia`.
 4. Atualize a página para acompanhar as métricas.
 
-As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. O adapter e os checkpoints continuam sendo salvos em:
+As métricas são enviadas a cada 10 passos, conforme `logging_steps: 10`. Durante o treinamento, acompanhe `loss`, `eval_loss`, `learning_rate`, `epoch` e `step`.
+
+Depois que a célula de treinamento terminar, execute a célula `Registrar contexto e progresso no MLflow` do notebook. Ela adiciona `training_percentage`, hash do dataset, decisão do gate e registra como artefatos a configuração YAML, o relatório de validação e `trainer_log.jsonl`.
+
+O adapter e os checkpoints continuam sendo salvos em:
 
 ```text
 EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia/
@@ -83,3 +87,5 @@ Confirme que:
 - o MLflow UI está usando o mesmo arquivo `EscutIA/mlflow.db`.
 
 Treinamentos interrompidos antes da configuração SQLite não aparecem automaticamente no novo banco. Os outputs produzidos continuam em `EscutIA/fine_tuning_lora/outputs/`.
+
+Accuracy, precision, recall e F1 não são métricas geradas automaticamente pelo SFT generativo. Para registrá-las, crie uma etapa de avaliação separada que gere respostas do adapter e compare os resultados com um conjunto de avaliação reservado.
