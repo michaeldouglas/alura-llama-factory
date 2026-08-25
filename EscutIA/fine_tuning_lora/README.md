@@ -233,6 +233,45 @@ Depois que a célula de treinamento terminar, execute a célula `Registrar conte
 
 O MLflow acompanha o treinamento, mas não substitui o notebook nem salva o adapter no lugar dos outputs do LLaMA-Factory.
 
+### Rastrear o adapter, comparar runs e registrar uma versão
+
+Depois que o adapter for gerado, a partir da raiz do repositório execute:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py log
+```
+
+Esse comando acrescenta à última execução LoRA:
+
+- hash dos arquivos do dataset;
+- configuração YAML, gate e manifesto do dataset;
+- `trainer_log.jsonl` e resultados do treinamento;
+- `adapter_model.safetensors`, `adapter_config.json` e tokenizer;
+- tags indicando modelo-base, método LoRA e disponibilidade da avaliação.
+
+Para comparar as execuções do experimento:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py compare
+```
+
+Depois de avaliar o adapter e decidir que aquela execução é a versão escolhida, registre-a no
+Model Registry:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py register
+```
+
+O registro cria versões do modelo `EscutIA-LoRA` usando o adapter como artefato. O modelo-base
+continua sendo uma dependência explícita do adapter; o Registry não transforma o LoRA em um
+modelo completo.
+
+O notebook `Inferencia_LoRA_EscutIA.ipynb`, quando a avaliação congelada for habilitada, também
+salva `outputs/avaliacao/avaliacao_lora.json` e `avaliacao_lora.csv` e registra no MLflow a
+acurácia, a taxa de JSON válido, o tamanho da avaliação e o hash do conjunto avaliado. Para
+comparar explicitamente o modelo-base com o adapter, defina `AVALIAR_BASELINE = True` na célula
+de avaliação; as métricas do baseline serão registradas junto com as métricas do LoRA.
+
 Accuracy, precision, recall e F1 não são calculados automaticamente nesta etapa, porque o treinamento é SFT generativo. Essas métricas devem ser obtidas em uma avaliação separada com um conjunto de avaliação e um procedimento de geração/classificação definido.
 
 ## Onde ficam os resultados
