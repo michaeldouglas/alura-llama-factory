@@ -4,70 +4,145 @@ Este diretório contém o notebook de treinamento LoRA, a configuração do mode
 
 Nesta etapa, o LoRA não é o LLM conversacional principal. Ele funciona como um **roteador de sentimentos**: recebe um texto, classifica o sentimento e devolve somente um JSON que outro LLM pode consumir para decidir o próximo comportamento.
 
-## Pré-requisitos
+## Como reproduzir esta etapa
 
-- Windows x64
-- Python 3.12 x64
-- Driver da GPU Intel instalado
-- GPU Intel Arc com memória suficiente para a configuração
-- Dataset preparado e aprovado para SFT
+Execute os passos abaixo depois de concluir a preparação e a validação do dataset.
 
-A configuração de referência usa:
+### 1. Abrir a pasta raiz do projeto
 
-- PyTorch `2.6.0+xpu`
-- Precisão `bf16`
-- Modelo `Qwen/Qwen2.5-0.5B-Instruct`
-
-## 1. Preparar o ambiente
-
-Execute os comandos a partir da raiz do repositório, e não de dentro de `fine_tuning_lora`:
+Abra um PowerShell e entre na raiz do repositório:
 
 ```powershell
 cd C:\Users\mdbaa\development\alura\alura-llama-factory
+```
+
+Se o `.venv` ainda não existir, crie o ambiente base:
+
+```powershell
 uv sync --native-tls
 ```
 
-O comando cria ou atualiza o ambiente `.venv` da raiz com PyTorch/XPU, LLaMA-Factory, MLflow, Jupyter e as demais dependências do projeto.
+### 2. Instalar os requirements do fine-tuning
 
-## 2. Confirmar a GPU
+Instale as dependências do LLaMA-Factory, PyTorch/XPU, MLflow e notebooks:
 
-Antes de iniciar o notebook, valide se o PyTorch encontrou a GPU Intel:
+```powershell
+.venv\Scripts\python.exe -m pip install -r EscutIA\fine_tuning_lora\requirements.txt
+```
+
+O driver da GPU Intel Arc precisa estar instalado no Windows antes desta etapa.
+
+### 3. Confirmar o dataset preparado
+
+Confirme que estes arquivos existem:
+
+```text
+EscutIA/dataset/dados/preparados/dataset_info.json
+EscutIA/dataset/dados/preparados/escutia_train.json
+EscutIA/dataset/dados/preparados/escutia_validation.json
+EscutIA/dataset/dados/relatorios/11_validacao_final.json
+```
+
+O relatório precisa indicar `DATA_READY_FOR_SFT`. Não inicie o treinamento se o gate não estiver
+aprovado.
+
+### 4. Confirmar a GPU
+
+Verifique se o PyTorch encontrou a GPU Intel pelo backend XPU:
 
 ```powershell
 .venv\Scripts\python.exe -c "import torch; print(torch.__version__); print('XPU:', torch.xpu.is_available()); print(torch.xpu.get_device_name(0) if torch.xpu.is_available() else 'GPU XPU não encontrada')"
 ```
 
-O resultado esperado deve indicar `XPU: True` e exibir o nome da GPU. Se aparecer `XPU: False`, corrija o driver ou o ambiente antes de iniciar o treinamento.
+O resultado esperado deve mostrar `XPU: True`.
 
-## 3. Conferir o dataset
+### 5. Conferir a configuração
 
-O notebook espera o dataset preparado em:
-
-```text
-EscutIA/dataset/dados/preparados/
-```
-
-Os arquivos obrigatórios são:
+Abra e revise:
 
 ```text
-dataset_info.json
-escutia_train.json
-escutia_validation.json
+EscutIA/fine_tuning_lora/configs/lora_escutia.yaml
 ```
 
-Também deve existir o relatório de validação:
+Confira principalmente o modelo-base, o dataset, `finetuning_type: lora`, `lora_rank`,
+`lora_alpha`, `lora_dropout`, batch, learning rate, épocas, precisão e `output_dir`.
+
+### 6. Iniciar o MLflow
+
+Abra um PowerShell separado, mantenha-o aberto e execute:
+
+```powershell
+cd C:\Users\mdbaa\development\alura\alura-llama-factory
+.venv\Scripts\mlflow.exe ui `
+  --backend-store-uri "sqlite:///./EscutIA/mlflow.db" `
+  --default-artifact-root ".\EscutIA\mlflow-artifacts" `
+  --host 127.0.0.1 `
+  --port 5000
+```
+
+Depois, acesse `http://127.0.0.1:5000`.
+
+### 7. Executar o notebook de treinamento
+
+Em outro PowerShell, ainda na raiz do projeto, inicie o Jupyter:
+
+```powershell
+.venv\Scripts\jupyter.exe lab
+```
+
+Abra:
 
 ```text
-EscutIA/dataset/dados/relatorios/11_validacao_final.json
+EscutIA/fine_tuning_lora/Fine_Tuning_LoRA_EscutIA.ipynb
 ```
 
-O relatório precisa indicar `DATA_READY_FOR_SFT`. O notebook bloqueia o treinamento quando o dataset não está preparado ou aprovado.
+Selecione o kernel do `.venv` e execute as células em ordem. O notebook carrega o modelo-base,
+executa o SFT com LoRA, salva checkpoints em `output_dir` e envia as métricas para o MLflow.
 
-O contrato de saída treinado é:
+Não inicie uma segunda execução usando a mesma pasta de saída. Se precisar de um novo
+experimento, altere o `run_name` e o `output_dir` na configuração.
 
-```json
-{"sentimento":"negativo|neutro|positivo"}
+### 8. Registrar e conferir os resultados
+
+Quando a célula de treinamento terminar, execute a célula `Registrar contexto e progresso no
+MLflow`. Depois confira:
+
+```text
+EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia_router/adapter_model.safetensors
+EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia_router/adapter_config.json
+EscutIA/fine_tuning_lora/outputs/resultados/lora_escutia_router/checkpoint-*/
 ```
+
+### 9. Testar a inferência
+
+Somente depois que o adapter existir, abra e execute:
+
+```text
+EscutIA/fine_tuning_lora/Inferencia_LoRA_EscutIA.ipynb
+```
+
+O notebook de inferência carrega o modelo-base com o adapter treinado. Ele deve devolver o JSON
+de sentimento para ser encaminhado ao LLM principal.
+
+## O que fizemos nesta etapa
+
+Depois de preparar e validar o dataset, nós usamos esta pasta para treinar um adapter LoRA com o
+LLaMA-Factory. Primeiro definimos o modelo-base Qwen, o template de dados e a tarefa de SFT.
+Depois configuramos o LoRA, escolhendo os módulos-alvo e os valores de `rank`, `alpha` e
+`dropout`.
+
+Também configuramos os principais parâmetros do treinamento, como batch efetivo, gradient
+accumulation, learning rate, scheduler, warmup, épocas e gradient checkpointing. Com isso,
+conseguimos executar o treinamento na GPU Intel Arc usando o backend XPU, acompanhando a loss,
+as avaliações e os checkpoints gerados durante o processo.
+
+Durante o treinamento, registramos os parâmetros e as métricas no MLflow. Ao final, obtivemos o
+adapter LoRA em `outputs/resultados/lora_escutia_router/`, junto com o
+`adapter_model.safetensors`, o `adapter_config.json`, o `trainer_log.jsonl` e os checkpoints.
+Esse adapter pode ser carregado com o modelo-base no notebook de inferência.
+
+Nesta etapa nós trabalhamos com LoRA. Depois vamos avançar para QLoRA, comparar o consumo de
+recursos, ampliar a avaliação, fazer o merge quando necessário e publicar o modelo especializado.
 
 ## Papel do modelo na arquitetura
 
@@ -81,7 +156,7 @@ O fluxo esperado depois do treinamento é:
 
 O adapter treinado nesta pasta não deve tentar substituir o LLM principal nem gerar uma conversa completa. Ele deve ser tratado como um componente especializado e determinístico de classificação.
 
-## 4. Iniciar o MLflow
+## Detalhes: MLflow
 
 O MLflow armazena os experimentos em SQLite. Isso evita o erro do filesystem backend legado e mantém o banco separado do dataset.
 
@@ -105,7 +180,7 @@ http://127.0.0.1:5000
 
 Não é necessário executar o notebook antes de iniciar o MLflow. O MLflow pode ser iniciado sem nenhum treinamento existente; os experimentos aparecerão quando o notebook enviar a primeira execução.
 
-## 5. Executar o notebook de treinamento
+## Detalhes: execução do notebook
 
 Abra um segundo PowerShell na raiz do repositório:
 
@@ -130,7 +205,7 @@ Execute as células em ordem. O notebook:
 
 O notebook já configura automaticamente o mesmo banco SQLite usado pela interface do MLflow. Não é necessário definir manualmente `MLFLOW_TRACKING_URI` quando o treinamento é iniciado por esse notebook.
 
-## 6. Acompanhar o treinamento no MLflow
+## Acompanhar o treinamento no MLflow
 
 Com o treinamento em andamento:
 
@@ -160,7 +235,7 @@ O MLflow acompanha o treinamento, mas não substitui o notebook nem salva o adap
 
 Accuracy, precision, recall e F1 não são calculados automaticamente nesta etapa, porque o treinamento é SFT generativo. Essas métricas devem ser obtidas em uma avaliação separada com um conjunto de avaliação e um procedimento de geração/classificação definido.
 
-## 7. Onde ficam os resultados
+## Onde ficam os resultados
 
 ```text
 EscutIA/mlflow.db                              # banco dos experimentos
