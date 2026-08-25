@@ -1,0 +1,52 @@
+{
+  "fonte_unificada": 3063,
+  "conjuntos": {
+    "treino": 1833,
+    "validacao": 612,
+    "avaliacao": 612
+  },
+  "distribuicao_rotulos": {
+    "negativo": {
+      "treino": 612,
+      "validacao": 204,
+      "avaliacao": 204
+    },
+    "neutro": {
+      "treino": 610,
+      "validacao": 204,
+      "avaliacao": 204
+    },
+    "positivo": {
+      "treino": 611,
+      "validacao": 204,
+      "avaliacao": 204
+    }
+  },
+  "duplicidades_internas": {
+    "treino": 0,
+    "validacao": 0,
+    "avaliacao": 0
+  },
+  "sobreposicoes_entre_conjuntos": [
+    {
+      "conjunto_a": "treino",
+      "conjunto_b": "validacao",
+      "textos_em_comum": 0
+    },
+    {
+      "conjunto_a": "treino",
+      "conjunto_b": "avaliacao",
+      "textos_em_comum": 0
+    },
+    {
+      "conjunto_a": "validacao",
+      "conjunto_b": "avaliacao",
+      "textos_em_comum": 0
+    }
+  ],
+  "motivos_rejeicao": {
+    "DUPLICATA_DE_TEXTO": 2,
+    "CONFLITO_DE_ROTULO": 4
+  },
+  "gate_preparacao": "DATA_READY_FOR_SFT"
+}
