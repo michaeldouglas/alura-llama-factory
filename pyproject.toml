@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 
 dependencies = [
-    "torch>=2.2,<3",
+    "torch==2.6.0+xpu",
+    "torchvision==0.21.0+xpu",
+    "torchaudio==2.6.0+xpu",
     "transformers>=4.49,<5",
     "datasets>=2.20,<4",
     "peft>=0.14,<1",
@@ -17,6 +19,7 @@ dependencies = [
     "safetensors>=0.4,<1",
     "sentencepiece>=0.2,<1",
     "protobuf>=4,<6",
+    "truststore>=0.10,<1",
     "ipykernel>=6.29,<8",
     "jupyter>=1.1,<2",
     "jsonschema>=4.23,<5",
@@ -27,3 +30,16 @@ dependencies = [
     "matplotlib>=3.8,<4",
     "seaborn>=0.13,<1",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-xpu" }
+torchvision = { index = "pytorch-xpu" }
+torchaudio = { index = "pytorch-xpu" }
+
+[tool.uv]
+environments = ["sys_platform == 'win32'"]
+
+[[tool.uv.index]]
+name = "pytorch-xpu"
+url = "https://download.pytorch.org/whl/xpu"
+explicit = true

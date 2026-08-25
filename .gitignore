@@ -1,2 +1,23 @@
 harness-llama-factory/EscutIA
 harness-llama-factory
+graphify-out
+
+# Ambientes Python e caches locais
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Checkpoints automáticos dos notebooks
+.ipynb_checkpoints/
+
+# Artefatos gerados pelo fine-tuning; os marcadores .gitkeep permanecem versionados
+EscutIA/fine_tuning_lora/resultados/*
+!EscutIA/fine_tuning_lora/resultados/.gitkeep
+EscutIA/fine_tuning_lora/logs/*
+!EscutIA/fine_tuning_lora/logs/.gitkeep
+EscutIA/fine_tuning_lora/checkpoints/*
+!EscutIA/fine_tuning_lora/checkpoints/.gitkeep
+*.log
