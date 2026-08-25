@@ -20,4 +20,12 @@ EscutIA/fine_tuning_lora/logs/*
 !EscutIA/fine_tuning_lora/logs/.gitkeep
 EscutIA/fine_tuning_lora/checkpoints/*
 !EscutIA/fine_tuning_lora/checkpoints/.gitkeep
+
+# Nova organização: todos os artefatos gerados ficam sob outputs/
+EscutIA/fine_tuning_lora/outputs/resultados/*
+!EscutIA/fine_tuning_lora/outputs/resultados/.gitkeep
+EscutIA/fine_tuning_lora/outputs/logs/*
+!EscutIA/fine_tuning_lora/outputs/logs/.gitkeep
+EscutIA/fine_tuning_lora/outputs/checkpoints/*
+!EscutIA/fine_tuning_lora/outputs/checkpoints/.gitkeep
 *.log

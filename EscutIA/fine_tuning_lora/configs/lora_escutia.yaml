@@ -48,5 +48,5 @@ logging_strategy: steps
 logging_steps: 10
 report_to: none
 
-output_dir: resultados/lora_escutia
-logging_dir: logs/lora_escutia
+output_dir: outputs/resultados/lora_escutia
+logging_dir: outputs/logs/lora_escutia
