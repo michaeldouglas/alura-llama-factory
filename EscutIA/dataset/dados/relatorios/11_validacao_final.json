@@ -1,0 +1,83 @@
+{
+  "passo": 11,
+  "decisao": "DATA_READY_FOR_SFT",
+  "resultados": [
+    {
+      "checagem": "schema_treino",
+      "status": "PASS",
+      "registros": 1833,
+      "erros": []
+    },
+    {
+      "checagem": "schema_validacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": []
+    },
+    {
+      "checagem": "schema_avaliacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": []
+    },
+    {
+      "checagem": "conversacional_treino",
+      "status": "PASS",
+      "registros": 1833,
+      "erros": 0
+    },
+    {
+      "checagem": "conversacional_validacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": 0
+    },
+    {
+      "checagem": "conversacional_avaliacao",
+      "status": "PASS",
+      "registros": 612,
+      "erros": 0
+    },
+    {
+      "checagem": "isolamento_treino_x_validacao",
+      "status": "PASS",
+      "sobreposicoes": 0
+    },
+    {
+      "checagem": "isolamento_treino_x_avaliacao",
+      "status": "PASS",
+      "sobreposicoes": 0
+    },
+    {
+      "checagem": "isolamento_validacao_x_avaliacao",
+      "status": "PASS",
+      "sobreposicoes": 0
+    },
+    {
+      "checagem": "dataset_info",
+      "status": "PASS"
+    },
+    {
+      "checagem": "avaliacao_congelada",
+      "status": "PASS"
+    }
+  ],
+  "distribuicao": {
+    "treino": {
+      "positivo": 611,
+      "negativo": 612,
+      "neutro": 610
+    },
+    "validacao": {
+      "neutro": 204,
+      "negativo": 204,
+      "positivo": 204
+    },
+    "avaliacao": {
+      "negativo": 204,
+      "neutro": 204,
+      "positivo": 204
+    }
+  },
+  "gerado_em_utc": "2026-08-25T21:45:26.728972+00:00"
+}

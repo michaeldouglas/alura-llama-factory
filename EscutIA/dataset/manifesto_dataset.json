@@ -1,0 +1,13 @@
+{
+  "version": "2-json-sentimento",
+  "source_sha256": {
+    "dataset.csv": "74c0c3b15ad86a6f54afb8fc9837d4e717f7894a4a9f85c5d58527705b70f81c",
+    "dataset_local.csv": "f81b32c82a9984dc9b0d78cbbb1dc8ae96abcea4369bb15fbcedb2e6cb35bfb0"
+  },
+  "counts": {
+    "treino": 1833,
+    "validacao": 612,
+    "avaliacao": 612
+  },
+  "training_authorized": true
+}
