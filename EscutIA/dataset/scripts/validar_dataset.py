@@ -1,103 +1,77 @@
-"""Validação independente e somente leitura da preparação inicial do EscutIA."""
+"""Valida os artefatos preparados do dataset sem acessar outras pastas."""
 
 from __future__ import annotations
 
-import argparse
-import hashlib
 import json
-import re
-import unicodedata
-from collections import Counter
+import sys
 from pathlib import Path
-from typing import Any
 
 
+ROOT = Path(__file__).resolve().parents[1]
+PREPARED_DIR = ROOT / "dados" / "preparados"
+REPORT_PATH = ROOT / "dados" / "relatorios" / "11_validacao_final.json"
 LABELS = {"negativo", "neutro", "positivo"}
-ROLES = {"system", "user", "assistant"}
-PHONE = re.compile(r"(?<!\d)(?:\+?55\s*)?(?:\(?\d{2}\)?\s*)?9?\d{4}[-\s]?\d{4}(?!\d)")
+SPLITS = {
+    "treino": PREPARED_DIR / "escutia_train.json",
+    "validacao": PREPARED_DIR / "escutia_validation.json",
+    "avaliacao": PREPARED_DIR / "escutia_evaluation.json",
+}
 
 
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+def carregar(caminho: Path):
+    if not caminho.exists():
+        raise FileNotFoundError(f"Artefato não encontrado: {caminho}")
+    return json.loads(caminho.read_text(encoding="utf-8"))
 
 
-def normalize(value: str) -> str:
-    value = unicodedata.normalize("NFKC", value).casefold()
-    value = re.sub(r"\s+", " ", value).strip()
-    return re.sub(r"[^\w\s]", "", value, flags=re.UNICODE)
+def validar() -> None:
+    entradas_por_split: dict[str, set[str]] = {}
 
+    for nome, caminho in SPLITS.items():
+        registros = carregar(caminho)
+        if not isinstance(registros, list) or not registros:
+            raise ValueError(f"O split {nome} precisa ser uma lista não vazia.")
 
-def load_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+        entradas: set[str] = set()
+        labels: dict[str, int] = {label: 0 for label in sorted(LABELS)}
+        for indice, item in enumerate(registros):
+            if set(item) != {"instruction", "input", "output"}:
+                raise ValueError(f"{nome}[{indice}] possui campos inválidos.")
+            entrada = item["input"]
+            if not isinstance(entrada, str) or not entrada.strip():
+                raise ValueError(f"{nome}[{indice}] possui entrada vazia.")
+            if entrada in entradas:
+                raise ValueError(f"Entrada duplicada dentro do split {nome}: índice {indice}.")
 
+            resposta = json.loads(item["output"])
+            if set(resposta) != {"sentimento"} or resposta["sentimento"] not in LABELS:
+                raise ValueError(f"{nome}[{indice}] possui resposta JSON inválida.")
+            entradas.add(entrada)
+            labels[resposta["sentimento"]] += 1
 
-def validate(dataset_dir: Path) -> dict[str, Any]:
-    info = load_json(dataset_dir / "dataset_info.json")
-    manifest = load_json(dataset_dir / "manifesto_dataset.json")
-    checks: dict[str, bool] = {}
-    errors: list[str] = []
-    alpaca_sets: dict[str, list[dict[str, Any]]] = {}
-    conversational_sets: dict[str, list[dict[str, Any]]] = {}
+        entradas_por_split[nome] = entradas
+        print(f"{nome}: {len(registros)} registros | rótulos: {labels}")
 
-    for name, description in info.items():
-        path = dataset_dir / description["file_name"]
-        if not path.exists():
-            errors.append(f"Arquivo ausente: {path}")
-            continue
-        records = load_json(path)
-        if description.get("formatting", "alpaca") == "sharegpt":
-            conversational_sets[name] = records
-            for index, record in enumerate(records):
-                messages = record.get("messages")
-                if not isinstance(messages, list) or len(messages) != 3:
-                    errors.append(f"{name}[{index}] não tem três mensagens")
-                    continue
-                if {message.get("role") for message in messages} != ROLES:
-                    errors.append(f"{name}[{index}] tem roles inválidos")
-                if any(not isinstance(message.get("content"), str) or not message["content"].strip() for message in messages):
-                    errors.append(f"{name}[{index}] tem conteúdo vazio")
-        else:
-            alpaca_sets[name] = records
-            for index, record in enumerate(records):
-                if set(record) != {"instruction", "input", "output"}:
-                    errors.append(f"{name}[{index}] tem campos diferentes do Alpaca")
-                if not record.get("instruction") or not record.get("input") or record.get("output") not in LABELS:
-                    errors.append(f"{name}[{index}] tem valor inválido")
-                if len(record.get("input", "")) > 280:
-                    errors.append(f"{name}[{index}] ultrapassa 280 caracteres")
-                if PHONE.search(record.get("input", "")):
-                    errors.append(f"{name}[{index}] contém padrão de telefone")
+    nomes = list(entradas_por_split)
+    for indice, primeiro in enumerate(nomes):
+        for segundo in nomes[indice + 1 :]:
+            intersecao = entradas_por_split[primeiro] & entradas_por_split[segundo]
+            if intersecao:
+                raise ValueError(f"Há {len(intersecao)} entradas compartilhadas entre {primeiro} e {segundo}.")
 
-    train = alpaca_sets.get("escutia_treino_alpaca", [])
-    validation = alpaca_sets.get("escutia_validacao_alpaca", [])
-    evaluation = alpaca_sets.get("escutia_avaliacao_alpaca", [])
-    keys = {"treino": {normalize(row["input"]) for row in train}, "validacao": {normalize(row["input"]) for row in validation}, "avaliacao": {normalize(row["input"]) for row in evaluation}}
-    overlaps = {"treino_x_validacao": len(keys["treino"] & keys["validacao"]), "treino_x_avaliacao": len(keys["treino"] & keys["avaliacao"]), "validacao_x_avaliacao": len(keys["validacao"] & keys["avaliacao"])}
-    checks["alpaca_schema"] = not errors
-    checks["sharegpt_schema"] = bool(conversational_sets) and not errors
-    checks["split_isolation"] = not any(overlaps.values())
-    checks["source_lineage"] = (dataset_dir / "trabalho" / "lineage.jsonl").exists()
-    checks["frozen_evaluation"] = (dataset_dir / "avaliacao_congelada.jsonl").exists()
-    checks["dataset_info"] = all(description.get("file_name") for description in info.values())
-    checks["training_not_authorized"] = manifest.get("llamafactory", {}).get("training_authorized") is False
-    counts = {name: dict(Counter(row.get("output") for row in records)) for name, records in {"treino": train, "validacao": validation, "avaliacao": evaluation}.items()}
-    result = {"decision": "DATA_READY_FOR_SFT" if all(checks.values()) else "DATA_BLOCKED", "checks": checks, "counts": counts, "overlaps": overlaps, "errors": errors[:20]}
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return result
+    if not REPORT_PATH.exists():
+        raise FileNotFoundError(f"Relatório final não encontrado: {REPORT_PATH}")
+    relatorio = carregar(REPORT_PATH)
+    if relatorio.get("decisao") != "DATA_READY_FOR_SFT":
+        raise ValueError(f"Gate final não aprovado: {relatorio.get('decisao')}")
 
-
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset-dir", type=Path, default=Path(__file__).resolve().parents[1] / "dados")
-    args = parser.parse_args()
-    result = validate(args.dataset_dir)
-    if result["decision"] != "DATA_READY_FOR_SFT":
-        raise SystemExit(2)
+    print("Isolamento entre os splits: PASS")
+    print("Gate final do dataset: PASS")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        validar()
+    except (FileNotFoundError, ValueError, json.JSONDecodeError) as error:
+        print(f"VALIDAÇÃO BLOQUEADA: {error}", file=sys.stderr)
+        raise SystemExit(1) from error

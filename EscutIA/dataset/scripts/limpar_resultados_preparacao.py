@@ -1,7 +1,7 @@
 """Remove apenas resultados gerados da preparação do dataset do EscutIA.
 
 As fontes, o notebook, os scripts e a documentação ficam preservados.
-Use este utilitário para voltar ao estado de primeira execução da Parte 2.
+Use este utilitário para voltar ao estado de primeira execução do dataset.
 """
 
 from __future__ import annotations
@@ -12,13 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = [
-    ROOT / "dados" / "dataset.csv",
     ROOT / "dados" / "revisao_manual.json",
     ROOT / "dados" / "revisao_manual.template.json",
     ROOT / "dados" / "dataset_info.json",
-    ROOT / "dados" / "manifesto_dataset.json",
+    ROOT / "manifesto_dataset.json",
     ROOT / "dados" / "avaliacao_congelada.jsonl",
-    ROOT / "dados" / "README.md",
 ]
 DIRECTORIES = [
     ROOT / "dados" / "preparados",
