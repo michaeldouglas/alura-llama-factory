@@ -1,2 +1,45 @@
 harness-llama-factory/EscutIA
 harness-llama-factory
+graphify-out
+
+# Ambientes Python e caches locais
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Checkpoints automáticos dos notebooks
+.ipynb_checkpoints/
+
+# Artefatos gerados pelo fine-tuning; os marcadores .gitkeep permanecem versionados
+EscutIA/fine_tuning_lora/resultados/*
+!EscutIA/fine_tuning_lora/resultados/.gitkeep
+EscutIA/fine_tuning_lora/logs/*
+!EscutIA/fine_tuning_lora/logs/.gitkeep
+EscutIA/fine_tuning_lora/checkpoints/*
+!EscutIA/fine_tuning_lora/checkpoints/.gitkeep
+
+# Nova organização: todos os artefatos gerados ficam sob outputs/
+EscutIA/fine_tuning_lora/outputs/resultados/*
+!EscutIA/fine_tuning_lora/outputs/resultados/.gitkeep
+EscutIA/fine_tuning_lora/outputs/logs/*
+!EscutIA/fine_tuning_lora/outputs/logs/.gitkeep
+EscutIA/fine_tuning_lora/outputs/checkpoints/*
+!EscutIA/fine_tuning_lora/outputs/checkpoints/.gitkeep
+
+# Experimentos locais do MLflow
+EscutIA/mlflow/*
+!EscutIA/mlflow/.gitkeep
+!EscutIA/mlflow/README.md
+
+# Backends e artefatos locais do MLflow
+mlruns/
+**/mlruns/
+EscutIA/mlflow.db
+EscutIA/mlflow.db-*
+EscutIA/mlflow-artifacts/
+
+*.log
+EscutIA/CURSO_FINE_TUNING_LLAMА_FACTORY.md
