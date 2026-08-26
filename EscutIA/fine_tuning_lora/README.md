@@ -125,6 +125,19 @@ O notebook de inferência carrega o modelo-base com o adapter treinado, executa 
 conjunto congelado e também avalia o modelo-base sem adapter para permitir a comparação. Ele deve
 devolver o JSON de sentimento para ser encaminhado ao LLM principal.
 
+### 10. Testar o modelo registrado no MLflow
+
+Depois de registrar o adapter no MLflow Model Registry, abra e execute:
+
+```text
+EscutIA/fine_tuning_lora/Teste_Modelo_Registrado_MLflow_EscutIA.ipynb
+```
+
+Esse notebook seleciona a versão `EscutIA-LoRA/1`, baixa o adapter pelo URI
+`models:/EscutIA-LoRA/1`, carrega o modelo-base, executa inferências de exemplo e registra o
+teste de consumo no MLflow. Ele demonstra como recuperar e utilizar o artefato posteriormente,
+sem realizar um novo treinamento.
+
 ## O que fizemos nesta etapa
 
 Depois de preparar e validar o dataset, nós usamos esta pasta para treinar um adapter LoRA com o
