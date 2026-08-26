@@ -1,0 +1,5 @@
+# O Colab gera estes artefatos localmente; não versionar pesos, caches ou checkpoints.
+outputs/*
+!outputs/.gitkeep
+__pycache__/
+.ipynb_checkpoints/

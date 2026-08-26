@@ -1,0 +1,18 @@
+# O Colab já fornece PyTorch com CUDA. Não reinstale torch, torchvision ou torchaudio aqui.
+# O notebook valida torch.cuda.is_available() antes de permitir treinamento.
+
+llamafactory==0.9.5
+bitsandbytes>=0.43.0,<1
+transformers>=4.49,<5
+datasets>=2.20,<4
+peft>=0.14,<1
+accelerate>=0.34,<2
+trl>=0.8.6,<1
+huggingface_hub>=0.24,<1
+safetensors>=0.4,<1
+sentencepiece>=0.2,<1
+protobuf>=4,<6
+pyyaml>=6,<7
+numpy>=1.26,<3
+pandas>=2,<3
+scikit-learn>=1.5,<2
