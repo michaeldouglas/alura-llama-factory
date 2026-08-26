@@ -24,7 +24,8 @@ da etapa LoRA, sem transformar o notebook em um experimento excessivamente pesad
 2. Abra `Fine_Tuning_QLoRA_EscutIA_Colab.ipynb` no Google Colab.
 3. Selecione uma sessão com GPU NVIDIA em **Runtime > Change runtime type**.
 4. Clique em **Runtime > Run all**.
-5. Faça backup do adapter gerado antes de encerrar a sessão do Colab.
+5. Aguarde o treinamento, a inferência e a comparação terminarem.
+6. Faça backup dos artefatos gerados antes de encerrar a sessão do Colab.
 
 O treinamento está ativado por padrão. Para somente clonar, instalar e validar, altere
 `EXECUTE_TRAINING = True` para `False` antes de clicar em **Run all**.
@@ -50,7 +51,7 @@ Não há uma cópia paralela do dataset nesta pasta. O treinamento só prossegue
 ## Arquivos
 
 ```text
-Fine_Tuning_QLoRA_EscutIA_Colab.ipynb  # fluxo didático para o Colab
+Fine_Tuning_QLoRA_EscutIA_Colab.ipynb  # treino, inferência, avaliação e comparação no Colab
 configs/qlora_escutia.yaml             # configuração do LLaMA-Factory
 requirements-colab.txt                 # dependências sem substituir o PyTorch CUDA do Colab
 outputs/                               # criado durante a execução; não versionar checkpoints
@@ -88,6 +89,29 @@ EscutIA/fine_tuning_qlora/outputs/resultados/qlora_escutia_router/
 
 O diretório de saída não deve ser reutilizado para uma nova execução. Para outro experimento,
 altere `run_name` e `output_dir` no YAML e preserve os resultados anteriores.
+
+## Inferência, avaliação e comparação no Colab
+
+O próprio `Fine_Tuning_QLoRA_EscutIA_Colab.ipynb` carrega o modelo-base em 4 bits e aplica o
+adapter produzido pelo treinamento. Ele testa exemplos prontos, permite informar um texto próprio
+e avalia o conjunto congelado sem usar MLflow. Os resultados da avaliação são salvos em
+`outputs/avaliacao/avaliacao_qlora.json` e `outputs/avaliacao/avaliacao_qlora.csv`.
+
+Ao final, o notebook compara LoRA e QLoRA no conjunto congelado completo. A comparação calcula
+acurácia, F1 macro e taxa de JSON válido e lê dos artefatos de treinamento o loss de validação, a
+duração e o tamanho de cada adapter. A execução QLoRA também registra o pico de memória da GPU por
+amostragem durante o treinamento; a execução LoRA histórica não possui essa medição, por isso o
+relatório marca esse campo como não registrado. Os arquivos ficam em
+`outputs/comparacao/comparacao_lora_qlora.json` e `outputs/comparacao/comparacao_lora_qlora.csv`.
+
+Essa etapa é executada automaticamente na sequência do treinamento, no mesmo runtime. O modelo
+continua no cache da sessão, o adapter é carregado de `outputs/resultados/qlora_escutia_router` e o
+dataset de avaliação já existente no clone é reutilizado sem nenhuma ação manual adicional.
+
+A última célula cria e baixa automaticamente `outputs/escutia-qlora-huggingface.zip`. O pacote contém
+uma seleção limpa dos arquivos necessários para publicar o adapter no Hugging Face, incluindo
+tokenizer, configuração, manifesto, métricas e um Model Card. Checkpoints e arquivos de otimização
+ficam fora do ZIP.
 
 ## Limitações conhecidas
 
