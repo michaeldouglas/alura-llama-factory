@@ -121,8 +121,22 @@ Somente depois que o adapter existir, abra e execute:
 EscutIA/fine_tuning_lora/Inferencia_LoRA_EscutIA.ipynb
 ```
 
-O notebook de inferência carrega o modelo-base com o adapter treinado. Ele deve devolver o JSON
-de sentimento para ser encaminhado ao LLM principal.
+O notebook de inferência carrega o modelo-base com o adapter treinado, executa a avaliação no
+conjunto congelado e também avalia o modelo-base sem adapter para permitir a comparação. Ele deve
+devolver o JSON de sentimento para ser encaminhado ao LLM principal.
+
+### 10. Testar o modelo registrado no MLflow
+
+Depois de registrar o adapter no MLflow Model Registry, abra e execute:
+
+```text
+EscutIA/fine_tuning_lora/Teste_Modelo_Registrado_MLflow_EscutIA.ipynb
+```
+
+Esse notebook seleciona a versão `EscutIA-LoRA/1`, baixa o adapter pelo URI
+`models:/EscutIA-LoRA/1`, carrega o modelo-base, executa inferências de exemplo e registra o
+teste de consumo no MLflow. Ele demonstra como recuperar e utilizar o artefato posteriormente,
+sem realizar um novo treinamento.
 
 ## O que fizemos nesta etapa
 
@@ -232,6 +246,52 @@ Depois que a célula de treinamento terminar, execute a célula `Registrar conte
 - configuração YAML, relatório do gate e `trainer_log.jsonl` como artefatos.
 
 O MLflow acompanha o treinamento, mas não substitui o notebook nem salva o adapter no lugar dos outputs do LLaMA-Factory.
+
+### Rastrear o adapter, comparar runs e registrar uma versão
+
+Depois de testar a inferência, volte ao final do notebook `Inferencia_LoRA_EscutIA.ipynb` e
+execute a célula **Finalizar o experimento no MLflow**. Ela faz automaticamente as três ações:
+
+1. registra o adapter, os artefatos e os resultados da execução;
+2. mostra a comparação entre os runs LoRA;
+3. cria uma versão do `EscutIA-LoRA` no Model Registry.
+
+Não é necessário chamar um script manualmente no terminal. O script abaixo existe como alternativa
+para automação fora do Jupyter:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py log
+```
+
+Esse comando acrescenta à última execução LoRA:
+
+- hash dos arquivos do dataset;
+- configuração YAML, gate e manifesto do dataset;
+- `trainer_log.jsonl` e resultados do treinamento;
+- `adapter_model.safetensors`, `adapter_config.json` e tokenizer;
+- tags indicando modelo-base, método LoRA e disponibilidade da avaliação.
+
+Para comparar as execuções do experimento diretamente no terminal:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py compare
+```
+
+Depois de avaliar o adapter e decidir que aquela execução é a versão escolhida, registre-a no
+Model Registry:
+
+```powershell
+.venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py register
+```
+
+O registro cria versões do modelo `EscutIA-LoRA` usando o adapter como artefato. O modelo-base
+continua sendo uma dependência explícita do adapter; o Registry não transforma o LoRA em um
+modelo completo.
+
+O notebook `Inferencia_LoRA_EscutIA.ipynb` salva `outputs/avaliacao/avaliacao_lora.json` e
+`avaliacao_lora.csv` e registra no MLflow a acurácia, a taxa de JSON válido, o tamanho da
+avaliação, o hash do conjunto avaliado e as métricas do modelo-base. A avaliação completa e a
+comparação estão habilitadas por padrão no notebook.
 
 Accuracy, precision, recall e F1 não são calculados automaticamente nesta etapa, porque o treinamento é SFT generativo. Essas métricas devem ser obtidas em uma avaliação separada com um conjunto de avaliação e um procedimento de geração/classificação definido.
 

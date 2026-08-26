@@ -1,0 +1,10 @@
+{
+  "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+  "adapter": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\fine_tuning_lora\\outputs\\resultados\\lora_escutia_router",
+  "dataset": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\preparados\\escutia_evaluation.json",
+  "quantidade_amostras": 612,
+  "acuracia_sentimento": 0.6405228758169934,
+  "taxa_json_valido": 1.0,
+  "acuracia_modelo_base": 0.4019607843137255,
+  "taxa_json_modelo_base": 0.815359477124183
+}

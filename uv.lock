@@ -101,8 +101,10 @@ dependencies = [
     { name = "datasets", marker = "sys_platform == 'win32'" },
     { name = "huggingface-hub", marker = "sys_platform == 'win32'" },
     { name = "ipykernel", marker = "sys_platform == 'win32'" },
+    { name = "ipywidgets", marker = "sys_platform == 'win32'" },
     { name = "jsonschema", marker = "sys_platform == 'win32'" },
     { name = "jupyter", marker = "sys_platform == 'win32'" },
+    { name = "jupyterlab", marker = "sys_platform == 'win32'" },
     { name = "llamafactory", marker = "sys_platform == 'win32'" },
     { name = "matplotlib", marker = "sys_platform == 'win32'" },
     { name = "mlflow", marker = "sys_platform == 'win32'" },
@@ -129,8 +131,10 @@ requires-dist = [
     { name = "datasets", specifier = ">=2.20,<4" },
     { name = "huggingface-hub", specifier = ">=0.24,<1" },
     { name = "ipykernel", specifier = ">=6.29,<8" },
+    { name = "ipywidgets", specifier = ">=8.1,<9" },
     { name = "jsonschema", specifier = ">=4.23,<5" },
     { name = "jupyter", specifier = ">=1.1,<2" },
+    { name = "jupyterlab", specifier = ">=4,<5" },
     { name = "llamafactory", specifier = "==0.9.5" },
     { name = "matplotlib", specifier = ">=3.8,<4" },
     { name = "mlflow", specifier = ">=2.15,<4" },
@@ -715,6 +719,7 @@ dependencies = [
     { name = "cryptography", marker = "sys_platform == 'win32'" },
     { name = "pyasn1-modules", marker = "sys_platform == 'win32'" },
 ]
+sdist = { url = "https://files.pythonhosted.org/packages/41/64/55f316b729f92a552d26e00aa3b1542b2e149d0a5efe2842afff0cac7af7/google_auth-2.57.0.tar.gz", hash = "sha256:9b4f96d6a1feb5f7201231f47cfb3de08d8f176f8a61f9e461555116e95a8789", size = 370794, upload-time = "2026-08-25T19:18:26.419Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/00/f3/8508a702c094af5f6e89773f4dfdeee74913df0f41a02c21b5e7dc3d75cd/google_auth-2.57.0-py3-none-any.whl", hash = "sha256:180dafe015cfb62193bea26b677500fab5b9fd51a1e825ebf3ad9b182047ae59", size = 259728, upload-time = "2026-08-24T21:55:08.449Z" },
 ]
