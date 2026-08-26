@@ -1,6 +1,6 @@
 # O Colab já fornece PyTorch com CUDA. Não reinstale torch, torchvision ou torchaudio aqui.
-# O notebook instala o LLaMA-Factory com --no-deps para não substituir os pacotes web/API
-# pré-instalados no Colab, que não são necessários para `llamafactory-cli train`.
+# O notebook instala o LLaMA-Factory separadamente, por último e com --no-deps, para não
+# substituir os pacotes web/API pré-instalados no Colab. Este arquivo contém o runtime de treino.
 
 bitsandbytes>=0.43.0,<1
 transformers>=4.55.0,<=5.6.0,!=4.57.0
@@ -17,7 +17,7 @@ packaging>=23,<26
 tiktoken>=0.7,<1
 fire>=0.6,<1
 av>=10,<=16
-huggingface_hub>=0.24,<1
+huggingface_hub>=1.16,<2
 safetensors>=0.4,<1
 sentencepiece>=0.2,<1
 protobuf>=4,<6
