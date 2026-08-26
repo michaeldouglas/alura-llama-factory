@@ -121,8 +121,9 @@ Somente depois que o adapter existir, abra e execute:
 EscutIA/fine_tuning_lora/Inferencia_LoRA_EscutIA.ipynb
 ```
 
-O notebook de inferência carrega o modelo-base com o adapter treinado. Ele deve devolver o JSON
-de sentimento para ser encaminhado ao LLM principal.
+O notebook de inferência carrega o modelo-base com o adapter treinado, executa a avaliação no
+conjunto congelado e também avalia o modelo-base sem adapter para permitir a comparação. Ele deve
+devolver o JSON de sentimento para ser encaminhado ao LLM principal.
 
 ## O que fizemos nesta etapa
 
@@ -235,7 +236,15 @@ O MLflow acompanha o treinamento, mas não substitui o notebook nem salva o adap
 
 ### Rastrear o adapter, comparar runs e registrar uma versão
 
-Depois que o adapter for gerado, a partir da raiz do repositório execute:
+Depois de testar a inferência, volte ao final do notebook `Inferencia_LoRA_EscutIA.ipynb` e
+execute a célula **Finalizar o experimento no MLflow**. Ela faz automaticamente as três ações:
+
+1. registra o adapter, os artefatos e os resultados da execução;
+2. mostra a comparação entre os runs LoRA;
+3. cria uma versão do `EscutIA-LoRA` no Model Registry.
+
+Não é necessário chamar um script manualmente no terminal. O script abaixo existe como alternativa
+para automação fora do Jupyter:
 
 ```powershell
 .venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py log
@@ -249,7 +258,7 @@ Esse comando acrescenta à última execução LoRA:
 - `adapter_model.safetensors`, `adapter_config.json` e tokenizer;
 - tags indicando modelo-base, método LoRA e disponibilidade da avaliação.
 
-Para comparar as execuções do experimento:
+Para comparar as execuções do experimento diretamente no terminal:
 
 ```powershell
 .venv\Scripts\python.exe EscutIA\fine_tuning_lora\scripts\mlflow_tools.py compare
@@ -266,11 +275,10 @@ O registro cria versões do modelo `EscutIA-LoRA` usando o adapter como artefato
 continua sendo uma dependência explícita do adapter; o Registry não transforma o LoRA em um
 modelo completo.
 
-O notebook `Inferencia_LoRA_EscutIA.ipynb`, quando a avaliação congelada for habilitada, também
-salva `outputs/avaliacao/avaliacao_lora.json` e `avaliacao_lora.csv` e registra no MLflow a
-acurácia, a taxa de JSON válido, o tamanho da avaliação e o hash do conjunto avaliado. Para
-comparar explicitamente o modelo-base com o adapter, defina `AVALIAR_BASELINE = True` na célula
-de avaliação; as métricas do baseline serão registradas junto com as métricas do LoRA.
+O notebook `Inferencia_LoRA_EscutIA.ipynb` salva `outputs/avaliacao/avaliacao_lora.json` e
+`avaliacao_lora.csv` e registra no MLflow a acurácia, a taxa de JSON válido, o tamanho da
+avaliação, o hash do conjunto avaliado e as métricas do modelo-base. A avaliação completa e a
+comparação estão habilitadas por padrão no notebook.
 
 Accuracy, precision, recall e F1 não são calculados automaticamente nesta etapa, porque o treinamento é SFT generativo. Essas métricas devem ser obtidas em uma avaliação separada com um conjunto de avaliação e um procedimento de geração/classificação definido.
 

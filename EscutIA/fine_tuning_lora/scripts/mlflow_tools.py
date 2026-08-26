@@ -194,6 +194,15 @@ def register_adapter(run_id: str | None = None, model_name: str = DEFAULT_MODEL_
             description="Adapter LoRA do roteador de sentimentos do EscutIA.",
         )
 
+    versoes_existentes = mlflow_client.search_model_versions(f"name='{model_name}'")
+    for versao_existente in versoes_existentes:
+        if versao_existente.run_id == actual_run_id:
+            print(
+                f"Modelo já registrado: {model_name} versão {versao_existente.version} "
+                f"(run {actual_run_id})"
+            )
+            return
+
     version = mlflow_client.create_model_version(
         name=model_name,
         source=f"runs:/{actual_run_id}/adapter_lora",
