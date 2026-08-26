@@ -29,9 +29,12 @@ da etapa LoRA, sem transformar o notebook em um experimento excessivamente pesad
 O treinamento está ativado por padrão. Para somente clonar, instalar e validar, altere
 `EXECUTE_TRAINING = True` para `False` antes de clicar em **Run all**.
 
-A instalação é feita pelo próprio notebook usando o padrão do Colab:
+A instalação é feita pelo próprio notebook usando o padrão do Colab. O LLaMA-Factory é instalado
+com `--no-deps` porque o treinamento não precisa da camada web/API, evitando conflitos com pacotes
+pré-instalados pelo Colab:
 
 ```python
+!pip install -q --no-deps llamafactory==0.9.5
 !pip install -q -r /content/alura-llama-factory/EscutIA/fine_tuning_qlora/requirements-colab.txt
 ```
 
