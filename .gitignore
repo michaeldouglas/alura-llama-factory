@@ -44,6 +44,7 @@ EscutIA/mlflow-artifacts/
 # Artefatos locais da publicação no Hugging Face
 # O modelo completo e o download local são gerados novamente quando necessário.
 EscutIA/huggingface/EscutIA_Modelo/
+EscutIA/huggingface/EscutIA_Modelo_QLoRA/
 EscutIA/huggingface/modelos/completos/
 EscutIA/huggingface/modelos/testes/
 **/.cache/
