@@ -1,0 +1,19 @@
+{
+  "record_id": "evaluation-g8",
+  "decision": "SUCCESSFUL",
+  "report": "experiments/001-resource-efficient-finetune/reports/evaluation-g8.json",
+  "report_sha256": "686a487e9a636b754f6577ae676847909fd291a5dca6a745806eedc47fde64a5",
+  "run_id": "001-resource-efficient-finetune-run-20260822-v3",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "dataset_revision": "606156db529f327fd871515cccbe14dcbafef682",
+  "transformation_version": "transformation-v1",
+  "frozen_selection": {
+    "record_count": 90,
+    "class_counts": {"negativo": 30, "neutro": 30, "positivo": 30},
+    "selection_sha256": "517bab9d543de6f1e07b7ba5717f5b871dcafa8e14701c5dcffb237a0e2ed6f6"
+  },
+  "base": {"accuracy": 0.5, "macro_f1": 0.4044117647058824, "invalid_label_rate": 0.011111111111111112, "prediction_sequence_sha256": "84b3d50548cbb759b6fa1362359273ebd330fc97ca41595cc0cf573da855c449"},
+  "adapted": {"accuracy": 0.6888888888888889, "macro_f1": 0.6890744750317902, "invalid_label_rate": 0.0, "prediction_sequence_sha256": "4ac1a108e32bb9a4bf84a34b1b046204df5f5aca63748ac741347ad69455d357"},
+  "comparison": {"macro_f1_improvement": 0.2846627103259078, "required_improvement": 0.1, "accuracy_delta": 0.18888888888888888, "all_adapted_predictions_valid": true},
+  "checkpoint_external_only": true
+}
