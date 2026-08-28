@@ -14,16 +14,24 @@ export default async function ChatPage() {
     redirect("/");
   }
 
-  const conversations = await prisma.conversation.findMany({
-    where: { userId: session.user.id },
-    orderBy: { updatedAt: "desc" },
-    take: 50,
-    select: { id: true, title: true, updatedAt: true },
-  });
+  const [profile, conversations] = await Promise.all([
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { currentSentiment: true, currentSentimentAt: true },
+    }),
+    prisma.conversation.findMany({
+      where: { userId: session.user.id },
+      orderBy: { updatedAt: "desc" },
+      take: 50,
+      select: { id: true, title: true, updatedAt: true },
+    }),
+  ]);
 
   return (
     <ChatWorkspace
       user={{ name: session.user.name ?? null, email: session.user.email ?? null, image: session.user.image ?? null }}
+      currentSentiment={profile?.currentSentiment as "negativo" | "neutro" | "positivo" | null}
+      currentSentimentAt={profile?.currentSentimentAt?.toISOString() ?? null}
       initialConversations={conversations.map((conversation) => ({ ...conversation, updatedAt: conversation.updatedAt.toISOString() }))}
     />
   );

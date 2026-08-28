@@ -13,6 +13,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  currentSentiment   String?
+  currentSentimentAt DateTime?
   accounts      Account[]
   sessions      Session[]
   conversations Conversation[]

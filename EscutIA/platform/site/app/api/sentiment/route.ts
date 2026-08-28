@@ -19,9 +19,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Faça login para validar seu sentimento." }, { status: 401 });
   }
 
-  const body = (await request.json().catch(() => null)) as { text?: unknown; conversationId?: unknown } | null;
+  const body = (await request.json().catch(() => null)) as { text?: unknown } | null;
   const text = typeof body?.text === "string" ? body.text.trim() : "";
-  const conversationId = typeof body?.conversationId === "string" ? body.conversationId : null;
   if (!text || text.length > 2000) {
     return NextResponse.json({ error: "Escreva uma mensagem de até 2000 caracteres." }, { status: 400 });
   }
@@ -38,43 +37,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Não foi possível validar o sentimento agora. Tente novamente em instantes." }, { status: 503 });
   }
 
-  const conversation = await prisma.$transaction(async (transaction) => {
-    const existing = conversationId
-      ? await transaction.conversation.findFirst({
-          where: { id: conversationId, userId: session.user.id },
-          select: { id: true },
-        })
-      : null;
-    const current = existing
-      ? existing
-      : await transaction.conversation.create({
-          data: { userId: session.user.id, title: text.slice(0, 80) },
-          select: { id: true },
-        });
-
-    await transaction.message.create({
-      data: { conversationId: current.id, role: "user", content: text },
-    });
-    await transaction.message.create({
-      data: {
-        conversationId: current.id,
-        role: "assistant",
-        content: SENTIMENT_RESPONSES[result.sentiment],
-        sentiment: result.sentiment,
-      },
-    });
-    await transaction.conversation.update({
-      where: { id: current.id },
-      data: { updatedAt: new Date() },
-    });
-    return current;
+  const sentimentAt = new Date();
+  await prisma.user.update({
+    where: { id: session.user.id },
+    data: { currentSentiment: result.sentiment, currentSentimentAt: sentimentAt },
   });
 
   return NextResponse.json({
-    conversationId: conversation.id,
     sentiment: result.sentiment,
     response: SENTIMENT_RESPONSES[result.sentiment],
     model: result.model,
+    sentimentAt: sentimentAt.toISOString(),
     elapsedMs: Date.now() - startedAt,
   });
 }
