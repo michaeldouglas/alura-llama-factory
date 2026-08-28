@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[codz]
+.cache/
+.ruff_cache/
+modelo/

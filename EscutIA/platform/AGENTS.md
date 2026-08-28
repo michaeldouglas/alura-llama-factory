@@ -9,8 +9,11 @@ e do harness localizado em `../../harness-llama-factory/`.
   componentes, estilos e experiência do usuário.
 - As rotas da API ficam dentro do mesmo projeto, principalmente em
   `site/app/api/**/route.ts`, junto das regras de negócio e integrações do
-  backend. Não há uma pasta `platform/api` separada como requisito desta
-  arquitetura.
+  backend.
+- **Exceção atual:** `api-modelos/` é um serviço FastAPI separado, criado
+  exclusivamente para executar localmente o modelo de sentimento em Python.
+  Ele não substitui as rotas do site, não contém regras de negócio do produto
+  e não deve ser misturado ao código React/Next.js.
 - Alterações de site ou API devem permanecer dentro de `EscutIA/platform/`,
   salvo quando o responsável solicitar explicitamente outro escopo.
 
@@ -26,12 +29,15 @@ e do harness localizado em `../../harness-llama-factory/`.
 
 ## Execução do modelo
 
-- A implementação futura será completamente em JavaScript/TypeScript.
-- O modelo será carregado no servidor pela API do Next.js, usando runtime
-  Node.js; não deve ser executado no navegador por padrão.
-- `testar_modelo_lora.py` não faz parte da arquitetura planejada.
-- O modelo deverá estar em formato compatível com o runtime JavaScript escolhido
-  quando a implementação for solicitada. Essa escolha ainda não foi feita.
+- O serviço excepcional em `api-modelos/` usa Python, FastAPI e Transformers
+  para carregar o modelo LoRA completo localmente.
+- O modelo fica em `api-modelos/modelo/`, é baixado apenas quando os pesos
+  completos não estão no cache e permanece carregado em memória enquanto a API
+  estiver em execução.
+- `testar_modelo_lora.py` continua sendo referência do comportamento e não é
+  executado pela API.
+- O site continuará consumindo um contrato HTTP; sua integração com este
+  serviço será feita em uma etapa separada.
 
 ## Comunicação
 

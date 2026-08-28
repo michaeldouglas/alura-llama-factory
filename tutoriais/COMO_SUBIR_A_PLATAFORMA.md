@@ -72,7 +72,33 @@ npm run dev
 Abra `http://localhost:3000`, clique em **Entrar**, escolha **Continuar com
 Google** e confirme o redirecionamento para `/dashboard`.
 
-## 7. Validar
+## 7. Iniciar a API local do modelo
+
+Esta API é um serviço separado do site. A integração do chat com ela será feita
+em uma etapa posterior. Em outro terminal:
+
+```powershell
+cd C:\Users\mdbaa\development\alura\alura-llama-factory\EscutIA\platform\api-modelos
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env.local
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+Na primeira inicialização, o modelo é baixado para `api-modelos/modelo/`.
+Depois, os pesos locais são reutilizados e o pipeline permanece em memória
+enquanto o serviço estiver ativo. Se o repositório do modelo for privado,
+preencha `HF_TOKEN` somente no `.env.local` da API.
+
+Teste em outro terminal:
+
+```powershell
+Invoke-RestMethod http://localhost:8000/health
+Invoke-RestMethod -Method Post -Uri http://localhost:8000/sentiment -ContentType "application/json" -Body '{"text":"Estou muito feliz hoje"}'
+```
+
+## 8. Validar
 
 ```powershell
 npm run typecheck
