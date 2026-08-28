@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 type SentimentLabel = "negativo" | "neutro" | "positivo";
 
@@ -30,6 +31,8 @@ type ChatWorkspaceProps = {
   currentSentiment: SentimentLabel | null;
   currentSentimentAt: string | null;
   initialConversations: ConversationSummary[];
+  initialConversationId?: string | null;
+  initialMessages?: ChatMessage[];
 };
 
 const SENTIMENT_LABELS: Record<SentimentLabel, string> = {
@@ -42,6 +45,12 @@ const SENTIMENT_TONES: Record<SentimentLabel, string> = {
   negativo: "border-rose-200 bg-rose-50 text-rose-700",
   neutro: "border-amber-200 bg-amber-50 text-amber-700",
   positivo: "border-emerald-200 bg-emerald-50 text-emerald-700",
+};
+
+const SENTIMENT_ICON_TONES: Record<SentimentLabel, string> = {
+  negativo: "text-rose-500",
+  neutro: "text-amber-500",
+  positivo: "text-emerald-500",
 };
 
 function getDisplayName(user: UserProfile) {
@@ -117,34 +126,163 @@ function PanelIcon() {
   );
 }
 
+function HistoryIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
+      <path d="M5 5.5h14A1.5 1.5 0 0 1 20.5 7v10A1.5 1.5 0 0 1 19 18.5H5A1.5 1.5 0 0 1 3.5 17V7A1.5 1.5 0 0 1 5 5.5Z" />
+      <path d="M7.5 9h9M7.5 12h9M7.5 15h5" />
+    </svg>
+  );
+}
+
+function DashboardIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
+      <rect x="4" y="4" width="6" height="6" rx="1" />
+      <rect x="14" y="4" width="6" height="6" rx="1" />
+      <rect x="4" y="14" width="6" height="6" rx="1" />
+      <rect x="14" y="14" width="6" height="6" rx="1" />
+    </svg>
+  );
+}
+
+function PlusIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8">
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  );
+}
+
+function SendIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="m4 4 16 8-16 8 3-8-3-8Z" />
+      <path d="M7 12h13" />
+    </svg>
+  );
+}
+
+function EditIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="m14.5 5.5 4 4M6 18l1-4.5L16.5 4a2.12 2.12 0 0 1 3 3L10 16.5 6 18Z" />
+      <path d="M13 7.5 17 11.5" />
+    </svg>
+  );
+}
+
+function MoreIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+      <circle cx="5" cy="12" r="1.5" />
+      <circle cx="12" cy="12" r="1.5" />
+      <circle cx="19" cy="12" r="1.5" />
+    </svg>
+  );
+}
+
+function ShareIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="M12 15V4M8 8l4-4 4 4" />
+      <path d="M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13" />
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="M5 7h14M10 4h4l1 3H9l1-3ZM7 7l.7 12.5h8.6L17 7M10 10.5v6M14 10.5v6" />
+    </svg>
+  );
+}
+
+function LogoMark() {
+  return (
+    <Link href="/" aria-label="EscutIA — voltar para a página inicial" title="EscutIA" className="flex h-11 w-11 shrink-0 items-center overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">
+      <Image src="/logo.png" alt="EscutIA" width={132} height={45} priority className="h-[45px] w-[132px] max-w-none" />
+    </Link>
+  );
+}
+
+function CollapsedIconButton({ label, onClick, children, disabled = false }: { label: string; onClick: () => void; children: ReactNode; disabled?: boolean }) {
+  return (
+    <button type="button" aria-label={label} title={label} onClick={onClick} disabled={disabled} className="grid h-11 w-11 place-items-center rounded-2xl text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none">
+      {children}
+    </button>
+  );
+}
+
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className={`h-4 w-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
+    <svg aria-hidden="true" viewBox="0 0 20 20" className={`h-4 w-4 transition-transform duration-200 motion-reduce:transition-none ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
       <path d="m5 7.5 5 5 5-5" />
     </svg>
   );
 }
 
-function SentimentBadge({ sentiment }: { sentiment: SentimentLabel }) {
-  return <span className={`inline-flex rounded-full border px-3 py-1 text-xs font-bold ${SENTIMENT_TONES[sentiment]}`}>{SENTIMENT_LABELS[sentiment]}</span>;
+function EscutiaMoodIcon({ sentiment, className = "h-5 w-5" }: { sentiment: SentimentLabel; className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 32 32" className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="M16 4.5C9.2 1.6 3.5 5.6 3.5 12.2c0 6.1 4.2 10.1 10.5 12.6V29l4.2-3.5c6.1-2.3 10.3-6.8 10.3-13.3C28.5 5.6 22.8 1.6 16 4.5Z" className={SENTIMENT_ICON_TONES[sentiment]} />
+      {sentiment === "positivo" ? (
+        <>
+          <path d="M9.5 12.5c1.1-1.4 2.6-1.4 3.7 0M18.8 12.5c1.1-1.4 2.6-1.4 3.7 0" />
+          <path d="M11 17c1.5 2 3 2.8 5 2.8s3.5-.8 5-2.8" />
+        </>
+      ) : null}
+      {sentiment === "neutro" ? (
+        <>
+          <circle cx="11.5" cy="12.5" r=".8" fill="currentColor" stroke="none" />
+          <circle cx="20.5" cy="12.5" r=".8" fill="currentColor" stroke="none" />
+          <path d="M11.5 18h9" />
+        </>
+      ) : null}
+      {sentiment === "negativo" ? (
+        <>
+          <path d="M9.5 13.5c1.1-1.4 2.6-1.4 3.7 0M18.8 13.5c1.1-1.4 2.6-1.4 3.7 0" />
+          <path d="M11 20c1.5-2 3-2.8 5-2.8s3.5.8 5 2.8" />
+        </>
+      ) : null}
+    </svg>
+  );
 }
 
-export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations }: ChatWorkspaceProps) {
+function SentimentBadge({ sentiment, className = "" }: { sentiment: SentimentLabel; className?: string }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${SENTIMENT_TONES[sentiment]} ${className}`}>
+      <EscutiaMoodIcon sentiment={sentiment} className="h-5 w-5 shrink-0" />
+      <span>{SENTIMENT_LABELS[sentiment]}</span>
+    </span>
+  );
+}
+
+export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages }: ChatWorkspaceProps) {
   const displayName = getDisplayName(user);
+  const router = useRouter();
   const [currentSentiment, setCurrentSentiment] = useState<SentimentLabel | null>(initialSentiment);
   const [currentSentimentAt, setCurrentSentimentAt] = useState<string | null>(initialSentimentAt);
   const [conversations, setConversations] = useState(initialConversations);
-  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [activeConversationId, setActiveConversationId] = useState<string | null>(initialConversationId ?? null);
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? []);
   const [search, setSearch] = useState("");
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
-  const [busy, setBusy] = useState<"sending" | "validating" | "loading" | null>(null);
+  const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId);
   const [historyOpen, setHistoryOpen] = useState(true);
-  const [conversationOpen, setConversationOpen] = useState(false);
+  const [sentimentPanelOpen, setSentimentPanelOpen] = useState(false);
+  const [conversationOpen, setConversationOpen] = useState(Boolean(initialConversationId));
   const [sentimentModalOpen, setSentimentModalOpen] = useState(!initialSentiment);
+  const [openConversationMenuId, setOpenConversationMenuId] = useState<string | null>(null);
+  const [renameTarget, setRenameTarget] = useState<ConversationSummary | null>(null);
+  const [renameDraft, setRenameDraft] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<ConversationSummary | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const conversationMenuRef = useRef<HTMLDivElement>(null);
 
   const filteredConversations = useMemo(() => {
     const normalizedSearch = search.trim().toLocaleLowerCase("pt-BR");
@@ -162,6 +300,50 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, [busy, sentimentModalOpen]);
+
+  useEffect(() => {
+    if (!conversationOpen) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    messagesEndRef.current?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "end" });
+  }, [conversationOpen, messages.length]);
+
+  useEffect(() => {
+    if (!openConversationMenuId) return undefined;
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpenConversationMenuId(null);
+    }
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [openConversationMenuId]);
+
+  useEffect(() => {
+    if (!openConversationMenuId) return undefined;
+
+    function handlePointerDown(event: PointerEvent) {
+      if (conversationMenuRef.current && !conversationMenuRef.current.contains(event.target as Node)) {
+        setOpenConversationMenuId(null);
+      }
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [openConversationMenuId]);
+
+  useEffect(() => {
+    if (!renameTarget && !deleteTarget) return undefined;
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape" || busy) return;
+      setRenameTarget(null);
+      setRenameDraft("");
+      setDeleteTarget(null);
+    }
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [busy, deleteTarget, renameTarget]);
 
   function rememberConversation(id: string, title: string) {
     setConversations((current) => {
@@ -207,7 +389,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       const saved = await persistMessage(content, activeConversationId);
       setActiveConversationId(saved.id);
       rememberConversation(saved.id, saved.title);
-      setNotice("Mensagem salva. Quando quiser, você pode atualizar seu sentimento no card acima.");
+      if (saved.id !== activeConversationId) router.push(`/chat/${saved.id}`);
+      setNotice("Mensagem salva no seu histórico privado.");
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
     } finally {
@@ -243,6 +426,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
   async function handleSelectConversation(id: string) {
     if (busy) return;
+    setOpenConversationMenuId(null);
     setBusy("loading");
     setSidebarOpen(false);
     setConversationOpen(true);
@@ -253,6 +437,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       if (!response.ok || !data.conversation) throw new Error(data.error || "Não foi possível carregar a conversa.");
       setActiveConversationId(id);
       setMessages(data.conversation.messages);
+      router.push(`/chat/${id}`);
       setNotice("Conversa carregada.");
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível carregar a conversa.");
@@ -261,23 +446,113 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     }
   }
 
+  function getConversationUrl(id: string) {
+    return `${window.location.origin}/chat/${id}`;
+  }
+
+  async function handleShareConversation(conversation: ConversationSummary) {
+    setOpenConversationMenuId(null);
+    const url = getConversationUrl(conversation.id);
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: conversation.title, url });
+        setNotice("Conversa compartilhada.");
+      } else {
+        await navigator.clipboard.writeText(url);
+        setNotice("Link da conversa copiado.");
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      setNotice("Não foi possível compartilhar. Copie o link da barra de endereço.");
+    }
+  }
+
+  function openRenameModal(conversation: ConversationSummary) {
+    setOpenConversationMenuId(null);
+    setRenameTarget(conversation);
+    setRenameDraft(conversation.title);
+  }
+
+  function openDeleteModal(conversation: ConversationSummary) {
+    setOpenConversationMenuId(null);
+    setDeleteTarget(conversation);
+  }
+
+  async function handleRenameConversation(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const title = renameDraft.trim();
+    if (!renameTarget || !title || busy) return;
+
+    setBusy("renaming");
+    try {
+      const response = await fetch(`/api/conversations/${renameTarget.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+      });
+      const data = (await response.json()) as { conversation?: ConversationSummary; error?: string };
+      const renamedConversation = data.conversation;
+      if (!response.ok || !renamedConversation) throw new Error(data.error || "Não foi possível renomear a conversa.");
+
+      setConversations((current) => current.map((conversation) => conversation.id === renamedConversation.id ? renamedConversation : conversation));
+      setRenameTarget(null);
+      setRenameDraft("");
+      setNotice("Conversa renomeada.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível renomear a conversa.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function handleDeleteConversation() {
+    if (!deleteTarget || busy) return;
+    const deletedId = deleteTarget.id;
+    setBusy("deleting");
+
+    try {
+      const response = await fetch(`/api/conversations/${deletedId}`, { method: "DELETE" });
+      const data = (await response.json()) as { error?: string };
+      if (!response.ok) throw new Error(data.error || "Não foi possível excluir a conversa.");
+
+      setConversations((current) => current.filter((conversation) => conversation.id !== deletedId));
+      setDeleteTarget(null);
+      if (activeConversationId === deletedId) {
+        setActiveConversationId(null);
+        setMessages([]);
+        setConversationOpen(false);
+        setSidebarOpen(true);
+        router.push("/chat");
+      }
+      setNotice("Conversa excluída.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível excluir a conversa.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
   function handleNewConversation() {
     if (busy) return;
+    setOpenConversationMenuId(null);
     setActiveConversationId(null);
     setMessages([]);
+    window.history.replaceState(null, "", "/chat");
     setSidebarOpen(false);
     setConversationOpen(true);
     setNotice("Nova conversa pronta. Escreva no seu ritmo.");
   }
 
-  function handleToggleConversation() {
-    if (conversationOpen) {
-      setConversationOpen(false);
-      return;
-    }
-
+  function handleOpenConversation() {
     setSidebarOpen(false);
     setConversationOpen(true);
+  }
+
+  function handleDraftKeyDown(event: ReactKeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key !== "Enter" || event.shiftKey || event.nativeEvent.isComposing) return;
+    event.preventDefault();
+    event.currentTarget.form?.requestSubmit();
   }
 
   function openSentimentModal() {
@@ -287,210 +562,303 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   }
 
   return (
-    <main id="main-content" className="min-h-screen overflow-x-hidden bg-[#f9f6f3] text-navy">
-      <div className="flex min-h-screen">
+    <main id="main-content" className="h-screen min-h-screen overflow-x-hidden bg-[#f9f6f3] text-navy">
+      <div className="flex h-screen min-h-screen">
         {sidebarOpen ? <button type="button" aria-label="Fechar painel lateral" onClick={() => setSidebarOpen(false)} className="fixed inset-0 z-30 bg-navy/20 lg:hidden" /> : null}
 
-        <aside className={`fixed inset-y-0 left-0 z-40 flex w-[min(88vw,320px)] flex-col border-r border-navy/8 bg-white shadow-xl transition-[transform,width] duration-300 ease-out lg:static lg:h-screen lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0 lg:w-[300px]" : "-translate-x-full lg:w-0 lg:overflow-hidden"}`}>
-          <div className="border-b border-navy/8 px-5 py-5 sm:px-6">
-            <div className="flex items-center justify-between gap-3">
-              <Logo />
-              <Link href="/" aria-label="Sair do chat e voltar para a página inicial" title="Sair do chat" className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">
-                <ExitIcon />
-              </Link>
-            </div>
-
-            <div className="mt-8 flex items-start gap-3">
-              <Avatar user={user} size="large" />
-              <div className="min-w-0 pt-1">
-                <p className="truncate text-sm font-black text-navy">{displayName}</p>
-                <p className="mt-0.5 text-xs text-navy/50">seu espaço pessoal</p>
-              </div>
-            </div>
-
-            <div className="mt-5 rounded-2xl border border-purple/10 bg-purple/[0.045] p-4">
-              <p className="text-[0.68rem] font-black uppercase tracking-[0.14em] text-navy/40">Seu sentimento hoje</p>
-              {currentSentiment && currentSentimentAt ? (
-                <div className="mt-3">
-                  <SentimentBadge sentiment={currentSentiment} />
-                  <p className="mt-2 text-xs leading-5 text-navy/50">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
-                </div>
-              ) : (
-                <p className="mt-2 text-sm leading-5 text-navy/55">Ainda não registrado</p>
-              )}
-              <button type="button" onClick={openSentimentModal} disabled={Boolean(busy)} className="mt-3 text-xs font-black text-purple transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
-                {currentSentiment ? "Editar sentimento" : "Registrar agora"}
-              </button>
-            </div>
-          </div>
-
-          <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
-            <button type="button" aria-expanded={historyOpen} onClick={() => setHistoryOpen((current) => !current)} className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-colors hover:bg-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">
-              <span className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-navy/40">
-                Histórico
-                <span className="rounded-full bg-navy/5 px-2 py-0.5 text-[0.65rem]">{filteredConversations.length}</span>
-              </span>
-              <ChevronIcon open={historyOpen} />
-            </button>
-
-            {historyOpen ? (
-              <div className="mt-2">
-                <label htmlFor="conversation-search" className="sr-only">Buscar conversas</label>
-                <div className="relative">
-                  <svg aria-hidden="true" viewBox="0 0 20 20" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy/40">
-                    <path d="m14.5 14.5 3 3m-1.5-7a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
-                  </svg>
-                  <input id="conversation-search" name="conversation-search" type="search" autoComplete="off" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar conversas…" className="w-full rounded-xl border border-navy/10 bg-warm/70 py-3 pl-10 pr-3 text-sm text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
-                </div>
-
-                <div className="mt-3">
-                  {filteredConversations.length ? (
-                    <div className="space-y-1">
-                      {filteredConversations.map((conversation) => (
-                        <button key={conversation.id} type="button" onClick={() => void handleSelectConversation(conversation.id)} className={`w-full rounded-xl px-3 py-3 text-left transition-colors hover:bg-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${activeConversationId === conversation.id ? "bg-warm" : ""}`}>
-                          <p className="truncate text-sm font-bold text-navy">{conversation.title}</p>
-                          <p className="mt-1 text-xs text-navy/40">{formatConversationDate(conversation.updatedAt)}</p>
-                        </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="px-3 py-5 text-sm leading-6 text-navy/45">Seu histórico está vazio. As conversas aparecerão aqui quando você começar a usar esse espaço.</p>
-                  )}
-                </div>
-              </div>
-            ) : null}
-          </div>
-
-          <div className="border-t border-navy/8 p-4">
-            <button type="button" onClick={handleNewConversation} disabled={Boolean(busy)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
-              <span aria-hidden="true" className="text-lg leading-none">+</span>
-              Nova conversa
-            </button>
-            <Link href="/dashboard" className="mt-3 block text-center text-xs font-bold text-navy/50 transition-colors hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">Voltar ao dashboard</Link>
-          </div>
-        </aside>
-
-        <section className="flex min-w-0 flex-1 flex-col">
-          <header className="flex items-center justify-between border-b border-navy/8 bg-white/55 px-5 py-4 sm:px-8 lg:px-10">
-            <div className="flex items-center gap-3">
-              {!conversationOpen ? (
-                <button type="button" aria-label={sidebarOpen ? "Fechar painel lateral" : "Abrir painel lateral"} title={sidebarOpen ? "Fechar painel lateral" : "Abrir painel lateral"} aria-expanded={sidebarOpen} onClick={() => setSidebarOpen((current) => !current)} className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">
-                  <PanelIcon />
-                </button>
-              ) : null}
-              {!sidebarOpen || conversationOpen ? <Logo /> : null}
-            </div>
-            {!sidebarOpen || conversationOpen ? (
-              <div className="flex items-center gap-2">
-                <Link href="/" aria-label="Sair do chat e voltar para a página inicial" title="Sair do chat" className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 lg:hidden">
-                  <ExitIcon />
-                </Link>
-                <span className="hidden max-w-[9rem] truncate text-sm font-bold text-navy sm:inline">{displayName}</span>
-                <Avatar user={user} />
-              </div>
-            ) : null}
-          </header>
-
-          <div className="flex-1 overflow-y-auto px-5 py-8 sm:px-8 lg:px-12 lg:py-12">
-            <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
-              {!sidebarOpen && !conversationOpen ? (
-                <button type="button" onClick={() => setSidebarOpen(true)} className="hidden items-center gap-2 self-start text-xs font-black uppercase tracking-[0.12em] text-purple transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 lg:inline-flex">
-                  <PanelIcon />
-                  Abrir painel
-                </button>
-              ) : null}
-
-              {!conversationOpen ? (
-                <section aria-labelledby="sentiment-heading" className="relative overflow-hidden rounded-[2rem] border border-navy/8 bg-white px-6 py-7 shadow-[0_20px_60px_rgba(26,31,61,0.07)] sm:px-10 sm:py-10">
-                <div aria-hidden="true" className="absolute -right-16 -top-20 h-48 w-48 rounded-full bg-purple/10 blur-2xl" />
-                <div className="relative">
-                  <p className="eyebrow">seu espaço pessoal</p>
-                  <h1 id="sentiment-heading" className="mt-4 max-w-2xl text-3xl font-black tracking-[-0.05em] text-balance sm:text-5xl">Como você está se sentindo hoje?</h1>
-                  <p className="mt-4 max-w-xl text-sm leading-7 text-navy/55 sm:text-base">Antes de conversar, registre o que está presente em você agora. Esse é um ponto de partida para se observar com mais calma.</p>
-
-                  <div className="mt-8 flex flex-col gap-5 border-t border-navy/8 pt-6 sm:flex-row sm:items-end sm:justify-between">
-                    <div>
-                      {currentSentiment && currentSentimentAt ? (
-                        <>
-                          <p className="text-sm font-black text-navy">Seu sentimento hoje</p>
-                          <div className="mt-3 flex flex-wrap items-center gap-3">
-                            <SentimentBadge sentiment={currentSentiment} />
-                            <p className="text-xs text-navy/45">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <p className="text-sm font-black text-navy">Ainda não registramos seu sentimento</p>
-                          <p className="mt-1 text-sm text-navy/50">Leva só alguns instantes e pode ser atualizado a qualquer momento.</p>
-                        </>
-                      )}
-                    </div>
-                    <button type="button" onClick={openSentimentModal} disabled={Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
-                      {currentSentiment ? "Editar sentimento" : "Registrar sentimento"}
+        <aside aria-label="Navegação do chat" className={`fixed inset-y-0 left-0 z-40 flex w-[min(88vw,320px)] flex-col border-r border-navy/8 bg-white shadow-xl transition-[transform,width] duration-300 ease-out motion-reduce:transition-none lg:static lg:h-screen lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0 lg:w-[300px]" : "-translate-x-full lg:translate-x-0 lg:w-[76px]"}`}>
+          {sidebarOpen ? (
+            <>
+              <div className="border-b border-navy/8 px-5 py-5 sm:px-6">
+                <div className="flex items-center justify-between gap-2">
+                  <Logo />
+                  <div className="flex items-center gap-1">
+                    <button type="button" aria-label="Fechar painel lateral" title="Fechar painel lateral" aria-expanded={sidebarOpen} onClick={() => setSidebarOpen(false)} className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                      <PanelIcon />
                     </button>
+                    <Link href="/" aria-label="Sair do chat e voltar para a página inicial" title="Sair do chat" className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">
+                      <ExitIcon />
+                    </Link>
                   </div>
                 </div>
-                </section>
-              ) : null}
 
-              {!conversationOpen ? <p className="px-1 text-xs leading-5 text-navy/45" aria-live="polite">{notice}</p> : null}
-
-              <section aria-labelledby="conversation-heading" className={`overflow-hidden rounded-[1.5rem] border border-navy/8 bg-white/75 ${conversationOpen ? "mx-auto w-full max-w-3xl shadow-[0_20px_60px_rgba(26,31,61,0.07)]" : ""}`}>
-                <button type="button" aria-expanded={conversationOpen} onClick={handleToggleConversation} className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple/50 sm:px-8">
-                  <div>
-                    <p className="eyebrow text-[0.68rem]">seu próximo passo</p>
-                    <h2 id="conversation-heading" className="mt-2 text-xl font-black tracking-[-0.03em]">Seu espaço de conversa</h2>
+                <div className="mt-8 flex items-start gap-3">
+                  <Avatar user={user} size="large" />
+                  <div className="min-w-0 pt-1">
+                    <p className="truncate text-sm font-black text-navy">{displayName}</p>
+                    <p className="mt-0.5 text-xs text-navy/50">seu espaço pessoal</p>
                   </div>
-                  <span className="flex shrink-0 items-center gap-2 text-xs font-black text-purple">
-                    {conversationOpen ? <span role="presentation" onClick={(event) => event.stopPropagation()}><span className="mr-2 inline-flex items-center gap-2" title="Abrir painel lateral"><PanelIcon /></span></span> : null}
-                    {conversationOpen ? "Fechar" : "Abrir"}
-                    <ChevronIcon open={conversationOpen} />
+                </div>
+
+                <div className="mt-5 rounded-2xl border border-purple/10 bg-purple/[0.045]">
+                  <button type="button" aria-expanded={sentimentPanelOpen} aria-controls="sidebar-sentiment-panel" onClick={() => setSentimentPanelOpen((current) => !current)} className="flex w-full items-center justify-between gap-3 rounded-2xl p-4 text-left transition-colors hover:bg-purple/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple/50 motion-reduce:transition-none">
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[0.68rem] font-black uppercase tracking-[0.14em] text-navy/40">Seu sentimento hoje</span>
+                      {currentSentiment && !sentimentPanelOpen ? <SentimentBadge sentiment={currentSentiment} className="mt-2 px-2 py-0.5 text-[0.6rem] tracking-[-0.01em]" /> : null}
+                    </span>
+                    <span className="shrink-0 self-center"><ChevronIcon open={sentimentPanelOpen} /></span>
+                  </button>
+                  {sentimentPanelOpen ? (
+                    <div id="sidebar-sentiment-panel" className="border-t border-purple/10 px-4 pb-4 pt-3">
+                      {currentSentiment && currentSentimentAt ? (
+                        <div>
+                          <SentimentBadge sentiment={currentSentiment} />
+                          <p className="mt-2 text-xs leading-5 text-navy/50">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
+                        </div>
+                      ) : (
+                        <p className="text-sm leading-5 text-navy/55">Ainda não registrado</p>
+                      )}
+                      <button type="button" onClick={openSentimentModal} disabled={Boolean(busy)} className="mt-4 inline-flex items-center gap-2 rounded-xl border border-purple/15 bg-white px-3 py-2 text-xs font-black text-purple shadow-[0_6px_18px_rgba(109,40,217,0.08)] transition-colors hover:border-purple/30 hover:bg-purple/[0.04] hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none">
+                        {currentSentiment ? <EditIcon /> : null}
+                        {currentSentiment ? "Editar sentimento" : "Registrar agora"}
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
+                <button type="button" aria-expanded={historyOpen} onClick={() => setHistoryOpen((current) => !current)} className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-colors hover:bg-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                  <span className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-navy/40">
+                    Histórico
+                    <span className="rounded-full bg-navy/5 px-2 py-0.5 text-[0.65rem]">{filteredConversations.length}</span>
                   </span>
+                  <ChevronIcon open={historyOpen} />
                 </button>
 
-                {conversationOpen ? (
-                  <div className="border-t border-navy/8">
-                    <div className="max-h-[28rem] overflow-y-auto px-6 py-6 sm:px-8">
-                      {messages.length ? (
-                        <div className="flex flex-col gap-5">
-                          {messages.map((message) => (
-                            <article key={message.id} className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                              {message.role === "assistant" ? <div aria-hidden="true" className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-xs font-black text-white">E</div> : null}
-                              <div className={`max-w-[min(42rem,88%)] rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
-                                <p className="break-words">{message.content}</p>
-                                {message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
-                              </div>
-                              {message.role === "user" ? <Avatar user={user} /> : null}
-                            </article>
+                {historyOpen ? (
+                  <div className="mt-2">
+                    <label htmlFor="conversation-search" className="sr-only">Buscar conversas</label>
+                    <div className="relative">
+                      <svg aria-hidden="true" viewBox="0 0 20 20" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy/40">
+                        <path d="m14.5 14.5 3 3m-1.5-7a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+                      </svg>
+                      <input id="conversation-search" name="conversation-search" type="search" autoComplete="off" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar conversas…" className="w-full rounded-xl border border-navy/10 bg-warm/70 py-3 pl-10 pr-3 text-sm text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20 motion-reduce:transition-none" />
+                    </div>
+
+                    <div className="mt-3">
+                      {filteredConversations.length ? (
+                        <div className="space-y-1">
+                          {filteredConversations.map((conversation, index) => (
+                            <div key={conversation.id} ref={openConversationMenuId === conversation.id ? conversationMenuRef : undefined} className="relative flex items-stretch">
+                              <button type="button" onClick={() => void handleSelectConversation(conversation.id)} className={`min-w-0 flex-1 rounded-l-xl px-3 py-3 pr-2 text-left transition-colors hover:bg-warm focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple/50 motion-reduce:transition-none ${activeConversationId === conversation.id ? "bg-warm" : ""}`}>
+                                <p className="truncate text-sm font-bold text-navy">{conversation.title}</p>
+                                <p className="mt-1 text-xs text-navy/40">{formatConversationDate(conversation.updatedAt)}</p>
+                              </button>
+                              <button type="button" aria-label={`Ações para ${conversation.title}`} aria-expanded={openConversationMenuId === conversation.id} aria-haspopup="menu" title={`Ações para ${conversation.title}`} onClick={() => setOpenConversationMenuId((current) => current === conversation.id ? null : conversation.id)} className={`grid w-11 shrink-0 place-items-center rounded-r-xl text-navy/45 transition-colors hover:bg-warm hover:text-purple focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple/50 motion-reduce:transition-none ${activeConversationId === conversation.id ? "bg-warm" : ""}`}>
+                                <MoreIcon />
+                              </button>
+                              {openConversationMenuId === conversation.id ? (
+                                <div role="menu" aria-label={`Ações para ${conversation.title}`} className={`absolute right-2 z-30 max-h-[calc(100vh-2rem)] w-52 overflow-y-auto rounded-xl border border-navy/10 bg-white p-1 shadow-[0_14px_32px_rgba(26,31,61,0.15)] ${index === 0 ? "top-full mt-1" : "bottom-full mb-1"}`}>
+                                  <button type="button" role="menuitem" onClick={() => void handleShareConversation(conversation)} className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-xs font-bold text-navy/70 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                                    <ShareIcon />
+                                    Compartilhar conversa
+                                  </button>
+                                  <button type="button" role="menuitem" onClick={() => openRenameModal(conversation)} className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-xs font-bold text-navy/70 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                                    <EditIcon />
+                                    Renomear
+                                  </button>
+                                  <button type="button" role="menuitem" onClick={() => openDeleteModal(conversation)} className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-xs font-bold text-rose-600 transition-colors hover:bg-rose-50 hover:text-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300 motion-reduce:transition-none">
+                                    <TrashIcon />
+                                    Excluir
+                                  </button>
+                                </div>
+                              ) : null}
+                            </div>
                           ))}
                         </div>
                       ) : (
-                        <div className="rounded-2xl border border-dashed border-navy/12 bg-warm/50 px-5 py-8 text-center">
-                          <p className="text-sm font-bold text-navy/65">Quando quiser, este espaço estará aqui para você.</p>
-                          <p className="mt-1 text-sm leading-6 text-navy/45">O registro do sentimento acima é o primeiro passo. A conversa pode começar depois.</p>
-                        </div>
+                        <p className="px-3 py-5 text-sm leading-6 text-navy/45">Seu histórico está vazio. As conversas aparecerão aqui quando você começar a usar esse espaço.</p>
                       )}
-                    </div>
-
-                    <div className="border-t border-navy/8 bg-white/70 px-6 py-5 sm:px-8">
-                      <form onSubmit={(event) => void handleSend(event)}>
-                        <label htmlFor="chat-message" className="sr-only">Escreva uma mensagem</label>
-                        <textarea id="chat-message" name="chat-message" value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={2000} rows={3} placeholder="Escreva como você está se sentindo…" className="w-full resize-none rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
-                        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                          <p className="text-xs text-navy/45">Mensagens ficam no seu histórico privado.</p>
-                          <button type="submit" disabled={!draft.trim() || Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">
-                            {busy === "sending" ? "Enviando…" : "Enviar mensagem"}
-                          </button>
-                        </div>
-                      </form>
                     </div>
                   </div>
                 ) : null}
-              </section>
+              </div>
+
+              <div className="border-t border-navy/8 p-4">
+                <button type="button" onClick={handleNewConversation} disabled={Boolean(busy)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none">
+                  <span aria-hidden="true" className="text-lg leading-none">+</span>
+                  Nova conversa
+                </button>
+                <Link href="/dashboard" className="mt-3 block text-center text-xs font-bold text-navy/50 transition-colors hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">Voltar ao dashboard</Link>
+              </div>
+            </>
+          ) : (
+            <div className="hidden h-full flex-col items-center px-2 py-5 lg:flex">
+              <LogoMark />
+              <div className="mt-8 flex flex-col items-center gap-2">
+                <CollapsedIconButton label="Abrir painel lateral" onClick={() => setSidebarOpen(true)}>
+                  <PanelIcon />
+                </CollapsedIconButton>
+                <CollapsedIconButton label="Abrir histórico" onClick={() => { setHistoryOpen(true); setSidebarOpen(true); }}>
+                  <HistoryIcon />
+                </CollapsedIconButton>
+                <CollapsedIconButton label="Nova conversa" onClick={handleNewConversation} disabled={Boolean(busy)}>
+                  <PlusIcon />
+                </CollapsedIconButton>
+              </div>
+              <div className="mt-auto flex flex-col items-center gap-2">
+                <Link href="/dashboard" aria-label="Voltar ao dashboard" title="Voltar ao dashboard" className="grid h-11 w-11 place-items-center rounded-2xl text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                  <DashboardIcon />
+                </Link>
+                <Link href="/" aria-label="Sair do chat e voltar para a página inicial" title="Sair do chat" className="grid h-11 w-11 place-items-center rounded-2xl text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                  <ExitIcon />
+                </Link>
+              </div>
             </div>
+          )}
+        </aside>
+
+        <section className="flex h-screen min-h-0 min-w-0 flex-1 flex-col">
+          {!sidebarOpen ? (
+            <header className="flex items-center gap-3 border-b border-navy/8 bg-white/55 px-5 py-4 lg:hidden">
+              <button type="button" aria-label="Abrir painel lateral" title="Abrir painel lateral" aria-expanded={sidebarOpen} onClick={() => setSidebarOpen(true)} className="grid h-10 w-10 place-items-center rounded-full text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                <PanelIcon />
+              </button>
+              <Logo />
+            </header>
+          ) : null}
+
+          <div className={`px-5 py-8 sm:px-8 lg:px-12 lg:py-12 ${conversationOpen ? "min-h-0 flex-1 overflow-hidden" : "flex-1 overflow-y-auto"}`}>
+            {conversationOpen ? (
+              <div className="mx-auto flex h-full min-h-0 w-full flex-col">
+                {messages.length === 0 ? (
+                  <div className="border-b border-navy/8 pb-5">
+                    <div className="min-w-0">
+                      <p className="eyebrow text-[0.68rem]">seu próximo passo</p>
+                      <h1 className="mt-2 truncate text-2xl font-black tracking-[-0.04em] text-navy sm:text-3xl">Seu espaço de conversa</h1>
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className={`flex min-h-0 flex-1 flex-col ${messages.length ? "pt-2" : "pt-6"}`}>
+                  <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-1 py-2">
+                    {messages.length ? (
+                      <div className="flex flex-col gap-5">
+                        {messages.map((message) => (
+                          <article key={message.id} className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+                            {message.role === "assistant" ? <div aria-hidden="true" className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-xs font-black text-white">E</div> : null}
+                            <div className={`max-w-[min(42rem,88%)] rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
+                              <p className="break-words">{message.content}</p>
+                              {message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
+                            </div>
+                            {message.role === "user" ? <Avatar user={user} /> : null}
+                          </article>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex h-full min-h-[9rem] items-center justify-center rounded-2xl border border-dashed border-navy/12 bg-white/60 px-4 py-5 text-center">
+                        <div>
+                          <p className="text-xs font-bold text-navy/65 sm:text-sm">Quando quiser, este espaço estará aqui para você.</p>
+                          <p className="mt-1 text-xs leading-5 text-navy/45">O registro do sentimento foi o primeiro passo. Escreva abaixo para começar.</p>
+                        </div>
+                      </div>
+                    )}
+                    <div ref={messagesEndRef} aria-hidden="true" className="h-px" />
+                  </div>
+
+                  <div className="mt-4 shrink-0 rounded-[1.5rem] border border-navy/8 bg-white/80 p-4 shadow-[0_14px_40px_rgba(26,31,61,0.06)] sm:p-5">
+                    <form onSubmit={(event) => void handleSend(event)}>
+                      <label htmlFor="chat-message" className="sr-only">Escreva uma mensagem</label>
+                      <textarea id="chat-message" name="chat-message" value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={3} placeholder="Escreva uma mensagem…" className="w-full resize-none rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
+                      <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <p className="text-xs text-navy/45" aria-live="polite">{busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
+                        <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy)} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">
+                          <SendIcon />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="mx-auto w-full max-w-4xl">
+                <section aria-labelledby={currentSentiment && currentSentimentAt ? "next-step-heading" : "sentiment-heading"} className="relative overflow-hidden rounded-[2rem] border border-navy/8 bg-white px-6 py-7 shadow-[0_20px_60px_rgba(26,31,61,0.07)] sm:px-10 sm:py-10">
+                  <div aria-hidden="true" className="absolute -right-16 -top-20 h-48 w-48 rounded-full bg-purple/10 blur-2xl" />
+                  <div className="relative">
+                    {currentSentiment && currentSentimentAt ? (
+                      <>
+                        <p className="eyebrow">seu próximo passo</p>
+                        <h1 id="next-step-heading" className="mt-4 max-w-2xl text-3xl font-black tracking-[-0.05em] text-balance sm:text-5xl">Seu próximo passo</h1>
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-navy/55 sm:text-base">Seu sentimento já foi registrado. Quando estiver pronto, podemos conversar a partir do que você percebeu hoje.</p>
+
+                        <div className="mt-8 flex flex-col gap-5 border-t border-navy/8 pt-6 sm:flex-row sm:items-end sm:justify-between">
+                          <div>
+                            <p className="text-sm font-black text-navy">Seu sentimento hoje</p>
+                            <div className="mt-3 flex flex-wrap items-center gap-3">
+                              <SentimentBadge sentiment={currentSentiment} />
+                              <p className="text-xs text-navy/45">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
+                            </div>
+                          </div>
+                          <button type="button" onClick={handleOpenConversation} disabled={Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
+                            Vamos conversar sobre isso?
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <p className="eyebrow">seu espaço pessoal</p>
+                        <h1 id="sentiment-heading" className="mt-4 max-w-2xl text-3xl font-black tracking-[-0.05em] text-balance sm:text-5xl">Como você está se sentindo hoje?</h1>
+                        <p className="mt-4 max-w-xl text-sm leading-7 text-navy/55 sm:text-base">Antes de conversar, registre o que está presente em você agora. Esse é um ponto de partida para se observar com mais calma.</p>
+
+                        <div className="mt-8 flex flex-col gap-5 border-t border-navy/8 pt-6 sm:flex-row sm:items-end sm:justify-between">
+                          <div>
+                            <p className="text-sm font-black text-navy">Ainda não registramos seu sentimento</p>
+                            <p className="mt-1 text-sm text-navy/50">Leva só alguns instantes e pode ser atualizado a qualquer momento.</p>
+                          </div>
+                          <button type="button" onClick={openSentimentModal} disabled={Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
+                            Registrar sentimento
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </section>
+                <p className="mt-4 px-1 text-xs leading-5 text-navy/45" aria-live="polite">{notice}</p>
+              </div>
+            )}
           </div>
         </section>
       </div>
+
+      {renameTarget ? (
+        <div className="fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
+          <div role="dialog" aria-modal="true" aria-labelledby="rename-conversation-title" className="w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-8">
+            <div className="flex items-start justify-between gap-5">
+              <div>
+                <p className="eyebrow">organizar conversa</p>
+                <h2 id="rename-conversation-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy">Renomear conversa</h2>
+              </div>
+              <button type="button" aria-label="Fechar renomear conversa" title="Fechar" onClick={() => { if (!busy) { setRenameTarget(null); setRenameDraft(""); } }} disabled={busy === "renaming"} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8"><path d="m7 7 10 10M17 7 7 17" /></svg>
+              </button>
+            </div>
+
+            <form onSubmit={(event) => void handleRenameConversation(event)} className="mt-7">
+              <label htmlFor="conversation-title" className="mb-2 block text-sm font-black text-navy">Nome da conversa</label>
+              <input id="conversation-title" name="conversation-title" type="text" autoComplete="off" value={renameDraft} onChange={(event) => setRenameDraft(event.target.value)} maxLength={80} required className="w-full rounded-2xl border border-navy/12 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
+              <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                <button type="button" onClick={() => { setRenameTarget(null); setRenameDraft(""); }} disabled={busy === "renaming"} className="inline-flex items-center justify-center rounded-xl border border-navy/10 px-5 py-3 text-sm font-bold text-navy/65 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Cancelar</button>
+                <button type="submit" disabled={!renameDraft.trim() || busy === "renaming"} className="inline-flex items-center justify-center rounded-xl bg-purple px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">{busy === "renaming" ? "Salvando…" : "Salvar nome"}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : null}
+
+      {deleteTarget ? (
+        <div className="fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
+          <div role="dialog" aria-modal="true" aria-labelledby="delete-conversation-title" aria-describedby="delete-conversation-description" className="w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-8">
+            <p className="eyebrow text-rose-600/70">atenção</p>
+            <h2 id="delete-conversation-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy">Excluir conversa?</h2>
+            <p id="delete-conversation-description" className="mt-4 break-words text-sm leading-7 text-navy/55">Deseja realmente excluir “{deleteTarget.title}”? Essa ação não poderá ser desfeita.</p>
+            <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <button type="button" onClick={() => setDeleteTarget(null)} disabled={busy === "deleting"} className="inline-flex items-center justify-center rounded-xl border border-navy/10 px-5 py-3 text-sm font-bold text-navy/65 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Cancelar</button>
+              <button type="button" onClick={() => void handleDeleteConversation()} disabled={busy === "deleting"} className="inline-flex items-center justify-center rounded-xl bg-rose-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300 disabled:cursor-not-allowed disabled:opacity-45">{busy === "deleting" ? "Excluindo…" : "Excluir"}</button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {sentimentModalOpen ? (
         <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">

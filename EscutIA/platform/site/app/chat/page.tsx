@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import ChatWorkspace from "@/components/ChatWorkspace";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { getChatWorkspaceData } from "./chat-data";
 
 export const dynamic = "force-dynamic";
 
@@ -14,18 +14,7 @@ export default async function ChatPage() {
     redirect("/");
   }
 
-  const [profile, conversations] = await Promise.all([
-    prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: { currentSentiment: true, currentSentimentAt: true },
-    }),
-    prisma.conversation.findMany({
-      where: { userId: session.user.id },
-      orderBy: { updatedAt: "desc" },
-      take: 50,
-      select: { id: true, title: true, updatedAt: true },
-    }),
-  ]);
+  const { profile, conversations } = await getChatWorkspaceData(session.user.id);
 
   return (
     <ChatWorkspace
