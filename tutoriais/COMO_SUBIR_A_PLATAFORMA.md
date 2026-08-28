@@ -26,6 +26,8 @@ GOOGLE_CLIENT_SECRET="seu-client-secret"
 NEXTAUTH_SECRET="um-segredo-aleatorio"
 NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="file:./dev.db"
+HF_TOKEN="seu-token-do-hugging-face"
+HF_MODEL_ID="mdba/escutia-lora"
 ```
 
 Gere um segredo com:
@@ -45,6 +47,10 @@ No Google Cloud Console:
 5. Adicione como redirecionamento autorizado:
    `http://localhost:3000/api/auth/callback/google`.
 6. Copie o Client ID e o Client Secret para `.env.local`.
+
+Para validar sentimentos no chat, crie também um token do Hugging Face com
+permissão de **Inference Providers** e preencha `HF_TOKEN`. O token é usado
+somente pela API server-side.
 
 ## 5. Criar o SQLite
 
@@ -74,4 +80,5 @@ npm run lint
 npm run build
 ```
 
-Não faça commit de `.env.local`, credenciais Google ou arquivos `prisma/*.db`.
+Não faça commit de `.env.local`, credenciais Google, token do Hugging Face ou
+arquivos `prisma/*.db`.
