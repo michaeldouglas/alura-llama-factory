@@ -17,6 +17,13 @@ EscutIA/platform/site/   # Next.js: site e API no mesmo projeto
 harness-llama-factory/   # fine-tuning e coordenação dos agentes
 ```
 
+Na plataforma, `EscutIA/platform/site/` é o único projeto da aplicação. A API
+fica nas rotas server-side do Next.js, normalmente em
+`site/app/api/**/route.ts`; não existe uma aplicação irmã obrigatória em
+`EscutIA/platform/api/`. A inferência futura será implementada somente em
+JavaScript/TypeScript, no runtime Node.js do servidor, sem usar
+`testar_modelo_lora.py`.
+
 No harness:
 
 - `dataset-specialist` cuida de análise, validação e preparação de dados;
@@ -98,6 +105,16 @@ uv run --native-tls --python 3.12 python harness-llama-factory/integrations/escu
 ```
 
 Renderizar uma proposta não inicia treinamento.
+
+### Planejar a integração com o site
+
+```text
+Quero planejar como o site consumirá o modelo treinado.
+Mantenha o trabalho separado entre harness-llama-factory e
+EscutIA/platform/site. Explique o contrato HTTP entre as rotas API do Next.js e
+o serviço de inferência em JavaScript/TypeScript, indique quais artefatos do
+harness serão consumidos e não implemente nem altere arquivos ainda.
+```
 
 ## Exemplos de prompts
 

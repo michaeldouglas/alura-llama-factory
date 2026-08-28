@@ -1,6 +1,6 @@
 # Configurações
 
-Como nosso Harness utiliza o MCP do GitHub você deverá entrar em: [personal-access-tokens/new](ttps://github.com/settings/personal-access-tokens/new) e gerar uma chave.
+Como nosso Harness utiliza o MCP do GitHub você deverá entrar em: [personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) e gerar uma chave.
 
 ## 2. Preencha os dados
 

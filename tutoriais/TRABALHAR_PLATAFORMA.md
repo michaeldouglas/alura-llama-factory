@@ -63,7 +63,8 @@ banco de dados ou integração de serviço.
 ```text
 Trabalhe somente em EscutIA/platform/site.
 Analise a página inicial e melhore a responsividade para telas pequenas.
-Não altere o harness nem crie uma aplicação separada em EscutIA/platform/api.
+Não altere o harness; mantenha a API dentro das rotas server-side do projeto
+Next.js em `site/app/api/`.
 Antes de editar, explique quais arquivos pretende modificar e depois valide o
 build do site.
 ```
