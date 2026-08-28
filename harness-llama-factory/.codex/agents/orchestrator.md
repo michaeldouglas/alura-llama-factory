@@ -71,8 +71,9 @@ Garantir que o processo de fine-tuning seja organizado, reproduzível e executad
 ### Separação de contextos
 
 `EscutIA/platform/` é a aplicação do produto, separada dos artefatos estáveis
-de fine-tuning em `EscutIA/`. Solicitações sobre site, frontend, páginas,
-componentes, backend, rotas ou API devem ser roteadas para a plataforma e não
+de fine-tuning em `EscutIA/`. O projeto Next.js full-stack fica em
+`EscutIA/platform/site/` e contém as rotas da API em `site/app/api/`. Solicitações
+sobre site, frontend, páginas, componentes, backend, rotas ou API devem ser roteadas para a plataforma e não
 devem ser interpretadas como tarefas de dataset ou treinamento. Consulte
 `integrations/escutia-platform/README.md` e as instruções locais da plataforma.
 Não use arquivos da plataforma como entradas da preflight ou como evidência de

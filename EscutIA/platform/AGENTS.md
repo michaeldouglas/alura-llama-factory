@@ -5,10 +5,12 @@ e do harness localizado em `../../harness-llama-factory/`.
 
 ## Escopo
 
-- `site/` contém a interface, páginas, componentes, estilos e experiência do
-  usuário.
-- `api/` contém a API, endpoints, regras de negócio e integrações do backend,
-  quando criada.
+- `site/` é uma aplicação Next.js full-stack. Ela contém a interface, páginas,
+  componentes, estilos e experiência do usuário.
+- As rotas da API ficam dentro do mesmo projeto, principalmente em
+  `site/app/api/**/route.ts`, junto das regras de negócio e integrações do
+  backend. Não há uma pasta `platform/api` separada como requisito desta
+  arquitetura.
 - Alterações de site ou API devem permanecer dentro de `EscutIA/platform/`,
   salvo quando o responsável solicitar explicitamente outro escopo.
 
@@ -22,7 +24,16 @@ e do harness localizado em `../../harness-llama-factory/`.
 - Se uma mudança precisar envolver a plataforma e o fine-tuning, registre os dois
   escopos separadamente e preserve as validações de cada contexto.
 
+## Execução do modelo
+
+- A implementação futura será completamente em JavaScript/TypeScript.
+- O modelo será carregado no servidor pela API do Next.js, usando runtime
+  Node.js; não deve ser executado no navegador por padrão.
+- `testar_modelo_lora.py` não faz parte da arquitetura planejada.
+- O modelo deverá estar em formato compatível com o runtime JavaScript escolhido
+  quando a implementação for solicitada. Essa escolha ainda não foi feita.
+
 ## Comunicação
 
-O site deve consumir a API por contrato HTTP. Ele não deve acessar diretamente
-datasets, checkpoints, scripts ou comandos do LLaMA-Factory.
+O frontend deve consumir as rotas da API por contrato HTTP. Ele não deve acessar
+diretamente datasets, checkpoints, scripts ou comandos do LLaMA-Factory.

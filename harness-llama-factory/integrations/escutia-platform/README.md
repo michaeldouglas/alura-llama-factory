@@ -7,14 +7,23 @@ autoriza alterações no projeto externo.
 ## Localização
 
 - Raiz da plataforma: `../EscutIA/platform/`
-- Site: `../EscutIA/platform/site/`
-- API: `../EscutIA/platform/api/` quando criada
+- Aplicação Next.js full-stack: `../EscutIA/platform/site/`
+- Rotas da API: `../EscutIA/platform/site/app/api/`
 - Harness: `../../harness-llama-factory/`
 
 ## Regras de contexto
 
 - Site, páginas, componentes, CSS, layout, frontend, rotas, chamadas HTTP,
   backend, endpoints e API pertencem ao contexto da plataforma.
+- Site e API fazem parte do mesmo projeto Next.js em `platform/site`; a API não
+  deve ser tratada como uma aplicação irmã em `platform/api`.
+- A API deve ser implementada com Route Handlers ou outro mecanismo server-side
+  do Next.js, mantendo o frontend e o backend no mesmo projeto.
+- A inferência deve ser completamente JavaScript/TypeScript, executada no
+  runtime Node.js do servidor. O arquivo `testar_modelo_lora.py` não será usado.
+- O modelo deve permanecer no servidor e ser acessado pelo site através das
+  rotas da API. A escolha do runtime e do formato compatível do modelo fica para
+  a etapa de implementação.
 - Dataset, modelo, LoRA, QLoRA, hiperparâmetros, avaliação, jobs de treinamento
   e LLaMA-Factory pertencem ao contexto do harness.
 - A integração `integrations/escutia/` continua limitada aos artefatos estáveis
@@ -30,6 +39,7 @@ autoriza alterações no projeto externo.
 
 ## Contrato entre site e API
 
-Quando o site precisar de funcionalidades do produto, ele deve consumi-las pela
-API. A API é a fronteira entre a interface e serviços de backend; o site não deve
-acessar diretamente scripts, datasets, checkpoints ou comandos do LLaMA-Factory.
+Quando o frontend precisar de funcionalidades do produto, ele deve consumi-las
+pelas rotas da API dentro do mesmo projeto Next.js. A API é a fronteira entre a
+interface e os serviços de backend; o site não deve acessar diretamente scripts,
+datasets, checkpoints ou comandos do LLaMA-Factory.

@@ -7,11 +7,12 @@ uma solicitação explícita de evolução do responsável.
 
 ## Fronteira com a plataforma
 
-`EscutIA/platform/` é uma aplicação separada dentro do repositório, com o site
-em `EscutIA/platform/site/` e a API em `EscutIA/platform/api/` quando criada.
-Ela não faz parte desta integração de dataset e fine-tuning. Os arquivos da
-plataforma não são artefatos de treinamento, não são incluídos na preflight e
-não devem ser executados ou alterados por esta integração.
+`EscutIA/platform/` é uma aplicação separada dentro do repositório. O projeto
+Next.js full-stack fica em `EscutIA/platform/site/` e contém o frontend e a API
+por meio das rotas server-side do próprio Next.js. Ela não faz parte desta
+integração de dataset e fine-tuning. Os arquivos da plataforma não são artefatos
+de treinamento, não são incluídos na preflight e não devem ser executados ou
+alterados por esta integração.
 
 Para o mapa de contexto do harness e as regras específicas da aplicação, consulte
 `integrations/escutia-platform/README.md` e `EscutIA/platform/AGENTS.md`.

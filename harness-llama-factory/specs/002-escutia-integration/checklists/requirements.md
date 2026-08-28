@@ -28,4 +28,6 @@
 - [X] O fluxo não autoriza treinamento implicitamente
 - [X] A proteção do projeto EscutIA está explícita
 - [X] A fronteira entre `EscutIA/` e `EscutIA/platform/` está explícita
+- [X] A arquitetura Next.js full-stack, com API no mesmo projeto e runtime Node.js, está explícita
+- [X] A implementação futura não depende de `testar_modelo_lora.py`
 - [X] O modo estável read-only e o protocolo de evolução explicitamente solicitada estão distinguidos

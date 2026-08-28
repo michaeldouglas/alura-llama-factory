@@ -34,8 +34,9 @@ necessário e executando as validações antes e depois da alteração.
 
 - `EscutIA/` é o projeto estável usado pela integração de fine-tuning: datasets,
   relatórios, manifestos e configurações relacionadas ao treinamento.
-- `EscutIA/platform/` é um contexto de aplicação separado. O site fica em
-  `EscutIA/platform/site/` e a API fica em `EscutIA/platform/api/` quando criada.
+- `EscutIA/platform/` é um contexto de aplicação separado. O projeto Next.js
+  full-stack fica em `EscutIA/platform/site/` e contém tanto a interface quanto
+  a API por meio das rotas do próprio Next.js.
 - Solicitações sobre páginas, componentes, estilos, rotas, frontend, backend,
   endpoints ou API devem ser tratadas como trabalho da plataforma; não são
   tarefas de dataset ou treinamento por inferência.
@@ -45,6 +46,12 @@ necessário e executando as validações antes e depois da alteração.
 - Arquivos de `EscutIA/platform/` não devem ser considerados artefatos de
   treinamento, nem ser lidos, executados ou alterados durante uma tarefa de
   fine-tuning sem que a solicitação inclua explicitamente a plataforma.
+- A API da plataforma não deve ser modelada como uma pasta irmã obrigatória:
+  para este projeto, ela pertence ao mesmo projeto Next.js do site, com rotas
+  server-side como `EscutIA/platform/site/app/api/**/route.ts`.
+- A inferência do modelo da plataforma será feita em JavaScript/TypeScript no
+  runtime Node.js do servidor. `testar_modelo_lora.py` não faz parte desse
+  fluxo; nenhuma implementação do modelo deve ser criada nesta etapa.
 - Quando uma solicitação envolver os dois contextos, o orchestrator deve separar
   o escopo, indicar os caminhos afetados e manter as validações de cada parte
   independentes.

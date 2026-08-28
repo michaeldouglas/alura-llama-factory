@@ -42,10 +42,12 @@
 - [X] T020 [US4] Criar `EscutIA/platform/AGENTS.md` com as instruções locais da aplicação e seus limites com o harness.
 - [X] T021 [US4] Criar `integrations/escutia-platform/README.md` e atualizar a documentação de `integrations/escutia/` para manter plataforma e fine-tuning independentes.
 - [X] T022 [US4] Alinhar os arquivos Markdown e TOML dos agentes ao novo limite de contexto e registrar a mudança na especificação e no plano.
+- [X] T023 [US4] Registrar que `EscutIA/platform/site/` é um projeto Next.js full-stack com frontend e API no mesmo projeto, sem criar `platform/api/` separado.
+- [X] T024 [US4] Registrar o contrato futuro de inferência em JavaScript/TypeScript no runtime Node.js e a exclusão de `testar_modelo_lora.py`, sem implementar o modelo.
 
 ## Dependencies & Execution Order
 
-`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T017 → T019–T022`
+`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T017 → T019–T024`
 
 T002, T004, T006 e T011 são paralelizáveis quando não alteram os mesmos arquivos. T007 depende de T005; T009 depende do perfil e da preflight.
 
