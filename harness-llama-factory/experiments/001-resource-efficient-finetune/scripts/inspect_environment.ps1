@@ -46,6 +46,9 @@ $activePowerPlan = Invoke-ObservedCommand -Command 'powercfg.exe' -Arguments @('
 $pythonVersion = Invoke-ObservedCommand -Command 'python.exe' -Arguments @('--version')
 $pythonArchitecture = Invoke-ObservedCommand -Command 'python.exe' -Arguments @('-c', 'import platform,struct; print(platform.machine()+";"+str(struct.calcsize("P")*8))')
 $uvVersion = Invoke-ObservedCommand -Command 'uv.exe' -Arguments @('--version')
+$repositoryRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)))
+$repositoryPythonVersionFile = Join-Path $repositoryRoot '.python-version'
+$repositoryVersionRequest = if (Test-Path -LiteralPath $repositoryPythonVersionFile) { (Get-Content -Raw -LiteralPath $repositoryPythonVersionFile).Trim() } else { $null }
 
 $profile = [ordered]@{
     profile_id = 'environment-g1-2026-08-21'
@@ -86,7 +89,7 @@ $profile = [ordered]@{
     python = [ordered]@{
         observed_version = $pythonVersion
         observed_architecture = $pythonArchitecture
-        repository_version_request = if (Test-Path -LiteralPath '.python-version') { (Get-Content -Raw -LiteralPath '.python-version').Trim() } else { $null }
+        repository_version_request = $repositoryVersionRequest
     }
     uv = [ordered]@{ observed_version = $uvVersion }
     constraints = [ordered]@{

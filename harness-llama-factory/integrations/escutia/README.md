@@ -13,11 +13,15 @@ a coerência da configuração LoRA existente.
 
 ## Verificar a integração
 
-Na raiz de `harness-llama-factory/`:
+Na raiz do repositório (`alura-llama-factory/`):
 
 ```powershell
-uv run --python 3.12 python integrations/escutia/scripts/validate_escutia_integration.py
+uv run --native-tls --python 3.12 python harness-llama-factory/integrations/escutia/scripts/validate_escutia_integration.py
 ```
+
+O `pyproject.toml` e o `uv.lock` da raiz são a única configuração do ambiente
+Python. Por isso, os comandos devem ser executados a partir da raiz do
+repositório, que também é onde fica o `.venv` compartilhado.
 
 O comando é read-only. Ele retorna `READY` quando os artefatos externos estão
 presentes e coerentes; qualquer divergência retorna `BLOCKED` e código de saída
@@ -28,7 +32,7 @@ presentes e coerentes; qualquer divergência retorna `BLOCKED` e código de saí
 O comando abaixo imprime uma configuração resolvida sem criar arquivo:
 
 ```powershell
-uv run --python 3.12 python integrations/escutia/scripts/render_escutia_config.py
+uv run --native-tls --python 3.12 python harness-llama-factory/integrations/escutia/scripts/render_escutia_config.py
 ```
 
 Para persistir uma cópia, informe explicitamente um caminho abaixo de

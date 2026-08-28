@@ -18,6 +18,12 @@ Rules:
 
 Este projeto utiliza um harness especializado em fine-tuning de modelos com LLaMA-Factory.
 
+O ambiente Python é único e pertence à raiz do repositório:
+`C:\Users\mdbaa\development\alura\alura-llama-factory\pyproject.toml` e
+`uv.lock`. O harness não possui `pyproject.toml` nem `uv.lock` próprios; os
+comandos `uv` executados a partir desta pasta devem descobrir a configuração da
+raiz.
+
 ## Fluxo
 
 O fluxo principal do projeto é:
