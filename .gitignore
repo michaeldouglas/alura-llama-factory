@@ -21,6 +21,9 @@ htmlcov/
 .hypothesis/
 .cache/
 
+# Cache local do serviço FastAPI de inferência
+EscutIA/platform/api-modelos/modelo/
+
 # Checkpoints automáticos dos notebooks
 .ipynb_checkpoints/
 
