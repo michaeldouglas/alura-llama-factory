@@ -52,6 +52,14 @@
     "repository_writes": false,
     "escutia_writes": false,
     "overwrite": false,
-    "training_requires_explicit_authorization": true
+    "training_requires_explicit_authorization": true,
+    "evolution_policy": {
+      "default_mode": "read_only_stable",
+      "explicit_request_required": true,
+      "scope_required": true,
+      "preserve_previous_revision": true,
+      "dataset_promotion_requires_explicit_authorization": true,
+      "post_change_validation_required": true
+    }
   }
 }

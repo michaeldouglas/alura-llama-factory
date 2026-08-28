@@ -1,9 +1,15 @@
 # Integração do harness com o EscutIA
 
 Esta integração faz o harness consumir os artefatos já preparados no projeto
-`EscutIA/`. O projeto EscutIA é somente leitura nesta integração: o harness não
-executa seus scripts de preparação, não edita seus arquivos e não grava saídas
-em `EscutIA/`.
+`EscutIA/`. O modo padrão protege a versão estável atual: o harness não executa
+scripts de preparação, não edita arquivos e não grava saídas em `EscutIA/` sem
+uma solicitação explícita de evolução do responsável.
+
+Uma evolução futura é permitida quando o responsável pedir explicitamente a
+alteração e o escopo estiver claro. Nesse caso, o orchestrator deve consultar o
+Spec Kit, preservar a versão anterior, registrar a mudança e executar validações
+antes e depois. Datasets devem ser derivados e revisados antes de qualquer
+promoção autorizada para `EscutIA/`; a fonte não deve ser sobrescrita em silêncio.
 
 O perfil versionado em `escutia-integration.json` fixa o dataset JSON de
 sentimento, o modelo Qwen2.5-0.5B-Instruct, a revisão do modelo e a estratégia

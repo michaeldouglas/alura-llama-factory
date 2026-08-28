@@ -12,7 +12,8 @@ Adicionar uma integração isolada no harness que consuma o dataset preparado e 
 **Testing**: `uv run --python 3.12 pytest integrations/escutia/tests`  
 **Target**: projeto irmão `../EscutIA`, validado por nome e existência  
 **Agent contract**: os arquivos `.codex/agents/*.md` e `.codex/agents/*.toml` devem expressar o mesmo contrato de integração e delegação
-**Constraints**: nenhuma escrita no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa; uma única política de ignorados no `.gitignore` da raiz
+**Write mode**: o padrão protege a versão estável do EscutIA em modo read-only; uma evolução explicitamente solicitada pode escrever somente no escopo aprovado, preservando a versão anterior e validando o resultado
+**Constraints**: nenhuma escrita automática no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa; uma única política de ignorados no `.gitignore` da raiz
 
 ## Constitution Check
 
@@ -64,7 +65,10 @@ validate_escutia_integration.py
 render_escutia_config.py → external LOCALAPPDATA proposal/output paths
 ```
 
-The preflight never writes a report to the target. It emits evidence to stdout; an explicit config output may be written only below the approved external root and only when the destination does not exist.
+The preflight never writes a report to the target. It emits evidence to stdout;
+the current renderer writes only below the approved external root. Future
+project evolution is an explicit, scoped mode and must preserve the prior
+revision and run post-change validation.
 
 ## Complexity Tracking
 

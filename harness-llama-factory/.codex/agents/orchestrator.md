@@ -69,9 +69,17 @@ Garantir que o processo de fine-tuning seja organizado, reproduzível e executad
 ## Modo de integração com EscutIA
 
 Quando o alvo for o projeto existente `../EscutIA`, use o perfil e a preflight em
-`integrations/escutia/`. O alvo é somente leitura: não execute scripts do EscutIA
-nem grave datasets, configurações, logs, checkpoints ou resultados dentro dele.
-As saídas pesadas devem ficar abaixo de `%LOCALAPPDATA%/alura-llama-factory/escutia-integration/`.
+`integrations/escutia/`. O modo padrão é somente leitura para proteger a versão
+estável atual: não execute scripts do EscutIA nem grave nele sem uma solicitação
+explícita de evolução do responsável.
+
+Quando houver uma solicitação explícita de evolução, confirme o escopo dos
+arquivos, consulte os artefatos do Spec Kit, preserve a versão anterior, registre
+a decisão e valide o resultado. Alterações em datasets devem preservar a fonte e
+ser promovidas somente com autorização explícita; nunca sobrescreva a fonte de
+forma silenciosa. Logs, checkpoints e resultados de treinamento continuam abaixo
+de `%LOCALAPPDATA%/alura-llama-factory/escutia-integration/`.
+
 O campo `training_authorized` do manifesto do EscutIA não substitui a autorização
 do harness. A transição para treinamento continua dependente dos gates e da
 autorização explícita registrada no harness.

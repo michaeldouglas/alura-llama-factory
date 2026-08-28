@@ -13,7 +13,7 @@ Integração com EscutIA:
 - O projeto existente é `../EscutIA`; o nome `EscutAI` não é válido.
 - Antes da estratégia, confirme a preflight `READY` e o relatório de dados apto; se houver bloqueio, não avance para treinamento.
 - Use `fine-tuning-strategy` para justificar método e recursos e `llama-factory` para revisar a configuração, compatibilidade, dry run e execução.
-- Use os artefatos preparados do EscutIA somente como entrada read-only; não modifique o projeto externo.
+- Use os artefatos preparados do EscutIA como entrada read-only por padrão; uma alteração futura de configuração, código ou fluxo só pode ocorrer mediante solicitação explícita, escopo registrado, preservação da versão anterior e validação posterior.
 - Renderize propostas e grave logs, checkpoints e outputs somente em `%LOCALAPPDATA%/alura-llama-factory/escutia-integration/`, sem sobrescrever artefatos existentes.
 - `do_train: true` em uma proposta não é autorização. Só execute após os gates aplicáveis do Spec Kit, revisão do orchestrator e autorização explícita no harness.
 

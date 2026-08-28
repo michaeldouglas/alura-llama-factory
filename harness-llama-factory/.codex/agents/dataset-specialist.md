@@ -51,6 +51,9 @@ Entregar um dataset validado e preparado para ser utilizado no processo de fine-
 ## Modo de integração com EscutIA
 
 Na integração `integrations/escutia/`, leia os arquivos preparados e os relatórios
-existentes do EscutIA para confirmar schema, rótulos, isolamento e prontidão. Não
-execute a preparação nem altere qualquer arquivo em `EscutIA/`; qualquer derivação
-futura deve ser criada separadamente sob o armazenamento externo aprovado.
+existentes do EscutIA para confirmar schema, rótulos, isolamento e prontidão. No
+modo padrão, não execute a preparação nem altere qualquer arquivo em `EscutIA/`.
+Se o responsável solicitar explicitamente uma evolução dos dados, trabalhe
+primeiro em um derivado separado, documente linhagem e transformações e só
+promova o resultado para `EscutIA/` após autorização explícita para essa
+promoção, preservação da versão anterior e validação pós-alteração.

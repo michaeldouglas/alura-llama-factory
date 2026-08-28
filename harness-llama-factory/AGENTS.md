@@ -24,6 +24,12 @@ O ambiente Python é único e pertence à raiz do repositório:
 comandos `uv` executados a partir desta pasta devem descobrir a configuração da
 raiz.
 
+O `EscutIA` representa a versão estável atual. O modo padrão do harness é
+somente leitura, mas isso não congela o projeto: quando o responsável solicitar
+explicitamente uma evolução, o orchestrator pode coordenar alterações no escopo
+pedido, preservando a versão anterior, registrando a mudança no Spec Kit quando
+necessário e executando as validações antes e depois da alteração.
+
 ## Fluxo
 
 O fluxo principal do projeto é:

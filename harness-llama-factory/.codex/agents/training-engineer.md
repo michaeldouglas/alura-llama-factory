@@ -59,3 +59,8 @@ resolvida do LLaMA-Factory depois que a preflight passar. A proposta usa os dado
 existentes do EscutIA, mas direciona cache, logs e saída para o armazenamento
 externo do harness. Renderizar a configuração não autoriza treinamento; valide
 hardware, recursos e gates antes de qualquer execução.
+
+O modo padrão mantém a configuração estável do EscutIA sem escrita. Se o
+responsável solicitar explicitamente uma evolução de configuração, código ou
+fluxo, confirme o escopo, registre a mudança no Spec Kit quando aplicável,
+preserve a versão anterior e execute os testes e a preflight após a alteração.

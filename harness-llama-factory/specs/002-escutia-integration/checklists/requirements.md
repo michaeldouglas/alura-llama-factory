@@ -27,3 +27,4 @@
 - [X] As histórias cobrem descoberta, dados e proposta
 - [X] O fluxo não autoriza treinamento implicitamente
 - [X] A proteção do projeto EscutIA está explícita
+- [X] O modo estável read-only e o protocolo de evolução explicitamente solicitada estão distinguidos

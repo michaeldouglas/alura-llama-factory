@@ -34,6 +34,7 @@
 - [X] T015 Consolidar regras do `.gitignore` na raiz, remover os `.gitignore` redundantes de `harness-llama-factory/`, `harness-llama-factory/.specify/` e `EscutIA/fine_tuning_qlora/`, e validar o `graphify-out` local com `git check-ignore`.
 - [X] T016 Alinhar os arquivos TOML carregados dos três agentes ao contrato read-only do EscutIA, às skills aplicáveis e à exigência de gates e autorização explícita.
 - [X] T017 Completar os testes de segurança do renderizador para destinos internos e recusa de sobrescrita.
+- [X] T018 Registrar o modo estável read-only e o protocolo de evolução explicitamente autorizada para futuras alterações no EscutIA.
 
 ## Dependencies & Execution Order
 

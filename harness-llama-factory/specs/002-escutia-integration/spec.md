@@ -32,13 +32,14 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - O caminho de saída solicitado está no repositório ou dentro de `EscutIA`.
 - O caminho de saída externo já existe.
 - O manifesto do EscutIA declara autorização, mas não existe autorização correspondente no harness.
+- O responsável solicita uma evolução do projeto estável sem definir o escopo, a preservação da versão anterior ou a validação pós-alteração.
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
 - **FR-001**: O harness MUST resolver por padrão `../EscutIA` e MUST bloquear qualquer raiz cujo nome seja `EscutAI` ou diferente de `EscutIA`.
-- **FR-002**: A integração MUST manter `EscutIA` como alvo somente leitura e MUST NOT executar seus scripts de preparação ou escrever dentro dele.
+- **FR-002**: A integração MUST manter `EscutIA` em modo somente leitura por padrão, para proteger a versão estável atual, e MUST NOT executar seus scripts de preparação ou escrever dentro dele sem uma solicitação explícita de evolução do responsável.
 - **FR-003**: A preflight MUST validar os arquivos JSON de treino, validação e avaliação, os seis campos/formatos declarados e os rótulos `negativo`, `neutro` e `positivo` dentro do JSON de saída.
 - **FR-004**: A preflight MUST exigir `DATA_READY_FOR_SFT`, checks PASS, isolamento entre splits e avaliação congelada com hash correspondente.
 - **FR-005**: A preflight MUST conferir os hashes das fontes contra o manifesto existente e a coerência da configuração LoRA com o perfil do harness.
@@ -48,6 +49,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **FR-009**: O harness MUST recusar sobrescrita de uma configuração renderizada existente e MUST recusar qualquer saída dentro do repositório ou do EscutIA.
 - **FR-010**: O repositório MUST manter uma única política de ignorados de projeto no `.gitignore` da raiz; não deve existir outro `.gitignore` versionado dentro de `harness-llama-factory` ou `EscutIA`.
 - **FR-011**: As configurações operacionais do `orchestrator`, `dataset-specialist` e `training-engineer` MUST declarar o projeto `EscutIA`, a política read-only, a ordem do Spec Kit, a delegação das skills aplicáveis e a exigência de autorização explícita; a documentação e os arquivos TOML carregados pelos agentes MUST permanecer coerentes.
+- **FR-012**: Uma evolução explicitamente solicitada MUST ter escopo identificado, preservar a versão anterior, registrar mudanças no Spec Kit quando requisitos forem afetados, manter linhagem de datasets e executar validação pós-alteração; promoção de um derivado para a fonte exige autorização explícita e não pode ocorrer por inferência de um manifesto externo.
 
 ### Key Entities
 
@@ -67,6 +69,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **SC-005**: Outra pessoa consegue reproduzir a preflight e identificar o modelo, revisão, splits, template, método, seed e política de saída apenas pelos artefatos versionados do harness.
 - **SC-006**: O repositório possui exatamente um `.gitignore` de projeto versionado, localizado na raiz, e o `graphify-out` localizado no harness permanece ignorado.
 - **SC-007**: Uma auditoria dos três arquivos TOML dos agentes encontra o contrato de integração do `EscutIA`, as skills responsáveis e a regra de não iniciar treinamento sem gates e autorização explícita, sem exigir alterações no projeto externo.
+- **SC-008**: Sem solicitação explícita, nenhuma escrita é feita em `EscutIA`; com uma solicitação de evolução claramente delimitada, o harness identifica o escopo, preserva a versão anterior e exige validação antes de concluir a alteração.
 
 ## Assumptions
 

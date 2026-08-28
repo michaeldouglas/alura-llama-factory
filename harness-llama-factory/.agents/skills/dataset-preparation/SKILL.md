@@ -64,6 +64,15 @@ Verifique quando aplicável:
 - Não invente conteúdo para completar dados ausentes.
 - Registre transformações realizadas.
 
+## Evolução explicitamente autorizada
+
+Quando o dataset pertencer a um projeto estável externo, como `EscutIA/`,
+"não altere o dataset original diretamente" significa que a análise e a
+preparação devem ocorrer em um derivado separado. Se o responsável solicitar
+explicitamente a evolução do projeto, preserve a versão anterior, registre o
+escopo e a linhagem e só promova o derivado para a fonte após autorização
+explícita para essa promoção e validação pós-alteração.
+
 ## Resultado esperado
 
 Ao finalizar, informe:
