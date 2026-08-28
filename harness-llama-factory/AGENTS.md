@@ -58,6 +58,20 @@ necessário e executando as validações antes e depois da alteração.
 - As instruções locais de `EscutIA/platform/AGENTS.md` complementam estas regras
   quando o trabalho estiver dentro da plataforma.
 
+## Skills exclusivas da plataforma
+
+- `frontend-design` e `vercel-react-best-practices` são skills exclusivas de
+  `EscutIA/platform/` e não devem ser aplicadas a tarefas de fine-tuning,
+  datasets, modelos ou LLaMA-Factory.
+- Quando uma solicitação envolver o site, páginas, componentes, estilos ou
+  experiência de usuário React/Next.js, o orchestrator deve usar as duas
+  skills. A ordem é `frontend-design` para definir e preservar a direção visual
+  e `vercel-react-best-practices` para revisar a implementação React/Next.js,
+  performance, carregamento e divisão entre servidor e cliente.
+- Alterações exclusivamente documentais ou de configuração da plataforma podem
+  usar apenas a orientação necessária; qualquer criação, revisão ou refatoração
+  de UI deve passar pelas duas skills.
+
 ## Fluxo
 
 O fluxo principal do projeto é:

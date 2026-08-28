@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -46,10 +47,11 @@ export default async function DashboardPage() {
           <div className="rounded-[32px] bg-gradient-brand p-8 text-white shadow-2xl shadow-pink/20 sm:p-10">
             <div className="flex items-center gap-5">
               {session.user.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={session.user.image}
                   alt={`Foto de ${displayName}`}
+                  width={80}
+                  height={80}
                   className="h-20 w-20 rounded-full border-4 border-white/50 object-cover"
                 />
               ) : (

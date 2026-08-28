@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type AuthModalProps = {
@@ -11,16 +11,55 @@ type AuthModalProps = {
 export default function AuthModal({ className }: AuthModalProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
 
+    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    const focusableSelector =
+      '#login-modal-dialog button:not([disabled]), #login-modal-dialog [href], #login-modal-dialog input:not([disabled]), #login-modal-dialog select:not([disabled]), #login-modal-dialog textarea:not([disabled]), #login-modal-dialog [tabindex]:not([tabindex="-1"])';
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusableElements = Array.from(document.querySelectorAll<HTMLElement>(focusableSelector));
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!document.querySelector("#login-modal-dialog")?.contains(document.activeElement)) {
+        event.preventDefault();
+        firstElement.focus();
+      } else if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     };
 
+    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    const focusTimer = window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocusedRef.current?.focus();
+      previouslyFocusedRef.current = null;
+    };
   }, [open]);
 
   const handleGoogleSignIn = async () => {
@@ -31,7 +70,7 @@ export default function AuthModal({ className }: AuthModalProps) {
 
   return (
     <>
-      <button type="button" className={className} onClick={() => setOpen(true)}>
+      <button ref={triggerRef} type="button" className={className} onClick={() => setOpen(true)}>
         Entrar
       </button>
 
@@ -45,7 +84,9 @@ export default function AuthModal({ className }: AuthModalProps) {
             }}
           >
             <section
+              id="login-modal-dialog"
               aria-labelledby="login-modal-title"
+              aria-describedby="login-modal-description"
               aria-modal="true"
               className="w-full max-w-md rounded-[30px] bg-warm p-7 text-navy shadow-2xl sm:p-9"
               role="dialog"
@@ -58,6 +99,7 @@ export default function AuthModal({ className }: AuthModalProps) {
                   </h2>
                 </div>
                 <button
+                  ref={closeButtonRef}
                   type="button"
                   aria-label="Fechar janela de login"
                   onClick={() => setOpen(false)}
@@ -67,7 +109,7 @@ export default function AuthModal({ className }: AuthModalProps) {
                 </button>
               </div>
 
-              <p className="mt-4 leading-7 text-navy/65">
+              <p id="login-modal-description" className="mt-4 leading-7 text-navy/65">
                 Use sua conta Google para acessar seu espaço pessoal.
               </p>
 

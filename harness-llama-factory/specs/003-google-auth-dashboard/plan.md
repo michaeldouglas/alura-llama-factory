@@ -10,7 +10,7 @@ integração Stripe.
 ## Technical Context
 
 **Language/Version**: TypeScript, Next.js 14 App Router, Node.js runtime  
-**Dependencies**: `next-auth` 4.x, `@next-auth/prisma-adapter`, Prisma 7.x, `@prisma/client` 7.x  
+**Dependencies**: `next-auth` 4.x, `@next-auth/prisma-adapter`, Prisma 6.19.x, `@prisma/client` 6.19.x
 **Storage**: SQLite local em `prisma/dev.db`, ignorado pelo Git  
 **Authentication**: Google OAuth com sessão persistida pelo adaptador Prisma  
 **Environment**: `.env.local` em desenvolvimento; somente placeholders em `.env.example`  

@@ -37,3 +37,19 @@ e do harness localizado em `../../harness-llama-factory/`.
 
 O frontend deve consumir as rotas da API por contrato HTTP. Ele não deve acessar
 diretamente datasets, checkpoints, scripts ou comandos do LLaMA-Factory.
+
+## Skills obrigatórias do site
+
+As skills abaixo pertencem exclusivamente ao site e devem ser usadas nas
+solicitações de UI e código React/Next.js dentro de `site/`:
+
+- `frontend-design`: usar antes de criar ou alterar páginas, componentes,
+  layouts, estilos e demais elementos visuais. A direção visual existente deve
+  ser preservada ou evoluída conscientemente.
+- `vercel-react-best-practices`: usar ao implementar, revisar ou refatorar
+  componentes, páginas, rotas e carregamento de dados React/Next.js, verificando
+  performance, waterfalls, bundle, renderização e limites server/client.
+
+Para mudanças de interface, a ordem recomendada é usar primeiro
+`frontend-design` e depois `vercel-react-best-practices`. Essas skills não se
+aplicam ao harness de fine-tuning nem aos artefatos de treinamento.
