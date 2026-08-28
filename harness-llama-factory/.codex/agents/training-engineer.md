@@ -54,6 +54,15 @@ Entregar uma configuração de fine-tuning adequada ao modelo, dataset e hardwar
 
 ## Modo de integração com EscutIA
 
+### Separação de contextos
+
+`EscutIA/platform/` é a aplicação do produto e permanece fora do fluxo de
+fine-tuning. Não use o site ou a API como dataset, configuração, saída ou
+evidência de treinamento. Solicitações sobre frontend, backend, rotas ou
+endpoints pertencem à plataforma; consulte `integrations/escutia-platform/README.md`
+e não as trate como configuração do LLaMA-Factory. Se o escopo envolver ambos,
+separe as alterações e as validações.
+
 Use `integrations/escutia/scripts/render_escutia_config.py` para gerar a proposta
 resolvida do LLaMA-Factory depois que a preflight passar. A proposta usa os dados
 existentes do EscutIA, mas direciona cache, logs e saída para o armazenamento

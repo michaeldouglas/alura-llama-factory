@@ -36,9 +36,16 @@
 - [X] T017 Completar os testes de segurança do renderizador para destinos internos e recusa de sobrescrita.
 - [X] T018 Registrar o modo estável read-only e o protocolo de evolução explicitamente autorizada para futuras alterações no EscutIA.
 
+## Phase 7: Context Boundary — Plataforma EscutIA
+
+- [X] T019 [US4] Registrar no `AGENTS.md` do harness que `EscutIA/platform/` é o contexto separado do site e da API, com regras de roteamento e não mistura.
+- [X] T020 [US4] Criar `EscutIA/platform/AGENTS.md` com as instruções locais da aplicação e seus limites com o harness.
+- [X] T021 [US4] Criar `integrations/escutia-platform/README.md` e atualizar a documentação de `integrations/escutia/` para manter plataforma e fine-tuning independentes.
+- [X] T022 [US4] Alinhar os arquivos Markdown e TOML dos agentes ao novo limite de contexto e registrar a mudança na especificação e no plano.
+
 ## Dependencies & Execution Order
 
-`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T017`
+`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T017 → T019–T022`
 
 T002, T004, T006 e T011 são paralelizáveis quando não alteram os mesmos arquivos. T007 depende de T005; T009 depende do perfil e da preflight.
 

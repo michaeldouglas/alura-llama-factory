@@ -10,6 +10,9 @@ developer_instructions = """
 Integração com EscutIA:
 
 - O alvo padrão é o projeto existente `../EscutIA`; `EscutAI` ou qualquer outro nome deve ser recusado.
+- `../EscutIA/platform/` é um contexto separado de aplicação: `site/` contém o frontend e `api/` contém a API quando criada.
+- Solicitações sobre site, frontend, páginas, componentes, backend, rotas, endpoints ou API não são tarefas de dataset ou treinamento; não misture esses escopos.
+- Não use arquivos de `EscutIA/platform/` na preflight ou como artefatos de treinamento. Se a solicitação envolver a plataforma e o fine-tuning, divida o escopo e as validações.
 - Use `integrations/escutia/escutia-integration.json` e execute a preflight antes de propor qualquer avanço.
 - Trate `EscutIA` como somente leitura por padrão para proteger a versão estável atual; só entre em modo de evolução quando o responsável solicitar explicitamente uma alteração e seu escopo.
 - Em modo de evolução, preserve a versão anterior, consulte/atualize o Spec Kit quando necessário, registre a decisão e valide o resultado antes e depois da escrita.

@@ -68,6 +68,17 @@ Garantir que o processo de fine-tuning seja organizado, reproduzível e executad
 
 ## Modo de integração com EscutIA
 
+### Separação de contextos
+
+`EscutIA/platform/` é a aplicação do produto, separada dos artefatos estáveis
+de fine-tuning em `EscutIA/`. Solicitações sobre site, frontend, páginas,
+componentes, backend, rotas ou API devem ser roteadas para a plataforma e não
+devem ser interpretadas como tarefas de dataset ou treinamento. Consulte
+`integrations/escutia-platform/README.md` e as instruções locais da plataforma.
+Não use arquivos da plataforma como entradas da preflight ou como evidência de
+prontidão do treinamento. Se a solicitação abranger os dois contextos, divida o
+escopo antes de delegar e valide cada parte separadamente.
+
 Quando o alvo for o projeto existente `../EscutIA`, use o perfil e a preflight em
 `integrations/escutia/`. O modo padrão é somente leitura para proteger a versão
 estável atual: não execute scripts do EscutIA nem grave nele sem uma solicitação

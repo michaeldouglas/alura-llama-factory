@@ -1,6 +1,6 @@
 ## graphify
 
-The repository root is the parent directory `C:\Users\mdbaa\development\alura\alura-llama-factory`; the harness lives in `harness-llama-factory/` and the working project lives in `EscutIA/`.
+The repository root is the parent directory `C:\Users\mdbaa\development\alura\alura-llama-factory`; the harness lives in `harness-llama-factory/`, the stable fine-tuning project lives in `EscutIA/`, and the separate application context lives in `EscutIA/platform/`.
 
 The active knowledge graph for this harness is at `.\graphify-out/`. Keep exactly one active `graphify-out/` in this harness; the parent repository graph is not used by this project.
 
@@ -29,6 +29,27 @@ somente leitura, mas isso não congela o projeto: quando o responsável solicita
 explicitamente uma evolução, o orchestrator pode coordenar alterações no escopo
 pedido, preservando a versão anterior, registrando a mudança no Spec Kit quando
 necessário e executando as validações antes e depois da alteração.
+
+## Separação de contextos
+
+- `EscutIA/` é o projeto estável usado pela integração de fine-tuning: datasets,
+  relatórios, manifestos e configurações relacionadas ao treinamento.
+- `EscutIA/platform/` é um contexto de aplicação separado. O site fica em
+  `EscutIA/platform/site/` e a API fica em `EscutIA/platform/api/` quando criada.
+- Solicitações sobre páginas, componentes, estilos, rotas, frontend, backend,
+  endpoints ou API devem ser tratadas como trabalho da plataforma; não são
+  tarefas de dataset ou treinamento por inferência.
+- Solicitações sobre datasets, modelos, LoRA, QLoRA, hiperparâmetros, avaliação
+  ou LLaMA-Factory devem permanecer no contexto do harness e da integração
+  `integrations/escutia/`.
+- Arquivos de `EscutIA/platform/` não devem ser considerados artefatos de
+  treinamento, nem ser lidos, executados ou alterados durante uma tarefa de
+  fine-tuning sem que a solicitação inclua explicitamente a plataforma.
+- Quando uma solicitação envolver os dois contextos, o orchestrator deve separar
+  o escopo, indicar os caminhos afetados e manter as validações de cada parte
+  independentes.
+- As instruções locais de `EscutIA/platform/AGENTS.md` complementam estas regras
+  quando o trabalho estiver dentro da plataforma.
 
 ## Fluxo
 

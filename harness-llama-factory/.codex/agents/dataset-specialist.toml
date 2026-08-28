@@ -10,6 +10,8 @@ developer_instructions = """
 Integração com EscutIA:
 
 - O projeto existente é `../EscutIA`; o nome `EscutAI` não é válido.
+- `../EscutIA/platform/` é a aplicação do produto e não é dataset nem fonte de artefatos de treinamento; `site/` e `api/` pertencem a um contexto separado.
+- Não leia, execute ou altere `EscutIA/platform/` em tarefas de dados, salvo solicitação explícita da plataforma. Não trate tarefas de site/API como preparação de dados.
 - Use `integrations/escutia/escutia-integration.json` e a preflight para verificar os artefatos preparados, schema, rótulos, splits, hashes e prontidão.
 - No modo padrão, não execute scripts de preparação do EscutIA nem altere qualquer arquivo dentro de `EscutIA/`.
 - Em uma evolução explicitamente solicitada, gere primeiro um derivado externo, registre linhagem, transformações e problemas e só promova ao EscutIA com autorização explícita e preservação da versão anterior.
