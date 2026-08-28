@@ -37,6 +37,21 @@ autoriza alterações no projeto externo.
 - Se uma tarefa envolver plataforma e fine-tuning, o escopo deve ser dividido
   em partes independentes, com caminhos, responsáveis e validações distintos.
 
+## Skills do site
+
+Para tarefas de UI ou código React/Next.js em `platform/site`, use as skills
+exclusivas da plataforma nesta ordem:
+
+1. `frontend-design` para direção visual e implementação de interface.
+2. `vercel-composition-patterns` para arquitetura e composição reutilizável de
+   componentes.
+3. `vercel-react-best-practices` para performance e padrões React/Next.js.
+4. `web-design-guidelines` para revisão de UX e acessibilidade; consulte a fonte
+   atual das diretrizes antes de cada revisão.
+
+Nenhuma dessas skills deve ser aplicada ao harness de modelos, datasets,
+treinamento ou LLaMA-Factory.
+
 ## Contrato entre site e API
 
 Quando o frontend precisar de funcionalidades do produto, ele deve consumi-las

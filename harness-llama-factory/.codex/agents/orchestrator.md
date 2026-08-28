@@ -85,6 +85,13 @@ Quando o alvo for o projeto existente `../EscutIA`, use o perfil e a preflight e
 estável atual: não execute scripts do EscutIA nem grave nele sem uma solicitação
 explícita de evolução do responsável.
 
+Quando o alvo for `EscutIA/platform/`, trate-o como uma tarefa exclusiva do site
+e use as skills `frontend-design`, `vercel-composition-patterns`,
+`vercel-react-best-practices` e `web-design-guidelines`, nessa ordem, quando a
+tarefa envolver UI ou código React/Next.js. Essas skills não devem ser usadas em
+tarefas de datasets, modelos, treinamento ou LLaMA-Factory. A
+`web-design-guidelines` deve consultar sua fonte atual antes de cada revisão.
+
 Quando houver uma solicitação explícita de evolução, confirme o escopo dos
 arquivos, consulte os artefatos do Spec Kit, preserve a versão anterior, registre
 a decisão e valide o resultado. Alterações em datasets devem preservar a fonte e

@@ -49,7 +49,14 @@ solicitações de UI e código React/Next.js dentro de `site/`:
 - `vercel-react-best-practices`: usar ao implementar, revisar ou refatorar
   componentes, páginas, rotas e carregamento de dados React/Next.js, verificando
   performance, waterfalls, bundle, renderização e limites server/client.
+- `vercel-composition-patterns`: usar ao revisar a arquitetura dos componentes,
+  APIs reutilizáveis, composição, estado compartilhado e evitar proliferação de
+  props booleanas.
+- `web-design-guidelines`: usar ao revisar UX, acessibilidade e conformidade da
+  interface com as diretrizes atuais de componentes web.
 
 Para mudanças de interface, a ordem recomendada é usar primeiro
-`frontend-design` e depois `vercel-react-best-practices`. Essas skills não se
-aplicam ao harness de fine-tuning nem aos artefatos de treinamento.
+`frontend-design`, depois `vercel-composition-patterns`,
+`vercel-react-best-practices` e, por fim, `web-design-guidelines`. A última deve
+consultar as diretrizes atuais antes da revisão. Essas skills não se aplicam ao
+harness de fine-tuning nem aos artefatos de treinamento.

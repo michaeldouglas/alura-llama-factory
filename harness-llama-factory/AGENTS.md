@@ -60,14 +60,19 @@ necessário e executando as validações antes e depois da alteração.
 
 ## Skills exclusivas da plataforma
 
-- `frontend-design` e `vercel-react-best-practices` são skills exclusivas de
-  `EscutIA/platform/` e não devem ser aplicadas a tarefas de fine-tuning,
+- `frontend-design`, `vercel-react-best-practices`,
+  `vercel-composition-patterns` e `web-design-guidelines` são skills exclusivas
+  de `EscutIA/platform/` e não devem ser aplicadas a tarefas de fine-tuning,
   datasets, modelos ou LLaMA-Factory.
 - Quando uma solicitação envolver o site, páginas, componentes, estilos ou
-  experiência de usuário React/Next.js, o orchestrator deve usar as duas
-  skills. A ordem é `frontend-design` para definir e preservar a direção visual
-  e `vercel-react-best-practices` para revisar a implementação React/Next.js,
-  performance, carregamento e divisão entre servidor e cliente.
+  experiência de usuário React/Next.js, o orchestrator deve usar as quatro
+  skills aplicáveis. A ordem é `frontend-design` para definir e preservar a
+  direção visual, `vercel-composition-patterns` para avaliar a arquitetura e a
+  composição dos componentes, `vercel-react-best-practices` para revisar a
+  implementação React/Next.js, performance, carregamento e divisão entre
+  servidor e cliente, e `web-design-guidelines` para revisar UX e acessibilidade.
+- Ao usar `web-design-guidelines`, consulte a fonte atual das diretrizes antes
+  de cada revisão, conforme a própria skill orienta.
 - Alterações exclusivamente documentais ou de configuração da plataforma podem
   usar apenas a orientação necessária; qualquer criação, revisão ou refatoração
   de UI deve passar pelas duas skills.
