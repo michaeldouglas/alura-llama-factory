@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import AuthModal from "@/components/AuthModal";
+import AccountAction from "@/components/AccountAction";
+import ConversationAction from "@/components/ConversationAction";
 
 const links = [
   ["Início", "#inicio"],
@@ -32,10 +33,8 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 sm:flex">
-          <AuthModal className="rounded-full px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-white" />
-          <a href="#conversar" className="rounded-full bg-navy px-5 py-3 text-sm font-bold text-white shadow-lg shadow-navy/15 transition hover:-translate-y-0.5 hover:bg-purple">
-            Conversar agora <span aria-hidden="true" className="ml-1">↗</span>
-          </a>
+          <AccountAction className="rounded-full px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-white" />
+          <ConversationAction className="rounded-full bg-navy px-5 py-3 text-sm font-bold text-white shadow-lg shadow-navy/15 transition hover:-translate-y-0.5 hover:bg-purple" />
         </div>
 
         <button
@@ -56,10 +55,11 @@ export default function Header() {
               {label}
             </a>
           ))}
-          <AuthModal className="mt-3 block w-full rounded-full border border-navy/10 px-5 py-3 text-center text-sm font-bold text-navy" />
-          <a href="#conversar" onClick={() => setOpen(false)} className="mt-4 block rounded-full bg-navy px-5 py-3 text-center text-sm font-bold text-white">
-            Conversar agora <span aria-hidden="true">↗</span>
-          </a>
+          <AccountAction
+            className="mt-3 block w-full rounded-full border border-navy/10 px-5 py-3 text-center text-sm font-bold text-navy"
+            onNavigate={() => setOpen(false)}
+          />
+          <ConversationAction className="mt-4 block w-full rounded-full bg-navy px-5 py-3 text-center text-sm font-bold text-white" />
         </nav>
       )}
     </header>

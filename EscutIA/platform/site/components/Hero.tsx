@@ -1,4 +1,5 @@
 import ChatPreview from "@/components/ChatPreview";
+import ConversationAction from "@/components/ConversationAction";
 
 export default function Hero() {
   return (
@@ -15,7 +16,7 @@ export default function Hero() {
             A EscutIA é um espaço de apoio emocional onde você pode conversar, organizar seus pensamentos e expressar como está se sentindo, a qualquer momento.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <a href="#conversar" className="rounded-full bg-gradient-brand px-7 py-4 text-center text-sm font-extrabold text-white shadow-xl shadow-pink/20 transition hover:-translate-y-1">Conversar agora <span aria-hidden="true">↗</span></a>
+            <ConversationAction className="rounded-full bg-gradient-brand px-7 py-4 text-center text-sm font-extrabold text-white shadow-xl shadow-pink/20 transition hover:-translate-y-1" />
             <a href="#como-funciona" className="rounded-full border border-navy/12 bg-white/60 px-7 py-4 text-center text-sm font-extrabold text-navy transition hover:-translate-y-1 hover:border-purple hover:text-purple">Saiba mais <span aria-hidden="true">↓</span></a>
           </div>
           <div className="mt-10 flex items-center gap-3 text-sm font-semibold text-navy/50">

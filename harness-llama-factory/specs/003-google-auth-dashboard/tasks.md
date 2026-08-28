@@ -40,13 +40,22 @@
 - [X] T021 Verificar que nenhum `.env.local`, segredo Google ou banco SQLite é rastreado pelo Git.
 - [X] T022 Atualizar o grafo do harness após a alteração documental e registrar que Stripe permanece fora do escopo.
 
+## Phase 7: Navegação orientada pela sessão
+
+- [X] T023 Registrar no Spec Kit a navegação autenticada para dashboard e para o futuro chat.
+- [X] T024 Tornar o controle de conta do header dependente da sessão, apontando usuários autenticados para `/dashboard`.
+- [X] T025 Fazer “Conversar agora” abrir o login para visitantes e levar usuários autenticados para `/chat`.
+- [X] T026 Criar a rota protegida `/chat` como tela de preparação para a futura conversa.
+- [X] T027 Validar os estados autenticado, não autenticado e carregando, além de typecheck, lint e build.
+
 ## Dependencies & Execution Order
 
-`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022`
+`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022 → T023–T027`
 
 ## Implementation Strategy
 
 1. Configurar dependências, ambiente e schema.
 2. Implementar o callback Google e a persistência SQLite.
 3. Implementar modal, redirect e dashboard protegido.
-4. Documentar configuração segura e validar o build completo.
+4. Implementar navegação dependente da sessão e o destino protegido do futuro chat.
+5. Documentar configuração segura e validar o build completo.

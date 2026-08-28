@@ -1,14 +1,18 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type AuthModalProps = {
   className?: string;
+  callbackUrl?: string;
+  children?: ReactNode;
+  label?: string;
 };
 
-export default function AuthModal({ className }: AuthModalProps) {
+export default function AuthModal({ className, callbackUrl = "/dashboard", children, label = "Entrar" }: AuthModalProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -64,14 +68,14 @@ export default function AuthModal({ className }: AuthModalProps) {
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
-    await signIn("google", { callbackUrl: "/dashboard" });
+    await signIn("google", { callbackUrl });
     setLoading(false);
   };
 
   return (
     <>
       <button ref={triggerRef} type="button" className={className} onClick={() => setOpen(true)}>
-        Entrar
+        {children ?? label}
       </button>
 
       {open &&

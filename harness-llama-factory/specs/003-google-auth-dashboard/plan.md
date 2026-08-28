@@ -31,11 +31,13 @@ integração Stripe.
 EscutIA/platform/site/
 ├── app/
 │   ├── api/auth/[...nextauth]/route.ts
+│   ├── chat/page.tsx
 │   ├── dashboard/page.tsx
 │   └── layout.tsx
 ├── components/
 │   ├── AuthModal.tsx
 │   ├── AuthProvider.tsx
+│   ├── ConversationAction.tsx
 │   └── SignOutButton.tsx
 ├── lib/
 │   ├── auth.ts
@@ -46,16 +48,18 @@ EscutIA/platform/site/
 └── package.json
 ```
 
-The landing page remains the existing public experience. The `Entrar` control
-opens the client modal, while OAuth, sessions and user persistence remain
-server-side.
+The landing page remains the existing public experience. The account control
+uses the client session to link authenticated users to `/dashboard`; the
+conversation CTA links authenticated users to `/chat` and opens the OAuth modal
+for visitors, preserving `/chat` as the callback destination. OAuth, sessions
+and user persistence remain server-side.
 
 ## Data Flow
 
 ```text
-Entrar → modal → Google OAuth → NextAuth route → Prisma/SQLite
-                                      ↓
-                                  /dashboard
+Entrar → modal → Google OAuth → NextAuth route → Prisma/SQLite → /dashboard
+Conversar agora (visitante) ────────────────────────────────→ modal → /chat
+Conversar agora (autenticado) ───────────────────────────────→ /chat
 ```
 
 The dashboard obtains the session server-side and never trusts profile data

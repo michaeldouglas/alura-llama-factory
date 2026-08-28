@@ -37,6 +37,17 @@ página inicial.
 usuário sem sessão acessa `/dashboard` e retorna para `/` sem visualizar o
 conteúdo protegido. O botão de sair encerra a sessão.
 
+### User Story 4 - Continuar para o espaço de conversa (Priority: P1)
+
+Como usuário autenticado, quero que o botão “Conversar agora” me leve ao espaço
+de conversa da EscutIA; como visitante, quero ser convidado a entrar antes de
+continuar, para que o futuro chat seja acessível somente com uma sessão válida.
+
+**Independent Test**: Usuário autenticado vê “Dashboard” no lugar de “Entrar” e
+acessa `/dashboard`; ao selecionar “Conversar agora”, chega a `/chat`. Visitante
+vê “Entrar” e, ao selecionar “Conversar agora”, abre o modal Google e, depois do
+login, retorna para `/chat`.
+
 ## Edge Cases
 
 - Credenciais Google ausentes ou inválidas.
@@ -44,6 +55,9 @@ conteúdo protegido. O botão de sair encerra a sessão.
 - Foto ou nome não estão presentes no perfil Google.
 - Arquivo SQLite ainda não foi criado.
 - Usuário autenticado tenta acessar novamente a tela inicial.
+- Sessão ainda está carregando enquanto os CTAs são exibidos.
+- Usuário autenticado acessa o destino futuro do chat antes da implementação da
+  conversa.
 - A aplicação é iniciada em produção sem armazenamento persistente para o SQLite.
 - Um arquivo `.env.local` real ou um banco SQLite é selecionado para entrar no Git.
 
@@ -72,6 +86,15 @@ conteúdo protegido. O botão de sair encerra a sessão.
   a implementação não deve criar um serviço separado nesta etapa.
 - **FR-010**: Esta feature MUST NOT implementar Stripe, planos, cobrança,
   inferência de modelo ou integração com o harness de fine-tuning.
+- **FR-011**: Quando houver uma sessão válida, o controle “Entrar” MUST ser
+  substituído por um link para `/dashboard`; durante o carregamento da sessão,
+  a interface MUST evitar uma ação incorreta.
+- **FR-012**: O botão “Conversar agora” MUST levar usuários autenticados para
+  `/chat`; para visitantes, MUST abrir o modal Google com `/chat` como destino
+  após o login.
+- **FR-013**: A rota `/chat` MUST exigir uma sessão válida e, até a
+  implementação da conversa, MUST exibir uma tela de preparação sem expor
+  conteúdo protegido a visitantes.
 
 ## Key Entities
 
@@ -91,6 +114,8 @@ conteúdo protegido. O botão de sair encerra a sessão.
   bundle enviado ao navegador.
 - **SC-005**: A aplicação inicia e informa claramente quando a configuração do
   OAuth ou do SQLite está incompleta.
+- **SC-006**: A navegação para dashboard e para o futuro chat respeita a sessão
+  atual e preserva o destino escolhido durante o login.
 
 ## Assumptions
 
