@@ -28,6 +28,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only rounded-full bg-navy px-4 py-3 text-sm font-bold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200]"
+        >
+          Pular para o conteúdo principal
+        </a>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

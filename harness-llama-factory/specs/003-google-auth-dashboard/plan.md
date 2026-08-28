@@ -36,6 +36,7 @@ EscutIA/platform/site/
 │   └── layout.tsx
 ├── components/
 │   ├── AuthModal.tsx
+│   ├── AccountAction.tsx
 │   ├── AuthProvider.tsx
 │   ├── ConversationAction.tsx
 │   └── SignOutButton.tsx

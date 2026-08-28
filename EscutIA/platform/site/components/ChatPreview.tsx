@@ -32,7 +32,7 @@ export default function ChatPreview() {
         </div>
 
         <div className="flex items-center gap-2 rounded-2xl bg-warm p-2">
-          <span className="flex-1 px-3 text-sm text-navy/35">Escreva o que você está sentindo...</span>
+          <span className="flex-1 px-3 text-sm text-navy/35">Escreva o que você está sentindo…</span>
           <span aria-hidden="true" className="grid h-10 w-10 place-items-center rounded-xl bg-purple text-lg text-white">↑</span>
         </div>
         <p className="mt-3 text-center text-[11px] font-medium text-navy/35">Seu espaço de conversa, no seu ritmo.</p>

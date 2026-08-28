@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen overflow-hidden bg-warm text-navy">
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
         <HowItWorks />
         <Features />

@@ -48,9 +48,17 @@
 - [X] T026 Criar a rota protegida `/chat` como tela de preparação para a futura conversa.
 - [X] T027 Validar os estados autenticado, não autenticado e carregando, além de typecheck, lint e build.
 
+## Phase 8: Revisão de qualidade do site
+
+- [X] T028 Aplicar `frontend-design` para preservar a direção visual e corrigir tipografia, responsividade e estados de interação.
+- [X] T029 Aplicar `vercel-composition-patterns` para manter CTAs de conta e conversa em componentes reutilizáveis.
+- [X] T030 Aplicar `vercel-react-best-practices` para revisar limites client/server, navegação e carregamento dos componentes.
+- [X] T031 Aplicar `web-design-guidelines` para corrigir skip link, foco visível, foco do modal, rolagem, semântica e conteúdo acessível.
+- [X] T032 Reexecutar as validações do site e atualizar o Graphify após a revisão.
+
 ## Dependencies & Execution Order
 
-`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022 → T023–T027`
+`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022 → T023–T027 → T028–T032`
 
 ## Implementation Strategy
 

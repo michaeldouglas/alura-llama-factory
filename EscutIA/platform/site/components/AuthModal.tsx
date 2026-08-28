@@ -15,7 +15,7 @@ type AuthModalProps = {
 export default function AuthModal({ className, callbackUrl = "/dashboard", children, label = "Entrar" }: AuthModalProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
@@ -25,7 +25,10 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
     previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const previousOverflow = document.body.style.overflow;
     const focusableSelector =
-      '#login-modal-dialog button:not([disabled]), #login-modal-dialog [href], #login-modal-dialog input:not([disabled]), #login-modal-dialog select:not([disabled]), #login-modal-dialog textarea:not([disabled]), #login-modal-dialog [tabindex]:not([tabindex="-1"])';
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const modalElement = modalRef.current;
+
+    if (!modalElement) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -35,13 +38,13 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
 
       if (event.key !== "Tab") return;
 
-      const focusableElements = Array.from(document.querySelectorAll<HTMLElement>(focusableSelector));
+      const focusableElements = Array.from(modalElement.querySelectorAll<HTMLElement>(focusableSelector));
       if (focusableElements.length === 0) return;
 
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
 
-      if (!document.querySelector("#login-modal-dialog")?.contains(document.activeElement)) {
+      if (!modalElement.contains(document.activeElement)) {
         event.preventDefault();
         firstElement.focus();
       } else if (event.shiftKey && document.activeElement === firstElement) {
@@ -74,7 +77,7 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
 
   return (
     <>
-      <button ref={triggerRef} type="button" className={className} onClick={() => setOpen(true)}>
+      <button type="button" className={className} onClick={() => setOpen(true)}>
         {children ?? label}
       </button>
 
@@ -88,11 +91,12 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
             }}
           >
             <section
+              ref={modalRef}
               id="login-modal-dialog"
               aria-labelledby="login-modal-title"
               aria-describedby="login-modal-description"
               aria-modal="true"
-              className="w-full max-w-md rounded-[30px] bg-warm p-7 text-navy shadow-2xl sm:p-9"
+              className="max-h-[calc(100dvh-4rem)] w-full max-w-md overflow-y-auto overscroll-contain rounded-[30px] bg-warm p-7 text-navy shadow-2xl sm:p-9"
               role="dialog"
             >
               <div className="flex items-start justify-between gap-4">
@@ -121,12 +125,13 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
                 type="button"
                 onClick={handleGoogleSignIn}
                 disabled={loading}
+                aria-live="polite"
                 className="mt-7 flex w-full items-center justify-center gap-3 rounded-full bg-white px-5 py-4 text-sm font-extrabold text-navy shadow-lg shadow-navy/10 transition hover:-translate-y-0.5 hover:shadow-xl disabled:cursor-wait disabled:opacity-60"
               >
                 <span aria-hidden="true" className="text-lg font-black text-purple">
                   G
                 </span>
-                {loading ? "Abrindo o Google..." : "Continuar com Google"}
+                {loading ? "Abrindo o Google…" : "Continuar com Google"}
               </button>
 
               <p className="mt-5 text-center text-xs leading-5 text-navy/45">

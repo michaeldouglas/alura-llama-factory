@@ -24,7 +24,7 @@ export default function AccountAction({ className, onNavigate }: AccountActionPr
   if (status === "loading") {
     return (
       <span className={`${className ?? ""} text-navy/45`} aria-busy="true">
-        Carregando...
+        Carregando…
       </span>
     );
   }

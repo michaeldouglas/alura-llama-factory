@@ -21,7 +21,7 @@ export default function ConversationAction({ className }: ConversationActionProp
   if (status === "loading") {
     return (
       <span className={`${className ?? ""} cursor-wait opacity-70`} aria-busy="true">
-        Carregando...
+        Carregando…
       </span>
     );
   }

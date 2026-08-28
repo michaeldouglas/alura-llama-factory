@@ -12,6 +12,28 @@
   box-sizing: border-box;
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: rgba(92, 77, 255, 0.18);
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid #5c4dff;
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+section[id],
+main[id] {
+  scroll-margin-top: 96px;
+}
+
 html {
   scroll-behavior: smooth;
 }

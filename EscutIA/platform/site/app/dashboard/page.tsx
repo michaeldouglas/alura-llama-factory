@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -23,12 +24,12 @@ export default async function DashboardPage() {
     .toUpperCase();
 
   return (
-    <main className="min-h-screen bg-warm text-navy">
+    <main id="main-content" className="min-h-screen bg-warm text-navy">
       <div className="site-container py-8 sm:py-12">
         <header className="flex items-center justify-between gap-4">
-          <a href="/" className="text-xl font-black tracking-[-0.04em]">
-            Escut<span className="text-purple">IA</span>
-          </a>
+          <Link href="/" aria-label="EscutIA — voltar para a página inicial">
+            <Image src="/logo.png" alt="EscutIA" width={132} height={45} priority className="h-auto w-[122px]" />
+          </Link>
           <SignOutButton />
         </header>
 

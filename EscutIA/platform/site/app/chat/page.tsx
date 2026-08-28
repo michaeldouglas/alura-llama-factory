@@ -14,7 +14,7 @@ export default async function ChatPage() {
   }
 
   return (
-    <main className="min-h-screen bg-warm text-navy">
+    <main id="main-content" className="min-h-screen bg-warm text-navy">
       <div className="site-container flex min-h-screen flex-col justify-center py-12">
         <p className="eyebrow">seu espaço de conversa</p>
         <h1 className="mt-5 max-w-3xl text-5xl font-black tracking-[-0.06em] sm:text-7xl">
