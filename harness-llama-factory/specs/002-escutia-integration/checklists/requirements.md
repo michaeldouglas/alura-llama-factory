@@ -24,7 +24,8 @@
 ## Feature Readiness
 
 - [X] Todos os requisitos têm critérios verificáveis
-- [X] As histórias cobrem descoberta, dados e proposta
+- [X] As histórias cobrem descoberta, dados, proposta e separação da plataforma
 - [X] O fluxo não autoriza treinamento implicitamente
 - [X] A proteção do projeto EscutIA está explícita
+- [X] A fronteira entre `EscutIA/` e `EscutIA/platform/` está explícita
 - [X] O modo estável read-only e o protocolo de evolução explicitamente solicitada estão distinguidos
