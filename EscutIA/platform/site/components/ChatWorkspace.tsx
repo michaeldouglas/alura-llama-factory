@@ -26,6 +26,23 @@ type ChatMessage = {
   sentiment?: SentimentLabel | null;
 };
 
+type PendingSentimentChange = {
+  question: string;
+  previousSentiment: SentimentLabel | null;
+  detectedSentiment: SentimentLabel | null;
+};
+
+type AgentEvent =
+  | { type: "token"; content: string }
+  | PendingSentimentChange & { type: "sentiment_confirmation" }
+  | {
+      type: "done";
+      message: ChatMessage;
+      sentiment: SentimentLabel | null;
+      sentimentAt: string | null;
+    }
+  | { type: "error"; message: string };
+
 type ChatWorkspaceProps = {
   user: UserProfile;
   currentSentiment: SentimentLabel | null;
@@ -271,6 +288,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
   const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
+  const [pendingSentimentChange, setPendingSentimentChange] = useState<PendingSentimentChange | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
   const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId);
   const [historyOpen, setHistoryOpen] = useState(true);
@@ -283,6 +301,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [deleteTarget, setDeleteTarget] = useState<ConversationSummary | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const conversationMenuRef = useRef<HTMLDivElement>(null);
+  const lastMessageContent = messages[messages.length - 1]?.content ?? "";
 
   const filteredConversations = useMemo(() => {
     const normalizedSearch = search.trim().toLocaleLowerCase("pt-BR");
@@ -305,7 +324,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     if (!conversationOpen) return;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     messagesEndRef.current?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "end" });
-  }, [conversationOpen, messages.length]);
+  }, [conversationOpen, messages.length, lastMessageContent, pendingSentimentChange]);
 
   useEffect(() => {
     if (!openConversationMenuId) return undefined;
@@ -363,18 +382,76 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     return data.conversation;
   }
 
-  async function persistMessage(content: string, conversationId: string | null) {
-    const conversation = conversationId ? null : await createConversation(content);
-    const id = conversationId || conversation?.id;
-    if (!id) throw new Error("Não foi possível identificar a conversa.");
-    const response = await fetch(`/api/conversations/${id}/messages`, {
+  async function consumeAgentStream(conversationId: string, payload: { message?: string; confirmation?: boolean }) {
+    const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ conversationId, ...payload }),
     });
-    const data = (await response.json()) as { error?: string };
-    if (!response.ok) throw new Error(data.error || "Não foi possível salvar a mensagem.");
-    return { id, title: conversation?.title || content };
+
+    if (!response.ok) {
+      const data = (await response.json().catch(() => null)) as { error?: string } | null;
+      throw new Error(data?.error || "Não foi possível iniciar a resposta da EscutIA.");
+    }
+    if (!response.body) throw new Error("A resposta da EscutIA não iniciou o streaming.");
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let assistantMessageId: string | null = null;
+
+    const handleEvent = (event: AgentEvent) => {
+      if (event.type === "token") {
+        const localId = assistantMessageId || `assistant-${Date.now()}`;
+        assistantMessageId = localId;
+        setMessages((current) => {
+          const existing = current.some((message) => message.id === localId);
+          if (!existing) return [...current, { id: localId, role: "assistant", content: event.content }];
+          return current.map((message) => message.id === localId ? { ...message, content: message.content + event.content } : message);
+        });
+        return;
+      }
+
+      if (event.type === "sentiment_confirmation") {
+        setPendingSentimentChange({
+          question: event.question,
+          previousSentiment: event.previousSentiment,
+          detectedSentiment: event.detectedSentiment,
+        });
+        setNotice("Antes de continuar, confirme se você percebeu uma mudança no seu sentimento.");
+        return;
+      }
+
+      if (event.type === "done") {
+        setMessages((current) => {
+          if (!assistantMessageId) return [...current, event.message];
+          return current.map((message) => message.id === assistantMessageId ? event.message : message);
+        });
+        setPendingSentimentChange(null);
+        if (event.sentiment) setCurrentSentiment(event.sentiment);
+        if (event.sentimentAt) setCurrentSentimentAt(event.sentimentAt);
+        setNotice("A EscutIA respondeu. Continue no seu ritmo.");
+        return;
+      }
+
+      if (event.type === "error") throw new Error(event.message);
+    };
+
+    const readLine = (line: string) => {
+      const trimmed = line.trim();
+      if (!trimmed) return;
+      handleEvent(JSON.parse(trimmed) as AgentEvent);
+    };
+
+    while (true) {
+      const { value, done } = await reader.read();
+      buffer += decoder.decode(value, { stream: !done });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
+      lines.forEach(readLine);
+      if (done) break;
+    }
+    if (buffer.trim()) readLine(buffer);
   }
 
   async function handleSend(event: FormEvent<HTMLFormElement>) {
@@ -382,17 +459,38 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     const content = draft.trim();
     if (!content || busy) return;
     setDraft("");
-    setNotice("Salvando sua mensagem…");
+    setPendingSentimentChange(null);
+    setNotice("A EscutIA está lendo sua mensagem…");
     setMessages((current) => [...current, { id: `local-${Date.now()}`, role: "user", content }]);
     setBusy("sending");
     try {
-      const saved = await persistMessage(content, activeConversationId);
-      setActiveConversationId(saved.id);
-      rememberConversation(saved.id, saved.title);
-      if (saved.id !== activeConversationId) router.push(`/chat/${saved.id}`);
-      setNotice("Mensagem salva no seu histórico privado.");
+      let conversationId = activeConversationId;
+      if (!conversationId) {
+        const conversation = await createConversation(content);
+        conversationId = conversation.id;
+        setActiveConversationId(conversation.id);
+        rememberConversation(conversation.id, conversation.title);
+        router.push(`/chat/${conversation.id}`);
+      }
+      await consumeAgentStream(conversationId, { message: content });
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function handleSentimentConfirmation(confirmed: boolean) {
+    if (!pendingSentimentChange || !activeConversationId || busy) return;
+    const pending = pendingSentimentChange;
+    setBusy("sending");
+    setPendingSentimentChange(null);
+    setNotice("Continuando a conversa…");
+    try {
+      await consumeAgentStream(activeConversationId, { confirmation: confirmed });
+    } catch (error) {
+      setPendingSentimentChange(pending);
+      setNotice(error instanceof Error ? error.message : "Não foi possível continuar a conversa.");
     } finally {
       setBusy(null);
     }
@@ -427,6 +525,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   async function handleSelectConversation(id: string) {
     if (busy) return;
     setOpenConversationMenuId(null);
+    setPendingSentimentChange(null);
     setBusy("loading");
     setSidebarOpen(false);
     setConversationOpen(true);
@@ -536,6 +635,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   function handleNewConversation() {
     if (busy) return;
     setOpenConversationMenuId(null);
+    setPendingSentimentChange(null);
     setActiveConversationId(null);
     setMessages([]);
     window.history.replaceState(null, "", "/chat");
@@ -745,6 +845,19 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                             {message.role === "user" ? <Avatar user={user} /> : null}
                           </article>
                         ))}
+                        {pendingSentimentChange ? (
+                          <section aria-live="polite" className="max-w-[min(42rem,88%)] rounded-2xl border border-purple/15 bg-purple/[0.045] px-4 py-4 shadow-sm">
+                            <p className="text-sm font-black text-navy">{pendingSentimentChange.question}</p>
+                            <div className="mt-3 flex flex-wrap items-center gap-2">
+                              {pendingSentimentChange.previousSentiment ? <SentimentBadge sentiment={pendingSentimentChange.previousSentiment} className="px-2 py-0.5 text-[0.6rem]" /> : null}
+                              {pendingSentimentChange.detectedSentiment ? <SentimentBadge sentiment={pendingSentimentChange.detectedSentiment} className="px-2 py-0.5 text-[0.6rem]" /> : null}
+                            </div>
+                            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                              <button type="button" onClick={() => void handleSentimentConfirmation(true)} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl bg-purple px-4 py-2.5 text-xs font-black text-white transition-colors hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Sim, mudou</button>
+                              <button type="button" onClick={() => void handleSentimentConfirmation(false)} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl border border-navy/10 bg-white px-4 py-2.5 text-xs font-black text-navy/65 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Continuar assim</button>
+                            </div>
+                          </section>
+                        ) : null}
                       </div>
                     ) : (
                       <div className="flex h-full min-h-[9rem] items-center justify-center rounded-2xl border border-dashed border-navy/12 bg-white/60 px-4 py-5 text-center">
