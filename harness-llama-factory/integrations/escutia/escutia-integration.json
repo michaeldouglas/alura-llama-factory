@@ -1,0 +1,57 @@
+{
+  "integration_id": "escutia-lora-sft",
+  "project_name": "EscutIA",
+  "project_root_default": "../EscutIA",
+  "read_only_target": true,
+  "source_paths": {
+    "dataset_dir": "dataset/dados/preparados",
+    "dataset_info": "dataset/dados/preparados/dataset_info.json",
+    "train": "dataset/dados/preparados/escutia_train.json",
+    "validation": "dataset/dados/preparados/escutia_validation.json",
+    "evaluation": "dataset/dados/preparados/escutia_evaluation.json",
+    "train_conversational": "dataset/dados/preparados/escutia_train_conversacional.json",
+    "validation_conversational": "dataset/dados/preparados/escutia_validation_conversacional.json",
+    "evaluation_conversational": "dataset/dados/preparados/escutia_evaluation_conversacional.json",
+    "frozen_evaluation": "dataset/dados/preparados/avaliacao_congelada.jsonl",
+    "dataset_manifest": "dataset/manifesto_dataset.json",
+    "validation_report": "dataset/dados/relatorios/11_validacao_final.json",
+    "leakage_report": "dataset/dados/relatorios/08_vazamento.json",
+    "frozen_report": "dataset/dados/relatorios/09_avaliacao_congelada.json",
+    "model_config": "fine_tuning_lora/configs/lora_escutia.yaml"
+  },
+  "dataset": {
+    "train_name": "escutia_treino",
+    "validation_name": "escutia_validacao",
+    "evaluation_name": "escutia_avaliacao",
+    "required_fields": ["instruction", "input", "output"],
+    "labels": ["negativo", "neutro", "positivo"],
+    "output_field": "sentimento"
+  },
+  "model": {
+    "name_or_path": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "llama_factory": {
+    "stage": "sft",
+    "finetuning_type": "lora",
+    "template": "qwen",
+    "cutoff_len": 256,
+    "seed": 42,
+    "train_batch_size": 1,
+    "eval_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0001,
+    "num_train_epochs": 2.0,
+    "lora_target": "q_proj,k_proj,v_proj,o_proj",
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05
+  },
+  "output_policy": {
+    "external_root_template": "%LOCALAPPDATA%/alura-llama-factory/escutia-integration",
+    "repository_writes": false,
+    "escutia_writes": false,
+    "overwrite": false,
+    "training_requires_explicit_authorization": true
+  }
+}

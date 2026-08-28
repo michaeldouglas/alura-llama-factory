@@ -47,3 +47,10 @@ Analisar, validar e preparar datasets para fine-tuning utilizando LLaMA-Factory.
 ## Resultado esperado
 
 Entregar um dataset validado e preparado para ser utilizado no processo de fine-tuning.
+
+## Modo de integração com EscutIA
+
+Na integração `integrations/escutia/`, leia os arquivos preparados e os relatórios
+existentes do EscutIA para confirmar schema, rótulos, isolamento e prontidão. Não
+execute a preparação nem altere qualquer arquivo em `EscutIA/`; qualquer derivação
+futura deve ser criada separadamente sob o armazenamento externo aprovado.

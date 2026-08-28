@@ -51,3 +51,11 @@ Planejar, configurar e executar o processo de fine-tuning utilizando LLaMA-Facto
 ## Resultado esperado
 
 Entregar uma configuração de fine-tuning adequada ao modelo, dataset e hardware disponíveis e executar o treinamento de forma reproduzível.
+
+## Modo de integração com EscutIA
+
+Use `integrations/escutia/scripts/render_escutia_config.py` para gerar a proposta
+resolvida do LLaMA-Factory depois que a preflight passar. A proposta usa os dados
+existentes do EscutIA, mas direciona cache, logs e saída para o armazenamento
+externo do harness. Renderizar a configuração não autoriza treinamento; valide
+hardware, recursos e gates antes de qualquer execução.

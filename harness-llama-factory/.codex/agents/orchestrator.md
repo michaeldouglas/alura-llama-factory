@@ -65,3 +65,13 @@ Use o `training-engineer` para:
 ## Resultado esperado
 
 Garantir que o processo de fine-tuning seja organizado, reproduzível e executado corretamente com LLaMA-Factory.
+
+## Modo de integração com EscutIA
+
+Quando o alvo for o projeto existente `../EscutIA`, use o perfil e a preflight em
+`integrations/escutia/`. O alvo é somente leitura: não execute scripts do EscutIA
+nem grave datasets, configurações, logs, checkpoints ou resultados dentro dele.
+As saídas pesadas devem ficar abaixo de `%LOCALAPPDATA%/alura-llama-factory/escutia-integration/`.
+O campo `training_authorized` do manifesto do EscutIA não substitui a autorização
+do harness. A transição para treinamento continua dependente dos gates e da
+autorização explícita registrada no harness.
