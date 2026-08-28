@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
+import AuthModal from "@/components/AuthModal";
+
 const links = [
   ["Início", "#inicio"],
   ["Como funciona", "#como-funciona"],
@@ -30,9 +32,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 sm:flex">
-          <a href="#conversar" className="rounded-full px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-white">
-            Entrar
-          </a>
+          <AuthModal className="rounded-full px-4 py-2.5 text-sm font-bold text-navy transition hover:bg-white" />
           <a href="#conversar" className="rounded-full bg-navy px-5 py-3 text-sm font-bold text-white shadow-lg shadow-navy/15 transition hover:-translate-y-0.5 hover:bg-purple">
             Conversar agora <span aria-hidden="true" className="ml-1">↗</span>
           </a>
@@ -56,6 +56,7 @@ export default function Header() {
               {label}
             </a>
           ))}
+          <AuthModal className="mt-3 block w-full rounded-full border border-navy/10 px-5 py-3 text-center text-sm font-bold text-navy" />
           <a href="#conversar" onClick={() => setOpen(false)} className="mt-4 block rounded-full bg-navy px-5 py-3 text-center text-sm font-bold text-white">
             Conversar agora <span aria-hidden="true">↗</span>
           </a>
