@@ -6,6 +6,12 @@ sandbox_mode = "workspace-write"
 service_tier = "flex"
 
 
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "GITHUB_PERSONAL_ACCESS_TOKEN"
+default_tools_approval_mode = "writes"
+
+
 [agents]
 enabled = true
 max_concurrent_threads_per_session = 4
