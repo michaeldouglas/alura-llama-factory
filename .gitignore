@@ -1,15 +1,41 @@
-graphify-out
+# Graphify é gerado a partir do código e mantido localmente
+**/graphify-out/
 
 # Ambientes Python e caches locais
 .venv/
+venv/
+env/
 __pycache__/
-*.py[cod]
+*.py[codz]
+*.so
+*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.hypothesis/
+.cache/
 
 # Checkpoints automáticos dos notebooks
 .ipynb_checkpoints/
+
+# Ambientes locais, segredos e arquivos temporários
+.env
+.env.*
+!.env.example
+.pypirc
+*.pem
+*.key
+*.p12
+*.pfx
+Thumbs.db
+.DS_Store
+tempCodeRunnerFile.py
 
 # Artefatos gerados pelo fine-tuning; os marcadores .gitkeep permanecem versionados
 EscutIA/fine_tuning_lora/resultados/*
@@ -45,7 +71,17 @@ EscutIA/huggingface/EscutIA_Modelo/
 EscutIA/huggingface/EscutIA_Modelo_QLoRA/
 EscutIA/huggingface/modelos/completos/
 EscutIA/huggingface/modelos/testes/
+EscutIA/huggingface/modelos/*.zip
 **/.cache/
+
+# Pesos e checkpoints de modelos em qualquer parte do repositório
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
 
 # Saídas geradas pelos notebooks QLoRA e pelas avaliações locais
 EscutIA/fine_tuning_qlora/outputs/*
@@ -55,3 +91,14 @@ EscutIA/fine_tuning_lora/outputs/comparacao/
 
 *.log
 EscutIA/CURSO_FINE_TUNING_LLAMА_FACTORY.md
+
+# Artefatos pesados dos experimentos do harness
+harness-llama-factory/experiments/**/environments/
+harness-llama-factory/experiments/**/cache/
+harness-llama-factory/experiments/**/dataset-source/
+harness-llama-factory/experiments/**/data-derived/
+harness-llama-factory/experiments/**/runs/
+
+# Estado local do Spec Kit do harness
+harness-llama-factory/.specify/feature.json
+harness-llama-factory/.specify/extensions/*/local-config.yml

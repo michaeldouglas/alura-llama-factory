@@ -11,7 +11,7 @@ Adicionar uma integração isolada no harness que consuma o dataset preparado e 
 **Storage**: perfil, scripts, testes e documentação no harness; caches, logs, checkpoints e outputs somente no `%LOCALAPPDATA%` externo  
 **Testing**: `uv run --python 3.12 pytest integrations/escutia/tests`  
 **Target**: projeto irmão `../EscutIA`, validado por nome e existência  
-**Constraints**: nenhuma escrita no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa
+**Constraints**: nenhuma escrita no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa; uma única política de ignorados no `.gitignore` da raiz
 
 ## Constitution Check
 
@@ -46,6 +46,8 @@ integrations/escutia/
 ```
 
 The integration does not add files under `EscutIA/`.
+
+The repository-wide ignore policy lives only in `../.gitignore`; nested project `.gitignore` files are intentionally not maintained.
 
 ## Data Flow
 

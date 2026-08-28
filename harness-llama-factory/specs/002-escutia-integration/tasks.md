@@ -31,6 +31,7 @@
 - [X] T012 Executar a suíte de testes e a preflight read-only da integração.
 - [X] T013 Atualizar o grafo do harness com `graphify update .`, validar que ele contém a integração e manter somente `harness-llama-factory/graphify-out`.
 - [X] T014 Registrar no quickstart/documentação que EscutIA não é alterado e que treinamento continua dependente dos gates.
+- [X] T015 Consolidar regras do `.gitignore` na raiz, remover os `.gitignore` redundantes de `harness-llama-factory/`, `harness-llama-factory/.specify/` e `EscutIA/fine_tuning_qlora/`, e validar o `graphify-out` local com `git check-ignore`.
 
 ## Dependencies & Execution Order
 

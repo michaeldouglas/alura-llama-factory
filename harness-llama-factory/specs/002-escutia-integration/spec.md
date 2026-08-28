@@ -46,6 +46,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **FR-007**: A configuração renderizada MUST usar os artefatos preparados do EscutIA e MUST direcionar cache, logs, checkpoints e outputs para armazenamento externo aprovado.
 - **FR-008**: A integração MUST NOT tratar a autorização registrada no manifesto do EscutIA como autorização de execução do harness; treinamento exige gate e autorização explícitos.
 - **FR-009**: O harness MUST recusar sobrescrita de uma configuração renderizada existente e MUST recusar qualquer saída dentro do repositório ou do EscutIA.
+- **FR-010**: O repositório MUST manter uma única política de ignorados de projeto no `.gitignore` da raiz; não deve existir outro `.gitignore` versionado dentro de `harness-llama-factory` ou `EscutIA`.
 
 ### Key Entities
 
@@ -63,6 +64,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **SC-003**: 100% das configurações renderizadas apontam para os datasets existentes e para um destino externo, com zero gravação em `EscutIA/`.
 - **SC-004**: Uma proposta existente nunca é sobrescrita e nenhuma execução de treinamento é iniciada pela preflight ou pelo renderizador.
 - **SC-005**: Outra pessoa consegue reproduzir a preflight e identificar o modelo, revisão, splits, template, método, seed e política de saída apenas pelos artefatos versionados do harness.
+- **SC-006**: O repositório possui exatamente um `.gitignore` de projeto versionado, localizado na raiz, e o `graphify-out` localizado no harness permanece ignorado.
 
 ## Assumptions
 
