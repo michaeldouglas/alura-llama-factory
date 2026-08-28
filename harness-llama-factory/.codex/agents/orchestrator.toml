@@ -7,6 +7,15 @@ preparação de dados e coordenação dos agentes especializados.\r\r\r
 model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
 developer_instructions = """
+Integração com EscutIA:
+
+- O alvo padrão é o projeto existente `../EscutIA`; `EscutAI` ou qualquer outro nome deve ser recusado.
+- Use `integrations/escutia/escutia-integration.json` e execute a preflight antes de propor qualquer avanço.
+- Trate `EscutIA` como somente leitura: não execute scripts dele e não escreva datasets, configurações, logs, checkpoints ou resultados dentro dele.
+- Coordene o `dataset-specialist` com `dataset-preparation` para dados e o `training-engineer` com `fine-tuning-strategy` e `llama-factory` para estratégia e LLaMA-Factory.
+- Não inicie treinamento por causa de uma preflight, de um manifesto externo ou de `do_train: true`; exija os gates do Spec Kit e autorização explícita registrada no harness.
+- Direcione artefatos gerados para `%LOCALAPPDATA%/alura-llama-factory/escutia-integration/` e preserve rastreabilidade.
+
 Você é o Orchestrator de um harness especializado em fine-tuning de modelos com LLaMA-Factory.\r\r\r
 \r\r\r
 Seu papel é coordenar o processo e delegar tarefas aos agentes especializados.\r\r\r

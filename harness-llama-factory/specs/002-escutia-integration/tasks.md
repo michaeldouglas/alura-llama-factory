@@ -32,10 +32,12 @@
 - [X] T013 Atualizar o grafo do harness com `graphify update .`, validar que ele contém a integração e manter somente `harness-llama-factory/graphify-out`.
 - [X] T014 Registrar no quickstart/documentação que EscutIA não é alterado e que treinamento continua dependente dos gates.
 - [X] T015 Consolidar regras do `.gitignore` na raiz, remover os `.gitignore` redundantes de `harness-llama-factory/`, `harness-llama-factory/.specify/` e `EscutIA/fine_tuning_qlora/`, e validar o `graphify-out` local com `git check-ignore`.
+- [X] T016 Alinhar os arquivos TOML carregados dos três agentes ao contrato read-only do EscutIA, às skills aplicáveis e à exigência de gates e autorização explícita.
+- [X] T017 Completar os testes de segurança do renderizador para destinos internos e recusa de sobrescrita.
 
 ## Dependencies & Execution Order
 
-`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T014`
+`T001–T004 → T005–T008 → T009–T011 → T012 → T013–T017`
 
 T002, T004, T006 e T011 são paralelizáveis quando não alteram os mesmos arquivos. T007 depende de T005; T009 depende do perfil e da preflight.
 

@@ -47,6 +47,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **FR-008**: A integração MUST NOT tratar a autorização registrada no manifesto do EscutIA como autorização de execução do harness; treinamento exige gate e autorização explícitos.
 - **FR-009**: O harness MUST recusar sobrescrita de uma configuração renderizada existente e MUST recusar qualquer saída dentro do repositório ou do EscutIA.
 - **FR-010**: O repositório MUST manter uma única política de ignorados de projeto no `.gitignore` da raiz; não deve existir outro `.gitignore` versionado dentro de `harness-llama-factory` ou `EscutIA`.
+- **FR-011**: As configurações operacionais do `orchestrator`, `dataset-specialist` e `training-engineer` MUST declarar o projeto `EscutIA`, a política read-only, a ordem do Spec Kit, a delegação das skills aplicáveis e a exigência de autorização explícita; a documentação e os arquivos TOML carregados pelos agentes MUST permanecer coerentes.
 
 ### Key Entities
 
@@ -65,6 +66,7 @@ Como responsável pelo treinamento, quero renderizar uma proposta LoRA SFT com o
 - **SC-004**: Uma proposta existente nunca é sobrescrita e nenhuma execução de treinamento é iniciada pela preflight ou pelo renderizador.
 - **SC-005**: Outra pessoa consegue reproduzir a preflight e identificar o modelo, revisão, splits, template, método, seed e política de saída apenas pelos artefatos versionados do harness.
 - **SC-006**: O repositório possui exatamente um `.gitignore` de projeto versionado, localizado na raiz, e o `graphify-out` localizado no harness permanece ignorado.
+- **SC-007**: Uma auditoria dos três arquivos TOML dos agentes encontra o contrato de integração do `EscutIA`, as skills responsáveis e a regra de não iniciar treinamento sem gates e autorização explícita, sem exigir alterações no projeto externo.
 
 ## Assumptions
 

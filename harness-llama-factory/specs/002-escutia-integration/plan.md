@@ -7,16 +7,17 @@ Adicionar uma integração isolada no harness que consuma o dataset preparado e 
 ## Technical Context
 
 **Language/Version**: Python 3.12  
-**Dependencies**: biblioteca padrão para a preflight; `pytest` já usado pelo harness para testes  
+**Dependencies**: biblioteca padrão para a preflight; `pytest` já usado pelo projeto raiz para testes
 **Storage**: perfil, scripts, testes e documentação no harness; caches, logs, checkpoints e outputs somente no `%LOCALAPPDATA%` externo  
 **Testing**: `uv run --python 3.12 pytest integrations/escutia/tests`  
 **Target**: projeto irmão `../EscutIA`, validado por nome e existência  
+**Agent contract**: os arquivos `.codex/agents/*.md` e `.codex/agents/*.toml` devem expressar o mesmo contrato de integração e delegação
 **Constraints**: nenhuma escrita no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa; uma única política de ignorados no `.gitignore` da raiz
 
 ## Constitution Check
 
 - Spec Kit antes da implementação: PASS — esta feature tem spec, plan e tasks próprios.
-- Orquestração e skills: PASS — o perfil liga o orchestrator à preflight, o dataset-specialist à validação e o training-engineer à proposta; as skills aplicáveis foram consultadas.
+- Orquestração e skills: PASS — os arquivos Markdown e TOML ligam o orchestrator à preflight, o dataset-specialist à validação com `dataset-preparation` e o training-engineer à proposta com `fine-tuning-strategy` e `llama-factory`.
 - Integridade dos dados: PASS — apenas leitura dos derivados já existentes; nenhuma alteração da fonte.
 - Estratégia orientada a recursos: PASS — a proposta preserva LoRA, batch 1, acumulação 8 e sequência 256 para revisão posterior; não executa.
 - Reprodutibilidade: PASS — identidades, revisão, seed, paths e política de saída ficam versionados.
@@ -46,6 +47,10 @@ integrations/escutia/
 ```
 
 The integration does not add files under `EscutIA/`.
+
+The operational agent configurations in `.codex/agents/` are part of the harness
+contract and must remain aligned between their Markdown documentation and TOML
+runtime definitions.
 
 The repository-wide ignore policy lives only in `../.gitignore`; nested project `.gitignore` files are intentionally not maintained.
 

@@ -57,3 +57,23 @@ def test_rendered_config_uses_existing_dataset_and_external_output():
     assert "do_train: true" in rendered
     assert "escutia-integration" in rendered
     assert str(root) not in rendered.split("output_dir:", 1)[1]
+
+
+def test_renderer_rejects_repository_output(tmp_path):
+    repository_output = validator.HARNESS_ROOT / "proposal.yaml"
+    project_output = validator.resolve_project_root(None, validator.load_profile()) / "proposal.yaml"
+
+    assert not renderer.approved_output(repository_output)
+    assert not renderer.approved_output(project_output)
+    assert not renderer.approved_output(tmp_path / "proposal.yaml")
+
+
+def test_renderer_refuses_to_overwrite_existing_external_config(tmp_path, monkeypatch):
+    external_root = tmp_path / "approved"
+    external_root.mkdir()
+    existing = external_root / "proposal.yaml"
+    existing.write_text("keep-me", encoding="utf-8")
+    monkeypatch.setattr(renderer, "external_root", lambda: external_root)
+
+    assert renderer.main(["--output", str(existing)]) == 2
+    assert existing.read_text(encoding="utf-8") == "keep-me"
