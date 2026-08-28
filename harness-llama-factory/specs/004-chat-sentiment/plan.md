@@ -19,6 +19,8 @@ Implementar a UI do chat e suas rotas protegidas dentro do Next.js existente em
 ## Runtime do modelo
 
 O repositório publicado contém pesos do Transformers em `safetensors`, sem
-artefatos ONNX para carregamento direto pelo Transformers.js. Nesta etapa, a
-API usa o cliente HTTP do Hugging Face Inference Provider, com `HF_TOKEN` apenas
-no servidor. A conversão para ONNX ou execução por Python está fora do escopo.
+artefatos ONNX para carregamento direto pelo Transformers.js. Por padrão, a
+rota server-side do site chama a API FastAPI local em
+`EscutIA/platform/api-modelos`, que carrega o modelo completo e o mantém em
+cache. A configuração `USE_LOCAL_MODEL_API="false"` preserva o caminho HTTP do
+Hugging Face usando `HF_TOKEN` somente no servidor.

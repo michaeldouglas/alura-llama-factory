@@ -4,8 +4,9 @@ Aplicação full-stack da EscutIA, construída com Next.js, TypeScript e Tailwin
 
 O projeto contém a página institucional, autenticação Google, dashboard protegido
 e persistência local de usuários, sessões e conversas em SQLite. O chat valida
-sentimentos pela rota server-side em JavaScript usando o modelo `mdba/escutia-lora`
-via Hugging Face. O Stripe permanece fora desta etapa.
+sentimentos pela rota server-side em JavaScript. Por padrão, ela chama a API
+FastAPI local em `platform/api-modelos`; com `USE_LOCAL_MODEL_API="false"`, usa
+o modelo `mdba/escutia-lora` via Hugging Face. O Stripe permanece fora desta etapa.
 
 ## Executar localmente
 
@@ -38,7 +39,7 @@ npm run start
 - `components/ChatWorkspace.tsx`: interface protegida do chat, histórico e envio de texto.
 - `app/api/auth/[...nextauth]/route.ts`: rotas server-side de autenticação.
 - `app/api/conversations/`: rotas protegidas para histórico e mensagens.
-- `app/api/sentiment/route.ts`: validação de sentimento pelo modelo Hugging Face.
+- `app/api/sentiment/route.ts`: validação de sentimento pelo provedor configurado.
 - `app/dashboard/page.tsx`: área protegida do usuário.
 - `prisma/schema.prisma`: schema local SQLite para usuários, sessões e conversas.
 - `public/logo.png`: logo oficial da EscutIA reutilizado no site.
@@ -46,14 +47,16 @@ npm run start
 ## Ambiente
 
 Copie `.env.example` para `.env.local` e preencha as credenciais do Google, o
-`NEXTAUTH_SECRET` e um `HF_TOKEN` com permissão de Inference Providers. O token
-é usado somente no servidor; não use prefixo `NEXT_PUBLIC_`. Arquivos `.env.local`
-e `prisma/dev.db` são locais e estão ignorados pelo Git.
+`NEXTAUTH_SECRET` e mantenha `USE_LOCAL_MODEL_API="true"` para usar a API local
+em `http://localhost:8000`. O `HF_TOKEN` só é necessário quando essa configuração
+estiver como `false`; ele é usado somente no servidor e não deve usar prefixo
+`NEXT_PUBLIC_`. Arquivos `.env.local` e `prisma/dev.db` são locais e estão
+ignorados pelo Git.
 
-O modelo publicado em `mdba/escutia-lora` é usado pela API server-side através do
-Hugging Face Inference Providers. A primeira validação pode demorar mais enquanto
-o provedor aquece o modelo; as requisições seguintes reutilizam o modelo aquecido
-no provedor e a aplicação não baixa os pesos a cada mensagem.
+Com o provedor local, a API FastAPI baixa o modelo na primeira inicialização,
+reutiliza os pesos em cache e mantém o pipeline em memória. Para usar o caminho
+anterior do Hugging Face, defina `USE_LOCAL_MODEL_API="false"` e configure o
+`HF_TOKEN`.
 
 ## Posicionamento
 

@@ -26,6 +26,8 @@ GOOGLE_CLIENT_SECRET="seu-client-secret"
 NEXTAUTH_SECRET="um-segredo-aleatorio"
 NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="file:./dev.db"
+USE_LOCAL_MODEL_API="true"
+LOCAL_MODEL_API_URL="http://localhost:8000"
 HF_TOKEN="seu-token-do-hugging-face"
 HF_MODEL_ID="mdba/escutia-lora"
 ```
@@ -48,9 +50,9 @@ No Google Cloud Console:
    `http://localhost:3000/api/auth/callback/google`.
 6. Copie o Client ID e o Client Secret para `.env.local`.
 
-Para validar sentimentos no chat, crie também um token do Hugging Face com
-permissão de **Inference Providers** e preencha `HF_TOKEN`. O token é usado
-somente pela API server-side.
+Por padrão, o site usa a API local em `http://localhost:8000`. O `HF_TOKEN` só
+é necessário se você definir `USE_LOCAL_MODEL_API="false"`, para voltar ao
+provedor do Hugging Face. O token é usado somente pela API server-side.
 
 ## 5. Criar o SQLite
 
@@ -75,21 +77,23 @@ Google** e confirme o redirecionamento para `/dashboard`.
 ## 7. Iniciar a API local do modelo
 
 Esta API é um serviço separado do site. A integração do chat com ela será feita
-em uma etapa posterior. Em outro terminal:
+em uma etapa posterior. Em outro terminal, a partir da raiz do projeto:
 
 ```powershell
-cd C:\Users\mdbaa\development\alura\alura-llama-factory\EscutIA\platform\api-modelos
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-Copy-Item .env.example .env.local
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+cd C:\Users\mdbaa\development\alura\alura-llama-factory
+uv sync --native-tls
+Copy-Item EscutIA\platform\api-modelos\.env.example EscutIA\platform\api-modelos\.env.local
+uv run python -m uvicorn main:app `
+  --app-dir EscutIA/platform/api-modelos `
+  --host 0.0.0.0 `
+  --port 8000
 ```
 
 Na primeira inicialização, o modelo é baixado para `api-modelos/modelo/`.
 Depois, os pesos locais são reutilizados e o pipeline permanece em memória
 enquanto o serviço estiver ativo. Se o repositório do modelo for privado,
-preencha `HF_TOKEN` somente no `.env.local` da API.
+preencha `HF_TOKEN` somente no arquivo
+`EscutIA/platform/api-modelos/.env.local`.
 
 Teste em outro terminal:
 

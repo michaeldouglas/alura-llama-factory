@@ -16,7 +16,10 @@ validação opcional do sentimento da mensagem pelo modelo `mdba/escutia-lora`.
 - O sistema MUST persistir conversas e mensagens no SQLite pertencente ao site.
 - A validação MUST executar pela API server-side em JavaScript/TypeScript e
   retornar exatamente um dos rótulos `negativo`, `neutro` ou `positivo`.
-- O token Hugging Face MUST permanecer em variável de ambiente server-side.
+- A validação MUST usar a API FastAPI local por padrão, conforme
+  `USE_LOCAL_MODEL_API` ausente ou diferente de `false`.
+- Quando `USE_LOCAL_MODEL_API="false"`, o token Hugging Face MUST permanecer em
+  variável de ambiente server-side.
 - A primeira análise MAY demorar mais por aquecimento do provedor; o cliente
   não deve baixar pesos a cada mensagem.
 - Esta feature MUST NOT usar `testar_modelo_lora.py`, alterar o harness de
