@@ -1,13 +1,6 @@
 # Configurar o Google Auth
 
-## 1. Abrir o Google Cloud
-
-1. Acesse o [Google Cloud Console](https://console.cloud.google.com/).
-2. Crie ou selecione um projeto.
-3. Abra **APIs e serviços > Tela de consentimento OAuth**.
-4. Configure a tela como **Externo** e preencha os dados obrigatórios.
-
-## 2. Criar as credenciais
+## 1. Criar as credenciais
 
 1. Abra **APIs e serviços > Credenciais**.
 2. Clique em **Criar credenciais > ID do cliente OAuth**.
@@ -26,7 +19,7 @@
 
 6. Copie o Client ID e o Client Secret.
 
-## 3. Configurar a plataforma
+## 2. Configurar a plataforma
 
 Na pasta `EscutIA/platform/site`, crie `.env.local` a partir de `.env.example` e preencha:
 
@@ -44,7 +37,7 @@ Para gerar o `NEXTAUTH_SECRET`:
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
-## 4. Iniciar
+## 3. Iniciar
 
 ```powershell
 npm run db:generate
