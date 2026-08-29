@@ -5,7 +5,8 @@
 Implementar autenticação Google, persistência local em SQLite e um dashboard
 protegido dentro do projeto Next.js existente em `EscutIA/platform/site/`. A
 feature não altera o harness, os artefatos estáveis de fine-tuning nem a futura
-integração Stripe.
+integração Stripe. A visão inicial do dashboard será analítica, com histórico de
+sentimentos filtrável; os dados da conta ficam em `/dashboard/profile`.
 
 ## Technical Context
 

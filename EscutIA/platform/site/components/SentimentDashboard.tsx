@@ -51,11 +51,11 @@ function Chart({ summary, selected }: { summary: SentimentDashboardSummary; sele
   );
 }
 
-export default function SentimentDashboard({ initialSummary }: { initialSummary: SentimentDashboardSummary }) {
+export default function SentimentDashboard({ initialSummary, initialSelected = [...SENTIMENT_LABELS] }: { initialSummary: SentimentDashboardSummary; initialSelected?: SentimentLabel[] }) {
   const [summary, setSummary] = useState(initialSummary);
   const [from, setFrom] = useState(initialSummary.from);
   const [to, setTo] = useState(initialSummary.to);
-  const [selected, setSelected] = useState<SentimentLabel[]>([...SENTIMENT_LABELS]);
+  const [selected, setSelected] = useState<SentimentLabel[]>(initialSelected);
   const [notice, setNotice] = useState("");
   const [isPending, setIsPending] = useState(false);
 

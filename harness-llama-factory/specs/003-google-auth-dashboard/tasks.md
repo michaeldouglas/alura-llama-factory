@@ -56,9 +56,18 @@
 - [X] T031 Aplicar `web-design-guidelines` para corrigir skip link, foco visível, foco do modal, rolagem, semântica e conteúdo acessível.
 - [X] T032 Reexecutar as validações do site e atualizar o Graphify após a revisão.
 
+## Phase 9: Visão analítica de sentimentos
+
+- [X] T033 Criar a consulta server-side de registros agregados por dia em `EscutIA/platform/site/lib/sentiment-dashboard.ts`.
+- [X] T034 Criar a rota autenticada `EscutIA/platform/site/app/api/sentiment/summary/route.ts` com filtros de período e sentimento.
+- [X] T035 Criar o menu lateral reutilizável e tornar `/dashboard` a visão geral analítica.
+- [X] T036 Criar gráfico de barras, cartões de resumo, filtros e estados vazio/atualização em `EscutIA/platform/site/components/SentimentDashboard.tsx`.
+- [X] T037 Mover a visão de conta para `/dashboard/profile` e integrar os links de navegação.
+- [X] T038 Validar typecheck, lint, build, acessibilidade básica, URL dos filtros e atualizar o Graphify.
+
 ## Dependencies & Execution Order
 
-`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022 → T023–T027 → T028–T032`
+`T001–T008 → T009–T011 → T012–T013 → T014–T017 → T018–T022 → T023–T027 → T028–T032 → T033–T038`
 
 ## Implementation Strategy
 
@@ -67,3 +76,5 @@
 3. Implementar modal, redirect e dashboard protegido.
 4. Implementar navegação dependente da sessão e o destino protegido do futuro chat.
 5. Documentar configuração segura e validar o build completo.
+6. Implementar a visão analítica protegida, mantendo o perfil em rota própria e
+   consultando apenas os registros do usuário autenticado.

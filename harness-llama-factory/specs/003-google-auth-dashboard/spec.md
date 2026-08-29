@@ -48,6 +48,20 @@ acessa `/dashboard`; ao selecionar “Conversar agora”, chega a `/chat`. Visit
 vê “Entrar” e, ao selecionar “Conversar agora”, abre o modal Google e, depois do
 login, retorna para `/chat`.
 
+### User Story 5 - Acompanhar sentimentos por período (Priority: P1)
+
+Como usuário autenticado, quero abrir primeiro uma visão geral com gráficos dos
+meus registros de sentimento, filtrada por período e por sentimento, para
+perceber como tenho estado ao longo dos dias.
+
+**Independent Test**: Usuário autenticado acessa `/dashboard`, vê o menu lateral
+e um gráfico de barras agrupadas por dia com os totais de sentimentos positivos,
+neutros e negativos. Ao escolher datas ou sentimentos e aplicar o filtro, o
+gráfico e os resumos são atualizados apenas com seus próprios registros.
+
+O conteúdo anterior de dados da conta permanece disponível em
+`/dashboard/profile`.
+
 ## Edge Cases
 
 - Credenciais Google ausentes ou inválidas.
@@ -95,6 +109,17 @@ login, retorna para `/chat`.
 - **FR-013**: A rota `/chat` MUST exigir uma sessão válida e, até a
   implementação da conversa, MUST exibir uma tela de preparação sem expor
   conteúdo protegido a visitantes.
+- **FR-014**: A rota protegida `/dashboard` MUST carregar primeiro a visão geral
+  analítica de sentimentos, com menu lateral para visão geral, conversa e perfil.
+- **FR-015**: O dashboard MUST oferecer filtro de data inicial, data final e
+  sentimentos positivo, neutro e negativo.
+- **FR-016**: O gráfico MUST agrupar os registros do usuário por dia e exibir a
+  quantidade de cada sentimento selecionado, incluindo estado vazio quando não
+  houver registros no recorte.
+- **FR-017**: A API de resumo MUST validar a sessão, limitar o período consultado
+  e nunca retornar registros pertencentes a outro usuário.
+- **FR-018**: A URL MUST preservar os filtros aplicados para permitir recarregar
+  ou compartilhar a visão filtrada dentro da área autenticada.
 
 ## Key Entities
 
@@ -116,6 +141,10 @@ login, retorna para `/chat`.
   OAuth ou do SQLite está incompleta.
 - **SC-006**: A navegação para dashboard e para o futuro chat respeita a sessão
   atual e preserva o destino escolhido durante o login.
+- **SC-007**: Um usuário consegue identificar, por dia, quantos registros foram
+  positivos, neutros ou negativos no período escolhido.
+- **SC-008**: O perfil continua acessível em rota própria sem substituir a visão
+  geral do dashboard.
 
 ## Assumptions
 
