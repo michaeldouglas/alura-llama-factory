@@ -26,15 +26,8 @@ type ChatMessage = {
   sentiment?: SentimentLabel | null;
 };
 
-type PendingSentimentChange = {
-  question: string;
-  previousSentiment: SentimentLabel | null;
-  detectedSentiment: SentimentLabel | null;
-};
-
 type AgentEvent =
   | { type: "token"; content: string }
-  | PendingSentimentChange & { type: "sentiment_confirmation" }
   | {
       type: "done";
       message: ChatMessage;
@@ -87,6 +80,20 @@ function formatConversationDate(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short" }).format(new Date(value));
 }
 
+function formatDateInputValue(value: Date) {
+  return [value.getFullYear(), String(value.getMonth() + 1).padStart(2, "0"), String(value.getDate()).padStart(2, "0")].join("-");
+}
+
+function getLocalDateKey(value: string) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "" : formatDateInputValue(date);
+}
+
+function formatHistoryDate(value: string) {
+  const [year, month, day] = value.split("-").map(Number);
+  return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "long", year: "numeric" }).format(new Date(year, month - 1, day));
+}
+
 function formatSentimentDate(value: string) {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
@@ -95,6 +102,14 @@ function formatSentimentDate(value: string) {
     hour: "2-digit",
     minute: "2-digit",
   }).format(new Date(value));
+}
+
+function isSentimentFromToday(value: string) {
+  const registeredAt = new Date(value);
+  const today = new Date();
+  return registeredAt.getFullYear() === today.getFullYear()
+    && registeredAt.getMonth() === today.getMonth()
+    && registeredAt.getDate() === today.getDate();
 }
 
 function Avatar({ user, size = "normal" }: { user: UserProfile; size?: "normal" | "large" }) {
@@ -148,6 +163,15 @@ function HistoryIcon() {
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
       <path d="M5 5.5h14A1.5 1.5 0 0 1 20.5 7v10A1.5 1.5 0 0 1 19 18.5H5A1.5 1.5 0 0 1 3.5 17V7A1.5 1.5 0 0 1 5 5.5Z" />
       <path d="M7.5 9h9M7.5 12h9M7.5 15h5" />
+    </svg>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
+      <rect x="4" y="5.5" width="16" height="14" rx="2" />
+      <path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16.5h.01M12 16.5h.01" />
     </svg>
   );
 }
@@ -285,16 +309,20 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [activeConversationId, setActiveConversationId] = useState<string | null>(initialConversationId ?? null);
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? []);
   const [search, setSearch] = useState("");
+  const [historyDate, setHistoryDate] = useState("");
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
   const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
-  const [pendingSentimentChange, setPendingSentimentChange] = useState<PendingSentimentChange | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
   const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId);
   const [historyOpen, setHistoryOpen] = useState(true);
   const [sentimentPanelOpen, setSentimentPanelOpen] = useState(false);
   const [conversationOpen, setConversationOpen] = useState(Boolean(initialConversationId));
   const [sentimentModalOpen, setSentimentModalOpen] = useState(!initialSentiment);
+  const [sentimentReviewOpen, setSentimentReviewOpen] = useState(false);
+  const [sentimentReviewHandled, setSentimentReviewHandled] = useState(false);
+  const [sentimentStatus, setSentimentStatus] = useState<"unknown" | "today" | "stale">("unknown");
+  const [conversationFocusLatestSentiment, setConversationFocusLatestSentiment] = useState(false);
   const [openConversationMenuId, setOpenConversationMenuId] = useState<string | null>(null);
   const [renameTarget, setRenameTarget] = useState<ConversationSummary | null>(null);
   const [renameDraft, setRenameDraft] = useState("");
@@ -302,29 +330,53 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const conversationMenuRef = useRef<HTMLDivElement>(null);
   const lastMessageContent = messages[messages.length - 1]?.content ?? "";
+  const sentimentDateLabel = sentimentStatus === "stale" ? "Seu último sentimento" : "Seu sentimento hoje";
 
   const filteredConversations = useMemo(() => {
+    if (!historyDate) return [];
     const normalizedSearch = search.trim().toLocaleLowerCase("pt-BR");
-    if (!normalizedSearch) return conversations;
-    return conversations.filter((conversation) => conversation.title.toLocaleLowerCase("pt-BR").includes(normalizedSearch));
-  }, [conversations, search]);
+    return conversations.filter((conversation) => {
+      if (getLocalDateKey(conversation.updatedAt) !== historyDate) return false;
+      return !normalizedSearch || conversation.title.toLocaleLowerCase("pt-BR").includes(normalizedSearch);
+    });
+  }, [conversations, historyDate, search]);
 
   useEffect(() => {
-    if (!sentimentModalOpen) return undefined;
+    setHistoryDate(formatDateInputValue(new Date()));
+  }, []);
+
+  useEffect(() => {
+    if (!sentimentModalOpen && !sentimentReviewOpen) return undefined;
 
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape" && !busy) setSentimentModalOpen(false);
+      if (event.key === "Escape" && !busy) {
+        setSentimentModalOpen(false);
+        setSentimentReviewOpen(false);
+        setSentimentReviewHandled(true);
+      }
     }
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [busy, sentimentModalOpen]);
+  }, [busy, sentimentModalOpen, sentimentReviewOpen]);
+
+  useEffect(() => {
+    if (sentimentReviewHandled || !initialSentiment || !initialSentimentAt) return;
+
+    const isToday = isSentimentFromToday(initialSentimentAt);
+    setSentimentStatus(isToday ? "today" : "stale");
+    if (!isToday) {
+      setSentimentReviewHandled(true);
+      setSentimentReviewOpen(true);
+      setNotice("Seu último registro foi feito em outro dia. Vamos confirmar como você está hoje.");
+    }
+  }, [initialSentiment, initialSentimentAt, sentimentReviewHandled]);
 
   useEffect(() => {
     if (!conversationOpen) return;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     messagesEndRef.current?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "end" });
-  }, [conversationOpen, messages.length, lastMessageContent, pendingSentimentChange]);
+  }, [conversationOpen, messages.length, lastMessageContent]);
 
   useEffect(() => {
     if (!openConversationMenuId) return undefined;
@@ -382,7 +434,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     return data.conversation;
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message?: string; confirmation?: boolean }) {
+  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean }) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -412,22 +464,11 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         return;
       }
 
-      if (event.type === "sentiment_confirmation") {
-        setPendingSentimentChange({
-          question: event.question,
-          previousSentiment: event.previousSentiment,
-          detectedSentiment: event.detectedSentiment,
-        });
-        setNotice("Antes de continuar, confirme se você percebeu uma mudança no seu sentimento.");
-        return;
-      }
-
       if (event.type === "done") {
         setMessages((current) => {
           if (!assistantMessageId) return [...current, event.message];
           return current.map((message) => message.id === assistantMessageId ? event.message : message);
         });
-        setPendingSentimentChange(null);
         if (event.sentiment) setCurrentSentiment(event.sentiment);
         if (event.sentimentAt) setCurrentSentimentAt(event.sentimentAt);
         setNotice("A EscutIA respondeu. Continue no seu ritmo.");
@@ -459,7 +500,6 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     const content = draft.trim();
     if (!content || busy) return;
     setDraft("");
-    setPendingSentimentChange(null);
     setNotice("A EscutIA está lendo sua mensagem…");
     setMessages((current) => [...current, { id: `local-${Date.now()}`, role: "user", content }]);
     setBusy("sending");
@@ -472,25 +512,10 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         rememberConversation(conversation.id, conversation.title);
         router.push(`/chat/${conversation.id}`);
       }
-      await consumeAgentStream(conversationId, { message: content });
+      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment });
+      setConversationFocusLatestSentiment(false);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
-    } finally {
-      setBusy(null);
-    }
-  }
-
-  async function handleSentimentConfirmation(confirmed: boolean) {
-    if (!pendingSentimentChange || !activeConversationId || busy) return;
-    const pending = pendingSentimentChange;
-    setBusy("sending");
-    setPendingSentimentChange(null);
-    setNotice("Continuando a conversa…");
-    try {
-      await consumeAgentStream(activeConversationId, { confirmation: confirmed });
-    } catch (error) {
-      setPendingSentimentChange(pending);
-      setNotice(error instanceof Error ? error.message : "Não foi possível continuar a conversa.");
     } finally {
       setBusy(null);
     }
@@ -512,6 +537,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       if (!response.ok || !data.sentiment) throw new Error(data.error || "Não foi possível validar o sentimento.");
       setCurrentSentiment(data.sentiment);
       setCurrentSentimentAt(data.sentimentAt || new Date().toISOString());
+      setSentimentStatus("today");
       setSentimentDraft("");
       setSentimentModalOpen(false);
       setNotice("Seu sentimento foi atualizado. Isso é um apoio para a conversa, não um diagnóstico.");
@@ -525,7 +551,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   async function handleSelectConversation(id: string) {
     if (busy) return;
     setOpenConversationMenuId(null);
-    setPendingSentimentChange(null);
+    setConversationFocusLatestSentiment(false);
     setBusy("loading");
     setSidebarOpen(false);
     setConversationOpen(true);
@@ -635,7 +661,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   function handleNewConversation() {
     if (busy) return;
     setOpenConversationMenuId(null);
-    setPendingSentimentChange(null);
+    setConversationFocusLatestSentiment(false);
     setActiveConversationId(null);
     setMessages([]);
     window.history.replaceState(null, "", "/chat");
@@ -647,6 +673,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   function handleOpenConversation() {
     setSidebarOpen(false);
     setConversationOpen(true);
+    setConversationFocusLatestSentiment(true);
+    setNotice("Vamos conversar a partir do seu último registro de sentimento.");
   }
 
   function handleDraftKeyDown(event: ReactKeyboardEvent<HTMLTextAreaElement>) {
@@ -657,6 +685,43 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
   function openSentimentModal() {
     if (busy) return;
+    setSentimentReviewOpen(false);
+    setSentimentReviewHandled(true);
+    setSentimentDraft("");
+    setSentimentModalOpen(true);
+  }
+
+  async function handleRepeatSentiment() {
+    if (!currentSentiment || busy) return;
+    setBusy("validating");
+    setSentimentReviewOpen(false);
+    setNotice("Registrando seu sentimento novamente…");
+
+    try {
+      const response = await fetch("/api/sentiment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sameAsCurrent: true }),
+      });
+      const data = (await response.json()) as { sentiment?: SentimentLabel; sentimentAt?: string; error?: string };
+      if (!response.ok || !data.sentiment) throw new Error(data.error || "Não foi possível registrar o sentimento novamente.");
+
+      setCurrentSentiment(data.sentiment);
+      setCurrentSentimentAt(data.sentimentAt || new Date().toISOString());
+      setSentimentStatus("today");
+      setNotice("Seu sentimento foi registrado novamente hoje. O registro anterior continua salvo.");
+    } catch (error) {
+      setSentimentReviewOpen(true);
+      setNotice(error instanceof Error ? error.message : "Não foi possível registrar o sentimento novamente.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  function handleRegisterDifferentSentiment() {
+    if (busy) return;
+    setSentimentReviewOpen(false);
+    setSentimentReviewHandled(true);
     setSentimentDraft("");
     setSentimentModalOpen(true);
   }
@@ -693,7 +758,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                 <div className="mt-5 rounded-2xl border border-purple/10 bg-purple/[0.045]">
                   <button type="button" aria-expanded={sentimentPanelOpen} aria-controls="sidebar-sentiment-panel" onClick={() => setSentimentPanelOpen((current) => !current)} className="flex w-full items-center justify-between gap-3 rounded-2xl p-4 text-left transition-colors hover:bg-purple/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-purple/50 motion-reduce:transition-none">
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[0.68rem] font-black uppercase tracking-[0.14em] text-navy/40">Seu sentimento hoje</span>
+                      <span className="block text-[0.68rem] font-black uppercase tracking-[0.14em] text-navy/40">{sentimentDateLabel}</span>
                       {currentSentiment && !sentimentPanelOpen ? <SentimentBadge sentiment={currentSentiment} className="mt-2 px-2 py-0.5 text-[0.6rem] tracking-[-0.01em]" /> : null}
                     </span>
                     <span className="shrink-0 self-center"><ChevronIcon open={sentimentPanelOpen} /></span>
@@ -718,13 +783,27 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4">
-                <button type="button" aria-expanded={historyOpen} onClick={() => setHistoryOpen((current) => !current)} className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition-colors hover:bg-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
-                  <span className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-navy/40">
-                    Histórico
-                    <span className="rounded-full bg-navy/5 px-2 py-0.5 text-[0.65rem]">{filteredConversations.length}</span>
+                <div className="flex w-full items-center gap-1 rounded-xl px-3 py-2">
+                  <button type="button" aria-expanded={historyOpen} onClick={() => setHistoryOpen((current) => !current)} className="flex min-w-0 flex-1 items-center justify-between rounded-lg py-1 text-left transition-colors hover:bg-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
+                    <span className="flex min-w-0 items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-navy/40">
+                      <span>Histórico</span>
+                      <span className="rounded-full bg-navy/5 px-2 py-0.5 text-[0.65rem] tabular-nums">{filteredConversations.length}</span>
+                    </span>
+                    <ChevronIcon open={historyOpen} />
+                  </button>
+                  <span className="relative grid h-9 w-9 shrink-0 place-items-center rounded-lg text-navy/50 transition-colors hover:bg-warm hover:text-purple focus-within:bg-warm focus-within:text-purple focus-within:ring-2 focus-within:ring-purple/50 motion-reduce:transition-none" title="Escolher data do histórico">
+                    <CalendarIcon />
+                    <input
+                      id="history-date"
+                      name="history-date"
+                      type="date"
+                      aria-label={historyDate ? `Escolher data do histórico — ${formatHistoryDate(historyDate)}` : "Escolher data do histórico"}
+                      value={historyDate}
+                      onChange={(event) => setHistoryDate(event.target.value)}
+                      className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                    />
                   </span>
-                  <ChevronIcon open={historyOpen} />
-                </button>
+                </div>
 
                 {historyOpen ? (
                   <div className="mt-2">
@@ -768,7 +847,9 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                           ))}
                         </div>
                       ) : (
-                        <p className="px-3 py-5 text-sm leading-6 text-navy/45">Seu histórico está vazio. As conversas aparecerão aqui quando você começar a usar esse espaço.</p>
+                        <p className="px-3 py-5 text-sm leading-6 text-navy/45">
+                          {historyDate ? `Nenhuma conversa em ${formatHistoryDate(historyDate)}.` : "Carregando o histórico…"}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -845,19 +926,6 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                             {message.role === "user" ? <Avatar user={user} /> : null}
                           </article>
                         ))}
-                        {pendingSentimentChange ? (
-                          <section aria-live="polite" className="max-w-[min(42rem,88%)] rounded-2xl border border-purple/15 bg-purple/[0.045] px-4 py-4 shadow-sm">
-                            <p className="text-sm font-black text-navy">{pendingSentimentChange.question}</p>
-                            <div className="mt-3 flex flex-wrap items-center gap-2">
-                              {pendingSentimentChange.previousSentiment ? <SentimentBadge sentiment={pendingSentimentChange.previousSentiment} className="px-2 py-0.5 text-[0.6rem]" /> : null}
-                              {pendingSentimentChange.detectedSentiment ? <SentimentBadge sentiment={pendingSentimentChange.detectedSentiment} className="px-2 py-0.5 text-[0.6rem]" /> : null}
-                            </div>
-                            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-                              <button type="button" onClick={() => void handleSentimentConfirmation(true)} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl bg-purple px-4 py-2.5 text-xs font-black text-white transition-colors hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Sim, mudou</button>
-                              <button type="button" onClick={() => void handleSentimentConfirmation(false)} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl border border-navy/10 bg-white px-4 py-2.5 text-xs font-black text-navy/65 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Continuar assim</button>
-                            </div>
-                          </section>
-                        ) : null}
                       </div>
                     ) : (
                       <div className="flex h-full min-h-[9rem] items-center justify-center rounded-2xl border border-dashed border-navy/12 bg-white/60 px-4 py-5 text-center">
@@ -897,7 +965,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
                         <div className="mt-8 flex flex-col gap-5 border-t border-navy/8 pt-6 sm:flex-row sm:items-end sm:justify-between">
                           <div>
-                            <p className="text-sm font-black text-navy">Seu sentimento hoje</p>
+                            <p className="text-sm font-black text-navy">{sentimentDateLabel}</p>
                             <div className="mt-3 flex flex-wrap items-center gap-3">
                               <SentimentBadge sentiment={currentSentiment} />
                               <p className="text-xs text-navy/45">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
@@ -968,6 +1036,32 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
             <div className="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
               <button type="button" onClick={() => setDeleteTarget(null)} disabled={busy === "deleting"} className="inline-flex items-center justify-center rounded-xl border border-navy/10 px-5 py-3 text-sm font-bold text-navy/65 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">Cancelar</button>
               <button type="button" onClick={() => void handleDeleteConversation()} disabled={busy === "deleting"} className="inline-flex items-center justify-center rounded-xl bg-rose-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300 disabled:cursor-not-allowed disabled:opacity-45">{busy === "deleting" ? "Excluindo…" : "Excluir"}</button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {sentimentReviewOpen && currentSentiment && currentSentimentAt ? (
+        <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
+          <div role="dialog" aria-modal="true" aria-labelledby="sentiment-review-title" aria-describedby="sentiment-review-description" className="w-full max-w-xl rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-9">
+            <p className="eyebrow">um novo dia, um novo registro</p>
+            <h2 id="sentiment-review-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy sm:text-3xl">Você continua se sentindo assim hoje?</h2>
+            <p id="sentiment-review-description" className="mt-4 text-sm leading-7 text-navy/55">
+              Seu último registro foi feito em {formatSentimentDate(currentSentimentAt)}. Ele continua salvo; queremos apenas saber como você está hoje.
+            </p>
+
+            <div className="mt-6 rounded-2xl border border-purple/10 bg-purple/[0.045] p-4">
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-navy/40">Último registro</p>
+              <SentimentBadge sentiment={currentSentiment} className="mt-3" />
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-end">
+              <button type="button" onClick={handleRegisterDifferentSentiment} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl border border-navy/10 bg-white px-5 py-3 text-sm font-bold text-navy/70 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">
+                Não, quero registrar outro
+              </button>
+              <button type="button" onClick={() => void handleRepeatSentiment()} disabled={Boolean(busy)} className="inline-flex items-center justify-center rounded-xl bg-purple px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45">
+                {busy === "validating" ? "Registrando…" : "Sim, continuo assim"}
+              </button>
             </div>
           </div>
         </div>

@@ -1,4 +1,3 @@
-import { Command } from "@langchain/langgraph";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -15,17 +14,12 @@ export const maxDuration = 300;
 type AgentRequest = {
   conversationId?: unknown;
   message?: unknown;
-  confirmation?: unknown;
+  focusLatestSentiment?: unknown;
+  replaceMessageId?: unknown;
 };
 
 type AgentEvent =
   | { type: "token"; content: string }
-  | {
-      type: "sentiment_confirmation";
-      question: string;
-      previousSentiment: SentimentLabel | null;
-      detectedSentiment: SentimentLabel | null;
-    }
   | {
       type: "done";
       message: { id: string; role: "assistant"; content: string; sentiment: null };
@@ -44,29 +38,9 @@ function ndjson(event: AgentEvent) {
   return `${JSON.stringify(event)}\n`;
 }
 
-function getInterruptValue(value: unknown) {
-  if (!value || typeof value !== "object") return null;
-  const interrupt = (value as { __interrupt__?: unknown }).__interrupt__;
-  if (!Array.isArray(interrupt) || !interrupt.length) return null;
-  const first = interrupt[0];
-  if (first && typeof first === "object" && "value" in first) return (first as { value: unknown }).value;
-  return first;
-}
-
 function getGraphEvent(value: unknown) {
   if (!Array.isArray(value) || value.length !== 2 || typeof value[0] !== "string") return null;
   return { mode: value[0], chunk: value[1] };
-}
-
-function findInterrupt(value: unknown): unknown {
-  const direct = getInterruptValue(value);
-  if (direct) return direct;
-  if (!value || typeof value !== "object") return null;
-  for (const nested of Object.values(value)) {
-    const found = getInterruptValue(nested);
-    if (found) return found;
-  }
-  return null;
 }
 
 async function verifyConversation(conversationId: string, userId: string) {
@@ -85,17 +59,15 @@ export async function POST(request: Request) {
 
   const body = (await request.json().catch(() => null)) as AgentRequest | null;
   const conversationId = typeof body?.conversationId === "string" ? body.conversationId : "";
-  const isResume = typeof body?.confirmation === "boolean";
+  const focusLatestSentiment = body?.focusLatestSentiment === true;
+  const replaceMessageId = typeof body?.replaceMessageId === "string" ? body.replaceMessageId : "";
   const message = typeof body?.message === "string" ? body.message.trim() : "";
 
   if (!conversationId) {
     return NextResponse.json({ error: "Conversa não informada." }, { status: 400 });
   }
-  if (!isResume && (!message || message.length > 2000)) {
+  if (!message || message.length > 2000) {
     return NextResponse.json({ error: "A mensagem deve ter entre 1 e 2000 caracteres." }, { status: 400 });
-  }
-  if (isResume && body?.message !== undefined) {
-    return NextResponse.json({ error: "Pedido de confirmação inválido." }, { status: 400 });
   }
 
   try {
@@ -104,45 +76,96 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Conversa não encontrada." }, { status: 404 });
     }
 
-    const profile = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: { currentSentiment: true, currentSentimentAt: true },
-    });
+    const [profile, latestSentimentRecord] = await Promise.all([
+      prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { currentSentiment: true, currentSentimentAt: true },
+      }),
+      focusLatestSentiment
+        ? prisma.sentimentRecord.findFirst({
+            where: { userId: session.user.id },
+            orderBy: { createdAt: "desc" },
+            select: { sentiment: true, note: true, createdAt: true },
+          })
+        : Promise.resolve(null),
+    ]);
 
-    let userMessageId = "";
-    if (!isResume) {
-      const created = await prisma.$transaction(async (transaction) => {
-        const savedMessage = await transaction.message.create({
-          data: { conversationId, role: "user", content: message },
+    const created = await prisma.$transaction(async (transaction) => {
+      if (replaceMessageId) {
+        const target = await transaction.message.findFirst({
+          where: { id: replaceMessageId, conversationId, role: "user" },
           select: { id: true },
         });
-        await transaction.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
-        return savedMessage;
-      });
-      userMessageId = created.id;
-    }
+        if (!target) throw new Error("MESSAGE_NOT_FOUND");
 
-    const memory = isResume ? null : await getConversationMemory(conversationId, session.user.id);
+        const orderedMessages = await transaction.message.findMany({
+          where: { conversationId },
+          orderBy: [{ createdAt: "asc" }, { id: "asc" }],
+          select: { id: true },
+        });
+        const targetIndex = orderedMessages.findIndex((item) => item.id === target.id);
+        const laterMessageIds = orderedMessages.slice(targetIndex + 1).map((item) => item.id);
+        if (laterMessageIds.length) {
+          await transaction.message.deleteMany({ where: { id: { in: laterMessageIds } } });
+        }
+        await transaction.message.update({ where: { id: target.id }, data: { content: message, sentiment: null } });
+        await transaction.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
+        return target;
+      }
+
+      const savedMessage = await transaction.message.create({
+        data: { conversationId, role: "user", content: message },
+        select: { id: true },
+      });
+      await transaction.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
+      return savedMessage;
+    });
+    const userMessageId = created.id;
+
+    const memory = await getConversationMemory(conversationId, session.user.id);
     const currentSentiment = asSentiment(profile?.currentSentiment);
     const graph = getEscutiaGraph();
     const config = { configurable: { thread_id: conversationId } };
-    const input = isResume
-      ? new Command<{ confirmed: boolean }, Record<string, unknown>, "__start__" | "analyze_sentiment" | "confirm_sentiment_change" | "respond">({ resume: { confirmed: body?.confirmation === true } })
-      : {
-          conversationId,
-          userId: session.user.id,
-          userMessageId,
-          userMessage: message,
-          messages: memory?.messages.map((item) => ({
-            role: item.role === "assistant" ? "assistant" as const : "user" as const,
-            content: item.content,
-          })) ?? [],
-          currentSentiment,
-          detectedSentiment: null,
-          sentimentChanged: false,
-          approvedSentiment: currentSentiment,
-          assistantResponse: "",
-        };
+    const latestSentimentContext = latestSentimentRecord
+      ? [{
+          role: "system" as const,
+          content: [
+            "A pessoa escolheu conversar sobre o último registro de sentimento dela.",
+            "Use este contexto para acolher e conduzir a conversa naturalmente, sem mencionar que recebeu um contexto oculto nem transformar o rótulo em diagnóstico.",
+            `Sentimento registrado: ${latestSentimentRecord.sentiment}.`,
+            `Data do registro: ${latestSentimentRecord.createdAt.toISOString()}.`,
+            latestSentimentRecord.note ? `Relato da pessoa: ${latestSentimentRecord.note}` : "A pessoa não deixou um relato textual neste registro.",
+          ].join("\n"),
+        }]
+      : currentSentiment
+        ? [{
+            role: "system" as const,
+            content: [
+              "A pessoa escolheu conversar sobre o último sentimento salvo no perfil.",
+              "Use este contexto para acolher e conduzir a conversa naturalmente, sem mencionar que recebeu um contexto oculto nem transformar o rótulo em diagnóstico.",
+              `Sentimento registrado: ${currentSentiment}.`,
+              profile?.currentSentimentAt ? `Data do registro: ${profile.currentSentimentAt.toISOString()}.` : "A data do registro não está disponível.",
+            ].join("\n"),
+          }]
+        : [];
+    const input = {
+      conversationId,
+      userId: session.user.id,
+      userMessageId,
+      userMessage: message,
+      messages: [
+        ...latestSentimentContext,
+        ...memory.messages.map((item) => ({
+          role: item.role === "assistant" ? "assistant" as const : "user" as const,
+          content: item.content,
+        })),
+      ],
+      currentSentiment,
+      detectedSentiment: null,
+      sentimentChanged: false,
+      approvedSentiment: currentSentiment,
+      assistantResponse: "",
+    };
 
     const stream = await graph.stream(input, {
       ...config,
@@ -152,7 +175,6 @@ export async function POST(request: Request) {
     const responseStream = new ReadableStream<Uint8Array>({
       async start(controller) {
         const encoder = new TextEncoder();
-        let interrupted = false;
 
         const send = (event: AgentEvent) => controller.enqueue(encoder.encode(ndjson(event)));
 
@@ -167,26 +189,7 @@ export async function POST(request: Request) {
               if (typeof content === "string" && content) send({ type: "token", content });
             }
 
-            if (mode === "updates" || !mode) {
-              const interrupt = findInterrupt(chunk);
-              if (interrupt && typeof interrupt === "object") {
-                const value = interrupt as {
-                  question?: unknown;
-                  previousSentiment?: unknown;
-                  detectedSentiment?: unknown;
-                };
-                send({
-                  type: "sentiment_confirmation",
-                  question: typeof value.question === "string" ? value.question : "Percebi uma mudança no seu sentimento. É isso mesmo?",
-                  previousSentiment: asSentiment(value.previousSentiment),
-                  detectedSentiment: asSentiment(value.detectedSentiment),
-                });
-                interrupted = true;
-              }
-            }
           }
-
-          if (interrupted) return;
 
           const snapshot = await graph.getState(config);
           const values = snapshot.values as EscutiaStateType;
@@ -205,6 +208,9 @@ export async function POST(request: Request) {
                 await transaction.message.update({ where: { id: persistedUserMessageId }, data: { sentiment: finalSentiment } });
               }
               if (sentimentChanged && finalSentiment) {
+                await transaction.sentimentRecord.create({
+                  data: { userId: session.user.id, sentiment: finalSentiment },
+                });
                 await transaction.user.update({
                   where: { id: session.user.id },
                   data: { currentSentiment: finalSentiment, currentSentimentAt: sentimentAt },
@@ -240,6 +246,9 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Não foi possível iniciar o agente EscutIA:", error);
+    if (error instanceof Error && error.message === "MESSAGE_NOT_FOUND") {
+      return NextResponse.json({ error: "Mensagem não encontrada para edição." }, { status: 404 });
+    }
     return NextResponse.json({ error: "Não foi possível iniciar a conversa agora." }, { status: 503 });
   }
 }

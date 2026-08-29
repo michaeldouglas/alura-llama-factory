@@ -8,6 +8,6 @@ export async function analyzeSentimentNode(state: EscutiaStateType) {
   return {
     detectedSentiment: result.sentiment,
     sentimentChanged,
-    approvedSentiment: sentimentChanged ? state.currentSentiment : result.sentiment,
+    approvedSentiment: result.sentiment,
   };
 }

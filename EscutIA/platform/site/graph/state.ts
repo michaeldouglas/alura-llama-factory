@@ -9,7 +9,7 @@ export const EscutiaState = new StateSchema({
   userMessageId: z.string().default(""),
   userMessage: z.string(),
   messages: z.array(z.object({
-    role: z.enum(["user", "assistant"]),
+    role: z.enum(["system", "user", "assistant"]),
     content: z.string(),
   })).default(() => []),
   currentSentiment: SentimentSchema.nullable().default(null),

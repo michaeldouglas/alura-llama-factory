@@ -18,6 +18,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   conversations Conversation[]
+  sentimentRecords SentimentRecord[]
 }
 
 model Account {
@@ -79,4 +80,15 @@ model Message {
   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([conversationId, createdAt])
+}
+
+model SentimentRecord {
+  id        String   @id @default(cuid())
+  userId    String
+  sentiment String
+  note      String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
 }
