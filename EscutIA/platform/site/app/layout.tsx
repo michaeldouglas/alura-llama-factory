@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "http://localhost:3000";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -15,9 +17,53 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "EscutIA — Fale. Desabafe. Seja ouvido.",
+  ...(siteUrl
+    ? {
+        metadataBase: new URL(siteUrl),
+        alternates: { canonical: "/" },
+      }
+    : {}),
+  title: {
+    default: "Apoio emocional online para falar e ser ouvido | EscutIA",
+    template: "%s | EscutIA",
+  },
   description:
-    "Apoio emocional acolhedor, respeitoso e privado para conversar quando você precisar.",
+    "Converse sobre o que você está vivendo, organize seus pensamentos e encontre um próximo passo com acolhimento, privacidade e sem julgamentos.",
+  applicationName: "EscutIA",
+  keywords: [
+    "apoio emocional",
+    "conversa acolhedora",
+    "saúde emocional",
+    "escuta",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "EscutIA",
+    title: "Apoio emocional online para falar e ser ouvido | EscutIA",
+    description:
+      "Converse sobre o que você está vivendo, organize seus pensamentos e encontre um próximo passo com acolhimento, privacidade e sem julgamentos.",
+    ...(siteUrl ? { url: "/" } : {}),
+    images: [
+      {
+        url: "/logo.png",
+        width: 2172,
+        height: 724,
+        alt: "EscutIA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Apoio emocional online para falar e ser ouvido | EscutIA",
+    description:
+      "Converse sobre o que você está vivendo, organize seus pensamentos e encontre um próximo passo com acolhimento, privacidade e sem julgamentos.",
+    images: ["/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

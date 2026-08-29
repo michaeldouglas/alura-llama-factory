@@ -290,7 +290,7 @@ function LogoMark() {
 
 function CollapsedIconButton({ label, onClick, children, disabled = false }: { label: string; onClick: () => void; children: ReactNode; disabled?: boolean }) {
   return (
-    <button type="button" aria-label={label} title={label} onClick={onClick} disabled={disabled} className="grid h-11 w-11 place-items-center rounded-2xl text-navy/55 transition-colors hover:bg-warm hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transition-none">
+    <button type="button" aria-label={label} title={label} onClick={onClick} disabled={disabled} className="grid h-11 w-11 place-items-center rounded-2xl text-navy/55 transition-[background-color,color,transform] hover:bg-warm hover:text-purple active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40 motion-reduce:transform-none motion-reduce:transition-none">
       {children}
     </button>
   );
@@ -1021,7 +1021,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
               </div>
 
               <div className="border-t border-navy/8 p-4">
-                <button type="button" onClick={handleNewConversation} disabled={Boolean(busy)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none">
+                <button type="button" onClick={handleNewConversation} disabled={Boolean(busy)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transform-none motion-reduce:transition-none">
                   <span aria-hidden="true" className="text-lg leading-none">+</span>
                   Nova conversa
                 </button>
@@ -1081,7 +1081,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                     {messages.length ? (
                       <div className="flex flex-col gap-5">
                         {messages.map((message) => (
-                          <article key={message.id} className={`group flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+                          <article key={message.id} className={`chat-message-enter group flex gap-3 motion-reduce:animate-none ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                             {message.role === "assistant" ? <EscutiaAvatar /> : null}
                             {editingMessageId === message.id && message.role === "user" ? (
                               <form onSubmit={(event) => void handleEditMessage(event)} className="w-full max-w-[min(42rem,88%)] rounded-2xl rounded-br-md bg-navy p-2 shadow-sm">
@@ -1142,7 +1142,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                       <textarea id="chat-message" name="chat-message" value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={3} placeholder="Escreva uma mensagem…" className="w-full resize-none rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
                       <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <p className="text-xs text-navy/45" aria-live="polite">{busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
-                        <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy)} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">
+                        <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy)} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transform-none motion-reduce:transition-none">
                           <SendIcon />
                         </button>
                       </div>

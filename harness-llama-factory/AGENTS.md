@@ -61,8 +61,9 @@ necessário e executando as validações antes e depois da alteração.
 ## Skills exclusivas da plataforma
 
 - `frontend-design`, `vercel-react-best-practices`,
-  `vercel-composition-patterns` e `web-design-guidelines` são skills exclusivas
-  de `EscutIA/platform/` e não devem ser aplicadas a tarefas de fine-tuning,
+  `vercel-composition-patterns`, `web-design-guidelines`, `copywriting`,
+  `seo-audit` e `interaction-design` são skills exclusivas de
+  `EscutIA/platform/` e não devem ser aplicadas a tarefas de fine-tuning,
   datasets, modelos ou LLaMA-Factory.
 - Quando uma solicitação envolver o site, páginas, componentes, estilos ou
   experiência de usuário React/Next.js, o orchestrator deve usar as quatro
@@ -71,6 +72,14 @@ necessário e executando as validações antes e depois da alteração.
   composição dos componentes, `vercel-react-best-practices` para revisar a
   implementação React/Next.js, performance, carregamento e divisão entre
   servidor e cliente, e `web-design-guidelines` para revisar UX e acessibilidade.
+- Use `copywriting` em páginas de marketing, títulos, benefícios, CTAs,
+  propostas de valor e metadados editoriais; use `seo-audit` para revisar
+  títulos, descrições, headings, conteúdo, palavras-chave, indexação e demais
+  pontos de SEO do site. Essas skills complementam as quatro skills de UI e
+  nunca devem ser chamadas para o harness de LLaMA-Factory.
+- Use `interaction-design` para animações de entrada, transições, hover/clique,
+  skeletons, estados de carregamento, microinterações e suporte a
+  `prefers-reduced-motion`, sempre priorizando `transform` e `opacity`.
 - Ao usar `web-design-guidelines`, consulte a fonte atual das diretrizes antes
   de cada revisão, conforme a própria skill orienta.
 - Alterações exclusivamente documentais ou de configuração da plataforma podem

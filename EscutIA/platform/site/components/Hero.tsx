@@ -13,7 +13,7 @@ export default function Hero() {
             Fale. Desabafe. <span className="text-gradient">Seja ouvido.</span>
           </h1>
           <p className="mt-7 max-w-[550px] text-lg leading-8 text-navy/65 sm:text-xl">
-            A EscutIA é um espaço de apoio emocional onde você pode conversar, organizar seus pensamentos e expressar como está se sentindo, a qualquer momento.
+            Converse sobre o que está acontecendo, organize seus pensamentos e encontre um próximo passo com acolhimento, privacidade e sem julgamentos.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <ConversationAction className="rounded-full bg-gradient-brand px-7 py-4 text-center text-sm font-extrabold text-white shadow-xl shadow-pink/20 transition hover:-translate-y-1" />

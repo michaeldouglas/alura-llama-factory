@@ -60,9 +60,23 @@ solicitações de UI e código React/Next.js dentro de `site/`:
   props booleanas.
 - `web-design-guidelines`: usar ao revisar UX, acessibilidade e conformidade da
   interface com as diretrizes atuais de componentes web.
+- `copywriting`: usar ao escrever ou revisar textos de páginas, títulos,
+  benefícios, CTAs, propostas de valor e metadados editoriais, preservando a
+  voz em português e sem inventar provas ou promessas.
+- `seo-audit`: usar ao auditar títulos, descrições, headings, conteúdo,
+  palavras-chave, indexação, links, imagens, dados estruturados e demais
+  pontos técnicos de SEO.
+- `interaction-design`: usar ao implementar ou revisar animações de entrada,
+  transições, hover/clique, skeletons, estados de carregamento,
+  microinterações e suporte a `prefers-reduced-motion`, priorizando
+  `transform` e `opacity`.
 
 Para mudanças de interface, a ordem recomendada é usar primeiro
 `frontend-design`, depois `vercel-composition-patterns`,
-`vercel-react-best-practices` e, por fim, `web-design-guidelines`. A última deve
-consultar as diretrizes atuais antes da revisão. Essas skills não se aplicam ao
-harness de fine-tuning nem aos artefatos de treinamento.
+`vercel-react-best-practices` e, por fim, `web-design-guidelines`. Para páginas
+de marketing, use `copywriting` antes de consolidar o texto e `seo-audit` depois
+das mudanças de conteúdo e metadados. A última revisão de UI deve consultar as
+diretrizes atuais antes da análise. Essas skills não se aplicam ao harness de
+fine-tuning nem aos artefatos de treinamento.
+Quando a tarefa envolver movimento ou feedback de interação, acrescente
+`interaction-design` à implementação e à revisão da interface.

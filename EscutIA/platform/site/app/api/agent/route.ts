@@ -35,6 +35,14 @@ function asSentiment(value: unknown): SentimentLabel | null {
   return typeof value === "string" && SENTIMENTS.has(value as SentimentLabel) ? value as SentimentLabel : null;
 }
 
+function getFirstName(name: string | null | undefined, email: string | null | undefined) {
+  const displayName = name?.trim() || email?.split("@")[0]?.trim() || "";
+  const firstName = displayName.split(/\s+/)[0] || "";
+  const safeName = firstName.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ0-9'’-]/g, "").slice(0, 40);
+
+  return safeName || null;
+}
+
 function ndjson(event: AgentEvent) {
   return `${JSON.stringify(event)}\n`;
 }
@@ -125,8 +133,21 @@ export async function POST(request: Request) {
 
     const memory = await getConversationMemory(conversationId, session.user.id);
     const currentSentiment = asSentiment(profile?.currentSentiment);
+    const firstName = getFirstName(session.user.name, session.user.email);
+    const isFirstInteraction = !replaceMessageId && memory.messages.length === 1;
     const graph = getEscutiaGraph();
     const config = { configurable: { thread_id: conversationId } };
+    const identityContext = firstName
+      ? [{
+          role: "system" as const,
+          content: [
+            `O primeiro nome da pessoa nesta conversa é ${firstName}.`,
+            isFirstInteraction
+              ? `Esta é a primeira interação desta conversa: inclua na primeira resposta uma saudação como "Oi, ${firstName}! Eu sou a EscutIA" e use o nome somente uma vez.`
+              : "Esta conversa já possui histórico: não repita a apresentação nem faça uma nova saudação com o nome.",
+          ].join("\n"),
+        }]
+      : [];
     const latestSentimentContext = latestSentimentRecord
       ? [{
           role: "system" as const,
@@ -155,6 +176,7 @@ export async function POST(request: Request) {
       userMessageId,
       userMessage: message,
       messages: [
+        ...identityContext,
         ...latestSentimentContext,
         ...memory.messages.map((item) => ({
           role: item.role === "assistant" ? "assistant" as const : "user" as const,

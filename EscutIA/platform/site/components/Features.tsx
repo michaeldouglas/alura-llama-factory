@@ -2,9 +2,9 @@ const features = [
   ["24/7", "Apoio emocional 24/7", "Sempre disponível quando você quiser conversar.", "◷"],
   ["01", "Conversas acolhedoras", "Interações respeitosas e sem julgamentos.", "♡"],
   ["02", "Privacidade", "Experiência construída com preocupação com segurança e proteção dos dados.", "⌁"],
-  ["03", "Histórico pessoal", "Permitir futuramente acompanhar suas próprias conversas e reflexões.", "▤"],
-  ["04", "Reflexões", "Ajudar o usuário a organizar pensamentos e perceber padrões no seu dia a dia.", "✧"],
-  ["05", "Encaminhamento responsável", "Em situações que exijam atenção especializada, orientar o usuário a procurar profissionais adequados.", "↗"],
+  ["03", "Histórico pessoal", "Veja suas conversas e reflexões em um só lugar.", "▤"],
+  ["04", "Reflexões", "Organize o que você sente e perceba padrões no seu dia a dia.", "✧"],
+  ["05", "Encaminhamento responsável", "Se algo exigir atenção especializada, encontre orientação para buscar ajuda adequada.", "↗"],
 ];
 
 export default function Features() {

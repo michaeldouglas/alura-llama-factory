@@ -48,6 +48,20 @@ exclusivas da plataforma nesta ordem:
 3. `vercel-react-best-practices` para performance e padrões React/Next.js.
 4. `web-design-guidelines` para revisão de UX e acessibilidade; consulte a fonte
    atual das diretrizes antes de cada revisão.
+5. `copywriting` para textos de páginas, títulos, benefícios, CTAs, propostas de
+   valor e metadados editoriais.
+6. `seo-audit` para títulos, descrições, headings, conteúdo, palavras-chave,
+   indexação, links, imagens e demais pontos técnicos de SEO.
+7. `interaction-design` para animações, transições, hover/clique, skeletons,
+   estados de carregamento, microinterações e `prefers-reduced-motion`.
+
+Em páginas de marketing, `copywriting` deve orientar a revisão do texto antes
+de `seo-audit`, que valida o resultado editorial e técnico. As duas skills são
+exclusivas da plataforma e não devem ser aplicadas a datasets, modelos,
+treinamento ou LLaMA-Factory.
+Quando houver movimento ou feedback de interação, `interaction-design` deve
+orientar a implementação, com animações performáticas baseadas em `transform` e
+`opacity`.
 
 Nenhuma dessas skills deve ser aplicada ao harness de modelos, datasets,
 treinamento ou LLaMA-Factory.

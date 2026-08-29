@@ -91,6 +91,12 @@ e use as skills `frontend-design`, `vercel-composition-patterns`,
 tarefa envolver UI ou código React/Next.js. Essas skills não devem ser usadas em
 tarefas de datasets, modelos, treinamento ou LLaMA-Factory. A
 `web-design-guidelines` deve consultar sua fonte atual antes de cada revisão.
+Para páginas de marketing, use também `copywriting` para revisar a mensagem,
+benefícios, CTAs e metadados editoriais, seguido de `seo-audit` para validar
+conteúdo e SEO técnico. Ambas são exclusivas da plataforma.
+Para animações, transições, estados de carregamento e microinterações, use
+também `interaction-design`, respeitando `prefers-reduced-motion` e priorizando
+`transform` e `opacity`.
 
 Quando houver uma solicitação explícita de evolução, confirme o escopo dos
 arquivos, consulte os artefatos do Spec Kit, preserve a versão anterior, registre
