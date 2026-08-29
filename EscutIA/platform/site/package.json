@@ -23,6 +23,8 @@
     "next-auth": "4.24.15",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
     "zod": "^4.5.1"
   },
   "devDependencies": {

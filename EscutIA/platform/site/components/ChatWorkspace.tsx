@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type SentimentLabel = "negativo" | "neutro" | "positivo";
 
@@ -141,6 +143,14 @@ function Logo() {
   );
 }
 
+function EscutiaAvatar() {
+  return (
+    <div className="mt-1 flex h-9 w-[7.25rem] shrink-0 items-center overflow-hidden rounded-xl bg-white px-1 shadow-sm" aria-label="EscutIA">
+      <Image src="/logo.png" alt="EscutIA" width={132} height={45} className="h-8 w-auto max-w-none" />
+    </div>
+  );
+}
+
 function ExitIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
@@ -200,6 +210,23 @@ function SendIcon() {
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
       <path d="m4 4 16 8-16 8 3-8-3-8Z" />
       <path d="M7 12h13" />
+    </svg>
+  );
+}
+
+function CopyIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
+      <rect x="8" y="8" width="11" height="11" rx="2" />
+      <path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4H6.5A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+      <path d="m5 12.5 4.2 4.2L19 7" />
     </svg>
   );
 }
@@ -300,6 +327,62 @@ function SentimentBadge({ sentiment, className = "" }: { sentiment: SentimentLab
   );
 }
 
+const MARKDOWN_TONES = {
+  assistant: {
+    text: "text-navy/80",
+    muted: "text-navy/65",
+    border: "border-navy/15",
+    code: "bg-warm text-navy",
+    link: "text-purple decoration-purple/40 hover:text-purple",
+  },
+  user: {
+    text: "text-white",
+    muted: "text-white/80",
+    border: "border-white/25",
+    code: "bg-white/10 text-white",
+    link: "text-white underline decoration-white/50 hover:text-white",
+  },
+} as const;
+
+function MarkdownMessage({ content, tone }: { content: string; tone: keyof typeof MARKDOWN_TONES }) {
+  const colors = MARKDOWN_TONES[tone];
+
+  return (
+    <div className={`min-w-0 max-w-full overflow-x-auto break-words ${colors.text}`}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          p: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+          h1: ({ children }) => <h3 className="mb-3 mt-5 text-lg font-black leading-tight tracking-[-0.02em] first:mt-0">{children}</h3>,
+          h2: ({ children }) => <h4 className="mb-2.5 mt-5 text-base font-black leading-tight first:mt-0">{children}</h4>,
+          h3: ({ children }) => <h5 className="mb-2 mt-4 text-[0.95rem] font-black leading-tight first:mt-0">{children}</h5>,
+          ul: ({ children }) => <ul className="mb-3 ml-5 list-disc space-y-1.5 last:mb-0">{children}</ul>,
+          ol: ({ children }) => <ol className="mb-3 ml-5 list-decimal space-y-1.5 last:mb-0">{children}</ol>,
+          li: ({ children }) => <li className="pl-1 leading-7">{children}</li>,
+          a: ({ children, href }) => (
+            <a href={href} target="_blank" rel="noreferrer" className={`font-semibold underline decoration-1 underline-offset-2 transition-colors ${colors.link} motion-reduce:transition-none`}>
+              {children}
+            </a>
+          ),
+          blockquote: ({ children }) => <blockquote className={`my-3 border-l-2 pl-4 italic ${colors.border} ${colors.muted}`}>{children}</blockquote>,
+          strong: ({ children }) => <strong className="font-black">{children}</strong>,
+          em: ({ children }) => <em className="italic">{children}</em>,
+          del: ({ children }) => <del className={colors.muted}>{children}</del>,
+          hr: () => <hr className={`my-5 ${colors.border}`} />,
+          pre: ({ children }) => <pre className={`my-3 max-w-full overflow-x-auto rounded-xl px-3.5 py-3 text-[0.82rem] leading-6 ${colors.code}`}>{children}</pre>,
+          code: ({ children, className }) => <code className={`${className ?? ""} rounded-md px-1.5 py-0.5 text-[0.88em] ${colors.code}`}>{children}</code>,
+          table: ({ children }) => <table className={`my-3 min-w-[32rem] w-full border-collapse text-left text-[0.86em] ${colors.border}`}>{children}</table>,
+          thead: ({ children }) => <thead className={colors.code}>{children}</thead>,
+          th: ({ children }) => <th className={`border px-3 py-2 font-black ${colors.border}`}>{children}</th>,
+          td: ({ children }) => <td className={`border px-3 py-2 align-top ${colors.border}`}>{children}</td>,
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
+  );
+}
+
 export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages }: ChatWorkspaceProps) {
   const displayName = getDisplayName(user);
   const router = useRouter();
@@ -310,6 +393,9 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? []);
   const [search, setSearch] = useState("");
   const [historyDate, setHistoryDate] = useState("");
+  const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
+  const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
+  const [editingDraft, setEditingDraft] = useState("");
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
   const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
@@ -434,7 +520,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     return data.conversation;
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean }) {
+  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; replaceMessageId?: string }) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -493,6 +579,55 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       if (done) break;
     }
     if (buffer.trim()) readLine(buffer);
+  }
+
+  async function handleCopyMessage(message: ChatMessage) {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopiedMessageId(message.id);
+      setNotice("Mensagem copiada.");
+      window.setTimeout(() => {
+        setCopiedMessageId((current) => current === message.id ? null : current);
+      }, 1800);
+    } catch {
+      setNotice("Não foi possível copiar a mensagem. Selecione o texto e tente novamente.");
+    }
+  }
+
+  function startEditingMessage(message: ChatMessage) {
+    if (busy || message.role !== "user") return;
+    setEditingMessageId(message.id);
+    setEditingDraft(message.content);
+  }
+
+  function cancelEditingMessage() {
+    if (busy) return;
+    setEditingMessageId(null);
+    setEditingDraft("");
+  }
+
+  async function handleEditMessage(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const messageId = editingMessageId;
+    const content = editingDraft.trim();
+    if (!messageId || !content || !activeConversationId || busy) return;
+
+    const messageIndex = messages.findIndex((message) => message.id === messageId);
+    if (messageIndex < 0) return;
+
+    setEditingMessageId(null);
+    setEditingDraft("");
+    setMessages((current) => current.slice(0, messageIndex + 1).map((message, index) => index === messageIndex ? { ...message, content, sentiment: null } : message));
+    setBusy("sending");
+    setNotice("Atualizando sua mensagem e preparando uma nova resposta…");
+
+    try {
+      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId });
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
+    } finally {
+      setBusy(null);
+    }
   }
 
   async function handleSend(event: FormEvent<HTMLFormElement>) {
@@ -917,15 +1052,47 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                     {messages.length ? (
                       <div className="flex flex-col gap-5">
                         {messages.map((message) => (
-                          <article key={message.id} className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                            {message.role === "assistant" ? <div aria-hidden="true" className="mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-xs font-black text-white">E</div> : null}
-                            <div className={`max-w-[min(42rem,88%)] rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
-                              <p className="break-words">{message.content}</p>
-                              {message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
-                            </div>
+                          <article key={message.id} className={`group flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+                            {message.role === "assistant" ? <EscutiaAvatar /> : null}
+                            {editingMessageId === message.id && message.role === "user" ? (
+                              <form onSubmit={(event) => void handleEditMessage(event)} className="w-full max-w-[min(42rem,88%)] rounded-2xl rounded-br-md bg-navy p-2 shadow-sm">
+                                <label htmlFor={`edit-message-${message.id}`} className="sr-only">Editar mensagem</label>
+                                <textarea id={`edit-message-${message.id}`} name={`edit-message-${message.id}`} value={editingDraft} onChange={(event) => setEditingDraft(event.target.value)} maxLength={2000} rows={4} className="w-full resize-none rounded-xl border border-white/15 bg-white px-3 py-2.5 text-[0.95rem] leading-7 text-navy outline-none focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/30" />
+                                <div className="mt-2 flex justify-end gap-2">
+                                  <button type="button" onClick={cancelEditingMessage} disabled={Boolean(busy)} className="rounded-lg px-3 py-2 text-xs font-bold text-white/75 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">Cancelar</button>
+                                  <button type="submit" disabled={!editingDraft.trim() || Boolean(busy)} className="rounded-lg bg-white px-3 py-2 text-xs font-black text-navy transition-colors hover:bg-purple hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">Salvar & reenviar</button>
+                                </div>
+                              </form>
+                            ) : (
+                              <div className={`max-w-[min(42rem,88%)] rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
+                                <MarkdownMessage content={message.content} tone={message.role === "assistant" ? "assistant" : "user"} />
+                                {message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
+                                <div className={`mt-2 flex gap-1 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 motion-reduce:transition-none ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+                                  <button type="button" aria-label={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} title={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} onClick={() => void handleCopyMessage(message)} className={`rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 ${message.role === "user" ? "text-white/65 hover:bg-white/10 hover:text-white focus-visible:ring-white/70" : "text-navy/45 hover:bg-warm hover:text-navy focus-visible:ring-purple/50"} motion-reduce:transition-none`}>
+                                    {copiedMessageId === message.id ? <CheckIcon /> : <CopyIcon />}
+                                  </button>
+                                  {message.role === "user" ? (
+                                    <button type="button" aria-label="Editar mensagem" title="Editar mensagem" onClick={() => startEditingMessage(message)} disabled={Boolean(busy)} className="rounded-md p-1.5 text-white/65 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">
+                                      <EditIcon />
+                                    </button>
+                                  ) : null}
+                                </div>
+                              </div>
+                            )}
                             {message.role === "user" ? <Avatar user={user} /> : null}
                           </article>
                         ))}
+                        {busy === "sending" ? (
+                          <div className="flex gap-3" role="status" aria-live="polite">
+                            <EscutiaAvatar />
+                            <div className="flex min-h-12 items-center gap-1 rounded-2xl rounded-bl-md border border-navy/8 bg-white px-4 shadow-sm">
+                              <span className="sr-only">A EscutIA está digitando…</span>
+                              <span aria-hidden="true" className="h-2 w-2 animate-bounce rounded-full bg-purple [animation-delay:-0.3s] motion-reduce:animate-none" />
+                              <span aria-hidden="true" className="h-2 w-2 animate-bounce rounded-full bg-purple [animation-delay:-0.15s] motion-reduce:animate-none" />
+                              <span aria-hidden="true" className="h-2 w-2 animate-bounce rounded-full bg-purple motion-reduce:animate-none" />
+                            </div>
+                          </div>
+                        ) : null}
                       </div>
                     ) : (
                       <div className="flex h-full min-h-[9rem] items-center justify-center rounded-2xl border border-dashed border-navy/12 bg-white/60 px-4 py-5 text-center">
