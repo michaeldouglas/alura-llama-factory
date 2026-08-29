@@ -1,7 +1,7 @@
 import type { Runtime } from "@langchain/langgraph";
 
 import { getEscutiaAgent } from "@/agent/escutia-agent";
-import type { EscutiaStateType } from "@/graph/state";
+import type { EscutiaStateType } from "@/agent/graph/state";
 
 function getTextContent(content: unknown) {
   if (typeof content === "string") return content;

@@ -1,6 +1,6 @@
 import type { Runtime } from "@langchain/langgraph";
 
-import type { EscutiaStateType } from "@/graph/state";
+import type { EscutiaStateType } from "@/agent/graph/state";
 
 export async function confirmSentimentChangeNode(state: EscutiaStateType, runtime: Runtime) {
   const answer = runtime.interrupt({

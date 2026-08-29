@@ -13,6 +13,12 @@ Implementar a UI do chat e suas rotas protegidas dentro do Next.js existente em
 - `app/api/conversations/` protege a criação, leitura e persistência de mensagens.
 - `app/api/sentiment/route.ts` autentica, chama o modelo por Hugging Face e
   persiste o turno classificado.
+- `agent/graph/nodes/analisar-sentimento.ts` ignora mensagens fáticas sem sinal
+  emocional e centraliza a decisão de quando o classificador deve ser chamado.
+- `app/api/agent/route.ts` devolve no evento final o vínculo entre a mensagem do
+  usuário e o sentimento persistido para a UI reconciliar seu estado otimista.
+- `components/ChatWorkspace.tsx` apresenta o sentimento no balão da resposta e
+  mantém os controles de ação em uma linha externa ao balão.
 - `lib/sentiment.ts` mantém o prompt, parsing e chamada server-side.
 - SQLite recebe `Conversation` e `Message` relacionados ao `User`.
 

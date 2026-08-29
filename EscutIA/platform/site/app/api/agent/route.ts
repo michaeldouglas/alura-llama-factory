@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 import { getConversationMemory } from "@/agent/memory/conversation-memory";
-import { getEscutiaGraph } from "@/graph/escutia-graph";
-import type { EscutiaStateType } from "@/graph/state";
+import { getEscutiaGraph } from "@/agent/graph/escutia-graph";
+import type { EscutiaStateType } from "@/agent/graph/state";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import type { SentimentLabel } from "@/lib/sentiment";
@@ -22,7 +22,8 @@ type AgentEvent =
   | { type: "token"; content: string }
   | {
       type: "done";
-      message: { id: string; role: "assistant"; content: string; sentiment: null };
+      message: { id: string; role: "assistant"; content: string; sentiment: SentimentLabel | null };
+      userMessage: { id: string };
       sentiment: SentimentLabel | null;
       sentimentAt: string | null;
     }
@@ -194,26 +195,24 @@ export async function POST(request: Request) {
           const snapshot = await graph.getState(config);
           const values = snapshot.values as EscutiaStateType;
           const finalSentiment = values.approvedSentiment || values.currentSentiment || values.detectedSentiment;
-          const sentimentChanged = finalSentiment !== currentSentiment;
+          const messageSentiment = values.detectedSentiment;
+          const sentimentChanged = Boolean(messageSentiment && messageSentiment !== currentSentiment);
           const sentimentAt = sentimentChanged ? new Date() : profile?.currentSentimentAt ?? null;
           const persistedUserMessageId = values.userMessageId || userMessageId;
 
           if (values.assistantResponse) {
             const assistant = await prisma.$transaction(async (transaction) => {
               const created = await transaction.message.create({
-                data: { conversationId, role: "assistant", content: values.assistantResponse },
-                select: { id: true, content: true },
+                data: { conversationId, role: "assistant", content: values.assistantResponse, sentiment: messageSentiment },
+                select: { id: true, content: true, sentiment: true },
               });
-              if (persistedUserMessageId && finalSentiment) {
-                await transaction.message.update({ where: { id: persistedUserMessageId }, data: { sentiment: finalSentiment } });
-              }
-              if (sentimentChanged && finalSentiment) {
+              if (sentimentChanged && messageSentiment) {
                 await transaction.sentimentRecord.create({
-                  data: { userId: session.user.id, sentiment: finalSentiment },
+                  data: { userId: session.user.id, sentiment: messageSentiment },
                 });
                 await transaction.user.update({
                   where: { id: session.user.id },
-                  data: { currentSentiment: finalSentiment, currentSentimentAt: sentimentAt },
+                  data: { currentSentiment: messageSentiment, currentSentimentAt: sentimentAt },
                 });
               }
               await transaction.conversation.update({ where: { id: conversationId }, data: { updatedAt: new Date() } });
@@ -222,7 +221,8 @@ export async function POST(request: Request) {
 
             send({
               type: "done",
-              message: { id: assistant.id, role: "assistant", content: assistant.content, sentiment: null },
+              message: { id: assistant.id, role: "assistant", content: assistant.content, sentiment: assistant.sentiment as SentimentLabel | null },
+              userMessage: { id: persistedUserMessageId },
               sentiment: finalSentiment,
               sentimentAt: sentimentAt?.toISOString() ?? null,
             });

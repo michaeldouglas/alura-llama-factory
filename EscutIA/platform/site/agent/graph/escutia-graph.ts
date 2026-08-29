@@ -1,9 +1,9 @@
 import { END, START, StateGraph } from "@langchain/langgraph";
 
 import { getCheckpointer } from "@/agent/memory/checkpointer";
-import { analyzeSentimentNode } from "@/graph/nodes/analisar-sentimento";
-import { respondNode } from "@/graph/nodes/responder";
-import { EscutiaState } from "@/graph/state";
+import { analyzeSentimentNode } from "@/agent/graph/nodes/analisar-sentimento";
+import { respondNode } from "@/agent/graph/nodes/responder";
+import { EscutiaState } from "@/agent/graph/state";
 
 const globalForGraph = globalThis as unknown as {
   escutiaGraph: ReturnType<typeof createEscutiaGraph> | undefined;

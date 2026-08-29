@@ -33,6 +33,7 @@ type AgentEvent =
   | {
       type: "done";
       message: ChatMessage;
+      userMessage: { id: string };
       sentiment: SentimentLabel | null;
       sentimentAt: string | null;
     }
@@ -46,6 +47,18 @@ type ChatWorkspaceProps = {
   initialConversationId?: string | null;
   initialMessages?: ChatMessage[];
 };
+
+function normalizeConversationMessages(messages: ChatMessage[]) {
+  return messages.map((message, index) => {
+    if (message.role !== "assistant") return { ...message, sentiment: null };
+    if (message.sentiment) return message;
+
+    const previousMessage = messages[index - 1];
+    return previousMessage?.role === "user" && previousMessage.sentiment
+      ? { ...message, sentiment: previousMessage.sentiment }
+      : message;
+  });
+}
 
 const SENTIMENT_LABELS: Record<SentimentLabel, string> = {
   negativo: "Sentimento negativo",
@@ -145,8 +158,8 @@ function Logo() {
 
 function EscutiaAvatar() {
   return (
-    <div className="mt-1 flex h-9 w-[7.25rem] shrink-0 items-center overflow-hidden rounded-xl bg-white px-1 shadow-sm" aria-label="EscutIA">
-      <Image src="/logo.png" alt="EscutIA" width={132} height={45} className="h-8 w-auto max-w-none" />
+    <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm">
+      <Image src="/escutia-mark.png" alt="EscutIA" width={1254} height={1254} className="h-full w-full object-contain" />
     </div>
   );
 }
@@ -390,7 +403,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [currentSentimentAt, setCurrentSentimentAt] = useState<string | null>(initialSentimentAt);
   const [conversations, setConversations] = useState(initialConversations);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(initialConversationId ?? null);
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages ?? []);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => normalizeConversationMessages(initialMessages ?? []));
   const [search, setSearch] = useState("");
   const [historyDate, setHistoryDate] = useState("");
   const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
@@ -520,7 +533,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     return data.conversation;
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; replaceMessageId?: string }) {
+  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; replaceMessageId?: string }, optimisticUserMessageId?: string) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -552,8 +565,17 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
       if (event.type === "done") {
         setMessages((current) => {
-          if (!assistantMessageId) return [...current, event.message];
-          return current.map((message) => message.id === assistantMessageId ? event.message : message);
+          const reconciled = current.map((message) => {
+            const isUserMessage = message.id === optimisticUserMessageId || message.id === event.userMessage.id;
+            return isUserMessage
+              ? { ...message, id: event.userMessage.id, sentiment: null }
+              : message;
+          });
+
+          if (!assistantMessageId) return [...reconciled, event.message];
+          return reconciled.some((message) => message.id === assistantMessageId)
+            ? reconciled.map((message) => message.id === assistantMessageId ? event.message : message)
+            : [...reconciled, event.message];
         });
         if (event.sentiment) setCurrentSentiment(event.sentiment);
         if (event.sentimentAt) setCurrentSentimentAt(event.sentimentAt);
@@ -622,7 +644,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setNotice("Atualizando sua mensagem e preparando uma nova resposta…");
 
     try {
-      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId });
+      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId }, messageId);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
     } finally {
@@ -636,7 +658,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     if (!content || busy) return;
     setDraft("");
     setNotice("A EscutIA está lendo sua mensagem…");
-    setMessages((current) => [...current, { id: `local-${Date.now()}`, role: "user", content }]);
+    const optimisticUserMessageId = `local-${Date.now()}`;
+    setMessages((current) => [...current, { id: optimisticUserMessageId, role: "user", content }]);
     setBusy("sending");
     try {
       let conversationId = activeConversationId;
@@ -645,9 +668,15 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         conversationId = conversation.id;
         setActiveConversationId(conversation.id);
         rememberConversation(conversation.id, conversation.title);
-        router.push(`/chat/${conversation.id}`);
       }
-      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment });
+      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment }, optimisticUserMessageId);
+      // Keep this component mounted while the NDJSON stream is consumed. If we
+      // navigate immediately after creating the conversation, the route can
+      // remount with only the user message before the assistant response is
+      // persisted, making the first answer appear only after a refresh.
+      if (!activeConversationId) {
+        router.push(`/chat/${conversationId}`);
+      }
       setConversationFocusLatestSentiment(false);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
@@ -696,7 +725,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       const data = (await response.json()) as { conversation?: { messages: ChatMessage[] }; error?: string };
       if (!response.ok || !data.conversation) throw new Error(data.error || "Não foi possível carregar a conversa.");
       setActiveConversationId(id);
-      setMessages(data.conversation.messages);
+      setMessages(normalizeConversationMessages(data.conversation.messages));
       router.push(`/chat/${id}`);
       setNotice("Conversa carregada.");
     } catch (error) {
@@ -1064,15 +1093,17 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                                 </div>
                               </form>
                             ) : (
-                              <div className={`max-w-[min(42rem,88%)] rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
-                                <MarkdownMessage content={message.content} tone={message.role === "assistant" ? "assistant" : "user"} />
-                                {message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
+                              <div className="max-w-[min(42rem,88%)]">
+                                <div className={`rounded-2xl px-4 py-3 text-[0.95rem] leading-7 shadow-sm ${message.role === "user" ? "rounded-br-md bg-navy text-white" : "rounded-bl-md border border-navy/8 bg-white text-navy/80"}`}>
+                                  <MarkdownMessage content={message.content} tone={message.role === "assistant" ? "assistant" : "user"} />
+                                  {message.role === "assistant" && message.sentiment ? <p className="mt-3"><SentimentBadge sentiment={message.sentiment} /></p> : null}
+                                </div>
                                 <div className={`mt-2 flex gap-1 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100 motion-reduce:transition-none ${message.role === "user" ? "justify-end" : "justify-start"}`}>
-                                  <button type="button" aria-label={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} title={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} onClick={() => void handleCopyMessage(message)} className={`rounded-md p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 ${message.role === "user" ? "text-white/65 hover:bg-white/10 hover:text-white focus-visible:ring-white/70" : "text-navy/45 hover:bg-warm hover:text-navy focus-visible:ring-purple/50"} motion-reduce:transition-none`}>
+                                  <button type="button" aria-label={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} title={copiedMessageId === message.id ? "Mensagem copiada" : "Copiar mensagem"} onClick={() => void handleCopyMessage(message)} className="rounded-md p-1.5 text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">
                                     {copiedMessageId === message.id ? <CheckIcon /> : <CopyIcon />}
                                   </button>
                                   {message.role === "user" ? (
-                                    <button type="button" aria-label="Editar mensagem" title="Editar mensagem" onClick={() => startEditingMessage(message)} disabled={Boolean(busy)} className="rounded-md p-1.5 text-white/65 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">
+                                    <button type="button" aria-label="Editar mensagem" title="Editar mensagem" onClick={() => startEditingMessage(message)} disabled={Boolean(busy)} className="rounded-md p-1.5 text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">
                                       <EditIcon />
                                     </button>
                                   ) : null}

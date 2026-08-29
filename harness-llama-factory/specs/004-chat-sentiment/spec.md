@@ -22,6 +22,16 @@ validação opcional do sentimento da mensagem pelo modelo `mdba/escutia-lora`.
   variável de ambiente server-side.
 - A primeira análise MAY demorar mais por aquecimento do provedor; o cliente
   não deve baixar pesos a cada mensagem.
+- Saudações, confirmações e mensagens fáticas sem sinal emocional, como “oi”
+  ou “olá”, MAY não ser classificadas; nesses casos o agente MUST responder
+  naturalmente sem anunciar o rótulo `neutro` nem criar um registro de
+  sentimento.
+- A ferramenta de análise MUST ser chamada pelo nó de análise do grafo, e não
+  espontaneamente pelos subagentes durante a resposta.
+- Depois que o streaming terminar, o chat MUST atualizar a mensagem otimista do
+  usuário com seu ID persistido e o sentimento salvo, sem exigir refresh.
+- A label visual do sentimento MUST aparecer dentro da resposta da EscutIA; os
+  controles de copiar e editar MUST ficar fora dos balões das mensagens.
 - Esta feature MUST NOT usar `testar_modelo_lora.py`, alterar o harness de
   fine-tuning ou implementar Stripe.
 
