@@ -15,6 +15,7 @@ type AgentRequest = {
   conversationId?: unknown;
   message?: unknown;
   focusLatestSentiment?: unknown;
+  focusRecordId?: unknown;
   replaceMessageId?: unknown;
 };
 
@@ -69,6 +70,7 @@ export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as AgentRequest | null;
   const conversationId = typeof body?.conversationId === "string" ? body.conversationId : "";
   const focusLatestSentiment = body?.focusLatestSentiment === true;
+  const focusRecordId = typeof body?.focusRecordId === "string" ? body.focusRecordId : "";
   const replaceMessageId = typeof body?.replaceMessageId === "string" ? body.replaceMessageId : "";
   const message = typeof body?.message === "string" ? body.message.trim() : "";
 
@@ -90,7 +92,13 @@ export async function POST(request: Request) {
         where: { id: session.user.id },
         select: { currentSentiment: true, currentSentimentAt: true },
       }),
-      focusLatestSentiment
+      focusRecordId
+        ? prisma.sentimentRecord.findFirst({
+            where: { id: focusRecordId, userId: session.user.id },
+            orderBy: { createdAt: "desc" },
+            select: { sentiment: true, note: true, createdAt: true },
+          })
+        : focusLatestSentiment
         ? prisma.sentimentRecord.findFirst({
             where: { userId: session.user.id },
             orderBy: { createdAt: "desc" },
@@ -230,7 +238,7 @@ export async function POST(request: Request) {
               });
               if (sentimentChanged && messageSentiment) {
                 await transaction.sentimentRecord.create({
-                  data: { userId: session.user.id, sentiment: messageSentiment },
+                  data: { userId: session.user.id, sentiment: messageSentiment, note: message },
                 });
                 await transaction.user.update({
                   where: { id: session.user.id },

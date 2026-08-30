@@ -10,15 +10,57 @@ export type SentimentDashboardPoint = {
   total: number;
 };
 
-export type SentimentDashboardSummary = {
+export type SentimentDashboardComparison = {
   from: string;
   to: string;
   total: number;
   counts: Record<SentimentLabel, number>;
-  points: SentimentDashboardPoint[];
+  daysWithRecords: number;
+  totalDelta: number;
+  totalDeltaPercent: number | null;
+  daysDelta: number;
+  daysDeltaPercent: number | null;
+  hasPreviousData: boolean;
 };
 
+export type SentimentCalendarDay = {
+  date: string;
+  negativo: number;
+  neutro: number;
+  positivo: number;
+  total: number;
+  dominant: SentimentLabel | null;
+};
+
+export type SentimentDashboardSummary = {
+  from: string;
+  to: string;
+  durationDays: number;
+  total: number;
+  counts: Record<SentimentLabel, number>;
+  percentages: Record<SentimentLabel, number>;
+  daysWithRecords: number;
+  mostRegistered: SentimentLabel | null;
+  points: SentimentDashboardPoint[];
+  calendar: SentimentCalendarDay[];
+  comparison: SentimentDashboardComparison;
+};
+
+export type SentimentRecordItem = {
+  id: string;
+  sentiment: SentimentLabel;
+  note: string | null;
+  createdAt: string;
+};
+
+export const RECORDS_PAGE_SIZE = 12;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+type DashboardOptions = {
+  from?: string | null;
+  to?: string | null;
+  sentiments?: string | null;
+};
 
 function formatDate(date: Date) {
   return date.toISOString().slice(0, 10);
@@ -44,40 +86,56 @@ function getDateRange(fromValue?: string | null, toValue?: string | null) {
   let to = parseDate(toValue, defaultTo);
 
   if (from > to) [from, to] = [to, from];
-
-  // Avoid rendering an unexpectedly large chart when a malformed or overly broad
-  // query reaches the endpoint.
-  if (to.getTime() - from.getTime() > 1000 * 60 * 60 * 24 * 90) {
-    from = addDays(to, -90);
-  }
+  if (to.getTime() - from.getTime() > 1000 * 60 * 60 * 24 * 90) from = addDays(to, -90);
 
   return { from, to };
 }
 
-function getSelectedSentiments(values?: string | null): SentimentLabel[] {
+export function getSelectedSentiments(values?: string | null): SentimentLabel[] {
   if (!values) return [...SENTIMENT_LABELS];
   const selected = values.split(",").filter((value): value is SentimentLabel => SENTIMENT_LABELS.includes(value as SentimentLabel));
-  return selected.length ? selected : [...SENTIMENT_LABELS];
+  return selected.length ? Array.from(new Set(selected)) : [...SENTIMENT_LABELS];
 }
 
-export async function getSentimentDashboardSummary(
-  userId: string,
-  options: { from?: string | null; to?: string | null; sentiments?: string | null } = {},
-): Promise<SentimentDashboardSummary> {
-  const { from, to } = getDateRange(options.from, options.to);
-  const selectedSentiments = getSelectedSentiments(options.sentiments);
-  const endExclusive = addDays(to, 1);
-  const records = await prisma.sentimentRecord.findMany({
-    where: {
-      userId,
-      createdAt: { gte: from, lt: endExclusive },
-      sentiment: { in: selectedSentiments },
-    },
-    select: { sentiment: true, createdAt: true },
-    orderBy: { createdAt: "asc" },
-  });
+export function isValidDateInput(value: string | null | undefined) {
+  if (!value) return true;
+  if (!DATE_PATTERN.test(value)) return false;
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+}
 
+export function isValidSentimentFilter(value: string | null | undefined) {
+  if (!value) return true;
+  const values = value.split(",");
+  return values.length > 0 && values.every((item) => SENTIMENT_LABELS.includes(item as SentimentLabel));
+}
+
+export function getDashboardRange(options: DashboardOptions = {}) {
+  const { from, to } = getDateRange(options.from, options.to);
+  return { from, to, fromValue: formatDate(from), toValue: formatDate(to), selectedSentiments: getSelectedSentiments(options.sentiments) };
+}
+
+function emptyCounts(): Record<SentimentLabel, number> {
+  return { negativo: 0, neutro: 0, positivo: 0 };
+}
+
+function roundPercentage(value: number) {
+  return Math.round(value * 10) / 10;
+}
+
+function dominantSentiment(counts: Record<SentimentLabel, number>, total: number): SentimentLabel | null {
+  if (!total) return null;
+  const max = Math.max(...SENTIMENT_LABELS.map((sentiment) => counts[sentiment]));
+  const leaders = SENTIMENT_LABELS.filter((sentiment) => counts[sentiment] === max);
+  return leaders.length === 1 ? leaders[0] : null;
+}
+
+function aggregateRecords(records: Array<{ sentiment: string; createdAt: Date }>, from: Date, to: Date) {
+  const endExclusive = addDays(to, 1);
   const points = new Map<string, SentimentDashboardPoint>();
+  const calendar = new Map<string, SentimentCalendarDay>();
+
   for (let date = from; date < endExclusive; date = addDays(date, 1)) {
     const key = formatDate(date);
     points.set(key, {
@@ -88,24 +146,108 @@ export async function getSentimentDashboardSummary(
       positivo: 0,
       total: 0,
     });
+    calendar.set(key, { date: key, negativo: 0, neutro: 0, positivo: 0, total: 0, dominant: null });
   }
 
-  const counts: Record<SentimentLabel, number> = { negativo: 0, neutro: 0, positivo: 0 };
+  const counts = emptyCounts();
   for (const record of records) {
     if (!SENTIMENT_LABELS.includes(record.sentiment as SentimentLabel)) continue;
     const sentiment = record.sentiment as SentimentLabel;
-    const point = points.get(formatDate(record.createdAt));
-    if (!point) continue;
+    const key = formatDate(record.createdAt);
+    const point = points.get(key);
+    const calendarDay = calendar.get(key);
+    if (!point || !calendarDay) continue;
     point[sentiment] += 1;
     point.total += 1;
+    calendarDay[sentiment] += 1;
+    calendarDay.total += 1;
     counts[sentiment] += 1;
   }
+
+  Array.from(calendar.values()).forEach((day) => { day.dominant = dominantSentiment(day, day.total); });
+  const total = records.length;
+  const percentages = emptyCounts();
+  for (const sentiment of SENTIMENT_LABELS) percentages[sentiment] = total ? roundPercentage((counts[sentiment] / total) * 100) : 0;
+
+  return {
+    total,
+    counts,
+    percentages,
+    daysWithRecords: Array.from(points.values()).filter((point) => point.total > 0).length,
+    mostRegistered: dominantSentiment(counts, total),
+    points: Array.from(points.values()),
+    calendar: Array.from(calendar.values()),
+  };
+}
+
+function percentageDelta(current: number, previous: number) {
+  return previous ? roundPercentage(((current - previous) / previous) * 100) : null;
+}
+
+export async function getSentimentDashboardSummary(userId: string, options: DashboardOptions = {}): Promise<SentimentDashboardSummary> {
+  const { from, to, fromValue, toValue, selectedSentiments } = getDashboardRange(options);
+  const durationDays = Math.round((to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+  const previousTo = addDays(from, -1);
+  const previousFrom = addDays(previousTo, -(durationDays - 1));
+  const endExclusive = addDays(to, 1);
+  const records = await prisma.sentimentRecord.findMany({
+    where: { userId, sentiment: { in: selectedSentiments }, createdAt: { gte: previousFrom, lt: endExclusive } },
+    select: { sentiment: true, createdAt: true },
+    orderBy: { createdAt: "asc" },
+  });
+  const currentRecords = records.filter((record) => record.createdAt >= from && record.createdAt < endExclusive);
+  const previousRecords = records.filter((record) => record.createdAt >= previousFrom && record.createdAt < from);
+  const current = aggregateRecords(currentRecords, from, to);
+  const previous = aggregateRecords(previousRecords, previousFrom, previousTo);
+
+  return {
+    from: fromValue,
+    to: toValue,
+    durationDays,
+    total: current.total,
+    counts: current.counts,
+    percentages: current.percentages,
+    daysWithRecords: current.daysWithRecords,
+    mostRegistered: current.mostRegistered,
+    points: current.points,
+    calendar: current.calendar,
+    comparison: {
+      from: formatDate(previousFrom),
+      to: formatDate(previousTo),
+      total: previous.total,
+      counts: previous.counts,
+      daysWithRecords: previous.daysWithRecords,
+      totalDelta: current.total - previous.total,
+      totalDeltaPercent: percentageDelta(current.total, previous.total),
+      daysDelta: current.daysWithRecords - previous.daysWithRecords,
+      daysDeltaPercent: percentageDelta(current.daysWithRecords, previous.daysWithRecords),
+      hasPreviousData: previous.total > 0,
+    },
+  };
+}
+
+export async function getSentimentRecords(userId: string, options: DashboardOptions & { page?: number } = {}) {
+  const { from, to, selectedSentiments } = getDashboardRange(options);
+  const page = Number.isInteger(options.page) && (options.page as number) > 0 ? options.page as number : 1;
+  const where = { userId, sentiment: { in: selectedSentiments }, createdAt: { gte: from, lt: addDays(to, 1) } } as const;
+  const [records, total] = await Promise.all([
+    prisma.sentimentRecord.findMany({
+      where,
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      skip: (page - 1) * RECORDS_PAGE_SIZE,
+      take: RECORDS_PAGE_SIZE,
+      select: { id: true, sentiment: true, note: true, createdAt: true },
+    }),
+    prisma.sentimentRecord.count({ where }),
+  ]);
 
   return {
     from: formatDate(from),
     to: formatDate(to),
-    total: records.length,
-    counts,
-    points: Array.from(points.values()),
+    page,
+    pageSize: RECORDS_PAGE_SIZE,
+    total,
+    hasMore: page * RECORDS_PAGE_SIZE < total,
+    records: records.map((record): SentimentRecordItem => ({ id: record.id, sentiment: record.sentiment as SentimentLabel, note: record.note, createdAt: record.createdAt.toISOString() })),
   };
 }

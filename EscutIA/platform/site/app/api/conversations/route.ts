@@ -41,3 +41,23 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ conversation }, { status: 201 });
 }
+
+export async function DELETE(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Não autenticado." }, { status: 401 });
+  }
+
+  const body = (await request.json().catch(() => null)) as { confirm?: unknown } | null;
+  if (body?.confirm !== "EXCLUIR_CONVERSAS") {
+    return NextResponse.json({ error: "Confirmação inválida." }, { status: 400 });
+  }
+
+  try {
+    const result = await prisma.conversation.deleteMany({ where: { userId: session.user.id } });
+    return NextResponse.json({ ok: true, deleted: result.count });
+  } catch (error) {
+    console.error("Não foi possível excluir conversas:", error);
+    return NextResponse.json({ error: "Não foi possível excluir as conversas agora." }, { status: 503 });
+  }
+}

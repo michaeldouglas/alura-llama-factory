@@ -7,6 +7,8 @@ import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useEffect, u
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import ImmediateHelp from "@/components/ImmediateHelp";
+
 type SentimentLabel = "negativo" | "neutro" | "positivo";
 
 type UserProfile = {
@@ -46,6 +48,7 @@ type ChatWorkspaceProps = {
   initialConversations: ConversationSummary[];
   initialConversationId?: string | null;
   initialMessages?: ChatMessage[];
+  initialFocusRecordId?: string | null;
 };
 
 function normalizeConversationMessages(messages: ChatMessage[]) {
@@ -396,7 +399,7 @@ function MarkdownMessage({ content, tone }: { content: string; tone: keyof typeo
   );
 }
 
-export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages }: ChatWorkspaceProps) {
+export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages, initialFocusRecordId }: ChatWorkspaceProps) {
   const displayName = getDisplayName(user);
   const router = useRouter();
   const [currentSentiment, setCurrentSentiment] = useState<SentimentLabel | null>(initialSentiment);
@@ -413,15 +416,16 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [sentimentDraft, setSentimentDraft] = useState("");
   const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
-  const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId);
+  const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId && !initialFocusRecordId);
   const [historyOpen, setHistoryOpen] = useState(true);
   const [sentimentPanelOpen, setSentimentPanelOpen] = useState(false);
-  const [conversationOpen, setConversationOpen] = useState(Boolean(initialConversationId));
+  const [conversationOpen, setConversationOpen] = useState(Boolean(initialConversationId || initialFocusRecordId));
   const [sentimentModalOpen, setSentimentModalOpen] = useState(!initialSentiment);
   const [sentimentReviewOpen, setSentimentReviewOpen] = useState(false);
   const [sentimentReviewHandled, setSentimentReviewHandled] = useState(false);
   const [sentimentStatus, setSentimentStatus] = useState<"unknown" | "today" | "stale">("unknown");
   const [conversationFocusLatestSentiment, setConversationFocusLatestSentiment] = useState(false);
+  const [conversationFocusRecordId, setConversationFocusRecordId] = useState<string | null>(initialFocusRecordId ?? null);
   const [openConversationMenuId, setOpenConversationMenuId] = useState<string | null>(null);
   const [renameTarget, setRenameTarget] = useState<ConversationSummary | null>(null);
   const [renameDraft, setRenameDraft] = useState("");
@@ -580,7 +584,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     return data.conversation;
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; replaceMessageId?: string }, optimisticUserMessageId?: string) {
+  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; focusRecordId?: string | null; replaceMessageId?: string }, optimisticUserMessageId?: string) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -716,7 +720,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         setActiveConversationId(conversation.id);
         rememberConversation(conversation.id, conversation.title);
       }
-      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment }, optimisticUserMessageId);
+      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId }, optimisticUserMessageId);
       // Keep this component mounted while the NDJSON stream is consumed. If we
       // navigate immediately after creating the conversation, the route can
       // remount with only the user message before the assistant response is
@@ -725,6 +729,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         router.push(`/chat/${conversationId}`);
       }
       setConversationFocusLatestSentiment(false);
+      setConversationFocusRecordId(null);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
     } finally {
@@ -763,6 +768,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     if (busy) return;
     setOpenConversationMenuId(null);
     setConversationFocusLatestSentiment(false);
+    setConversationFocusRecordId(null);
     setBusy("loading");
     setSidebarOpen(false);
     setConversationOpen(true);
@@ -873,6 +879,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     if (busy) return;
     setOpenConversationMenuId(null);
     setConversationFocusLatestSentiment(false);
+    setConversationFocusRecordId(null);
     setActiveConversationId(null);
     setMessages([]);
     window.history.replaceState(null, "", "/chat");
@@ -885,6 +892,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setSidebarOpen(false);
     setConversationOpen(true);
     setConversationFocusLatestSentiment(true);
+    setConversationFocusRecordId(null);
     setNotice("Vamos conversar a partir do seu último registro de sentimento.");
   }
 
@@ -1343,6 +1351,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
           </div>
         </div>
       ) : null}
+      <ImmediateHelp />
     </main>
   );
 }
