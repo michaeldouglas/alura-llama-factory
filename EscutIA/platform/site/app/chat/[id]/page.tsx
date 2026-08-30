@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 
 import ChatWorkspace from "@/components/ChatWorkspace";
 import { authOptions } from "@/lib/auth";
+import { normalizeConversationMode } from "@/lib/conversation";
 import { getChatWorkspaceData } from "../chat-data";
 
 export const dynamic = "force-dynamic";
@@ -29,8 +30,10 @@ export default async function ChatConversationPage({ params }: ChatConversationP
       user={{ name: session.user.name ?? null, email: session.user.email ?? null, image: session.user.image ?? null }}
       currentSentiment={profile?.currentSentiment as "negativo" | "neutro" | "positivo" | null}
       currentSentimentAt={profile?.currentSentimentAt?.toISOString() ?? null}
-      initialConversations={conversations.map((item) => ({ ...item, updatedAt: item.updatedAt.toISOString() }))}
+      initialConversations={conversations.map((item) => ({ ...item, mode: normalizeConversationMode(item.mode), updatedAt: item.updatedAt.toISOString() }))}
       initialConversationId={conversation.id}
+      initialConversationMode={normalizeConversationMode(conversation.mode)}
+      initialPrivateMode={conversation.isPrivate}
       initialMessages={conversation.messages.map((message) => ({
         id: message.id,
         role: message.role === "assistant" ? "assistant" : "user",

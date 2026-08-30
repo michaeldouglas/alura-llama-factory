@@ -32,5 +32,7 @@ export async function respondNode(state: EscutiaStateType, runtime: Runtime) {
     runtime.writer({ type: "token", content });
   }
 
+  runtime.writer({ type: "complete", content: assistantResponse });
+
   return { assistantResponse };
 }

@@ -23,6 +23,14 @@ export function shouldAnalyzeSentiment(message: string) {
 }
 
 export async function analyzeSentimentNode(state: EscutiaStateType) {
+  if (state.skipSentiment) {
+    return {
+      detectedSentiment: null,
+      sentimentChanged: false,
+      approvedSentiment: null,
+    };
+  }
+
   if (!shouldAnalyzeSentiment(state.userMessage)) {
     return {
       detectedSentiment: null,

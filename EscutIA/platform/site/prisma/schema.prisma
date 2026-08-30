@@ -19,6 +19,7 @@ model User {
   sessions      Session[]
   conversations Conversation[]
   sentimentRecords SentimentRecord[]
+  personalResources PersonalResource[]
 }
 
 model Account {
@@ -59,13 +60,34 @@ model VerificationToken {
 }
 
 model Conversation {
-  id        String    @id @default(cuid())
+  id                String    @id @default(cuid())
+  userId            String
+  title             String    @default("Nova conversa")
+  mode              String    @default("ouvir")
+  isPrivate         Boolean   @default(false)
+  checkInSentiment  String?
+  checkInAt         DateTime?
+  checkOutSentiment String?
+  checkOutAt        DateTime?
+  journalType       String?
+  journalText       String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages          Message[]
+  sentimentRecords  SentimentRecord[]
+
+  @@index([userId, updatedAt])
+}
+
+model PersonalResource {
+  id        String   @id @default(cuid())
   userId    String
-  title     String    @default("Nova conversa")
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages  Message[]
+  kind      String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, updatedAt])
 }
@@ -83,12 +105,15 @@ model Message {
 }
 
 model SentimentRecord {
-  id        String   @id @default(cuid())
-  userId    String
-  sentiment String
-  note      String?
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String       @id @default(cuid())
+  userId         String
+  conversationId String?
+  sentiment      String
+  note           String?
+  createdAt      DateTime     @default(now())
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation   Conversation? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
 
   @@index([userId, createdAt])
+  @@index([conversationId])
 }

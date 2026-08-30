@@ -42,6 +42,7 @@ npm run start
 - `components/ImmediateHelp.tsx`: acesso direto a recursos de ajuda imediata no Brasil.
 - `app/api/auth/[...nextauth]/route.ts`: rotas server-side de autenticação.
 - `app/api/conversations/`: rotas protegidas para histórico e mensagens.
+- `app/api/resources/`: recursos pessoais guardados pela própria pessoa.
 - `app/api/sentiment/route.ts`: validação de sentimento pelo provedor configurado.
 - `app/api/sentiment/records/`: check-ins manuais, histórico paginado, edição e exclusão de registros.
 - `app/api/sentiment/export/route.ts`: exportação de registros em CSV ou JSON.
@@ -73,3 +74,7 @@ A EscutIA é apresentada como uma plataforma de apoio emocional e bem-estar. O s
 ## Origem dos registros
 
 O schema atual mantém `sentiment`, `note` e `createdAt` em `SentimentRecord`, sem uma coluna de origem. Por isso, o check-in manual é salvo de forma transparente na interface, mas a distinção entre registro manual e registro criado pelo fluxo do agente não é persistida separadamente nesta etapa.
+
+Check-ins e check-outs escolhidos durante conversas também usam esse registro
+existente para alimentar o resumo, o histórico e o calendário. Conversas privadas
+não criam conversa, mensagem, check-in ou check-out persistidos.

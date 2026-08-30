@@ -7,6 +7,8 @@ export async function getChatWorkspaceData(userId: string, conversationId?: stri
         select: {
           id: true,
           title: true,
+          mode: true,
+          isPrivate: true,
           updatedAt: true,
           messages: {
             orderBy: { createdAt: "asc" },
@@ -25,7 +27,7 @@ export async function getChatWorkspaceData(userId: string, conversationId?: stri
       where: { userId },
       orderBy: { updatedAt: "desc" },
       take: 50,
-      select: { id: true, title: true, updatedAt: true },
+      select: { id: true, title: true, mode: true, isPrivate: true, updatedAt: true },
     }),
     conversationPromise,
   ]);

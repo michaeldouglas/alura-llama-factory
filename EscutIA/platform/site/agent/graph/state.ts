@@ -8,6 +8,8 @@ export const EscutiaState = new StateSchema({
   userId: z.string(),
   userMessageId: z.string().default(""),
   userMessage: z.string(),
+  mode: z.enum(["ouvir", "organizar", "possibilidades", "bom"]).default("ouvir"),
+  skipSentiment: z.boolean().default(false),
   messages: z.array(z.object({
     role: z.enum(["system", "user", "assistant"]),
     content: z.string(),

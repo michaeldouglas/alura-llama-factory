@@ -5,6 +5,7 @@ import { getConversationMemory } from "@/agent/memory/conversation-memory";
 import { getEscutiaGraph } from "@/agent/graph/escutia-graph";
 import type { EscutiaStateType } from "@/agent/graph/state";
 import { authOptions } from "@/lib/auth";
+import { CONVERSATION_MODE_COPY, getConversationModeInstruction, isConversationMode, normalizeConversationMode, type ConversationMode } from "@/lib/conversation";
 import { prisma } from "@/lib/prisma";
 import type { SentimentLabel } from "@/lib/sentiment";
 
@@ -17,6 +18,10 @@ type AgentRequest = {
   focusLatestSentiment?: unknown;
   focusRecordId?: unknown;
   replaceMessageId?: unknown;
+  privateMode?: unknown;
+  mode?: unknown;
+  resumeConversationId?: unknown;
+  contextMessages?: unknown;
 };
 
 type AgentEvent =
@@ -56,9 +61,25 @@ function getGraphEvent(value: unknown) {
 async function verifyConversation(conversationId: string, userId: string) {
   const conversation = await prisma.conversation.findFirst({
     where: { id: conversationId, userId },
-    select: { id: true },
+    select: { id: true, mode: true, isPrivate: true },
   });
   return conversation;
+}
+
+function isPrivateConversationId(value: string) {
+  return /^private-[A-Za-z0-9-]{10,100}$/.test(value);
+}
+
+function getContextMessages(value: unknown) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(-30).flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const role = (item as { role?: unknown }).role;
+    const content = (item as { content?: unknown }).content;
+    if ((role !== "user" && role !== "assistant") || typeof content !== "string") return [];
+    const trimmed = content.trim();
+    return trimmed && trimmed.length <= 4000 ? [{ role, content: trimmed }] : [];
+  });
 }
 
 export async function POST(request: Request) {
@@ -69,25 +90,34 @@ export async function POST(request: Request) {
 
   const body = (await request.json().catch(() => null)) as AgentRequest | null;
   const conversationId = typeof body?.conversationId === "string" ? body.conversationId : "";
+  const requestedPrivateMode = body?.privateMode === true;
+  const requestedMode = body?.mode;
   const focusLatestSentiment = body?.focusLatestSentiment === true;
   const focusRecordId = typeof body?.focusRecordId === "string" ? body.focusRecordId : "";
+  const resumeConversationId = typeof body?.resumeConversationId === "string" ? body.resumeConversationId : "";
   const replaceMessageId = typeof body?.replaceMessageId === "string" ? body.replaceMessageId : "";
   const message = typeof body?.message === "string" ? body.message.trim() : "";
 
-  if (!conversationId) {
+  if (!conversationId || (requestedPrivateMode ? !isPrivateConversationId(conversationId) : false)) {
     return NextResponse.json({ error: "Conversa não informada." }, { status: 400 });
   }
   if (!message || message.length > 2000) {
     return NextResponse.json({ error: "A mensagem deve ter entre 1 e 2000 caracteres." }, { status: 400 });
   }
+  if (requestedPrivateMode && requestedMode !== undefined && !isConversationMode(requestedMode)) {
+    return NextResponse.json({ error: "Modo de conversa inválido." }, { status: 400 });
+  }
+  if (replaceMessageId && requestedPrivateMode && !isPrivateConversationId(conversationId)) {
+    return NextResponse.json({ error: "Conversa privada inválida." }, { status: 400 });
+  }
 
   try {
-    const conversation = await verifyConversation(conversationId, session.user.id);
-    if (!conversation) {
+    const conversation = requestedPrivateMode ? null : await verifyConversation(conversationId, session.user.id);
+    if (!requestedPrivateMode && !conversation) {
       return NextResponse.json({ error: "Conversa não encontrada." }, { status: 404 });
     }
 
-    const [profile, latestSentimentRecord] = await Promise.all([
+    const [profile, latestSentimentRecord, resumeConversation] = await Promise.all([
       prisma.user.findUnique({
         where: { id: session.user.id },
         select: { currentSentiment: true, currentSentimentAt: true },
@@ -105,9 +135,15 @@ export async function POST(request: Request) {
             select: { sentiment: true, note: true, createdAt: true },
           })
         : Promise.resolve(null),
+      resumeConversationId
+        ? prisma.conversation.findFirst({
+            where: { id: resumeConversationId, userId: session.user.id },
+            select: { id: true, title: true, messages: { orderBy: [{ createdAt: "asc" }, { id: "asc" }], take: 30, select: { role: true, content: true } } },
+          })
+        : Promise.resolve(null),
     ]);
 
-    const created = await prisma.$transaction(async (transaction) => {
+    const created = requestedPrivateMode ? { id: `private-user-${crypto.randomUUID()}` } : await prisma.$transaction(async (transaction) => {
       if (replaceMessageId) {
         const target = await transaction.message.findFirst({
           where: { id: replaceMessageId, conversationId, role: "user" },
@@ -139,11 +175,16 @@ export async function POST(request: Request) {
     });
     const userMessageId = created.id;
 
-    const memory = await getConversationMemory(conversationId, session.user.id);
-    const currentSentiment = asSentiment(profile?.currentSentiment);
+    const memory = requestedPrivateMode ? { messages: getContextMessages(body?.contextMessages) } : await getConversationMemory(conversationId, session.user.id);
+    const resumedMessages = resumeConversation?.messages.map((item) => ({
+      role: item.role === "assistant" ? "assistant" as const : "user" as const,
+      content: item.content,
+    })) ?? [];
+    const currentSentiment = requestedPrivateMode ? null : asSentiment(profile?.currentSentiment);
+    const mode: ConversationMode = requestedPrivateMode ? normalizeConversationMode(requestedMode) : normalizeConversationMode(conversation?.mode);
     const firstName = getFirstName(session.user.name, session.user.email);
-    const isFirstInteraction = !replaceMessageId && memory.messages.length === 1;
-    const graph = getEscutiaGraph();
+    const isFirstInteraction = !replaceMessageId && memory.messages.length === (requestedPrivateMode ? 0 : 1);
+    const graph = getEscutiaGraph({ persistent: !requestedPrivateMode });
     const config = { configurable: { thread_id: conversationId } };
     const identityContext = firstName
       ? [{
@@ -155,6 +196,16 @@ export async function POST(request: Request) {
               : "Esta conversa já possui histórico: não repita a apresentação nem faça uma nova saudação com o nome.",
           ].join("\n"),
         }]
+      : [];
+    const modeContext = [{
+      role: "system" as const,
+      content: `Modo de acolhimento escolhido pela pessoa: ${CONVERSATION_MODE_COPY[mode]?.label ?? mode}.\n${getConversationModeInstruction(mode)}\nNão apresente este modo como rótulo clínico e não diga que uma conversa causou melhora ou piora.`,
+    }];
+    const resumeContext = resumedMessages.length
+      ? [{
+          role: "system" as const,
+          content: "A pessoa escolheu retomar opcionalmente um assunto de uma conversa anterior. Use o contexto abaixo somente como ponto de partida e confirme com ela se ainda faz sentido falar sobre isso.",
+        }, ...resumedMessages]
       : [];
     const latestSentimentContext = latestSentimentRecord
       ? [{
@@ -185,13 +236,17 @@ export async function POST(request: Request) {
       userMessage: message,
       messages: [
         ...identityContext,
+        ...modeContext,
         ...latestSentimentContext,
+        ...resumeContext,
         ...memory.messages.map((item) => ({
           role: item.role === "assistant" ? "assistant" as const : "user" as const,
           content: item.content,
         })),
       ],
       currentSentiment,
+      mode,
+      skipSentiment: requestedPrivateMode,
       detectedSentiment: null,
       sentimentChanged: false,
       approvedSentiment: currentSentiment,
@@ -206,6 +261,8 @@ export async function POST(request: Request) {
     const responseStream = new ReadableStream<Uint8Array>({
       async start(controller) {
         const encoder = new TextEncoder();
+        let streamedAssistantResponse = "";
+        const streamedValues = { ...input } as EscutiaStateType;
 
         const send = (event: AgentEvent) => controller.enqueue(encoder.encode(ndjson(event)));
 
@@ -217,20 +274,41 @@ export async function POST(request: Request) {
 
             if (mode === "custom" && chunk && typeof chunk === "object" && "type" in chunk && (chunk as { type?: unknown }).type === "token") {
               const content = (chunk as { content?: unknown }).content;
-              if (typeof content === "string" && content) send({ type: "token", content });
+              if (typeof content === "string" && content) {
+                streamedAssistantResponse += content;
+                send({ type: "token", content });
+              }
+            }
+            if (mode === "custom" && chunk && typeof chunk === "object" && "type" in chunk && (chunk as { type?: unknown }).type === "complete") {
+              const content = (chunk as { content?: unknown }).content;
+              if (typeof content === "string") streamedAssistantResponse = content;
+            }
+            if (mode === "updates" && chunk && typeof chunk === "object") {
+              for (const update of Object.values(chunk as Record<string, unknown>)) {
+                if (update && typeof update === "object") Object.assign(streamedValues, update);
+              }
             }
 
           }
 
-          const snapshot = await graph.getState(config);
-          const values = snapshot.values as EscutiaStateType;
+          const values = requestedPrivateMode
+            ? { ...streamedValues, assistantResponse: streamedAssistantResponse || streamedValues.assistantResponse }
+            : (await graph.getState(config)).values as EscutiaStateType;
           const finalSentiment = values.approvedSentiment || values.currentSentiment || values.detectedSentiment;
           const messageSentiment = values.detectedSentiment;
           const sentimentChanged = Boolean(messageSentiment && messageSentiment !== currentSentiment);
           const sentimentAt = sentimentChanged ? new Date() : profile?.currentSentimentAt ?? null;
           const persistedUserMessageId = values.userMessageId || userMessageId;
 
-          if (values.assistantResponse) {
+          if (values.assistantResponse && requestedPrivateMode) {
+            send({
+              type: "done",
+              message: { id: `private-assistant-${crypto.randomUUID()}`, role: "assistant", content: values.assistantResponse, sentiment: null },
+              userMessage: { id: persistedUserMessageId },
+              sentiment: null,
+              sentimentAt: null,
+            });
+          } else if (values.assistantResponse) {
             const assistant = await prisma.$transaction(async (transaction) => {
               const created = await transaction.message.create({
                 data: { conversationId, role: "assistant", content: values.assistantResponse, sentiment: messageSentiment },

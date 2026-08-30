@@ -3,11 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import ImmediateHelp from "@/components/ImmediateHelp";
+import ConversationClosure, { type ConversationClosureData } from "@/components/ConversationClosure";
+import ConversationSetup, { type ConversationSetupOptions } from "@/components/ConversationSetup";
+import PersonalResources from "@/components/PersonalResources";
+import { CONVERSATION_MODE_COPY, normalizeConversationMode, type ConversationMode, type ConversationSentiment } from "@/lib/conversation";
 
 type SentimentLabel = "negativo" | "neutro" | "positivo";
 
@@ -20,6 +24,8 @@ type UserProfile = {
 type ConversationSummary = {
   id: string;
   title: string;
+  mode: ConversationMode;
+  isPrivate: boolean;
   updatedAt: string;
 };
 
@@ -49,6 +55,8 @@ type ChatWorkspaceProps = {
   initialConversationId?: string | null;
   initialMessages?: ChatMessage[];
   initialFocusRecordId?: string | null;
+  initialConversationMode?: string;
+  initialPrivateMode?: boolean;
 };
 
 function normalizeConversationMessages(messages: ChatMessage[]) {
@@ -399,7 +407,7 @@ function MarkdownMessage({ content, tone }: { content: string; tone: keyof typeo
   );
 }
 
-export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages, initialFocusRecordId }: ChatWorkspaceProps) {
+export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages, initialFocusRecordId, initialConversationMode, initialPrivateMode = false }: ChatWorkspaceProps) {
   const displayName = getDisplayName(user);
   const router = useRouter();
   const [currentSentiment, setCurrentSentiment] = useState<SentimentLabel | null>(initialSentiment);
@@ -407,6 +415,11 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [conversations, setConversations] = useState(initialConversations);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(initialConversationId ?? null);
   const [messages, setMessages] = useState<ChatMessage[]>(() => normalizeConversationMessages(initialMessages ?? []));
+  const [conversationMode, setConversationMode] = useState<ConversationMode>(normalizeConversationMode(initialConversationMode));
+  const [privateMode, setPrivateMode] = useState(initialPrivateMode);
+  const [setupOpen, setSetupOpen] = useState(false);
+  const [conversationResumeId, setConversationResumeId] = useState<string | null>(null);
+  const [conversationCheckIn, setConversationCheckIn] = useState<ConversationSentiment | null>(null);
   const [search, setSearch] = useState("");
   const [historyDate, setHistoryDate] = useState("");
   const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
@@ -414,7 +427,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [editingDraft, setEditingDraft] = useState("");
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
-  const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | null>(null);
+  const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | "finishing" | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
   const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId && !initialFocusRecordId);
   const [historyOpen, setHistoryOpen] = useState(true);
@@ -423,6 +436,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [sentimentModalOpen, setSentimentModalOpen] = useState(!initialSentiment);
   const [sentimentReviewOpen, setSentimentReviewOpen] = useState(false);
   const [sentimentReviewHandled, setSentimentReviewHandled] = useState(false);
+  const [closureOpen, setClosureOpen] = useState(false);
   const [sentimentStatus, setSentimentStatus] = useState<"unknown" | "today" | "stale">("unknown");
   const [conversationFocusLatestSentiment, setConversationFocusLatestSentiment] = useState(false);
   const [conversationFocusRecordId, setConversationFocusRecordId] = useState<string | null>(initialFocusRecordId ?? null);
@@ -431,6 +445,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [renameDraft, setRenameDraft] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<ConversationSummary | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const setupRef = useRef<HTMLDivElement>(null);
   const conversationMenuRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const lastMessageContent = messages[messages.length - 1]?.content ?? "";
@@ -529,6 +544,13 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   }, [conversationOpen, messages.length, lastMessageContent]);
 
   useEffect(() => {
+    if (!setupOpen || conversationOpen) return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timer = window.setTimeout(() => setupRef.current?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" }), 0);
+    return () => window.clearTimeout(timer);
+  }, [conversationOpen, setupOpen]);
+
+  useEffect(() => {
     if (!openConversationMenuId) return undefined;
 
     function handleEscape(event: KeyboardEvent) {
@@ -569,22 +591,34 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   function rememberConversation(id: string, title: string) {
     setConversations((current) => {
       const next = current.filter((conversation) => conversation.id !== id);
-      return [{ id, title: title.slice(0, 80), updatedAt: new Date().toISOString() }, ...next];
+      return [{ id, title: title.slice(0, 80), mode: conversationMode, isPrivate: false, updatedAt: new Date().toISOString() }, ...next];
     });
   }
 
-  async function createConversation(content: string) {
+  async function createConversation(content: string, options: ConversationSetupOptions) {
     const response = await fetch("/api/conversations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: content }),
+      body: JSON.stringify({ title: content, mode: options.mode, privateMode: false, checkInSentiment: options.checkInSentiment }),
     });
     const data = (await response.json()) as { conversation?: ConversationSummary; error?: string };
     if (!response.ok || !data.conversation) throw new Error(data.error || "Não foi possível criar a conversa.");
     return data.conversation;
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; focusRecordId?: string | null; replaceMessageId?: string }, optimisticUserMessageId?: string) {
+  function handleStartConversation(options: ConversationSetupOptions) {
+    if (busy) return;
+    setConversationMode(options.mode);
+    setPrivateMode(options.privateMode);
+    setConversationResumeId(options.resumeConversationId);
+    setConversationCheckIn(options.checkInSentiment);
+    setSetupOpen(false);
+    setSidebarOpen(false);
+    setConversationOpen(true);
+    setNotice(options.privateMode ? "Conversa privada pronta. Nada será salvo no histórico." : `Conversa pronta no modo “${CONVERSATION_MODE_COPY[options.mode].label}”.`);
+  }
+
+  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; focusRecordId?: string | null; replaceMessageId?: string; privateMode?: boolean; mode?: ConversationMode; resumeConversationId?: string | null; contextMessages?: ChatMessage[] }, optimisticUserMessageId?: string) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -695,7 +729,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setNotice("Atualizando sua mensagem e preparando uma nova resposta…");
 
     try {
-      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId }, messageId);
+      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId, privateMode, mode: conversationMode, contextMessages: privateMode ? messages.slice(0, messageIndex) : undefined }, messageId);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
     } finally {
@@ -707,6 +741,14 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     event.preventDefault();
     const content = draft.trim();
     if (!content || busy) return;
+    const wasConversationOpen = Boolean(activeConversationId);
+    const setupOptions: ConversationSetupOptions = {
+      mode: conversationMode,
+      privateMode,
+      checkInSentiment: conversationCheckIn,
+      resumeConversationId: conversationResumeId,
+    };
+    const contextMessages = messages;
     setDraft("");
     setNotice("A EscutIA está lendo sua mensagem…");
     const optimisticUserMessageId = `local-${Date.now()}`;
@@ -715,21 +757,32 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     try {
       let conversationId = activeConversationId;
       if (!conversationId) {
-        const conversation = await createConversation(content);
-        conversationId = conversation.id;
-        setActiveConversationId(conversation.id);
-        rememberConversation(conversation.id, conversation.title);
+        if (setupOptions.privateMode) {
+          conversationId = `private-${crypto.randomUUID()}`;
+        } else {
+          const conversation = await createConversation(content, setupOptions);
+          conversationId = conversation.id;
+          rememberConversation(conversation.id, conversation.title);
+          if (setupOptions.checkInSentiment) {
+            setCurrentSentiment(setupOptions.checkInSentiment);
+            setCurrentSentimentAt(new Date().toISOString());
+          }
+        }
+        setActiveConversationId(conversationId);
       }
-      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId }, optimisticUserMessageId);
+      setConversationOpen(true);
+      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId, privateMode: setupOptions.privateMode, mode: setupOptions.mode, resumeConversationId: setupOptions.resumeConversationId, contextMessages }, optimisticUserMessageId);
       // Keep this component mounted while the NDJSON stream is consumed. If we
       // navigate immediately after creating the conversation, the route can
       // remount with only the user message before the assistant response is
       // persisted, making the first answer appear only after a refresh.
-      if (!activeConversationId) {
+      if (!wasConversationOpen && !setupOptions.privateMode) {
         router.push(`/chat/${conversationId}`);
       }
       setConversationFocusLatestSentiment(false);
       setConversationFocusRecordId(null);
+      setConversationResumeId(null);
+      setConversationCheckIn(null);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
     } finally {
@@ -775,9 +828,12 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setNotice("Carregando conversa…");
     try {
       const response = await fetch(`/api/conversations/${id}`);
-      const data = (await response.json()) as { conversation?: { messages: ChatMessage[] }; error?: string };
+      const data = (await response.json()) as { conversation?: { mode?: unknown; isPrivate?: boolean; messages: ChatMessage[] }; error?: string };
       if (!response.ok || !data.conversation) throw new Error(data.error || "Não foi possível carregar a conversa.");
       setActiveConversationId(id);
+      setConversationMode(normalizeConversationMode(data.conversation.mode));
+      setPrivateMode(Boolean(data.conversation.isPrivate));
+      setSetupOpen(false);
       setMessages(normalizeConversationMessages(data.conversation.messages));
       router.push(`/chat/${id}`);
       setNotice("Conversa carregada.");
@@ -882,18 +938,60 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setConversationFocusRecordId(null);
     setActiveConversationId(null);
     setMessages([]);
+    setConversationMode("ouvir");
+    setPrivateMode(false);
+    setConversationResumeId(null);
+    setConversationCheckIn(null);
     window.history.replaceState(null, "", "/chat");
     setSidebarOpen(false);
-    setConversationOpen(true);
-    setNotice("Nova conversa pronta. Escreva no seu ritmo.");
+    setConversationOpen(false);
+    setSetupOpen(true);
+    setNotice("Escolha como quer ser acolhido e comece quando estiver pronto.");
   }
 
   function handleOpenConversation() {
     setSidebarOpen(false);
-    setConversationOpen(true);
+    setConversationOpen(false);
+    setSetupOpen(true);
     setConversationFocusLatestSentiment(true);
     setConversationFocusRecordId(null);
-    setNotice("Vamos conversar a partir do seu último registro de sentimento.");
+    setNotice("Escolha o ritmo da conversa logo abaixo. Ela pode partir do seu último registro.");
+  }
+
+  const handleCancelClosure = useCallback(() => setClosureOpen(false), []);
+
+  async function handleFinishConversation(data: ConversationClosureData) {
+    if (busy) return;
+    setBusy("finishing");
+    try {
+      if (!privateMode && activeConversationId) {
+        const response = await fetch(`/api/conversations/${activeConversationId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json() as { error?: string };
+        if (!response.ok) throw new Error(result.error || "Não foi possível guardar o encerramento.");
+      }
+      setClosureOpen(false);
+      if (data.checkOutSentiment) {
+        setCurrentSentiment(data.checkOutSentiment);
+        setCurrentSentimentAt(new Date().toISOString());
+      }
+      setActiveConversationId(null);
+      setMessages([]);
+      setConversationOpen(false);
+      setSetupOpen(true);
+      setConversationResumeId(null);
+      setConversationCheckIn(null);
+      setPrivateMode(false);
+      router.push("/chat");
+      setNotice(privateMode ? "Conversa privada encerrada. O conteúdo não foi salvo." : "Conversa encerrada. O que você escolheu guardar ficou no seu histórico.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível encerrar a conversa.");
+    } finally {
+      setBusy(null);
+    }
   }
 
   function handleDraftKeyDown(event: ReactKeyboardEvent<HTMLTextAreaElement>) {
@@ -1086,6 +1184,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                 </button>
                 <Link href="/dashboard" className="mt-3 block text-center text-xs font-bold text-navy/50 transition-colors hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">Voltar ao dashboard</Link>
               </div>
+              <PersonalResources onUse={(content) => { setDraft((current) => current ? `${current}\n\n${content}` : content); setNotice("Recurso colocado na mensagem. Você decide se quer enviá-lo."); }} />
             </>
           ) : (
             <div className="hidden h-full flex-col items-center px-2 py-5 lg:flex">
@@ -1131,6 +1230,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                     <div className="min-w-0">
                       <p className="eyebrow text-[0.68rem]">seu próximo passo</p>
                       <h1 className="mt-2 truncate text-2xl font-black tracking-[-0.04em] text-navy sm:text-3xl">Seu espaço de conversa</h1>
+                      <div className="mt-3 flex flex-wrap items-center gap-2"><span className="rounded-full border border-purple/15 bg-purple/[0.06] px-3 py-1 text-xs font-black text-purple">{privateMode ? "Conversa privada" : CONVERSATION_MODE_COPY[conversationMode].label}</span><span className="text-xs text-navy/45">{privateMode ? "não aparece no histórico" : "você pode mudar de assunto quando quiser"}</span></div>
                     </div>
                   </div>
                 ) : null}
@@ -1196,6 +1296,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                   </div>
 
                   <div className="mt-4 shrink-0 rounded-[1.5rem] border border-navy/8 bg-white/80 p-4 shadow-[0_14px_40px_rgba(26,31,61,0.06)] sm:p-5">
+                    <div className="mb-3 flex items-center justify-between gap-3"><p className="min-w-0 truncate text-xs font-bold text-navy/45">{privateMode ? "Nada desta conversa será salvo" : `Modo: ${CONVERSATION_MODE_COPY[conversationMode].label}`}</p><button type="button" onClick={() => setClosureOpen(true)} disabled={Boolean(busy)} className="shrink-0 rounded-lg px-2.5 py-2 text-xs font-black text-purple transition-colors hover:bg-purple/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">Encerrar conversa</button></div>
                     <form onSubmit={(event) => void handleSend(event)}>
                       <label htmlFor="chat-message" className="sr-only">Escreva uma mensagem</label>
                       <textarea id="chat-message" name="chat-message" value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={3} placeholder="Escreva uma mensagem…" className="w-full resize-none rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
@@ -1253,6 +1354,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                   </div>
                 </section>
                 <p className="mt-4 px-1 text-xs leading-5 text-navy/45" aria-live="polite">{notice}</p>
+                {setupOpen ? <div ref={setupRef}><ConversationSetup conversations={conversations} initialMode={conversationMode} initialPrivateMode={privateMode} onStart={handleStartConversation} /></div> : null}
               </div>
             )}
           </div>
@@ -1351,6 +1453,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
           </div>
         </div>
       ) : null}
+      {closureOpen ? <ConversationClosure privateMode={privateMode} busy={busy === "finishing"} onCancel={handleCancelClosure} onSave={(data) => void handleFinishConversation(data)} /> : null}
       <ImmediateHelp className="bottom-24 sm:bottom-6" />
     </main>
   );
