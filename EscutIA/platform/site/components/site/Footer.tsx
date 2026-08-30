@@ -1,6 +1,7 @@
 const footerLinks = [
   ["Sobre", "#sobre"],
   ["Segurança", "#seguranca"],
+  ["Planos", "/planos"],
   ["Contato", "#conversar"],
 ];
 

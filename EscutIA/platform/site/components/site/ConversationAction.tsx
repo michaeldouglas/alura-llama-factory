@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-import AuthModal from "@/components/AuthModal";
+import AuthModal from "@/components/shared/AuthModal";
 
 type ConversationActionProps = {
   className?: string;

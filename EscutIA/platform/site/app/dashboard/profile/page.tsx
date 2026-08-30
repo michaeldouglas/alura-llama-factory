@@ -2,9 +2,9 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import DashboardSidebar from "@/components/DashboardSidebar";
-import AccountData from "@/components/AccountData";
-import ImmediateHelp from "@/components/ImmediateHelp";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import AccountData from "@/components/dashboard/AccountData";
+import ImmediateHelp from "@/components/shared/ImmediateHelp";
 import { authOptions } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";

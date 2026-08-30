@@ -1,6 +1,6 @@
-import DashboardSidebar from "@/components/DashboardSidebar";
-import ImmediateHelp from "@/components/ImmediateHelp";
-import SentimentDashboard from "@/components/SentimentDashboard";
+import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
+import ImmediateHelp from "@/components/shared/ImmediateHelp";
+import SentimentDashboard from "@/components/dashboard/SentimentDashboard";
 import { getDashboardPageData } from "@/lib/dashboard-page";
 
 export const dynamic = "force-dynamic";

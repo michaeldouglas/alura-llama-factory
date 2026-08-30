@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import AccountAction from "@/components/AccountAction";
-import ConversationAction from "@/components/ConversationAction";
+import AccountAction from "@/components/site/AccountAction";
+import ConversationAction from "@/components/site/ConversationAction";
 
 const links = [
   ["Início", "#inicio"],
@@ -30,6 +30,7 @@ export default function Header() {
               {label}
             </a>
           ))}
+          <a href="/planos" className="text-sm font-semibold text-purple transition hover:text-navy">Planos</a>
         </nav>
 
         <div className="hidden items-center gap-3 sm:flex">
@@ -56,6 +57,7 @@ export default function Header() {
               {label}
             </a>
           ))}
+          <a href="/planos" onClick={() => setOpen(false)} className="block border-b border-navy/5 py-3 text-sm font-semibold text-purple">Planos</a>
           <AccountAction
             className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-navy/10 px-5 py-3 text-center text-sm font-bold text-navy"
             onNavigate={() => setOpen(false)}

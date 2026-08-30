@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 
-import AuthModal from "@/components/AuthModal";
-import SignOutButton from "@/components/SignOutButton";
+import AuthModal from "@/components/shared/AuthModal";
+import SignOutButton from "@/components/shared/SignOutButton";
 
 type AccountActionProps = {
   className?: string;

@@ -8,6 +8,7 @@ import { authOptions } from "@/lib/auth";
 import { CONVERSATION_MODE_COPY, getConversationModeInstruction, isConversationMode, normalizeConversationMode, type ConversationMode } from "@/lib/conversation";
 import { prisma } from "@/lib/prisma";
 import type { SentimentLabel } from "@/lib/sentiment";
+import { commitAiResponse, releaseAiResponse, reserveAiResponse } from "@/lib/billing/usage";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -22,6 +23,7 @@ type AgentRequest = {
   mode?: unknown;
   resumeConversationId?: unknown;
   contextMessages?: unknown;
+  requestId?: unknown;
 };
 
 type AgentEvent =
@@ -97,6 +99,7 @@ export async function POST(request: Request) {
   const resumeConversationId = typeof body?.resumeConversationId === "string" ? body.resumeConversationId : "";
   const replaceMessageId = typeof body?.replaceMessageId === "string" ? body.replaceMessageId : "";
   const message = typeof body?.message === "string" ? body.message.trim() : "";
+  const requestId = typeof body?.requestId === "string" && body.requestId.length <= 120 ? body.requestId : crypto.randomUUID();
 
   if (!conversationId || (requestedPrivateMode ? !isPrivateConversationId(conversationId) : false)) {
     return NextResponse.json({ error: "Conversa não informada." }, { status: 400 });
@@ -111,11 +114,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Conversa privada inválida." }, { status: 400 });
   }
 
+  let usageReserved = false;
+  const operationKey = `${session.user.id}:${requestId}`;
   try {
     const conversation = requestedPrivateMode ? null : await verifyConversation(conversationId, session.user.id);
     if (!requestedPrivateMode && !conversation) {
       return NextResponse.json({ error: "Conversa não encontrada." }, { status: 404 });
     }
+
+    const usage = await reserveAiResponse(session.user.id, operationKey);
+    if (!usage.ok) return NextResponse.json({ error: "Você atingiu o limite de respostas disponível no seu ciclo." }, { status: 402 });
+    if (usage.duplicate) return NextResponse.json({ error: "Esta resposta já está sendo processada ou foi concluída." }, { status: 409 });
+    usageReserved = true;
 
     const [profile, latestSentimentRecord, resumeConversation] = await Promise.all([
       prisma.user.findUnique({
@@ -301,6 +311,8 @@ export async function POST(request: Request) {
           const persistedUserMessageId = values.userMessageId || userMessageId;
 
           if (values.assistantResponse && requestedPrivateMode) {
+            await commitAiResponse(operationKey);
+            usageReserved = false;
             send({
               type: "done",
               message: { id: `private-assistant-${crypto.randomUUID()}`, role: "assistant", content: values.assistantResponse, sentiment: null },
@@ -327,6 +339,8 @@ export async function POST(request: Request) {
               return created;
             });
 
+            await commitAiResponse(operationKey);
+            usageReserved = false;
             send({
               type: "done",
               message: { id: assistant.id, role: "assistant", content: assistant.content, sentiment: assistant.sentiment as SentimentLabel | null },
@@ -334,8 +348,14 @@ export async function POST(request: Request) {
               sentiment: finalSentiment,
               sentimentAt: sentimentAt?.toISOString() ?? null,
             });
+          } else {
+            throw new Error("NO_ASSISTANT_RESPONSE");
           }
         } catch (error) {
+          if (usageReserved) {
+            await releaseAiResponse(operationKey).catch(() => undefined);
+            usageReserved = false;
+          }
           console.error("Erro no agente EscutIA:", error);
           send({ type: "error", message: "Não foi possível responder agora. Tente novamente em instantes." });
         } finally {
@@ -353,6 +373,7 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
+    if (usageReserved) await releaseAiResponse(operationKey).catch(() => undefined);
     console.error("Não foi possível iniciar o agente EscutIA:", error);
     if (error instanceof Error && error.message === "MESSAGE_NOT_FOUND") {
       return NextResponse.json({ error: "Mensagem não encontrada para edição." }, { status: 404 });

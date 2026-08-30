@@ -1,4 +1,4 @@
-import ConversationAction from "@/components/ConversationAction";
+import ConversationAction from "@/components/site/ConversationAction";
 
 export default function CTA() {
   return (

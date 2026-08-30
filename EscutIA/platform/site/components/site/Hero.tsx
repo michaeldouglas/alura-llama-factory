@@ -1,5 +1,5 @@
-import ChatPreview from "@/components/ChatPreview";
-import ConversationAction from "@/components/ConversationAction";
+import ChatPreview from "@/components/site/ChatPreview";
+import ConversationAction from "@/components/site/ConversationAction";
 
 export default function Hero() {
   return (

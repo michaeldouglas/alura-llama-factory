@@ -7,10 +7,10 @@ import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useCallback,
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import ImmediateHelp from "@/components/ImmediateHelp";
-import ConversationClosure, { type ConversationClosureData } from "@/components/ConversationClosure";
-import ConversationSetup, { ToggleSwitch, type ConversationSetupOptions } from "@/components/ConversationSetup";
-import PersonalResources from "@/components/PersonalResources";
+import ImmediateHelp from "@/components/shared/ImmediateHelp";
+import ConversationClosure, { type ConversationClosureData } from "@/components/chat/ConversationClosure";
+import ConversationSetup, { ToggleSwitch, type ConversationSetupOptions } from "@/components/chat/ConversationSetup";
+import PersonalResources from "@/components/chat/PersonalResources";
 import { CONVERSATION_MODE_COPY, normalizeConversationMode, type ConversationMode, type ConversationSentiment } from "@/lib/conversation";
 
 type SentimentLabel = "negativo" | "neutro" | "positivo";
@@ -658,7 +658,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setNotice(options.privateMode ? "Conversa privada pronta. Nada será salvo no histórico." : `Conversa pronta no modo “${CONVERSATION_MODE_COPY[options.mode].label}”.`);
   }
 
-  async function consumeAgentStream(conversationId: string, payload: { message: string; focusLatestSentiment?: boolean; focusRecordId?: string | null; replaceMessageId?: string; privateMode?: boolean; mode?: ConversationMode; resumeConversationId?: string | null; contextMessages?: ChatMessage[] }, optimisticUserMessageId?: string) {
+  async function consumeAgentStream(conversationId: string, payload: { message: string; requestId: string; focusLatestSentiment?: boolean; focusRecordId?: string | null; replaceMessageId?: string; privateMode?: boolean; mode?: ConversationMode; resumeConversationId?: string | null; contextMessages?: ChatMessage[] }, optimisticUserMessageId?: string) {
     const response = await fetch("/api/agent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -769,7 +769,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setNotice("Atualizando sua mensagem e preparando uma nova resposta…");
 
     try {
-      await consumeAgentStream(activeConversationId, { message: content, replaceMessageId: messageId, privateMode, mode: conversationMode, contextMessages: privateMode ? messages.slice(0, messageIndex) : undefined }, messageId);
+      await consumeAgentStream(activeConversationId, { message: content, requestId: crypto.randomUUID(), replaceMessageId: messageId, privateMode, mode: conversationMode, contextMessages: privateMode ? messages.slice(0, messageIndex) : undefined }, messageId);
     } catch (error) {
       setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
     } finally {
@@ -811,7 +811,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
         setActiveConversationId(conversationId);
       }
       setConversationOpen(true);
-      await consumeAgentStream(conversationId, { message: content, focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId, privateMode: setupOptions.privateMode, mode: setupOptions.mode, resumeConversationId: setupOptions.resumeConversationId, contextMessages }, optimisticUserMessageId);
+      await consumeAgentStream(conversationId, { message: content, requestId: crypto.randomUUID(), focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId, privateMode: setupOptions.privateMode, mode: setupOptions.mode, resumeConversationId: setupOptions.resumeConversationId, contextMessages }, optimisticUserMessageId);
       // Keep this component mounted while the NDJSON stream is consumed. If we
       // navigate immediately after creating the conversation, the route can
       // remount with only the user message before the assistant response is

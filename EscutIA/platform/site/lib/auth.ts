@@ -3,6 +3,7 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 import { prisma } from "@/lib/prisma";
+import { ensureBillingProfile } from "@/lib/billing/customer";
 
 const googleProvider =
   process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
@@ -29,6 +30,11 @@ export const authOptions: NextAuthOptions = {
       }
 
       return session;
+    },
+  },
+  events: {
+    async createUser({ user }) {
+      if (user.id) await ensureBillingProfile(user.id);
     },
   },
 };

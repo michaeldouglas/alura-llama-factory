@@ -20,6 +20,12 @@ model User {
   conversations Conversation[]
   sentimentRecords SentimentRecord[]
   personalResources PersonalResource[]
+  billingProfile BillingProfile?
+  billingSubscriptions BillingSubscription[]
+  usagePeriods AiUsagePeriod[]
+  usageEntries AiUsageEntry[]
+  addonPurchases AddonPurchase[]
+  stripeEvents StripeEvent[]
 }
 
 model Account {
@@ -116,4 +122,125 @@ model SentimentRecord {
 
   @@index([userId, createdAt])
   @@index([conversationId])
+}
+
+model BillingProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  stripeCustomerId    String?  @unique
+  planKey             String   @default("free")
+  priceLookupKey      String   @default("escutia_free_monthly")
+  priceId             String?
+  subscriptionId      String?
+  subscriptionStatus  String   @default("active")
+  currentPeriodStart  DateTime?
+  currentPeriodEnd    DateTime?
+  cancelAtPeriodEnd   Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([planKey, subscriptionStatus])
+}
+
+model BillingSubscription {
+  id                   String   @id @default(cuid())
+  userId               String
+  stripeSubscriptionId String   @unique
+  stripeCustomerId     String
+  stripePriceId        String
+  priceLookupKey       String
+  planKey              String
+  status               String
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean  @default(false)
+  canceledAt           DateTime?
+  endedAt              DateTime?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([stripeCustomerId])
+}
+
+model AiUsagePeriod {
+  id           String   @id @default(cuid())
+  userId       String
+  periodKey    String
+  planKey      String
+  baseLimit    Int
+  baseUsed     Int      @default(0)
+  addonGranted Int      @default(0)
+  addonUsed    Int      @default(0)
+  startsAt     DateTime
+  endsAt       DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  entries      AiUsageEntry[]
+  addons       AddonPurchase[]
+
+  @@unique([userId, periodKey])
+  @@index([userId, startsAt, endsAt])
+}
+
+model AiUsageEntry {
+  id             String   @id @default(cuid())
+  userId         String
+  usagePeriodId  String
+  operationKey   String   @unique
+  kind           String
+  units          Int      @default(1)
+  status         String   @default("reserved")
+  addonPurchaseId String?
+  createdAt      DateTime @default(now())
+  consumedAt     DateTime?
+  releasedAt     DateTime?
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usagePeriod    AiUsagePeriod    @relation(fields: [usagePeriodId], references: [id], onDelete: Cascade)
+  addonPurchase  AddonPurchase?   @relation(fields: [addonPurchaseId], references: [id], onDelete: SetNull)
+
+  @@index([userId, status])
+  @@index([usagePeriodId, kind, status])
+}
+
+model AddonPurchase {
+  id                String   @id @default(cuid())
+  userId            String
+  usagePeriodId     String?
+  checkoutSessionId String   @unique
+  paymentIntentId   String?  @unique
+  priceId           String
+  lookupKey         String
+  amount            Int
+  currency          String
+  status            String   @default("paid")
+  grantedUnits      Int      @default(100)
+  remainingUnits    Int      @default(100)
+  expiresAt         DateTime
+  refundedAt        DateTime?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usagePeriod       AiUsagePeriod? @relation(fields: [usagePeriodId], references: [id], onDelete: SetNull)
+  usageEntries      AiUsageEntry[]
+
+  @@index([userId, expiresAt, status])
+}
+
+model StripeEvent {
+  id            String    @id @default(cuid())
+  stripeEventId String    @unique
+  type          String
+  status        String    @default("processing")
+  userId        String?
+  error         String?
+  receivedAt    DateTime  @default(now())
+  processedAt   DateTime?
+  user         User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([type, status])
+  @@index([userId, receivedAt])
 }

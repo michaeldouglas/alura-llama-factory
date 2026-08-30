@@ -1,11 +1,11 @@
-import About from "@/components/About";
-import CTA from "@/components/CTA";
-import Features from "@/components/Features";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import Safety from "@/components/Safety";
+import About from "@/components/site/About";
+import CTA from "@/components/site/CTA";
+import Features from "@/components/site/Features";
+import Footer from "@/components/site/Footer";
+import Header from "@/components/site/Header";
+import Hero from "@/components/site/Hero";
+import HowItWorks from "@/components/site/HowItWorks";
+import Safety from "@/components/site/Safety";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "http://localhost:3000";
 

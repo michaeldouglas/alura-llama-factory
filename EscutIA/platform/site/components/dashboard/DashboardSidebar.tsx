@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import SignOutButton from "@/components/SignOutButton";
+import SignOutButton from "@/components/shared/SignOutButton";
 
 type DashboardSidebarProps = {
   name: string;
   email: string | null;
   image: string | null;
-  active?: "overview" | "records" | "calendar" | "profile";
+  active?: "overview" | "records" | "calendar" | "profile" | "billing";
 };
 
 function initials(name: string) {
@@ -59,6 +59,7 @@ export default function DashboardSidebar({ name, email, image, active = "overvie
         <Link href="/dashboard/calendar" aria-current={active === "calendar" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "calendar" ? activeClass : inactiveClass}`}><CalendarIcon />Calendário</Link>
         <Link href="/chat" className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${inactiveClass}`}><ChatIcon />Conversar</Link>
         <Link href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "profile" ? activeClass : inactiveClass}`}><PersonIcon />Conta e dados</Link>
+        <Link href="/dashboard/billing" aria-current={active === "billing" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "billing" ? activeClass : inactiveClass}`}><span aria-hidden="true" className="grid h-[1.1rem] w-[1.1rem] place-items-center text-sm">$</span>Plano e uso</Link>
       </nav>
 
       <div className="mt-auto hidden pt-8 lg:block"><p className="px-3 text-xs leading-5 text-navy/40">Um espaço privado para perceber seus dias com mais calma.</p><div className="mt-6"><SignOutButton /></div></div>

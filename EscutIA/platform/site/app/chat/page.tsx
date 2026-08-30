@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import ChatWorkspace from "@/components/ChatWorkspace";
+import ChatWorkspace from "@/components/chat/ChatWorkspace";
 import { authOptions } from "@/lib/auth";
 import { normalizeConversationMode } from "@/lib/conversation";
 import { getChatWorkspaceData } from "./chat-data";
