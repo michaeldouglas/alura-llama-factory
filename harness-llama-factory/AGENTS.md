@@ -86,6 +86,34 @@ necessário e executando as validações antes e depois da alteração.
   usar apenas a orientação necessária; qualquer criação, revisão ou refatoração
   de UI deve passar pelas duas skills.
 
+## Skills e MCP do Stripe na plataforma
+
+- As skills `connect-recommend`,
+  `connect-required-verification-information`, `stripe-apps`,
+  `stripe-best-practices`, `stripe-directory`, `stripe-docs`,
+  `stripe-projects` e `upgrade-stripe`, assim como o MCP configurado em
+  `.codex/config.toml`, pertencem exclusivamente ao contexto da plataforma em
+  `EscutIA/platform/site/`. Elas não fazem parte do harness de datasets,
+  modelos, treinamento ou LLaMA-Factory.
+- Só ative uma skill Stripe ou chame uma ferramenta do MCP Stripe quando o
+  pedido mencionar explicitamente Stripe, pagamentos, billing, Connect,
+  marketplace, onboarding/KYC, Stripe Apps ou o planejamento de uma
+  funcionalidade Stripe para o site. Um pedido genérico de planejamento e uma
+  alteração comum do site não ativam essas capacidades.
+- Para tarefas do site sem Stripe, use somente as skills de UI, React/Next.js,
+  conteúdo, SEO ou interação que forem pertinentes ao pedido.
+- Use apenas a skill Stripe específica ao problema: `stripe-docs` para
+  documentação, `stripe-best-practices` para decisões de integração,
+  `connect-recommend` para Connect e distribuição de pagamentos,
+  `connect-required-verification-information` para verificação/KYC,
+  `stripe-apps` para Stripe Apps, `stripe-projects` para provisionamento,
+  `stripe-directory` para selecionar ou engajar um provedor, e
+  `upgrade-stripe` para upgrades de API/SDK. Não aplique o conjunto inteiro por
+  padrão.
+- Mesmo em uma tarefa Stripe, mantenha o código e as alterações dentro de
+  `EscutIA/platform/site/`, salvo autorização explícita para outro escopo. Não
+  leia, execute ou altere artefatos de fine-tuning para implementar Stripe.
+
 ## Fluxo
 
 O fluxo principal do projeto é:

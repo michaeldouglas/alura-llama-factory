@@ -66,6 +66,30 @@ orientar a implementação, com animações performáticas baseadas em `transfor
 Nenhuma dessas skills deve ser aplicada ao harness de modelos, datasets,
 treinamento ou LLaMA-Factory.
 
+## Stripe no site
+
+As skills Stripe instaladas no harness e o servidor MCP Stripe configurado em
+`.codex/config.toml` são capacidades exclusivas de `EscutIA/platform/site/`.
+Elas não devem ser usadas em tarefas do harness de LLaMA-Factory.
+
+A ativação é sob demanda e exige as duas condições abaixo:
+
+1. o alvo da tarefa é o site ou suas rotas server-side em
+   `EscutIA/platform/site/`; e
+2. o pedido é explicitamente sobre Stripe, pagamentos, billing, Connect,
+   marketplace, onboarding/KYC, Stripe Apps ou o planejamento de uma
+   funcionalidade Stripe.
+
+Alterações comuns de páginas, componentes, estilos, rotas ou API não ativam as
+skills Stripe apenas por ocorrerem no site. Para cada tarefa, carregue somente
+a skill Stripe correspondente ao problema, conforme os gatilhos descritos em
+`AGENTS.md`.
+
+O MCP pode permanecer registrado no projeto para estar disponível quando
+solicitado, mas sua disponibilidade não autoriza chamadas automáticas nem
+ações de escrita. Qualquer operação externa ou mutação deve continuar sujeita
+à autorização e às confirmações normais da tarefa.
+
 ## Contrato entre site e API
 
 Quando o frontend precisar de funcionalidades do produto, ele deve consumi-las

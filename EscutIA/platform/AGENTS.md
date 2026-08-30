@@ -80,3 +80,27 @@ diretrizes atuais antes da análise. Essas skills não se aplicam ao harness de
 fine-tuning nem aos artefatos de treinamento.
 Quando a tarefa envolver movimento ou feedback de interação, acrescente
 `interaction-design` à implementação e à revisão da interface.
+
+## Stripe sob demanda
+
+As skills `connect-recommend`,
+`connect-required-verification-information`, `stripe-apps`,
+`stripe-best-practices`, `stripe-directory`, `stripe-docs`, `stripe-projects` e
+`upgrade-stripe`, junto com o MCP Stripe configurado no harness, são exclusivas
+deste contexto de aplicação. Não as aplique ao harness de fine-tuning, aos
+datasets, aos modelos ou ao LLaMA-Factory.
+
+Use uma skill Stripe ou o MCP somente quando a solicitação for explicitamente
+sobre Stripe, pagamentos, billing, Connect, marketplace, onboarding/KYC, Stripe
+Apps ou o planejamento de uma funcionalidade Stripe. Alterações comuns do site
+— inclusive páginas, componentes, estilos, rotas e API sem Stripe — não devem
+ativar essas capacidades.
+
+Escolha somente a skill correspondente ao pedido: documentação (`stripe-docs`),
+decisões de integração (`stripe-best-practices`), Connect e divisão de
+pagamentos (`connect-recommend`), verificação/KYC
+(`connect-required-verification-information`), Stripe Apps (`stripe-apps`),
+provisionamento (`stripe-projects`), seleção/engajamento de provedores
+(`stripe-directory`) ou upgrade de API/SDK (`upgrade-stripe`). Mantenha as
+alterações no projeto `site/` e não acesse artefatos do fine-tuning para
+implementar a integração.

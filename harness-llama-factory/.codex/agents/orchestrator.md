@@ -98,6 +98,24 @@ Para animações, transições, estados de carregamento e microinterações, use
 também `interaction-design`, respeitando `prefers-reduced-motion` e priorizando
 `transform` e `opacity`.
 
+### Stripe sob demanda
+
+As skills Stripe e o MCP Stripe pertencem somente ao contexto
+`EscutIA/platform/site/`. Só use essas capacidades quando o pedido mencionar
+explicitamente Stripe, pagamentos, billing, Connect, marketplace, onboarding/KYC,
+Stripe Apps ou o planejamento de uma funcionalidade Stripe para o site. Não as
+ative em uma alteração comum do site e nunca em tarefas de dataset, modelo,
+treinamento ou LLaMA-Factory.
+
+Carregue apenas a skill correspondente ao pedido: `stripe-docs` para
+documentação, `stripe-best-practices` para decisões de integração,
+`connect-recommend` para Connect, `connect-required-verification-information`
+para KYC, `stripe-apps` para Stripe Apps, `stripe-projects` para provisionamento,
+`stripe-directory` para selecionar ou engajar provedores e `upgrade-stripe` para
+upgrades de API/SDK. O MCP pode estar configurado no projeto, mas não deve ser
+chamado automaticamente; operações externas e escritas exigem autorização da
+tarefa.
+
 Quando houver uma solicitação explícita de evolução, confirme o escopo dos
 arquivos, consulte os artefatos do Spec Kit, preserve a versão anterior, registre
 a decisão e valide o resultado. Alterações em datasets devem preservar a fonte e
