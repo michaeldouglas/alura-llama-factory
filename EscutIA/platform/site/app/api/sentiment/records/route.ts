@@ -27,7 +27,8 @@ export async function GET(request: Request) {
 
   const params = new URL(request.url).searchParams;
   const pageValue = Number(params.get("page") || "1");
-  if (!Number.isInteger(pageValue) || pageValue <= 0 || pageValue > 10000 || !isValidDateInput(params.get("from")) || !isValidDateInput(params.get("to")) || !isValidSentimentFilter(params.get("sentiments"))) {
+  const search = params.get("q")?.trim() || "";
+  if (!Number.isInteger(pageValue) || pageValue <= 0 || pageValue > 10000 || search.length > 80 || !isValidDateInput(params.get("from")) || !isValidDateInput(params.get("to")) || !isValidSentimentFilter(params.get("sentiments"))) {
     return NextResponse.json({ error: "Paginação ou filtros inválidos." }, { status: 400 });
   }
   const page = pageValue;
@@ -37,6 +38,7 @@ export async function GET(request: Request) {
       from: params.get("from"),
       to: params.get("to"),
       sentiments: params.get("sentiments"),
+      search,
       page,
     }));
   } catch (error) {
@@ -89,9 +91,10 @@ export async function DELETE(request: Request) {
     const result = await prisma.$transaction(async (transaction) => {
       const deleted = await transaction.sentimentRecord.deleteMany({ where: { userId: session.user.id } });
       await transaction.user.update({ where: { id: session.user.id }, data: { currentSentiment: null, currentSentimentAt: null } });
-      return deleted;
+      const remaining = await transaction.sentimentRecord.count({ where: { userId: session.user.id } });
+      return { deleted: deleted.count, remaining };
     });
-    return NextResponse.json({ ok: true, deleted: result.count });
+    return NextResponse.json({ ok: true, ...result });
   } catch (error) {
     console.error("Não foi possível excluir registros de sentimento:", error);
     return NextResponse.json({ error: "Não foi possível excluir os registros agora." }, { status: 503 });

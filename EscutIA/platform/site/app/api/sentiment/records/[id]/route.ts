@@ -31,7 +31,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     const record = await prisma.sentimentRecord.update({
       where: { id: owned.id },
       data: { note: body.note.trim() || null },
-      select: { id: true, sentiment: true, note: true, createdAt: true },
+      select: { id: true, sentiment: true, note: true, createdAt: true, conversation: { select: { id: true, title: true } } },
     });
     return NextResponse.json({ record: { ...record, createdAt: record.createdAt.toISOString() } });
   } catch (error) {

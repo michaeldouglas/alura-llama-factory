@@ -12,6 +12,11 @@ bearer_token_env_var = "GITHUB_PERSONAL_ACCESS_TOKEN"
 default_tools_approval_mode = "writes"
 
 
+[mcp_servers.stripe]
+url = "https://mcp.stripe.com"
+bearer_token_env_var = "STRIPE_API_KEY"
+
+
 [agents]
 enabled = true
 max_concurrent_threads_per_session = 4

@@ -29,7 +29,6 @@ export type SentimentCalendarDay = {
   neutro: number;
   positivo: number;
   total: number;
-  dominant: SentimentLabel | null;
 };
 
 export type SentimentDashboardSummary = {
@@ -51,6 +50,7 @@ export type SentimentRecordItem = {
   sentiment: SentimentLabel;
   note: string | null;
   createdAt: string;
+  conversation: { id: string; title: string } | null;
 };
 
 export const RECORDS_PAGE_SIZE = 12;
@@ -60,6 +60,7 @@ type DashboardOptions = {
   from?: string | null;
   to?: string | null;
   sentiments?: string | null;
+  search?: string | null;
 };
 
 function formatDate(date: Date) {
@@ -146,7 +147,7 @@ function aggregateRecords(records: Array<{ sentiment: string; createdAt: Date }>
       positivo: 0,
       total: 0,
     });
-    calendar.set(key, { date: key, negativo: 0, neutro: 0, positivo: 0, total: 0, dominant: null });
+    calendar.set(key, { date: key, negativo: 0, neutro: 0, positivo: 0, total: 0 });
   }
 
   const counts = emptyCounts();
@@ -164,7 +165,6 @@ function aggregateRecords(records: Array<{ sentiment: string; createdAt: Date }>
     counts[sentiment] += 1;
   }
 
-  Array.from(calendar.values()).forEach((day) => { day.dominant = dominantSentiment(day, day.total); });
   const total = records.length;
   const percentages = emptyCounts();
   for (const sentiment of SENTIMENT_LABELS) percentages[sentiment] = total ? roundPercentage((counts[sentiment] / total) * 100) : 0;
@@ -229,14 +229,20 @@ export async function getSentimentDashboardSummary(userId: string, options: Dash
 export async function getSentimentRecords(userId: string, options: DashboardOptions & { page?: number } = {}) {
   const { from, to, selectedSentiments } = getDashboardRange(options);
   const page = Number.isInteger(options.page) && (options.page as number) > 0 ? options.page as number : 1;
-  const where = { userId, sentiment: { in: selectedSentiments }, createdAt: { gte: from, lt: addDays(to, 1) } } as const;
+  const search = typeof options.search === "string" ? options.search.trim().slice(0, 80) : "";
+  const where = {
+    userId,
+    sentiment: { in: selectedSentiments },
+    createdAt: { gte: from, lt: addDays(to, 1) },
+    ...(search ? { note: { contains: search } } : {}),
+  };
   const [records, total] = await Promise.all([
     prisma.sentimentRecord.findMany({
       where,
       orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       skip: (page - 1) * RECORDS_PAGE_SIZE,
       take: RECORDS_PAGE_SIZE,
-      select: { id: true, sentiment: true, note: true, createdAt: true },
+      select: { id: true, sentiment: true, note: true, createdAt: true, conversation: { select: { id: true, title: true } } },
     }),
     prisma.sentimentRecord.count({ where }),
   ]);
@@ -248,6 +254,6 @@ export async function getSentimentRecords(userId: string, options: DashboardOpti
     pageSize: RECORDS_PAGE_SIZE,
     total,
     hasMore: page * RECORDS_PAGE_SIZE < total,
-    records: records.map((record): SentimentRecordItem => ({ id: record.id, sentiment: record.sentiment as SentimentLabel, note: record.note, createdAt: record.createdAt.toISOString() })),
+    records: records.map((record): SentimentRecordItem => ({ id: record.id, sentiment: record.sentiment as SentimentLabel, note: record.note, createdAt: record.createdAt.toISOString(), conversation: record.conversation })),
   };
 }

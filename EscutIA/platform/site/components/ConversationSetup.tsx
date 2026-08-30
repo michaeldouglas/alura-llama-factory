@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, ReactNode, useState } from "react";
 
 import {
   CHECK_IN_OPTIONS,
@@ -11,6 +11,25 @@ import {
 } from "@/lib/conversation";
 
 type RecentConversation = { id: string; title: string; updatedAt: string };
+
+export function ToggleSwitch({ checked, onChange, children, name }: { checked: boolean; onChange: (checked: boolean) => void; children: ReactNode; name?: string }) {
+  return (
+    <label className="flex cursor-pointer items-start gap-3">
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={(event) => onChange(event.target.checked)}
+        className="peer sr-only"
+      />
+      <span
+        aria-hidden="true"
+        className="relative mt-0.5 h-6 w-11 shrink-0 rounded-full bg-navy/15 transition-[background-color] after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-sm after:transition-transform peer-checked:bg-purple peer-checked:after:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-purple/40 motion-reduce:transition-none motion-reduce:after:transition-none"
+      />
+      <span className="min-w-0">{children}</span>
+    </label>
+  );
+}
 
 export type ConversationSetupOptions = {
   mode: ConversationMode;
@@ -32,6 +51,7 @@ export default function ConversationSetup({ conversations, initialMode = "ouvir"
   const [checkInSentiment, setCheckInSentiment] = useState<ConversationSentiment | null>(null);
   const [privateMode, setPrivateMode] = useState(initialPrivateMode);
   const [resumeConversationId, setResumeConversationId] = useState<string | null>(initialResumeConversationId);
+  const latestConversation = conversations[0];
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -64,13 +84,13 @@ export default function ConversationSetup({ conversations, initialMode = "ouvir"
         </section>
 
         <section aria-labelledby="conversation-privacy-title" className="rounded-[1.75rem] border border-navy/8 bg-white p-5 shadow-[0_16px_50px_rgba(26,31,61,0.05)] sm:p-7">
-          <div className="flex items-start gap-3">
-            <button type="button" role="switch" aria-checked={privateMode} onClick={() => setPrivateMode((current) => !current)} className={`relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transition-none ${privateMode ? "bg-purple" : "bg-navy/15"}`}><span aria-hidden="true" className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow-sm transition-transform motion-reduce:transition-none ${privateMode ? "translate-x-6" : "translate-x-1"}`} /></button>
-            <div><h2 id="conversation-privacy-title" className="text-sm font-black text-navy">Conversa sem registro</h2><p className="mt-1 text-xs leading-5 text-navy/50">{privateMode ? "Esta conversa não será criada nem aparecerá no histórico. Ao encerrá-la, o conteúdo sai da tela." : "A conversa será guardada no seu histórico para você retomar quando quiser."}</p></div>
-          </div>
+          <ToggleSwitch checked={privateMode} onChange={setPrivateMode} name="private-mode">
+            <span id="conversation-privacy-title" role="heading" aria-level={2} className="block text-sm font-black text-navy">Conversa sem registro</span>
+            <p className="mt-1 text-xs leading-5 text-navy/50">{privateMode ? "Esta conversa não será criada nem aparecerá no histórico. Ao encerrá-la, o conteúdo sai da tela." : "A conversa será guardada no seu histórico para você retomar quando quiser."}</p>
+          </ToggleSwitch>
         </section>
 
-        {!privateMode && conversations.length ? <section aria-labelledby="conversation-resume-title" className="rounded-[1.75rem] border border-navy/8 bg-white p-5 shadow-[0_16px_50px_rgba(26,31,61,0.05)] sm:p-7"><h2 id="conversation-resume-title" className="text-sm font-black text-navy">Quer retomar um assunto?</h2><p className="mt-1 text-xs leading-5 text-navy/50">Você decide se a nova conversa parte de um tema anterior.</p><div className="mt-3 grid gap-2"><button type="button" aria-pressed={resumeConversationId === null} onClick={() => setResumeConversationId(null)} className={`rounded-xl border px-3 py-2.5 text-left text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transition-none ${resumeConversationId === null ? "border-purple bg-purple/[0.05] text-purple" : "border-navy/8 text-navy/55 hover:bg-warm"}`}>Começar um assunto completamente novo</button>{conversations.slice(0, 4).map((conversation) => <button key={conversation.id} type="button" aria-pressed={resumeConversationId === conversation.id} onClick={() => setResumeConversationId(conversation.id)} className={`min-w-0 rounded-xl border px-3 py-2.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transition-none ${resumeConversationId === conversation.id ? "border-purple bg-purple/[0.05]" : "border-navy/8 hover:bg-warm"}`}><span className="block truncate text-xs font-bold text-navy">Continuar: {conversation.title}</span><span className="mt-1 block text-[0.68rem] text-navy/40">Tema escolhido por você</span></button>)}</div></section> : null}
+        {!privateMode && latestConversation ? <section aria-labelledby="conversation-resume-title" className="rounded-[1.75rem] border border-navy/8 bg-white p-5 shadow-[0_16px_50px_rgba(26,31,61,0.05)] sm:p-7"><h2 id="conversation-resume-title" className="text-sm font-black text-navy">Quer retomar um assunto?</h2><p className="mt-1 text-xs leading-5 text-navy/50">A nova conversa pode partir do seu registro mais recente.</p><div className="mt-3 grid gap-2"><button type="button" aria-pressed={resumeConversationId === null} onClick={() => setResumeConversationId(null)} className={`rounded-xl border px-3 py-2.5 text-left text-xs font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transition-none ${resumeConversationId === null ? "border-purple bg-purple/[0.05] text-purple" : "border-navy/8 text-navy/55 hover:bg-warm"}`}>Começar um assunto completamente novo</button><button type="button" aria-pressed={resumeConversationId === latestConversation.id} onClick={() => setResumeConversationId(latestConversation.id)} className={`min-w-0 rounded-xl border px-3 py-2.5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transition-none ${resumeConversationId === latestConversation.id ? "border-purple bg-purple/[0.05]" : "border-navy/8 hover:bg-warm"}`}><span className="block truncate text-xs font-bold text-navy">Continuar: {latestConversation.title}</span><span className="mt-1 block text-[0.68rem] text-navy/40">Última conversa atualizada</span></button></div></section> : null}
       </div>
 
       <div className="lg:col-span-2 flex flex-col gap-3 border-t border-navy/8 pt-5 sm:flex-row sm:items-center sm:justify-between"><p className="text-xs leading-5 text-navy/45">Você pode mudar de assunto ou encerrar quando quiser.</p><button type="submit" className="inline-flex items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 motion-reduce:transform-none motion-reduce:transition-none">Começar conversa</button></div>

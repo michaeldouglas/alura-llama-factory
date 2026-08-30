@@ -9,7 +9,7 @@ import remarkGfm from "remark-gfm";
 
 import ImmediateHelp from "@/components/ImmediateHelp";
 import ConversationClosure, { type ConversationClosureData } from "@/components/ConversationClosure";
-import ConversationSetup, { type ConversationSetupOptions } from "@/components/ConversationSetup";
+import ConversationSetup, { ToggleSwitch, type ConversationSetupOptions } from "@/components/ConversationSetup";
 import PersonalResources from "@/components/PersonalResources";
 import { CONVERSATION_MODE_COPY, normalizeConversationMode, type ConversationMode, type ConversationSentiment } from "@/lib/conversation";
 
@@ -58,6 +58,35 @@ type ChatWorkspaceProps = {
   initialConversationMode?: string;
   initialPrivateMode?: boolean;
 };
+
+const LAST_CONVERSATION_MODE_STORAGE_KEY = "escutia:conversation-mode:v1";
+const DRAFT_TEXTAREA_MIN_HEIGHT = 48;
+const DRAFT_TEXTAREA_MAX_HEIGHT = 176;
+
+function readLastConversationMode() {
+  try {
+    return normalizeConversationMode(window.localStorage.getItem(LAST_CONVERSATION_MODE_STORAGE_KEY));
+  } catch {
+    return "ouvir" as ConversationMode;
+  }
+}
+
+function saveLastConversationMode(mode: ConversationMode) {
+  try {
+    window.localStorage.setItem(LAST_CONVERSATION_MODE_STORAGE_KEY, mode);
+  } catch {
+    // Storage can be unavailable in private browsing or when disabled.
+  }
+}
+
+function resizeDraftTextarea(element: HTMLTextAreaElement | null) {
+  if (!element) return;
+
+  element.style.height = "0px";
+  const contentHeight = element.scrollHeight;
+  element.style.height = `${Math.min(Math.max(contentHeight, DRAFT_TEXTAREA_MIN_HEIGHT), DRAFT_TEXTAREA_MAX_HEIGHT)}px`;
+  element.style.overflowY = contentHeight > DRAFT_TEXTAREA_MAX_HEIGHT ? "auto" : "hidden";
+}
 
 function normalizeConversationMessages(messages: ChatMessage[]) {
   return messages.map((message, index) => {
@@ -445,6 +474,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [renameDraft, setRenameDraft] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<ConversationSummary | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const draftRef = useRef<HTMLTextAreaElement>(null);
   const setupRef = useRef<HTMLDivElement>(null);
   const conversationMenuRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -464,6 +494,15 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   useEffect(() => {
     setHistoryDate(formatDateInputValue(new Date()));
   }, []);
+
+  useEffect(() => {
+    if (initialConversationId || initialConversationMode) return;
+    setConversationMode(readLastConversationMode());
+  }, [initialConversationId, initialConversationMode]);
+
+  useEffect(() => {
+    resizeDraftTextarea(draftRef.current);
+  }, [draft]);
 
   useEffect(() => {
     if (!sentimentModalOpen && !sentimentReviewOpen) return undefined;
@@ -609,6 +648,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   function handleStartConversation(options: ConversationSetupOptions) {
     if (busy) return;
     setConversationMode(options.mode);
+    saveLastConversationMode(options.mode);
     setPrivateMode(options.privateMode);
     setConversationResumeId(options.resumeConversationId);
     setConversationCheckIn(options.checkInSentiment);
@@ -831,7 +871,9 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       const data = (await response.json()) as { conversation?: { mode?: unknown; isPrivate?: boolean; messages: ChatMessage[] }; error?: string };
       if (!response.ok || !data.conversation) throw new Error(data.error || "Não foi possível carregar a conversa.");
       setActiveConversationId(id);
-      setConversationMode(normalizeConversationMode(data.conversation.mode));
+      const selectedMode = normalizeConversationMode(data.conversation.mode);
+      setConversationMode(selectedMode);
+      saveLastConversationMode(selectedMode);
       setPrivateMode(Boolean(data.conversation.isPrivate));
       setSetupOpen(false);
       setMessages(normalizeConversationMessages(data.conversation.messages));
@@ -938,24 +980,44 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     setConversationFocusRecordId(null);
     setActiveConversationId(null);
     setMessages([]);
-    setConversationMode("ouvir");
     setPrivateMode(false);
     setConversationResumeId(null);
     setConversationCheckIn(null);
     window.history.replaceState(null, "", "/chat");
     setSidebarOpen(false);
-    setConversationOpen(false);
-    setSetupOpen(true);
-    setNotice("Escolha como quer ser acolhido e comece quando estiver pronto.");
+    setConversationOpen(true);
+    setSetupOpen(false);
+    setNotice("Você pode começar agora. Se quiser, ative “Escolher o ritmo” antes da próxima conversa.");
   }
 
   function handleOpenConversation() {
     setSidebarOpen(false);
-    setConversationOpen(false);
-    setSetupOpen(true);
     setConversationFocusLatestSentiment(true);
     setConversationFocusRecordId(null);
-    setNotice("Escolha o ritmo da conversa logo abaixo. Ela pode partir do seu último registro.");
+    if (setupOpen) {
+      setConversationOpen(false);
+      setNotice("Escolha o ritmo da conversa logo abaixo. Ela pode partir do seu último registro.");
+      return;
+    }
+    setConversationOpen(true);
+    setNotice("Você pode começar a conversa a partir do seu último registro.");
+  }
+
+  function handleConversationSetupToggle(checked: boolean) {
+    if (busy) return;
+    setSetupOpen(checked);
+    setConversationFocusLatestSentiment(true);
+    setConversationFocusRecordId(null);
+    if (checked) {
+      setConversationOpen(false);
+      setNotice("Escolha o ritmo da conversa logo abaixo. Ela pode partir do seu último registro.");
+      return;
+    }
+    setConversationResumeId(null);
+    setConversationCheckIn(null);
+    setPrivateMode(false);
+    setConversationOpen(true);
+    setNotice("Conversa pronta. Você pode começar a partir do seu último registro.");
   }
 
   const handleCancelClosure = useCallback(() => setClosureOpen(false), []);
@@ -981,7 +1043,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       setActiveConversationId(null);
       setMessages([]);
       setConversationOpen(false);
-      setSetupOpen(true);
+      setSetupOpen(false);
       setConversationResumeId(null);
       setConversationCheckIn(null);
       setPrivateMode(false);
@@ -1299,9 +1361,9 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                     <div className="mb-3 flex items-center justify-between gap-3"><p className="min-w-0 truncate text-xs font-bold text-navy/45">{privateMode ? "Nada desta conversa será salvo" : `Modo: ${CONVERSATION_MODE_COPY[conversationMode].label}`}</p><button type="button" onClick={() => setClosureOpen(true)} disabled={Boolean(busy)} className="shrink-0 rounded-lg px-2.5 py-2 text-xs font-black text-purple transition-colors hover:bg-purple/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">Encerrar conversa</button></div>
                     <form onSubmit={(event) => void handleSend(event)}>
                       <label htmlFor="chat-message" className="sr-only">Escreva uma mensagem</label>
-                      <textarea id="chat-message" name="chat-message" value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={3} placeholder="Escreva uma mensagem…" className="w-full resize-none rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
+                      <textarea id="chat-message" name="chat-message" ref={draftRef} value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={1} placeholder="Escreva uma mensagem…" aria-describedby="chat-message-hint" className="max-h-44 w-full resize-none overflow-y-hidden rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-[border-color,box-shadow] placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
                       <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <p className="text-xs text-navy/45" aria-live="polite">{busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
+                        <p id="chat-message-hint" className="text-xs text-navy/45" aria-live="polite">{busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
                         <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy)} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transform-none motion-reduce:transition-none">
                           <SendIcon />
                         </button>
@@ -1329,9 +1391,15 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                               <p className="text-xs text-navy/45">Registrado em {formatSentimentDate(currentSentimentAt)}</p>
                             </div>
                           </div>
-                          <button type="button" onClick={handleOpenConversation} disabled={Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
-                            Vamos conversar sobre isso?
-                          </button>
+                          <div className="flex flex-col gap-3 sm:items-end">
+                            <ToggleSwitch checked={setupOpen} onChange={handleConversationSetupToggle} name="conversation-setup">
+                              <span className="block text-xs font-black text-navy">Escolher o ritmo</span>
+                              <span className="mt-0.5 block text-[0.68rem] leading-5 text-navy/45">Ative para ajustar antes de começar.</span>
+                            </ToggleSwitch>
+                            <button type="button" onClick={handleOpenConversation} disabled={Boolean(busy)} className="inline-flex shrink-0 items-center justify-center rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50">
+                              Vamos conversar sobre isso?
+                            </button>
+                          </div>
                         </div>
                       </>
                     ) : (
@@ -1354,7 +1422,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                   </div>
                 </section>
                 <p className="mt-4 px-1 text-xs leading-5 text-navy/45" aria-live="polite">{notice}</p>
-                {setupOpen ? <div ref={setupRef}><ConversationSetup conversations={conversations} initialMode={conversationMode} initialPrivateMode={privateMode} onStart={handleStartConversation} /></div> : null}
+                {setupOpen ? <div ref={setupRef}><ConversationSetup conversations={conversations} initialMode={conversationMode} initialPrivateMode={privateMode} initialResumeConversationId={conversationResumeId} onStart={handleStartConversation} /></div> : null}
               </div>
             )}
           </div>

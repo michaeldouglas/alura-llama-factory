@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { getSentimentDashboardSummary, getSentimentRecords } from "@/lib/sentiment-dashboard";
 import { SENTIMENT_LABELS, type SentimentLabel } from "@/lib/sentiment";
 
-export type DashboardSearchParams = { from?: string; to?: string; sentiments?: string };
+export type DashboardSearchParams = { from?: string; to?: string; sentiments?: string; q?: string };
 
 export async function getDashboardPageData(searchParams: DashboardSearchParams) {
   const session = await getServerSession(authOptions);
@@ -16,7 +16,7 @@ export async function getDashboardPageData(searchParams: DashboardSearchParams) 
   const initialSelected = selected?.length ? selected : [...SENTIMENT_LABELS];
   const [summary, records] = await Promise.all([
     getSentimentDashboardSummary(session.user.id, searchParams),
-    getSentimentRecords(session.user.id, { ...searchParams, page: 1 }),
+    getSentimentRecords(session.user.id, { ...searchParams, search: searchParams.q, page: 1 }),
   ]);
 
   return {
@@ -26,5 +26,6 @@ export async function getDashboardPageData(searchParams: DashboardSearchParams) 
     summary,
     records,
     initialSelected,
+    initialSearch: searchParams.q || "",
   };
 }

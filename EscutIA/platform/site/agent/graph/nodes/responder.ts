@@ -17,7 +17,7 @@ function getTextContent(content: unknown) {
 }
 
 export async function respondNode(state: EscutiaStateType, runtime: Runtime) {
-  const agent = getEscutiaAgent(state.approvedSentiment || state.currentSentiment);
+  const agent = getEscutiaAgent(state.approvedSentiment || state.currentSentiment, state.mode);
   const events = agent.streamEvents(
     { messages: state.messages },
     { version: "v2", signal: runtime.signal },

@@ -102,8 +102,17 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const result = await prisma.conversation.deleteMany({ where: { userId: session.user.id } });
-    return NextResponse.json({ ok: true, deleted: result.count });
+    const result = await prisma.$transaction(async (transaction) => {
+      const conversations = await transaction.conversation.findMany({ where: { userId: session.user.id }, select: { id: true } });
+      const deleted = await transaction.conversation.deleteMany({ where: { userId: session.user.id } });
+      const remainingConversations = await transaction.conversation.count({ where: { userId: session.user.id } });
+      const remainingMessages = await transaction.message.count({ where: { conversation: { userId: session.user.id } } });
+      const remainingRecords = conversations.length
+        ? await transaction.sentimentRecord.count({ where: { conversationId: { in: conversations.map((conversation) => conversation.id) } } })
+        : 0;
+      return { deleted: deleted.count, remaining: remainingConversations + remainingMessages + remainingRecords };
+    });
+    return NextResponse.json({ ok: true, ...result });
   } catch (error) {
     console.error("Não foi possível excluir conversas:", error);
     return NextResponse.json({ error: "Não foi possível excluir as conversas agora." }, { status: 503 });
