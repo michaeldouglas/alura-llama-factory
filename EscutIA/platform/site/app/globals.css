@@ -121,6 +121,23 @@ body {
   animation: menu-enter 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Keep each dashboard route focused while reusing the same data-aware client component. */
+[data-dashboard-section="overview"] [aria-labelledby="check-in-title"],
+[data-dashboard-section="overview"] [aria-labelledby="calendar-title"],
+[data-dashboard-section="overview"] [aria-labelledby="history-title"],
+[data-dashboard-section="records"] [aria-labelledby="period-summary-title"],
+[data-dashboard-section="records"] [aria-label="Resumo dos sentimentos"],
+[data-dashboard-section="records"] [aria-labelledby="chart-title"],
+[data-dashboard-section="records"] [aria-labelledby="calendar-title"],
+[data-dashboard-section="calendar"] [aria-labelledby="period-summary-title"],
+[data-dashboard-section="calendar"] [aria-label="Resumo dos sentimentos"],
+[data-dashboard-section="calendar"] [aria-labelledby="chart-title"],
+[data-dashboard-section="calendar"] [aria-labelledby="history-title"],
+[data-dashboard-section="records"] > section:last-child,
+[data-dashboard-section="calendar"] > section:last-child {
+  display: none;
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -12px, 0); }

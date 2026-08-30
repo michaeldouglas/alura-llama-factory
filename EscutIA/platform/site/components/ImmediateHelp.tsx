@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
-export default function ImmediateHelp() {
+export default function ImmediateHelp({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export default function ImmediateHelp() {
     };
   }, [open]);
 
-  return <div className="fixed bottom-4 right-4 z-40 sm:bottom-6 sm:right-6">
+  return <div className={`${className || "bottom-4 sm:bottom-6"} fixed right-4 z-40 sm:right-6`}>
     {open ? <div ref={panelRef} id={panelId} role="dialog" aria-modal="true" aria-labelledby={`${panelId}-title`} className="mb-3 w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-navy/10 bg-white p-5 text-navy shadow-[0_18px_60px_rgba(26,31,61,0.2)] modal-enter motion-reduce:animate-none">
       <div className="flex items-start justify-between gap-4"><div><p className="eyebrow text-[0.65rem]">apoio imediato</p><h2 id={`${panelId}-title`} className="mt-2 text-lg font-black">Você não precisa passar por isso sozinho</h2></div><button ref={closeButtonRef} type="button" aria-label="Fechar ajuda imediata" title="Fechar" onClick={() => setOpen(false)} className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-lg text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50">×</button></div>
       <p className="mt-3 text-sm leading-6 text-navy/60">Se houver risco imediato, procure ajuda agora:</p>

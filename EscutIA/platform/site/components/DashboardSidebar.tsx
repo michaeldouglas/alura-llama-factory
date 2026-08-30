@@ -7,7 +7,7 @@ type DashboardSidebarProps = {
   name: string;
   email: string | null;
   image: string | null;
-  active?: "overview" | "profile";
+  active?: "overview" | "records" | "calendar" | "profile";
 };
 
 function initials(name: string) {
@@ -24,6 +24,14 @@ function ChatIcon() {
 
 function PersonIcon() {
   return <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[1.1rem] w-[1.1rem]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><circle cx="12" cy="8" r="3" /><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" /></svg>;
+}
+
+function CalendarIcon() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[1.1rem] w-[1.1rem]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3.5v3M16 3.5v3M4 9.5h16" /></svg>;
+}
+
+function RecordsIcon() {
+  return <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[1.1rem] w-[1.1rem]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8"><path d="M7 5.5h10M7 10h10M7 14.5h6" /><path d="M5 3.5h14a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1Z" /></svg>;
 }
 
 function LogoMark() {
@@ -47,8 +55,10 @@ export default function DashboardSidebar({ name, email, image, active = "overvie
 
       <nav aria-label="Navegação principal" className="mt-7 flex gap-2 overflow-x-auto lg:block lg:space-y-1">
         <Link href="/dashboard" aria-current={active === "overview" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "overview" ? activeClass : inactiveClass}`}><GridIcon />Visão geral</Link>
+        <Link href="/dashboard/records" aria-current={active === "records" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "records" ? activeClass : inactiveClass}`}><RecordsIcon />Registros</Link>
+        <Link href="/dashboard/calendar" aria-current={active === "calendar" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "calendar" ? activeClass : inactiveClass}`}><CalendarIcon />Calendário</Link>
         <Link href="/chat" className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${inactiveClass}`}><ChatIcon />Conversar</Link>
-        <Link href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "profile" ? activeClass : inactiveClass}`}><PersonIcon />Meu perfil</Link>
+        <Link href="/dashboard/profile" aria-current={active === "profile" ? "page" : undefined} className={`flex shrink-0 items-center gap-3 rounded-xl px-3 py-3 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 ${active === "profile" ? activeClass : inactiveClass}`}><PersonIcon />Conta e dados</Link>
       </nav>
 
       <div className="mt-auto hidden pt-8 lg:block"><p className="px-3 text-xs leading-5 text-navy/40">Um espaço privado para perceber seus dias com mais calma.</p><div className="mt-6"><SignOutButton /></div></div>

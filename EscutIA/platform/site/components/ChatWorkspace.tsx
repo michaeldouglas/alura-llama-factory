@@ -1351,7 +1351,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
           </div>
         </div>
       ) : null}
-      <ImmediateHelp />
+      <ImmediateHelp className="bottom-24 sm:bottom-6" />
     </main>
   );
 }
