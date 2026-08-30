@@ -428,8 +428,10 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [deleteTarget, setDeleteTarget] = useState<ConversationSummary | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const conversationMenuRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const lastMessageContent = messages[messages.length - 1]?.content ?? "";
   const sentimentDateLabel = sentimentStatus === "stale" ? "Seu último sentimento" : "Seu sentimento hoje";
+  const openDialogKey = renameTarget ? "rename" : deleteTarget ? "delete" : sentimentReviewOpen ? "sentiment-review" : sentimentModalOpen ? "sentiment" : null;
 
   const filteredConversations = useMemo(() => {
     if (!historyDate) return [];
@@ -458,6 +460,51 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, [busy, sentimentModalOpen, sentimentReviewOpen]);
+
+  useEffect(() => {
+    if (!openDialogKey) return undefined;
+
+    const dialog = dialogRef.current;
+    if (!dialog) return undefined;
+
+    const previousFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const focusableSelector =
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const focusFirstElement = () => {
+      const focusableElements = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector));
+      focusableElements[0]?.focus();
+    };
+
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+
+      const focusableElements = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector));
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleTab);
+    const focusTimer = window.setTimeout(focusFirstElement, 0);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleTab);
+      previousFocusedElement?.focus();
+    };
+  }, [openDialogKey]);
 
   useEffect(() => {
     if (sentimentReviewHandled || !initialSentiment || !initialSentimentAt) return;
@@ -895,7 +942,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       <div className="flex h-screen min-h-screen">
         {sidebarOpen ? <button type="button" aria-label="Fechar painel lateral" onClick={() => setSidebarOpen(false)} className="fixed inset-0 z-30 bg-navy/20 lg:hidden" /> : null}
 
-        <aside aria-label="Navegação do chat" className={`fixed inset-y-0 left-0 z-40 flex w-[min(88vw,320px)] flex-col border-r border-navy/8 bg-white shadow-xl transition-[transform,width] duration-300 ease-out motion-reduce:transition-none lg:static lg:h-screen lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0 lg:w-[300px]" : "-translate-x-full lg:translate-x-0 lg:w-[76px]"}`}>
+        <aside aria-label="Navegação do chat" className={`fixed inset-y-0 left-0 z-40 flex w-[min(88vw,320px)] flex-col border-r border-navy/8 bg-white shadow-xl transition-transform duration-300 ease-out motion-reduce:transition-none lg:static lg:h-screen lg:shadow-none lg:translate-x-0 ${sidebarOpen ? "translate-x-0 lg:w-[300px]" : "-translate-x-full lg:translate-x-0 lg:w-[76px]"}`}>
           {sidebarOpen ? (
             <>
               <div className="border-b border-navy/8 px-5 py-5 sm:px-6">
@@ -1012,7 +1059,11 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                         </div>
                       ) : (
                         <p className="px-3 py-5 text-sm leading-6 text-navy/45">
-                          {historyDate ? `Nenhuma conversa em ${formatHistoryDate(historyDate)}.` : "Carregando o histórico…"}
+                          {historyDate
+                            ? search.trim()
+                              ? "Nenhuma conversa corresponde à busca nessa data."
+                              : `Nenhuma conversa em ${formatHistoryDate(historyDate)}.`
+                            : "Carregando o histórico…"}
                         </p>
                       )}
                     </div>
@@ -1201,8 +1252,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       </div>
 
       {renameTarget ? (
-        <div className="fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
-          <div role="dialog" aria-modal="true" aria-labelledby="rename-conversation-title" className="w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-8">
+        <div className="modal-backdrop-enter fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px] motion-reduce:animate-none">
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="rename-conversation-title" className="modal-enter w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] motion-reduce:animate-none sm:p-8">
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="eyebrow">organizar conversa</p>
@@ -1226,8 +1277,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       ) : null}
 
       {deleteTarget ? (
-        <div className="fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
-          <div role="dialog" aria-modal="true" aria-labelledby="delete-conversation-title" aria-describedby="delete-conversation-description" className="w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-8">
+        <div className="modal-backdrop-enter fixed inset-0 z-[60] grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px] motion-reduce:animate-none">
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="delete-conversation-title" aria-describedby="delete-conversation-description" className="modal-enter w-full max-w-md rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] motion-reduce:animate-none sm:p-8">
             <p className="eyebrow text-rose-600/70">atenção</p>
             <h2 id="delete-conversation-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy">Excluir conversa?</h2>
             <p id="delete-conversation-description" className="mt-4 break-words text-sm leading-7 text-navy/55">Deseja realmente excluir “{deleteTarget.title}”? Essa ação não poderá ser desfeita.</p>
@@ -1240,8 +1291,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       ) : null}
 
       {sentimentReviewOpen && currentSentiment && currentSentimentAt ? (
-        <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
-          <div role="dialog" aria-modal="true" aria-labelledby="sentiment-review-title" aria-describedby="sentiment-review-description" className="w-full max-w-xl rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-9">
+        <div className="modal-backdrop-enter fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px] motion-reduce:animate-none">
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="sentiment-review-title" aria-describedby="sentiment-review-description" className="modal-enter w-full max-w-xl rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] motion-reduce:animate-none sm:p-9">
             <p className="eyebrow">um novo dia, um novo registro</p>
             <h2 id="sentiment-review-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy sm:text-3xl">Você continua se sentindo assim hoje?</h2>
             <p id="sentiment-review-description" className="mt-4 text-sm leading-7 text-navy/55">
@@ -1266,8 +1317,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       ) : null}
 
       {sentimentModalOpen ? (
-        <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px]">
-          <div role="dialog" aria-modal="true" aria-labelledby="sentiment-modal-title" aria-describedby="sentiment-modal-description" className="w-full max-w-xl rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] sm:p-9">
+        <div className="modal-backdrop-enter fixed inset-0 z-50 grid place-items-center overflow-y-auto overscroll-contain bg-navy/35 p-4 backdrop-blur-[2px] motion-reduce:animate-none">
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="sentiment-modal-title" aria-describedby="sentiment-modal-description" className="modal-enter w-full max-w-xl rounded-[2rem] border border-white/70 bg-[#fffdfb] p-6 shadow-[0_28px_90px_rgba(26,31,61,0.22)] motion-reduce:animate-none sm:p-9">
             <div className="flex items-start justify-between gap-5">
               <div>
                 <p className="eyebrow">um instante para você</p>

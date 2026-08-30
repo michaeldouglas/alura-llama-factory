@@ -77,14 +77,14 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
 
   return (
     <>
-      <button type="button" className={className} onClick={() => setOpen(true)}>
+      <button type="button" className={className} aria-expanded={open} aria-controls="login-modal-dialog" aria-haspopup="dialog" onClick={() => setOpen(true)}>
         {children ?? label}
       </button>
 
       {open &&
         createPortal(
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-navy/45 px-5 py-8 backdrop-blur-sm"
+            className="modal-backdrop-enter fixed inset-0 z-[100] flex items-center justify-center bg-navy/45 px-5 py-8 backdrop-blur-sm motion-reduce:animate-none"
             role="presentation"
             onMouseDown={(event) => {
               if (event.target === event.currentTarget) setOpen(false);
@@ -96,7 +96,7 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
               aria-labelledby="login-modal-title"
               aria-describedby="login-modal-description"
               aria-modal="true"
-              className="max-h-[calc(100dvh-4rem)] w-full max-w-md overflow-y-auto overscroll-contain rounded-[30px] bg-warm p-7 text-navy shadow-2xl sm:p-9"
+              className="modal-enter max-h-[calc(100dvh-4rem)] w-full max-w-md overflow-y-auto overscroll-contain rounded-[30px] bg-warm p-7 text-navy shadow-2xl motion-reduce:animate-none sm:p-9"
               role="dialog"
             >
               <div className="flex items-start justify-between gap-4">

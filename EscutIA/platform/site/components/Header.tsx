@@ -41,6 +41,7 @@ export default function Header() {
           type="button"
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
+          aria-controls="mobile-site-navigation"
           onClick={() => setOpen(!open)}
           className="rounded-xl border border-navy/10 p-2.5 text-navy transition hover:border-purple hover:text-purple sm:hidden"
         >
@@ -49,7 +50,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav aria-label="Menu mobile" className="border-t border-navy/5 bg-warm px-5 pb-5 pt-3 sm:hidden">
+        <nav id="mobile-site-navigation" aria-label="Menu mobile" className="menu-enter border-t border-navy/5 bg-warm px-5 pb-5 pt-3 motion-reduce:animate-none sm:hidden">
           {links.map(([label, href]) => (
             <a key={href} href={href} onClick={() => setOpen(false)} className="block border-b border-navy/5 py-3 text-sm font-semibold text-navy/70">
               {label}

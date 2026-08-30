@@ -104,7 +104,7 @@ export default function AccountAction({ className, onNavigate }: AccountActionPr
           <div
             id={`account-menu-${menuId}`}
             aria-label={menuLabel}
-            className="absolute right-0 top-[calc(100%+0.65rem)] z-50 w-[min(18rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-navy/10 bg-white p-2 text-left shadow-2xl shadow-navy/15 sm:w-72"
+            className="menu-enter absolute right-0 top-[calc(100%+0.65rem)] z-50 w-[min(18rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-navy/10 bg-white p-2 text-left shadow-2xl shadow-navy/15 motion-reduce:animate-none sm:w-72"
           >
             <Link
               href="/dashboard"
