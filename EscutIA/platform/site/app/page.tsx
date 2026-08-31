@@ -6,6 +6,7 @@ import Header from "@/components/site/Header";
 import Hero from "@/components/site/Hero";
 import HowItWorks from "@/components/site/HowItWorks";
 import Safety from "@/components/site/Safety";
+import ScrollReveal from "@/components/site/ScrollReveal";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "http://localhost:3000";
 
@@ -25,13 +26,13 @@ export default function Home() {
         <Header />
         <main id="main-content">
           <Hero />
-          <HowItWorks />
-          <Features />
-          <Safety />
-          <About />
-          <CTA />
+          <ScrollReveal><HowItWorks /></ScrollReveal>
+          <ScrollReveal delay={60}><Features /></ScrollReveal>
+          <ScrollReveal delay={40}><Safety /></ScrollReveal>
+          <ScrollReveal><About /></ScrollReveal>
+          <ScrollReveal delay={60}><CTA /></ScrollReveal>
         </main>
-        <Footer />
+        <ScrollReveal><Footer /></ScrollReveal>
       </div>
     </>
   );

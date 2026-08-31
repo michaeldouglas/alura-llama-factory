@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import { X } from "lucide-react";
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -113,7 +114,7 @@ export default function AuthModal({ className, callbackUrl = "/dashboard", child
                   onClick={() => setOpen(false)}
                   className="rounded-full px-3 py-1 text-2xl leading-none text-navy/55 transition hover:bg-white hover:text-navy"
                 >
-                  ×
+                  <X aria-hidden="true" size={20} strokeWidth={2.25} />
                 </button>
               </div>
 

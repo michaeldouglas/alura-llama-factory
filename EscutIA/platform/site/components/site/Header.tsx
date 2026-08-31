@@ -1,26 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import AccountAction from "@/components/site/AccountAction";
 import ConversationAction from "@/components/site/ConversationAction";
 
 const links = [
-  ["Início", "#inicio"],
-  ["Como funciona", "#como-funciona"],
-  ["Recursos", "#recursos"],
-  ["Sobre nós", "#sobre"],
-  ["Segurança", "#seguranca"],
+  ["Início", "/#inicio"],
+  ["Como funciona", "/#como-funciona"],
+  ["Recursos", "/#recursos"],
+  ["Sobre nós", "/#sobre"],
+  ["Segurança", "/#seguranca"],
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-navy/5 bg-warm/90 backdrop-blur-xl">
+    <header className={`sticky top-0 z-50 border-b border-navy/5 bg-warm/90 backdrop-blur-xl transition-[background-color,box-shadow] duration-300 ${scrolled ? "bg-warm/95 shadow-lg shadow-navy/5" : ""} motion-reduce:transition-none`}>
       <div className="site-container flex h-[76px] items-center justify-between">
-        <a href="#inicio" aria-label="EscutIA — voltar ao início" onClick={() => setOpen(false)}>
+        <a href="/#inicio" aria-label="EscutIA — voltar ao início" onClick={() => setOpen(false)}>
           <Image src="/logo.png" alt="EscutIA" width={132} height={45} priority className="h-auto w-[122px]" />
         </a>
 
@@ -46,7 +55,7 @@ export default function Header() {
           onClick={() => setOpen(!open)}
           className="rounded-xl border border-navy/10 p-2.5 text-navy transition hover:border-purple hover:text-purple sm:hidden"
         >
-          <span aria-hidden="true" className="block text-xl leading-none">{open ? "×" : "☰"}</span>
+          {open ? <X aria-hidden="true" size={20} strokeWidth={2.25} /> : <Menu aria-hidden="true" size={20} strokeWidth={2.25} />}
         </button>
       </div>
 

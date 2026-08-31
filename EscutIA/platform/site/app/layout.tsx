@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "@/components/shared/AuthProvider";
+import ScrollProgress from "@/components/site/ScrollProgress";
+import ScrollToTop from "@/components/site/ScrollToTop";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "http://localhost:3000";
 
@@ -74,6 +76,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ScrollProgress />
         <a
           href="#main-content"
           className="sr-only rounded-full bg-navy px-4 py-3 text-sm font-bold text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200]"
@@ -81,6 +84,7 @@ export default function RootLayout({
           Pular para o conteúdo principal
         </a>
         <AuthProvider>{children}</AuthProvider>
+        <ScrollToTop />
       </body>
     </html>
   );

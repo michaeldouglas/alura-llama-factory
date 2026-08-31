@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, KeyboardEvent as ReactKeyboardEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRightFromLine, CalendarDays, Check, ChevronDown, Copy, History, LayoutDashboard, MoreHorizontal, PanelLeft, Pencil, Plus, Search, Send, Share2, Trash2, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -205,119 +206,55 @@ function EscutiaAvatar() {
 }
 
 function ExitIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="M10 5H6.5A1.5 1.5 0 0 0 5 6.5v11A1.5 1.5 0 0 0 6.5 19H10" />
-      <path d="M13 8l4 4-4 4M8.5 12H17" />
-    </svg>
-  );
+  return <ArrowRightFromLine aria-hidden="true" className="h-5 w-5" />;
 }
 
 function PanelIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <path d="M4 6.5h16M4 12h16M4 17.5h16" />
-    </svg>
-  );
+  return <PanelLeft aria-hidden="true" className="h-5 w-5" />;
 }
 
 function HistoryIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <path d="M5 5.5h14A1.5 1.5 0 0 1 20.5 7v10A1.5 1.5 0 0 1 19 18.5H5A1.5 1.5 0 0 1 3.5 17V7A1.5 1.5 0 0 1 5 5.5Z" />
-      <path d="M7.5 9h9M7.5 12h9M7.5 15h5" />
-    </svg>
-  );
+  return <History aria-hidden="true" className="h-5 w-5" />;
 }
 
 function CalendarIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <rect x="4" y="5.5" width="16" height="14" rx="2" />
-      <path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16.5h.01M12 16.5h.01" />
-    </svg>
-  );
+  return <CalendarDays aria-hidden="true" className="h-4 w-4" />;
 }
 
 function DashboardIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <rect x="4" y="4" width="6" height="6" rx="1" />
-      <rect x="14" y="4" width="6" height="6" rx="1" />
-      <rect x="4" y="14" width="6" height="6" rx="1" />
-      <rect x="14" y="14" width="6" height="6" rx="1" />
-    </svg>
-  );
+  return <LayoutDashboard aria-hidden="true" className="h-5 w-5" />;
 }
 
 function PlusIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8">
-      <path d="M12 5v14M5 12h14" />
-    </svg>
-  );
+  return <Plus aria-hidden="true" className="h-5 w-5" />;
 }
 
 function SendIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="m4 4 16 8-16 8 3-8-3-8Z" />
-      <path d="M7 12h13" />
-    </svg>
-  );
+  return <Send aria-hidden="true" className="h-5 w-5" />;
 }
 
 function CopyIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <rect x="8" y="8" width="11" height="11" rx="2" />
-      <path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4H6.5A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8" />
-    </svg>
-  );
+  return <Copy aria-hidden="true" className="h-4 w-4" />;
 }
 
 function CheckIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="m5 12.5 4.2 4.2L19 7" />
-    </svg>
-  );
+  return <Check aria-hidden="true" className="h-4 w-4" />;
 }
 
 function EditIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="m14.5 5.5 4 4M6 18l1-4.5L16.5 4a2.12 2.12 0 0 1 3 3L10 16.5 6 18Z" />
-      <path d="M13 7.5 17 11.5" />
-    </svg>
-  );
+  return <Pencil aria-hidden="true" className="h-3.5 w-3.5" />;
 }
 
 function MoreIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-      <circle cx="5" cy="12" r="1.5" />
-      <circle cx="12" cy="12" r="1.5" />
-      <circle cx="19" cy="12" r="1.5" />
-    </svg>
-  );
+  return <MoreHorizontal aria-hidden="true" className="h-5 w-5" />;
 }
 
 function ShareIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="M12 15V4M8 8l4-4 4 4" />
-      <path d="M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13" />
-    </svg>
-  );
+  return <Share2 aria-hidden="true" className="h-3.5 w-3.5" />;
 }
 
 function TrashIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
-      <path d="M5 7h14M10 4h4l1 3H9l1-3ZM7 7l.7 12.5h8.6L17 7M10 10.5v6M14 10.5v6" />
-    </svg>
-  );
+  return <Trash2 aria-hidden="true" className="h-3.5 w-3.5" />;
 }
 
 function LogoMark() {
@@ -337,11 +274,7 @@ function CollapsedIconButton({ label, onClick, children, disabled = false }: { l
 }
 
 function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" className={`h-4 w-4 transition-transform duration-200 motion-reduce:transition-none ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.7">
-      <path d="m5 7.5 5 5 5-5" />
-    </svg>
-  );
+  return <ChevronDown aria-hidden="true" className={`h-4 w-4 transition-transform duration-200 motion-reduce:transition-none ${open ? "rotate-180" : ""}`} />;
 }
 
 function EscutiaMoodIcon({ sentiment, className = "h-5 w-5" }: { sentiment: SentimentLabel; className?: string }) {
@@ -1188,9 +1121,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                   <div className="mt-2">
                     <label htmlFor="conversation-search" className="sr-only">Buscar conversas</label>
                     <div className="relative">
-                      <svg aria-hidden="true" viewBox="0 0 20 20" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy/40">
-                        <path d="m14.5 14.5 3 3m-1.5-7a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
-                      </svg>
+                      <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy/40" />
                       <input id="conversation-search" name="conversation-search" type="search" autoComplete="off" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Buscar conversas…" className="w-full rounded-xl border border-navy/10 bg-warm/70 py-3 pl-10 pr-3 text-sm text-navy outline-none transition-colors placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20 motion-reduce:transition-none" />
                     </div>
 
@@ -1241,7 +1172,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
               <div className="border-t border-navy/8 p-4">
                 <button type="button" onClick={handleNewConversation} disabled={Boolean(busy)} className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-4 py-3 text-sm font-bold text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transform-none motion-reduce:transition-none">
-                  <span aria-hidden="true" className="text-lg leading-none">+</span>
+                  <Plus aria-hidden="true" className="h-4 w-4" />
                   Nova conversa
                 </button>
                 <Link href="/dashboard" className="mt-3 block text-center text-xs font-bold text-navy/50 transition-colors hover:text-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 motion-reduce:transition-none">Voltar ao dashboard</Link>
@@ -1438,7 +1369,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                 <h2 id="rename-conversation-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy">Renomear conversa</h2>
               </div>
               <button type="button" aria-label="Fechar renomear conversa" title="Fechar" onClick={() => { if (!busy) { setRenameTarget(null); setRenameDraft(""); } }} disabled={busy === "renaming"} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40">
-                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8"><path d="m7 7 10 10M17 7 7 17" /></svg>
+                <X aria-hidden="true" className="h-5 w-5" />
               </button>
             </div>
 
@@ -1503,7 +1434,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
                 <h2 id="sentiment-modal-title" className="mt-3 text-2xl font-black tracking-[-0.04em] text-navy sm:text-3xl">Como você está se sentindo?</h2>
               </div>
               <button type="button" aria-label="Fechar registro de sentimento" title="Fechar" onClick={() => setSentimentModalOpen(false)} disabled={busy === "validating"} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-navy/45 transition-colors hover:bg-warm hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-40">
-                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8"><path d="m7 7 10 10M17 7 7 17" /></svg>
+                <X aria-hidden="true" className="h-5 w-5" />
               </button>
             </div>
             <p id="sentiment-modal-description" className="mt-4 text-sm leading-7 text-navy/55">Não precisa encontrar as palavras perfeitas. Conte do jeito que conseguir; vamos observar o sentimento predominante juntos.</p>

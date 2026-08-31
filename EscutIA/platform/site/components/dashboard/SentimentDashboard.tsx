@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import type { SentimentDashboardSummary, SentimentRecordItem } from "@/lib/sentiment-dashboard";
 import { SENTIMENT_LABELS, type SentimentLabel } from "@/lib/sentiment";
@@ -313,9 +314,9 @@ function CalendarSection({ summary, availableMonths, calendarMonth, onCalendarMo
           <p className="mt-2 text-sm leading-6 text-navy/50">Selecione um dia para abrir os registros daquele recorte. Cada bolinha representa um sentimento presente no dia.</p>
         </div>
         <div className="flex items-center justify-between gap-3 sm:justify-end">
-          <button type="button" aria-label="Mês anterior" title="Mês anterior" disabled={currentMonthIndex <= 0} onClick={() => onCalendarMonthChange(previousMonth)} className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/60 transition-colors hover:bg-warm hover:text-purple disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40">←</button>
+          <button type="button" aria-label="Mês anterior" title="Mês anterior" disabled={currentMonthIndex <= 0} onClick={() => onCalendarMonthChange(previousMonth)} className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/60 transition-colors hover:bg-warm hover:text-purple disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40"><ChevronLeft aria-hidden="true" className="h-4 w-4" /></button>
           <p className="min-w-[9rem] text-center text-sm font-black capitalize text-navy">{formatMonth(calendarMonth)}</p>
-          <button type="button" aria-label="Próximo mês" title="Próximo mês" disabled={!nextMonth} onClick={() => nextMonth && onCalendarMonthChange(nextMonth)} className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/60 transition-colors hover:bg-warm hover:text-purple disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40">→</button>
+          <button type="button" aria-label="Próximo mês" title="Próximo mês" disabled={!nextMonth} onClick={() => nextMonth && onCalendarMonthChange(nextMonth)} className="grid h-9 w-9 place-items-center rounded-full border border-navy/10 text-navy/60 transition-colors hover:bg-warm hover:text-purple disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40"><ChevronRight aria-hidden="true" className="h-4 w-4" /></button>
         </div>
       </div>
 

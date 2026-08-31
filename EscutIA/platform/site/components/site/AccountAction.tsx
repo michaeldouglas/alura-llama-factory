@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -84,20 +85,7 @@ export default function AccountAction({ className, onNavigate }: AccountActionPr
             </span>
           )}
           <span className="min-w-0 truncate">Olá, {firstName}</span>
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 16 16"
-            className={`h-4 w-4 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
-          >
-            <path
-              d="m4 6 4 4 4-4"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.75"
-            />
-          </svg>
+          <ChevronDown aria-hidden="true" size={16} strokeWidth={2} className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""} motion-reduce:transition-none`} />
         </button>
 
         {open && (
@@ -115,7 +103,7 @@ export default function AccountAction({ className, onNavigate }: AccountActionPr
               className="flex items-center justify-between rounded-xl px-3 py-3 text-sm font-bold text-navy transition hover:bg-warm hover:text-purple"
             >
               <span>Dashboard</span>
-              <span aria-hidden="true" className="text-base">→</span>
+              <ArrowRight aria-hidden="true" size={16} />
             </Link>
 
             <div className="my-1 border-t border-navy/8" />
@@ -157,7 +145,7 @@ export default function AccountAction({ className, onNavigate }: AccountActionPr
 
   if (status === "loading") {
     return (
-      <span className={`${className ?? ""} text-navy/45`} aria-busy="true">
+      <span className={`${className ?? ""} text-navy/45`} aria-busy="true" aria-live="polite">
         Carregando…
       </span>
     );

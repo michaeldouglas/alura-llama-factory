@@ -121,6 +121,35 @@ body {
   animation: menu-enter 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 520ms cubic-bezier(0.16, 1, 0.3, 1), transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.hero-enter {
+  animation: hero-enter 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+.typing-dot {
+  animation: typing-dot 1s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 120ms; }
+.typing-dot:nth-child(3) { animation-delay: 240ms; }
+
+.feature-card:hover .feature-icon,
+.step-card:hover .step-icon {
+  transform: translate3d(0, -2px, 0) rotate(-4deg);
+}
+
 /* Keep each dashboard route focused while reusing the same data-aware client component. */
 [data-dashboard-section="overview"] [aria-labelledby="check-in-title"],
 [data-dashboard-section="overview"] [aria-labelledby="calendar-title"],
@@ -179,6 +208,22 @@ body {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translate3d(0, 0, 0); }
+  30% { opacity: 1; transform: translate3d(0, -2px, 0); }
 }
 
 @media (max-width: 640px) {
