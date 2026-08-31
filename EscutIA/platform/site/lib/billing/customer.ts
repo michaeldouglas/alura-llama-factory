@@ -3,6 +3,8 @@ import { createStripeCustomer } from "@/lib/stripe";
 import { findPriceById, type StripeSubscription } from "@/lib/stripe";
 import { FREE_LOOKUP_KEY, getPlanByLookupKey } from "@/lib/billing/catalog";
 
+const ACTIVE_SUBSCRIPTION_STATUSES = new Set(["active", "trialing", "past_due", "unpaid", "incomplete", "paused"]);
+
 export async function ensureBillingProfile(userId: string) {
   return prisma.billingProfile.upsert({
     where: { userId },
@@ -59,8 +61,25 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
   const price = item.price.lookup_key ? item.price : await findPriceById(item.price.id);
   const catalogItem = getPlanByLookupKey(price.lookup_key ?? "");
   if (!catalogItem?.planKey) throw new Error("STRIPE_PLAN_LOOKUP_KEY_INVALID");
-  const start = new Date(subscription.current_period_start * 1000);
-  const end = new Date(subscription.current_period_end * 1000);
+  const existingProfile = await prisma.billingProfile.findUnique({ where: { userId: resolvedUserId } });
+  if (
+    existingProfile?.subscriptionId &&
+    existingProfile.subscriptionId !== subscription.id &&
+    ACTIVE_SUBSCRIPTION_STATUSES.has(existingProfile.subscriptionStatus)
+  ) {
+    return resolvedUserId;
+  }
+  const periodItem = subscription.items.data[0];
+  const startTimestamp = subscription.current_period_start ?? periodItem.current_period_start ?? subscription.billing_cycle_anchor;
+  const endTimestamp = subscription.current_period_end ?? periodItem.current_period_end;
+  if (typeof startTimestamp !== "number" || typeof endTimestamp !== "number" || !Number.isFinite(startTimestamp) || !Number.isFinite(endTimestamp) || startTimestamp <= 0 || endTimestamp <= startTimestamp) {
+    throw new Error("STRIPE_SUBSCRIPTION_PERIOD_INVALID");
+  }
+  const start = new Date(startTimestamp * 1000);
+  const end = new Date(endTimestamp * 1000);
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    throw new Error("STRIPE_SUBSCRIPTION_PERIOD_INVALID");
+  }
   await prisma.billingSubscription.upsert({
     where: { stripeSubscriptionId: subscription.id },
     create: {

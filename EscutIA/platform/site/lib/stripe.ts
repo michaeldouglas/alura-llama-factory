@@ -35,11 +35,19 @@ export type StripeSubscription = {
   status: string;
   cancel_at_period_end: boolean;
   canceled_at: number | null;
-  current_period_start: number;
-  current_period_end: number;
+  created?: number;
+  billing_cycle_anchor?: number | null;
+  current_period_start?: number | null;
+  current_period_end?: number | null;
   ended_at: number | null;
   metadata?: Record<string, string>;
-  items: { data: Array<{ price: StripePrice }> };
+  items: {
+    data: Array<{
+      price: StripePrice;
+      current_period_start?: number | null;
+      current_period_end?: number | null;
+    }>;
+  };
 };
 
 export type StripeInvoice = {
@@ -56,6 +64,10 @@ export type StripeCharge = {
 };
 
 type StripeList<T> = { data: T[]; has_more: boolean };
+
+type StripeRequestOptions = {
+  idempotencyKey?: string;
+};
 
 export type StripeEventPayload = {
   id: string;
@@ -84,7 +96,7 @@ function getStripeSecretKey() {
   return key;
 }
 
-async function stripeRequest<T>(method: StripeRequestMethod, path: string, parameters?: Record<string, string>) {
+async function stripeRequest<T>(method: StripeRequestMethod, path: string, parameters?: Record<string, string>, options?: StripeRequestOptions) {
   const encodedParameters = parameters ? new URLSearchParams(parameters) : undefined;
   const query = method === "GET" && encodedParameters ? `?${encodedParameters.toString()}` : "";
   const body = method === "POST" ? encodedParameters : undefined;
@@ -92,6 +104,7 @@ async function stripeRequest<T>(method: StripeRequestMethod, path: string, param
     method,
     headers: {
       Authorization: `Bearer ${getStripeSecretKey()}`,
+      ...(options?.idempotencyKey ? { "Idempotency-Key": options.idempotencyKey } : {}),
       ...(body ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
     },
     body,
@@ -131,8 +144,8 @@ export async function createStripeCustomer(input: { email?: string | null; name?
   });
 }
 
-export async function createCheckoutSession(parameters: Record<string, string>) {
-  return stripeRequest<StripeCheckoutSession>("POST", "/checkout/sessions", parameters);
+export async function createCheckoutSession(parameters: Record<string, string>, idempotencyKey?: string) {
+  return stripeRequest<StripeCheckoutSession>("POST", "/checkout/sessions", parameters, { idempotencyKey });
 }
 
 export async function createBillingPortalSession(customerId: string, returnUrl: string) {
@@ -145,6 +158,14 @@ export async function createBillingPortalSession(customerId: string, returnUrl: 
 
 export async function retrieveSubscription(subscriptionId: string) {
   return stripeRequest<StripeSubscription>("GET", `/subscriptions/${encodeURIComponent(subscriptionId)}`);
+}
+
+export async function listCustomerSubscriptions(customerId: string) {
+  return stripeRequest<StripeList<StripeSubscription>>("GET", "/subscriptions", {
+    customer: customerId,
+    status: "all",
+    limit: "100",
+  });
 }
 
 export async function verifyStripeWebhook(payload: string, signature: string) {

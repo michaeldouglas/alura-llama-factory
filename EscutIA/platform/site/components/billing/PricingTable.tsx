@@ -40,7 +40,8 @@ export default function PricingTable({ items, humanCareEnabled }: { items: Prici
     setBusy(item.lookupKey);
     setNotice("");
     try {
-      const response = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lookupKey: item.lookupKey }) });
+      const requestId = crypto.randomUUID();
+      const response = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lookupKey: item.lookupKey, requestId }) });
       const data = (await response.json().catch(() => null)) as { url?: string; error?: string } | null;
       if (!response.ok || !data?.url) throw new Error(data?.error || "Não foi possível iniciar agora.");
       window.location.assign(data.url);

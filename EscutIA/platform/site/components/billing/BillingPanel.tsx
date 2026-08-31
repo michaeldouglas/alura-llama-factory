@@ -35,7 +35,8 @@ export default function BillingPanel({ initial }: { initial: BillingStatus }) {
   async function buyAddon() {
     setBusy("addon"); setNotice("");
     try {
-      const response = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lookupKey: "escutia_ai_responses_100_onetime" }) });
+      const requestId = crypto.randomUUID();
+      const response = await fetch("/api/billing/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lookupKey: "escutia_ai_responses_100_onetime", requestId }) });
       const data = (await response.json().catch(() => null)) as { url?: string; error?: string } | null;
       if (!response.ok || !data?.url) throw new Error(data?.error || "Não foi possível abrir o pacote adicional.");
       window.location.assign(data.url);
