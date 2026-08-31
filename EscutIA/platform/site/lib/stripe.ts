@@ -1,4 +1,4 @@
-type StripeRequestMethod = "GET" | "POST";
+type StripeRequestMethod = "DELETE" | "GET" | "POST";
 
 export type StripePrice = {
   id: string;
@@ -36,6 +36,7 @@ export type StripeSubscription = {
   cancel_at_period_end: boolean;
   canceled_at: number | null;
   created?: number;
+  latest_invoice?: string | StripeInvoice | null;
   billing_cycle_anchor?: number | null;
   current_period_start?: number | null;
   current_period_end?: number | null;
@@ -50,11 +51,19 @@ export type StripeSubscription = {
   };
 };
 
+export type StripePaymentIntent = {
+  id: string;
+  status: string;
+  amount: number;
+  amount_received: number;
+};
+
 export type StripeInvoice = {
   id: string;
   subscription: string | StripeSubscription | null;
   customer: string | StripeCustomer | null;
   status: string | null;
+  payment_intent: string | StripePaymentIntent | null;
 };
 
 export type StripeCharge = {
@@ -157,7 +166,15 @@ export async function createBillingPortalSession(customerId: string, returnUrl: 
 }
 
 export async function retrieveSubscription(subscriptionId: string) {
-  return stripeRequest<StripeSubscription>("GET", `/subscriptions/${encodeURIComponent(subscriptionId)}`);
+  return stripeRequest<StripeSubscription>("GET", `/subscriptions/${encodeURIComponent(subscriptionId)}`, { "expand[0]": "latest_invoice.payment_intent" });
+}
+
+export async function cancelSubscriptionImmediately(subscriptionId: string, idempotencyKey: string) {
+  return stripeRequest<StripeSubscription>("DELETE", `/subscriptions/${encodeURIComponent(subscriptionId)}`, undefined, { idempotencyKey });
+}
+
+export async function createRefund(paymentIntentId: string, idempotencyKey: string) {
+  return stripeRequest<{ id: string; status: string; payment_intent: string | null }>("POST", "/refunds", { payment_intent: paymentIntentId }, { idempotencyKey });
 }
 
 export async function listCustomerSubscriptions(customerId: string) {

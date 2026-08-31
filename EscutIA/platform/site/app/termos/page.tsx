@@ -41,9 +41,24 @@ export default function TermsPage() {
       </section>
 
       <section aria-labelledby="terms-changes">
-        <h2 id="terms-changes" className="text-2xl font-black tracking-tight text-navy">5. Troca e cancelamento</h2>
-        <p className="mt-4">A troca de plano e o cancelamento são gerenciados pelo portal de cobrança da Stripe quando essa opção estiver disponível para a sua conta.</p>
-        <p className="mt-4">Quando o cancelamento for programado para o fim do período, o acesso ao plano pago permanece até a data informada. Depois disso, não ocorre nova renovação. Uma fatura pendente pode continuar devida, e a existência de cancelamento não implica reembolso automático do período já iniciado.</p>
+        <h2 id="terms-changes" className="text-2xl font-black tracking-tight text-navy">5. Cancelamento e reembolso</h2>
+        <h3 className="mt-7 text-xl font-black tracking-tight text-navy">5.1. Direito de arrependimento</h3>
+        <p className="mt-4">Nas contratações realizadas pela internet, você pode exercer o direito de arrependimento no prazo de 7 (sete) dias corridos, contado da confirmação da contratação ou do marco legal aplicável à disponibilização do serviço, conforme o caso. Não é necessário apresentar justificativa.</p>
+        <p className="mt-4">Se o pedido for feito dentro desse prazo, a EscutIA devolverá integralmente, em regra 100% dos valores pagos, sem cobrança de multa. O exercício desse direito não é afastado pelo simples login ou uso da plataforma durante o prazo de reflexão. Após o recebimento do pedido, o acesso ao plano contratado será interrompido imediatamente, e o reembolso será encaminhado sem demora ao meio de pagamento utilizado, sujeito aos prazos operacionais da instituição financeira e da Stripe.</p>
+        <h3 className="mt-7 text-xl font-black tracking-tight text-navy">5.2. Planos mensais recorrentes</h3>
+        <p className="mt-4">Os planos mensais não têm fidelidade. Depois do prazo de arrependimento, você pode solicitar o cancelamento a qualquer momento. O cancelamento impede a próxima renovação e não gera, por si só, reembolso do ciclo de faturamento já pago, porque a licença de uso ficou disponível durante esse período.</p>
+        <p className="mt-4">Quando o cancelamento for programado para o fim do ciclo vigente, o acesso ao plano pago permanece até a data exata indicada no painel, na fatura ou no portal de cobrança. Depois dessa data, a assinatura não será renovada e o acesso será ajustado ao Plano Grátis, quando aplicável. Uma fatura vencida, pendente ou já iniciada pode continuar sujeita às regras de cobrança do meio de pagamento.</p>
+        <h3 className="mt-7 text-xl font-black tracking-tight text-navy">5.3. Planos com prazo determinado</h3>
+        <p className="mt-4">Atualmente, a EscutIA oferece somente planos mensais. Se um plano anual ou outro plano com prazo determinado e fidelidade vier a ser disponibilizado, suas condições específicas — incluindo preço total, prazo, forma de pagamento, acesso e cancelamento — serão apresentadas de forma clara antes da contratação.</p>
+        <p className="mt-4">Para uma oferta de prazo determinado que preveja cancelamento antecipado, o saldo dos meses não utilizados poderá ser devolvido proporcionalmente, com retenção de 10% desse saldo como multa rescisória, desde que essa condição esteja expressamente informada na oferta e seja aplicada de forma proporcional, equilibrada e compatível com a legislação de proteção do consumidor. Nessa hipótese, o acesso ao plano será encerrado após a confirmação do cancelamento. Essa regra não limita o direito de arrependimento nem outros direitos de reembolso previstos em lei.</p>
+        <h3 className="mt-7 text-xl font-black tracking-tight text-navy">5.4. Como solicitar</h3>
+        <ol className="mt-4 list-decimal space-y-2 pl-6">
+          <li>Entre na sua conta e acesse a área <strong className="text-navy">Plano e uso</strong>.</li>
+          <li>Para um cancelamento após o prazo de arrependimento, selecione <strong className="text-navy">Gerenciar assinatura</strong> ou a opção equivalente e conclua o pedido no portal seguro da Stripe.</li>
+          <li>Para exercer o direito de arrependimento ou solicitar análise de reembolso, use o mesmo canal eletrônico da contratação quando disponível ou o canal de atendimento indicado no site. Informe o e-mail da conta, o plano, a data da contratação e, se possível, o identificador da fatura.</li>
+          <li>A EscutIA confirmará o recebimento da solicitação pelo meio eletrônico utilizado e informará o resultado e, quando cabível, o encaminhamento do reembolso.</li>
+        </ol>
+        <p className="mt-4">O portal da Stripe pode apresentar opções diferentes conforme o tipo e o estado da assinatura. A utilização do portal não impede o exercício dos direitos previstos nesta seção por outro canal eletrônico disponibilizado pela EscutIA.</p>
       </section>
 
       <section aria-labelledby="terms-addon">

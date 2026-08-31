@@ -59,7 +59,12 @@ async function handleInvoice(invoice: StripeInvoice, paid: boolean) {
 }
 
 async function handleRefund(charge: StripeCharge) {
-  if (charge.payment_intent) await revokeAddonByPaymentIntent(charge.payment_intent);
+  if (!charge.payment_intent) return;
+  const withdrawal = await prisma.billingWithdrawal.updateMany({
+    where: { stripePaymentIntentId: charge.payment_intent },
+    data: { status: "refunded", refundedAt: new Date(), error: null },
+  });
+  if (!withdrawal.count) await revokeAddonByPaymentIntent(charge.payment_intent);
 }
 
 export async function handleStripeEvent(event: StripeEventPayload) {

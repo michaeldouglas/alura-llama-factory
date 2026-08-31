@@ -48,6 +48,7 @@ export async function downgradeToFree(userId: string) {
       currentPeriodStart: null,
       currentPeriodEnd: null,
       cancelAtPeriodEnd: false,
+      subscriptionCreatedAt: null,
     },
   });
 }
@@ -77,6 +78,7 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
   }
   const start = new Date(startTimestamp * 1000);
   const end = new Date(endTimestamp * 1000);
+  const subscriptionCreatedAt = typeof subscription.created === "number" ? new Date(subscription.created * 1000) : null;
   if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
     throw new Error("STRIPE_SUBSCRIPTION_PERIOD_INVALID");
   }
@@ -93,6 +95,7 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
       currentPeriodStart: start,
       currentPeriodEnd: end,
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      subscriptionCreatedAt,
       canceledAt: subscription.canceled_at ? new Date(subscription.canceled_at * 1000) : null,
       endedAt: subscription.ended_at ? new Date(subscription.ended_at * 1000) : null,
     },
@@ -106,6 +109,7 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
       currentPeriodStart: start,
       currentPeriodEnd: end,
       cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      subscriptionCreatedAt,
       canceledAt: subscription.canceled_at ? new Date(subscription.canceled_at * 1000) : null,
       endedAt: subscription.ended_at ? new Date(subscription.ended_at * 1000) : null,
     },
@@ -126,6 +130,7 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
         currentPeriodStart: start,
         currentPeriodEnd: end,
         cancelAtPeriodEnd: subscription.cancel_at_period_end,
+        subscriptionCreatedAt,
       },
       update: {
         stripeCustomerId: customerId,
@@ -137,6 +142,7 @@ export async function syncStripeSubscription(subscription: StripeSubscription, u
         currentPeriodStart: start,
         currentPeriodEnd: end,
         cancelAtPeriodEnd: subscription.cancel_at_period_end,
+        subscriptionCreatedAt,
       },
     });
   }

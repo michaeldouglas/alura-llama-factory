@@ -26,6 +26,7 @@ model User {
   usageEntries AiUsageEntry[]
   addonPurchases AddonPurchase[]
   stripeEvents StripeEvent[]
+  billingWithdrawals BillingWithdrawal[]
 }
 
 model Account {
@@ -136,6 +137,7 @@ model BillingProfile {
   currentPeriodStart  DateTime?
   currentPeriodEnd    DateTime?
   cancelAtPeriodEnd   Boolean  @default(false)
+  subscriptionCreatedAt DateTime?
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
   user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -155,6 +157,7 @@ model BillingSubscription {
   currentPeriodStart   DateTime
   currentPeriodEnd     DateTime
   cancelAtPeriodEnd    Boolean  @default(false)
+  subscriptionCreatedAt DateTime?
   canceledAt           DateTime?
   endedAt              DateTime?
   createdAt            DateTime @default(now())
@@ -243,4 +246,21 @@ model StripeEvent {
 
   @@index([type, status])
   @@index([userId, receivedAt])
+}
+
+model BillingWithdrawal {
+  id                    String   @id @default(cuid())
+  userId                String
+  stripeSubscriptionId  String   @unique
+  stripePaymentIntentId String?
+  status                String   @default("processing")
+  requestedAt           DateTime @default(now())
+  canceledAt            DateTime?
+  refundedAt            DateTime?
+  error                 String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
 }
