@@ -123,7 +123,7 @@ export async function POST(request: Request) {
     }
 
     const usage = await reserveAiResponse(session.user.id, operationKey);
-    if (!usage.ok) return NextResponse.json({ error: "Você atingiu o limite de respostas disponível no seu ciclo." }, { status: 402 });
+    if (!usage.ok) return NextResponse.json({ code: "LIMIT_REACHED", error: "Você atingiu o limite de respostas disponível no seu ciclo." }, { status: 402 });
     if (usage.duplicate) return NextResponse.json({ error: "Esta resposta já está sendo processada ou foi concluída." }, { status: 409 });
     usageReserved = true;
 

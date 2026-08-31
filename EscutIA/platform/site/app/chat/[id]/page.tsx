@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import ChatWorkspace from "@/components/chat/ChatWorkspace";
 import { authOptions } from "@/lib/auth";
 import { normalizeConversationMode } from "@/lib/conversation";
+import { getUsageStatus } from "@/lib/billing/usage";
 import { getChatWorkspaceData } from "../chat-data";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export default async function ChatConversationPage({ params }: ChatConversationP
     redirect("/");
   }
 
-  const { profile, conversations, conversation } = await getChatWorkspaceData(session.user.id, params.id);
+  const [{ profile, conversations, conversation }, usage] = await Promise.all([getChatWorkspaceData(session.user.id, params.id), getUsageStatus(session.user.id)]);
 
   if (!conversation) {
     notFound();
@@ -34,6 +35,7 @@ export default async function ChatConversationPage({ params }: ChatConversationP
       initialConversationId={conversation.id}
       initialConversationMode={normalizeConversationMode(conversation.mode)}
       initialPrivateMode={conversation.isPrivate}
+      initialUsage={{ baseLimit: usage.baseLimit, baseUsed: usage.baseUsed, addonRemaining: usage.addonRemaining, remaining: usage.remaining, endsAt: usage.endsAt }}
       initialMessages={conversation.messages.map((message) => ({
         id: message.id,
         role: message.role === "assistant" ? "assistant" : "user",

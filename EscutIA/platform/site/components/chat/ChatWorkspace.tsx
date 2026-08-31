@@ -37,6 +37,24 @@ type ChatMessage = {
   sentiment?: SentimentLabel | null;
 };
 
+type UsageSummary = {
+  baseLimit: number;
+  baseUsed: number;
+  addonRemaining: number;
+  remaining: number;
+  endsAt: string;
+};
+
+class AgentRequestError extends Error {
+  code?: string;
+
+  constructor(message: string, code?: string) {
+    super(message);
+    this.name = "AgentRequestError";
+    this.code = code;
+  }
+}
+
 type AgentEvent =
   | { type: "token"; content: string }
   | {
@@ -58,6 +76,7 @@ type ChatWorkspaceProps = {
   initialFocusRecordId?: string | null;
   initialConversationMode?: string;
   initialPrivateMode?: boolean;
+  initialUsage?: UsageSummary;
 };
 
 const LAST_CONVERSATION_MODE_STORAGE_KEY = "escutia:conversation-mode:v1";
@@ -369,7 +388,7 @@ function MarkdownMessage({ content, tone }: { content: string; tone: keyof typeo
   );
 }
 
-export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages, initialFocusRecordId, initialConversationMode, initialPrivateMode = false }: ChatWorkspaceProps) {
+export default function ChatWorkspace({ user, currentSentiment: initialSentiment, currentSentimentAt: initialSentimentAt, initialConversations, initialConversationId, initialMessages, initialFocusRecordId, initialConversationMode, initialPrivateMode = false, initialUsage }: ChatWorkspaceProps) {
   const displayName = getDisplayName(user);
   const router = useRouter();
   const [currentSentiment, setCurrentSentiment] = useState<SentimentLabel | null>(initialSentiment);
@@ -389,6 +408,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const [editingDraft, setEditingDraft] = useState("");
   const [draft, setDraft] = useState("");
   const [sentimentDraft, setSentimentDraft] = useState("");
+  const [usage, setUsage] = useState<UsageSummary | null>(initialUsage ?? null);
   const [busy, setBusy] = useState<"sending" | "validating" | "loading" | "renaming" | "deleting" | "finishing" | null>(null);
   const [notice, setNotice] = useState("Seu sentimento fica salvo apenas no seu espaço pessoal.");
   const [sidebarOpen, setSidebarOpen] = useState(!initialConversationId && !initialFocusRecordId);
@@ -414,6 +434,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   const lastMessageContent = messages[messages.length - 1]?.content ?? "";
   const sentimentDateLabel = sentimentStatus === "stale" ? "Seu último sentimento" : "Seu sentimento hoje";
   const openDialogKey = renameTarget ? "rename" : deleteTarget ? "delete" : sentimentReviewOpen ? "sentiment-review" : sentimentModalOpen ? "sentiment" : null;
+  const limitReached = usage?.remaining === 0;
 
   const filteredConversations = useMemo(() => {
     if (!historyDate) return [];
@@ -436,6 +457,17 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
   useEffect(() => {
     resizeDraftTextarea(draftRef.current);
   }, [draft]);
+
+  async function refreshUsage() {
+    try {
+      const response = await fetch("/api/billing/status", { cache: "no-store" });
+      if (!response.ok) return;
+      const data = (await response.json()) as { usage?: UsageSummary };
+      if (data.usage) setUsage(data.usage);
+    } catch {
+      // Usage feedback must not interrupt an otherwise successful message.
+    }
+  }
 
   useEffect(() => {
     if (!sentimentModalOpen && !sentimentReviewOpen) return undefined;
@@ -599,8 +631,8 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     });
 
     if (!response.ok) {
-      const data = (await response.json().catch(() => null)) as { error?: string } | null;
-      throw new Error(data?.error || "Não foi possível iniciar a resposta da EscutIA.");
+      const data = (await response.json().catch(() => null)) as { error?: string; code?: string } | null;
+      throw new AgentRequestError(data?.error || "Não foi possível iniciar a resposta da EscutIA.", data?.code);
     }
     if (!response.body) throw new Error("A resposta da EscutIA não iniciou o streaming.");
 
@@ -691,10 +723,15 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     const messageId = editingMessageId;
     const content = editingDraft.trim();
     if (!messageId || !content || !activeConversationId || busy) return;
+    if (limitReached) {
+      setNotice("Você atingiu o limite de respostas disponível no seu ciclo. Acesse Plano e uso para acompanhar ou adicionar respostas.");
+      return;
+    }
 
     const messageIndex = messages.findIndex((message) => message.id === messageId);
     if (messageIndex < 0) return;
 
+    const previousMessages = messages;
     setEditingMessageId(null);
     setEditingDraft("");
     setMessages((current) => current.slice(0, messageIndex + 1).map((message, index) => index === messageIndex ? { ...message, content, sentiment: null } : message));
@@ -703,8 +740,15 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
     try {
       await consumeAgentStream(activeConversationId, { message: content, requestId: crypto.randomUUID(), replaceMessageId: messageId, privateMode, mode: conversationMode, contextMessages: privateMode ? messages.slice(0, messageIndex) : undefined }, messageId);
+      await refreshUsage();
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
+      if (error instanceof AgentRequestError && error.code === "LIMIT_REACHED") {
+        setUsage((current) => current ? { ...current, remaining: 0 } : current);
+        setMessages(previousMessages);
+        setNotice("Você atingiu o limite de respostas disponível no seu ciclo. Acesse Plano e uso para acompanhar ou adicionar respostas.");
+      } else {
+        setNotice(error instanceof Error ? error.message : "Não foi possível atualizar a mensagem.");
+      }
     } finally {
       setBusy(null);
     }
@@ -714,6 +758,10 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
     event.preventDefault();
     const content = draft.trim();
     if (!content || busy) return;
+    if (limitReached) {
+      setNotice("Você atingiu o limite de respostas disponível no seu ciclo. Acesse Plano e uso para acompanhar ou adicionar respostas.");
+      return;
+    }
     const wasConversationOpen = Boolean(activeConversationId);
     const setupOptions: ConversationSetupOptions = {
       mode: conversationMode,
@@ -745,6 +793,7 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       }
       setConversationOpen(true);
       await consumeAgentStream(conversationId, { message: content, requestId: crypto.randomUUID(), focusLatestSentiment: conversationFocusLatestSentiment, focusRecordId: conversationFocusRecordId, privateMode: setupOptions.privateMode, mode: setupOptions.mode, resumeConversationId: setupOptions.resumeConversationId, contextMessages }, optimisticUserMessageId);
+      await refreshUsage();
       // Keep this component mounted while the NDJSON stream is consumed. If we
       // navigate immediately after creating the conversation, the route can
       // remount with only the user message before the assistant response is
@@ -757,7 +806,14 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
       setConversationResumeId(null);
       setConversationCheckIn(null);
     } catch (error) {
-      setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
+      if (error instanceof AgentRequestError && error.code === "LIMIT_REACHED") {
+        setUsage((current) => current ? { ...current, remaining: 0 } : current);
+        setMessages((current) => current.filter((message) => message.id !== optimisticUserMessageId));
+        setDraft(content);
+        setNotice("Você atingiu o limite de respostas disponível no seu ciclo. Acesse Plano e uso para acompanhar ou adicionar respostas.");
+      } else {
+        setNotice(error instanceof Error ? error.message : "Não foi possível salvar a mensagem.");
+      }
     } finally {
       setBusy(null);
     }
@@ -1290,12 +1346,13 @@ export default function ChatWorkspace({ user, currentSentiment: initialSentiment
 
                   <div className="mt-4 shrink-0 rounded-[1.5rem] border border-navy/8 bg-white/80 p-4 shadow-[0_14px_40px_rgba(26,31,61,0.06)] sm:p-5">
                     <div className="mb-3 flex items-center justify-between gap-3"><p className="min-w-0 truncate text-xs font-bold text-navy/45">{privateMode ? "Nada desta conversa será salvo" : `Modo: ${CONVERSATION_MODE_COPY[conversationMode].label}`}</p><button type="button" onClick={() => setClosureOpen(true)} disabled={Boolean(busy)} className="shrink-0 rounded-lg px-2.5 py-2 text-xs font-black text-purple transition-colors hover:bg-purple/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/40 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none">Encerrar conversa</button></div>
+                    {limitReached ? <p role="alert" className="mb-3 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-3 text-xs font-semibold leading-5 text-amber-800">Você atingiu o limite de respostas deste ciclo. <Link href="/dashboard/billing" className="font-black underline underline-offset-2">Acesse Plano e uso</Link> para acompanhar o limite ou adicionar respostas.</p> : null}
                     <form onSubmit={(event) => void handleSend(event)}>
                       <label htmlFor="chat-message" className="sr-only">Escreva uma mensagem</label>
-                      <textarea id="chat-message" name="chat-message" ref={draftRef} value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={1} placeholder="Escreva uma mensagem…" aria-describedby="chat-message-hint" className="max-h-44 w-full resize-none overflow-y-hidden rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-[border-color,box-shadow] placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20" />
+                      <textarea id="chat-message" name="chat-message" ref={draftRef} value={draft} onChange={(event) => setDraft(event.target.value)} onKeyDown={handleDraftKeyDown} maxLength={2000} rows={1} disabled={limitReached || Boolean(busy)} placeholder={limitReached ? "Limite mensal atingido" : "Escreva uma mensagem…"} aria-describedby="chat-message-hint" className="max-h-44 w-full resize-none overflow-y-hidden rounded-2xl border border-navy/10 bg-white px-4 py-3 text-sm leading-6 text-navy outline-none transition-[border-color,box-shadow] placeholder:text-navy/35 focus:border-purple focus-visible:ring-2 focus-visible:ring-purple/20 disabled:cursor-not-allowed disabled:bg-warm/50 disabled:opacity-70" />
                       <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <p id="chat-message-hint" className="text-xs text-navy/45" aria-live="polite">{busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
-                        <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy)} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transform-none motion-reduce:transition-none">
+                        <p id="chat-message-hint" className="text-xs text-navy/45" aria-live="polite">{limitReached ? "O limite será renovado no próximo ciclo." : busy === "sending" ? "Enviando sua mensagem…" : "Pressione Enter para enviar · Shift+Enter para quebrar linha."}</p>
+                        <button type="submit" aria-label={busy === "sending" ? "Enviando mensagem" : limitReached ? "Limite de respostas atingido" : "Enviar mensagem"} title={busy === "sending" ? "Enviando mensagem" : limitReached ? "Limite de respostas atingido" : "Enviar mensagem"} disabled={!draft.trim() || Boolean(busy) || limitReached} className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy text-white transition-[background-color,transform] hover:bg-purple active:scale-[0.94] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple/50 disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transform-none motion-reduce:transition-none">
                           <SendIcon />
                         </button>
                       </div>

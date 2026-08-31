@@ -11,9 +11,11 @@ export const runtime = "nodejs";
 const WITHDRAWAL_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
 const STALE_PROCESSING_MS = 5 * 60 * 1000;
 
-function getPaymentIntent(invoice: StripeInvoice | null | undefined) {
+function getPaymentIntent(invoice: StripeInvoice | null | undefined): { id: string; paid: boolean } | null {
   if (!invoice?.payment_intent) return null;
-  return typeof invoice.payment_intent === "string" ? { id: invoice.payment_intent, paid: invoice.status === "paid" } : invoice.payment_intent as StripePaymentIntent;
+  if (typeof invoice.payment_intent === "string") return { id: invoice.payment_intent, paid: invoice.status === "paid" };
+  const paymentIntent = invoice.payment_intent as StripePaymentIntent;
+  return { id: paymentIntent.id, paid: paymentIntent.status === "succeeded" };
 }
 
 export async function POST() {
@@ -60,7 +62,7 @@ export async function POST() {
     await downgradeToFree(session.user.id);
     const canceledAt = new Date();
 
-    if (!paymentIntent?.id || paymentIntent.paid === false || (typeof paymentIntent !== "string" && paymentIntent.status !== "succeeded")) {
+    if (!paymentIntent?.id || !paymentIntent.paid) {
       await prisma.billingWithdrawal.update({ where: { id: withdrawal.id }, data: { status: "canceled_no_payment", canceledAt } });
       return NextResponse.json({ canceled: true, refunded: false, refundRequired: false });
     }

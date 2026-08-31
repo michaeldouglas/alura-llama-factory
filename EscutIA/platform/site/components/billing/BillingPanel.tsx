@@ -8,6 +8,7 @@ type BillingStatus = {
   subscriptionStatus: string;
   subscriptionId: boolean;
   cancelAtPeriodEnd: boolean;
+  withdrawalEligible: boolean;
   currentPeriodEnd: string;
   humanCareEnabled: boolean;
   usage: { baseLimit: number; baseUsed: number; addonRemaining: number; remaining: number; endsAt: string };
@@ -18,8 +19,8 @@ function dateLabel(value: string) {
 }
 
 export default function BillingPanel({ initial }: { initial: BillingStatus }) {
-  const status = initial;
-  const [busy, setBusy] = useState<"portal" | "addon" | null>(null);
+  const [status, setStatus] = useState(initial);
+  const [busy, setBusy] = useState<"portal" | "addon" | "withdrawal" | null>(null);
   const [notice, setNotice] = useState("");
 
   async function openPortal() {
@@ -43,10 +44,35 @@ export default function BillingPanel({ initial }: { initial: BillingStatus }) {
     } catch (error) { setNotice(error instanceof Error ? error.message : "Não foi possível abrir o pacote adicional."); setBusy(null); }
   }
 
+  async function requestWithdrawal() {
+    if (!window.confirm("O cancelamento por arrependimento encerra sua assinatura e seu acesso pago imediatamente. O reembolso integral será solicitado à Stripe. Deseja continuar?")) return;
+    setBusy("withdrawal"); setNotice("");
+    try {
+      const response = await fetch("/api/billing/withdrawal", { method: "POST" });
+      const data = (await response.json().catch(() => null)) as { canceled?: boolean; refunded?: boolean; refundPending?: boolean; error?: string } | null;
+      if (!response.ok && !data?.canceled) throw new Error(data?.error || "Não foi possível concluir o cancelamento.");
+
+      setStatus((current) => ({
+        ...current,
+        planKey: "free",
+        planName: "EscutIA Grátis",
+        subscriptionStatus: "canceled",
+        subscriptionId: false,
+        cancelAtPeriodEnd: false,
+        withdrawalEligible: false,
+        usage: { ...current.usage, baseLimit: 20, baseUsed: 0, addonRemaining: 0, remaining: 20 },
+      }));
+      setNotice(data?.refundPending ? "Sua assinatura foi cancelada. O reembolso integral ficou pendente de conclusão na Stripe." : data?.refunded ? "Sua assinatura foi cancelada e o reembolso integral foi solicitado." : "Sua assinatura foi cancelada. Não havia cobrança paga pendente para reembolsar.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "Não foi possível concluir o cancelamento.");
+    } finally { setBusy(null); }
+  }
+
   return <div className="mt-9 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
     <section aria-labelledby="billing-plan-title" className="rounded-[2rem] bg-navy p-7 text-white shadow-2xl shadow-navy/15 sm:p-10">
       <p className="text-sm font-black uppercase tracking-[0.14em] text-peach">plano atual</p>
-      <div className="mt-4 flex flex-wrap items-end justify-between gap-4"><div><h2 id="billing-plan-title" className="text-3xl font-black">{status.planName}</h2><p className="mt-2 text-white/60">Status: {status.subscriptionStatus === "active" ? "ativo" : status.subscriptionStatus}</p></div>{status.subscriptionId && <button type="button" onClick={openPortal} disabled={busy === "portal"} className="rounded-full bg-white px-5 py-3 text-sm font-bold text-navy transition hover:bg-peach disabled:opacity-60">{busy === "portal" ? "Abrindo…" : "Gerenciar assinatura"}</button>}</div>
+      <div className="mt-4 flex flex-wrap items-end justify-between gap-4"><div><h2 id="billing-plan-title" className="text-3xl font-black">{status.planName}</h2><p className="mt-2 text-white/60">Status: {status.subscriptionStatus === "active" ? "ativo" : status.subscriptionStatus}</p></div>{status.subscriptionId && <div className="flex flex-wrap gap-3"><button type="button" onClick={openPortal} disabled={busy === "portal" || busy === "withdrawal"} className="rounded-full bg-white px-5 py-3 text-sm font-bold text-navy transition hover:bg-peach disabled:opacity-60">{busy === "portal" ? "Abrindo…" : "Gerenciar assinatura"}</button>{status.withdrawalEligible ? <button type="button" onClick={() => void requestWithdrawal()} disabled={busy !== null} className="rounded-full border border-peach/35 px-5 py-3 text-sm font-bold text-peach transition hover:bg-peach/10 disabled:cursor-not-allowed disabled:opacity-60">{busy === "withdrawal" ? "Cancelando…" : "Cancelar em até 7 dias"}</button> : null}</div>}</div>
+      {status.withdrawalEligible ? <p className="mt-4 max-w-2xl text-sm leading-6 text-white/65">Ainda está dentro do prazo de arrependimento: o acesso pago será encerrado imediatamente e o reembolso integral será solicitado.</p> : null}
       {status.cancelAtPeriodEnd && <p className="mt-6 rounded-2xl border border-peach/30 bg-peach/10 px-4 py-3 text-sm leading-6 text-peach">Sua assinatura está programada para terminar em {dateLabel(status.currentPeriodEnd)}. O acesso continua disponível até essa data.</p>}
       <div className="mt-9 grid gap-4 sm:grid-cols-3"><div className="rounded-2xl bg-white/10 p-4"><p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Base usada</p><p className="mt-2 text-2xl font-black">{status.usage.baseUsed}/{status.usage.baseLimit}</p></div><div className="rounded-2xl bg-white/10 p-4"><p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Adicionais</p><p className="mt-2 text-2xl font-black">{status.usage.addonRemaining}</p></div><div className="rounded-2xl bg-white/10 p-4"><p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Disponíveis</p><p className="mt-2 text-2xl font-black">{status.usage.remaining}</p></div></div>
       <p className="mt-6 text-sm leading-6 text-white/55">Seu limite é renovado conforme o ciclo exibido até {dateLabel(status.usage.endsAt)}.</p>
