@@ -1,0 +1,51 @@
+{
+  "gate_id": "G1-METADATA-2",
+  "parent_gate_id": "G1-METADATA",
+  "decision": "APPROVED",
+  "approved_at": "2026-08-22",
+  "approved_by": "experiment owner",
+  "authorization_basis": "Owner authorized the exact G1-METADATA-2 scope in the project session.",
+  "scope_hash": "22b45ed456bdce7cad0c543ec20e5263183c29ddad8a09ac276f57737c2dc093",
+  "allowed_hosts": [
+    "api.github.com",
+    "download-r2.pytorch.org",
+    "download.pytorch.org",
+    "files.pythonhosted.org",
+    "github.com",
+    "pypi.org",
+    "raw.githubusercontent.com"
+  ],
+  "allowed_methods": ["GET", "HEAD"],
+  "authorized_actions": [
+    "resolve_https_metadata",
+    "write_versioned_metadata_lock",
+    "write_versioned_metadata_proposal",
+    "resolve_recursive_transitive_metadata",
+    "inspect_xpu_artifact_headers"
+  ],
+  "permitted_outputs": [
+    "immutable CPython 3.12 x64 identity",
+    "dependency metadata and candidates",
+    "recursive conflict-checked dependency constraints",
+    "artifact filenames, hashes and sizes from official metadata",
+    "XPU wheel headers obtained with HEAD",
+    "download, cache and installation estimates when evidence supports them",
+    "new versioned metadata lock without overwriting the previous lock"
+  ],
+  "prohibited_actions": [
+    "download_package_payload",
+    "download_source_repository",
+    "download_python_payload",
+    "create_environment",
+    "install_package",
+    "retrieve_model",
+    "retrieve_dataset",
+    "prepare_data",
+    "run_inference",
+    "run_dry_validation",
+    "run_training",
+    "open_g1_op"
+  ],
+  "payload_policy": "GET bodies are limited to PyPI/GitHub JSON metadata, package PEP 658 .metadata files and PyTorch index HTML. Wheel, sdist, archive, executable, model and dataset payloads are prohibited. The three XPU wheel URLs may be inspected only with HEAD.",
+  "does_not_authorize": "G1-OP"
+}

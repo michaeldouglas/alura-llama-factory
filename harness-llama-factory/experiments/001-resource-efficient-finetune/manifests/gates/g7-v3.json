@@ -1,0 +1,25 @@
+{
+  "gate_id": "G7-V3",
+  "decision": "APPROVED",
+  "issued_at": "2026-08-22",
+  "issued_by": "orchestrator",
+  "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822-v3",
+  "proposal_sha256": "87464eb4a56fdea56e13bc0c1e6d289e8feb383f9c663bf64a412c160f8d2da9",
+  "config_sha256": "dcc2294a0f9b944cb4f6842bb60fa30349248ca729186cf1730e23954cb73e87",
+  "owner_authorization": {
+    "received_at": "2026-08-22",
+    "authorization_text": "Eu autorizo o G7-V3 para executar uma única vez a proposta 001-resource-efficient-finetune-g7-proposal-20260822-v3, hash 87464eb4a56fdea56e13bc0c1e6d289e8feb383f9c663bf64a412c160f8d2da9, usando a configuração v3, o cache externo curto, a saída externa e o limite rígido de 60 minutos.",
+    "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822-v3",
+    "proposal_sha256": "87464eb4a56fdea56e13bc0c1e6d289e8feb383f9c663bf64a412c160f8d2da9",
+    "single_principal_run": true,
+    "hard_stop_minutes": 60,
+    "external_output_only": true
+  },
+  "principal_training_authorized": true,
+  "optimizer_update_authorized": true,
+  "checkpoint_creation_authorized": true,
+  "new_run_required": true,
+  "previous_run_reuse_forbidden": true,
+  "execution_block_reason": "The prior G7 was consumed by a failed run; v3 changes cache_dir and output identity and requires exact authorization.",
+  "next_action": "Execute exactly one guarded v3 run and preserve its separate run manifest."
+}

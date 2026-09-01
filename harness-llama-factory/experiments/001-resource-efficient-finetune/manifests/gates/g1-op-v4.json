@@ -1,0 +1,81 @@
+{
+  "gate_id": "G1-OP-V4",
+  "decision": "APPROVED",
+  "approved_at": "2026-08-22",
+  "approved_by": "experiment owner",
+  "scope": "Resume the existing isolated CPython 3.12.12 environment and install the exact v4 metadata lock, including the 18 Windows XPU/Intel oneMKL runtime wheels.",
+  "supersedes": "experiments/001-resource-efficient-finetune/manifests/gates/g1-op.json",
+  "lock_path": "experiments/001-resource-efficient-finetune/manifests/runtime-metadata-lock-g1-metadata-2-omegaconf-2.0.6-xpu-v4.json",
+  "lock_sha256": "E4C14B7F81B30B8D5958AC26D7CBB033E8BADF20FA56041DF87231AD1E04BD5A",
+  "environment_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/environments/py312-xpu",
+  "python": {
+    "version": "3.12.12",
+    "architecture": "x86_64",
+    "implementation": "CPython"
+  },
+  "package_set": {
+    "resolved_requirement_count": 121,
+    "direct_requirement_count": 50,
+    "transitive_requirement_count": 71,
+    "additional_package_count": 18,
+    "known_additional_transfer_bytes": 728159800,
+    "known_total_transfer_bytes": 1665242560,
+    "omegaconf_override": "omegaconf==2.0.6",
+    "llamafactory_revision": "7af909522a951e3ad9f022ea6f88b6755257eaa5"
+  },
+  "additional_packages": [
+    "intel-cmplr-lib-rt==2025.2.1",
+    "intel-cmplr-lib-ur==2025.2.1",
+    "intel-cmplr-lic-rt==2025.2.1",
+    "intel-sycl-rt==2025.2.1",
+    "onemkl-sycl-blas==2025.2.0",
+    "onemkl-sycl-dft==2025.2.0",
+    "onemkl-sycl-lapack==2025.2.0",
+    "onemkl-sycl-rng==2025.2.0",
+    "onemkl-sycl-sparse==2025.2.0",
+    "dpcpp-cpp-rt==2025.2.1",
+    "intel-opencl-rt==2025.2.1",
+    "mkl==2025.2.0",
+    "intel-openmp==2025.2.1",
+    "tbb==2022.2.0",
+    "tcmlib==1.4.0",
+    "umf==0.11.0",
+    "intel-pti==0.13.1",
+    "pytorch-triton-xpu==3.5.0"
+  ],
+  "storage_policy": {
+    "minimum_free_bytes_before": 5000000000,
+    "minimum_free_bytes_after": 2000000000,
+    "external_root_required": true,
+    "environment_must_be_outside_repository": true,
+    "resume_partial_environment": true
+  },
+  "network_policy": {
+    "allowed_hosts": [
+      "api.github.com",
+      "github.com",
+      "raw.githubusercontent.com",
+      "download.pytorch.org",
+      "download-r2.pytorch.org",
+      "files.pythonhosted.org",
+      "pypi.org"
+    ],
+    "allowed_methods": ["GET", "HEAD"]
+  },
+  "authorized_actions": [
+    "create_environment",
+    "resume_partial_environment",
+    "install_locked_dependencies",
+    "install_llamafactory_at_pinned_revision",
+    "write_g1_op_evidence"
+  ],
+  "prohibited_actions": [
+    "model_retrieval",
+    "dataset_retrieval",
+    "data_preparation",
+    "inference",
+    "run_baseline",
+    "dry_validation",
+    "training"
+  ]
+}

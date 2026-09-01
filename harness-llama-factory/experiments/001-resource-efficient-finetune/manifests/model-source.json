@@ -1,0 +1,96 @@
+{
+  "allowed_hosts": [
+    "huggingface.co",
+    "us.aws.cdn.hf.co"
+  ],
+  "approval_state": "APPROVED_RETRIEVED",
+  "cache_path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775",
+  "data_prepared": false,
+  "dataset_retrieved": false,
+  "expected_download_bytes": 999604126,
+  "file_count": 10,
+  "file_manifest": [
+    {
+      "metadata_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "path": ".gitattributes",
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "size_bytes": 1519,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/.gitattributes?download=true"
+    },
+    {
+      "metadata_oid": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+      "path": "LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size_bytes": 11343,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/LICENSE?download=true"
+    },
+    {
+      "metadata_oid": "4b8373851d093eb9f3017443f27781c6971eff24",
+      "path": "README.md",
+      "sha256": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15",
+      "size_bytes": 4917,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/README.md?download=true"
+    },
+    {
+      "metadata_oid": "0dbb161213629a23f0fc00ef286e6b1e366d180f",
+      "path": "config.json",
+      "sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+      "size_bytes": 659,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/config.json?download=true"
+    },
+    {
+      "metadata_oid": "dfc11073787daf1b0f9c0f1499487ab5f4c93738",
+      "path": "generation_config.json",
+      "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+      "size_bytes": 242,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/generation_config.json?download=true"
+    },
+    {
+      "metadata_oid": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0",
+      "path": "merges.txt",
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "size_bytes": 1671839,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/merges.txt?download=true"
+    },
+    {
+      "metadata_oid": "d7db405a3f0d9bf1ba5bdd4e4211db8022ebe4eb",
+      "path": "model.safetensors",
+      "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "size_bytes": 988097824,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/model.safetensors?download=true"
+    },
+    {
+      "metadata_oid": "443909a61d429dff23010e5bddd28ff530edda00",
+      "path": "tokenizer.json",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "size_bytes": 7031645,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/tokenizer.json?download=true"
+    },
+    {
+      "metadata_oid": "07bfe0640cb5a0037f9322287fbfc682806cf672",
+      "path": "tokenizer_config.json",
+      "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "size_bytes": 7305,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/tokenizer_config.json?download=true"
+    },
+    {
+      "metadata_oid": "4783fe10ac3adce15ac8f358ef5462739852c569",
+      "path": "vocab.json",
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "size_bytes": 2776833,
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/resolve/7ae557604adf67be50417f59c2c2f167def9a775/vocab.json?download=true"
+    }
+  ],
+  "free_bytes_after": 595316482048,
+  "inference_run": false,
+  "license_id": "Apache-2.0",
+  "license_verified": true,
+  "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen2.5-0.5B-Instruct/tree/7ae557604adf67be50417f59c2c2f167def9a775?recursive=true&expand=true",
+  "model_retrieved": true,
+  "parameter_count": 490000000,
+  "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "retrieved_at": "2026-08-22T21:37:46.431428+00:00",
+  "retrieved_bytes": 999604126,
+  "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "training_run": false
+}

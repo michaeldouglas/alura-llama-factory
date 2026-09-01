@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "definitions": {
+    "gateDecision": {
+      "required": ["gate_id", "decision", "approved_at", "scope_hash", "authorized_actions"],
+      "properties": {
+        "gate_id": {"type": "string"},
+        "decision": {"enum": ["APPROVED", "REJECTED", "BLOCKED"]},
+        "approved_at": {"type": "string"},
+        "scope_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "authorized_actions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "environmentProfile": {
+      "required": ["profile_id", "captured_at", "inspection_mode", "operating_system", "cpu", "gpu", "memory", "storage", "python", "uv", "operational_actions_performed", "readiness"],
+      "properties": {
+        "inspection_mode": {"const": "READ_ONLY"},
+        "operational_actions_performed": {"const": false},
+        "readiness": {"enum": ["OBSERVED", "READY", "BLOCKED", "NEEDS_AUTHORIZATION"]}
+      }
+    },
+    "modelSource": {
+      "required": ["repository_id", "revision_sha", "license_id", "approval_state"]
+    },
+    "datasetSource": {
+      "required": ["repository_id", "revision_sha", "configuration", "license_id", "approval_state"]
+    },
+    "executionProposal": {
+      "required": ["proposal_id", "spec_revision", "model_revision", "prepared_dataset_hash", "environment_profile_id", "configuration_hash", "review_state"]
+    },
+    "experimentRun": {
+      "required": ["run_id", "proposal_id", "status", "effective_configuration_hash", "environment_snapshot_hash"]
+    }
+  }
+}

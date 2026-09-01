@@ -1,0 +1,91 @@
+{
+  "gate_id": "G4-REMEDIATION",
+  "decision": "APPROVED",
+  "approved_at": "2026-08-22",
+  "approved_by": "experiment owner",
+  "authorization_basis": "Explicit owner authorization to remediate the existing G4 DATA_BLOCKED result by producing a separately identified external derivative.",
+  "source_manifest": "experiments/001-resource-efficient-finetune/manifests/dataset-source.json",
+  "repository_id": "cardiffnlp/tweet_sentiment_multilingual",
+  "revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+  "configuration": "portuguese",
+  "source_state_required": "APPROVED_RETRIEVED",
+  "source_read_only_required": true,
+  "source_file_hashes": [
+    {
+      "path": "data/portuguese/test.jsonl",
+      "size_bytes": 97981,
+      "sha256": "274fa27f495b42485698b49775bfa07226dc6acc8795bc350ad367234905fee8"
+    },
+    {
+      "path": "data/portuguese/train.jsonl",
+      "size_bytes": 207443,
+      "sha256": "95262fd2bf0e30657cf990ed9141aca8d9c0b0b18cdd35ef84b0488e2de9de09"
+    },
+    {
+      "path": "data/portuguese/validation.jsonl",
+      "size_bytes": 35171,
+      "sha256": "906d1bd07d39e7bed4d5d22697986652c8a1b778a9107f1e62a31f81d7ade9ac"
+    }
+  ],
+  "original_g4_decision": "DATA_BLOCKED",
+  "output_relative_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/data-derived/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682/transformation-v1",
+  "transformation_version": "transformation-v1",
+  "transformation": {
+    "format": "UTF-8 JSONL Alpaca SFT",
+    "instruction": "Classifique o sentimento do texto em exatamente uma palavra: positivo, neutro ou negativo.",
+    "input": "text",
+    "output_map": {
+      "0": "negativo",
+      "1": "neutro",
+      "2": "positivo"
+    },
+    "redactions": {
+      "handles": "@handle -> <USUARIO>",
+      "phone": "phone number -> <TELEFONE>"
+    },
+    "exclusions": [
+      "sensitive indicator",
+      "NON_PT_HEURISTIC",
+      "invalid or empty record",
+      "over_280_unicode_chars",
+      "unredacted PII indicator"
+    ],
+    "duplicate_resolution": "exact, normalized and near duplicates across splits; priority frozen-test > validation > train"
+  },
+  "scope_hash_basis": "G4-REMEDIATION|cardiffnlp/tweet_sentiment_multilingual|606156db529f327fd871515cccbe14dcbafef682|portuguese|transformation-v1|%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/data-derived/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682/transformation-v1",
+  "scope_hash": "79414a5de35d8657bd783f493212173567441afbd02d68d2b0b1b757e371c0e8",
+  "authorized_actions": [
+    "validate_g4_remediation_gate",
+    "read_pinned_source_read_only",
+    "verify_source_revision_and_hashes",
+    "create_external_derived_dataset",
+    "write_external_lineage_sidecar",
+    "write_derived_dataset_info",
+    "write_data_remediation_report",
+    "update_tasks_t040_t041_t042_when_completed"
+  ],
+  "prohibited_actions": [
+    "mutate_source",
+    "overwrite_source",
+    "write_source_text_to_repository",
+    "overwrite_any_existing_output",
+    "change_source_revision_or_split_scope",
+    "invent_or_impute_data",
+    "publish_or_redistribute_source_or_derived_data",
+    "model_loading",
+    "inference",
+    "baseline",
+    "dry_validation",
+    "training",
+    "declare_original_g4_data_ready",
+    "mark_t043_data_ready"
+  ],
+  "storage_policy": {
+    "external_root_required": true,
+    "repository_internal_derived_data_prohibited": true,
+    "overwrite": "DENY",
+    "source_files_read_only_after_retrieval": true
+  },
+  "superseded": false,
+  "revoked": false
+}

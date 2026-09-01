@@ -37,6 +37,11 @@ dependencies = [
     "hf-xet>=1,<2",
 ]
 
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
 [tool.uv.sources]
 torch = { index = "pytorch-xpu" }
 torchvision = { index = "pytorch-xpu" }

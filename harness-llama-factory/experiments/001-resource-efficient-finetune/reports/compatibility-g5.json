@@ -1,0 +1,680 @@
+{
+  "report_id": "compatibility-g5",
+  "gate": "G5",
+  "scope": "T049/T050 metadata-only model compatibility; no G6 or execution activity",
+  "decision": "READY",
+  "validated_at_utc": "2026-08-22T23:13:10.619754+00:00",
+  "model": {
+    "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775"
+  },
+  "dataset": {
+    "repository_id": "cardiffnlp/tweet_sentiment_multilingual",
+    "revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+    "transformation_version": "transformation-v1"
+  },
+  "runtime": {
+    "expected_environment": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\environments\\py312-xpu",
+    "actual_python": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\environments\\py312-xpu\\Scripts\\python.exe",
+    "environment_outside_repository": true,
+    "python_version": "3.12.12",
+    "architecture": "64bit",
+    "torch": "2.9.1+xpu",
+    "llamafactory": "0.9.5",
+    "xpu_available": true,
+    "xpu_device_count": 1
+  },
+  "checks": [
+    {
+      "name": "approved_external_root",
+      "status": "PASS",
+      "details": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune"
+    },
+    {
+      "name": "python_torch_llamafactory_xpu_runtime",
+      "status": "PASS",
+      "details": {
+        "expected_environment": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\environments\\py312-xpu",
+        "actual_python": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\environments\\py312-xpu\\Scripts\\python.exe",
+        "environment_outside_repository": true,
+        "python_version": "3.12.12",
+        "architecture": "64bit",
+        "torch": "2.9.1+xpu",
+        "llamafactory": "0.9.5",
+        "xpu_available": true,
+        "xpu_device_count": 1
+      }
+    },
+    {
+      "name": "model_manifest_identity",
+      "status": "PASS",
+      "details": {
+        "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "approval_state": "APPROVED_RETRIEVED"
+      }
+    },
+    {
+      "name": "model_cache_external",
+      "status": "PASS",
+      "details": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775"
+    },
+    {
+      "name": "model_revision_file_hashes",
+      "status": "PASS",
+      "details": {
+        "file_count": 10,
+        "expected_file_count": 10,
+        "files": [
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\.gitattributes",
+            "status": "PASS",
+            "expected_size_bytes": 1519,
+            "actual_size_bytes": 1519,
+            "expected_sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+            "actual_sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\LICENSE",
+            "status": "PASS",
+            "expected_size_bytes": 11343,
+            "actual_size_bytes": 11343,
+            "expected_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+            "actual_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\README.md",
+            "status": "PASS",
+            "expected_size_bytes": 4917,
+            "actual_size_bytes": 4917,
+            "expected_sha256": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15",
+            "actual_sha256": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\config.json",
+            "status": "PASS",
+            "expected_size_bytes": 659,
+            "actual_size_bytes": 659,
+            "expected_sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+            "actual_sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\generation_config.json",
+            "status": "PASS",
+            "expected_size_bytes": 242,
+            "actual_size_bytes": 242,
+            "expected_sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+            "actual_sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\merges.txt",
+            "status": "PASS",
+            "expected_size_bytes": 1671839,
+            "actual_size_bytes": 1671839,
+            "expected_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "actual_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\model.safetensors",
+            "status": "PASS",
+            "expected_size_bytes": 988097824,
+            "actual_size_bytes": 988097824,
+            "expected_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+            "actual_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\tokenizer.json",
+            "status": "PASS",
+            "expected_size_bytes": 7031645,
+            "actual_size_bytes": 7031645,
+            "expected_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "actual_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\tokenizer_config.json",
+            "status": "PASS",
+            "expected_size_bytes": 7305,
+            "actual_size_bytes": 7305,
+            "expected_sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "actual_sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+          },
+          {
+            "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\vocab.json",
+            "status": "PASS",
+            "expected_size_bytes": 2776833,
+            "actual_size_bytes": 2776833,
+            "expected_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+            "actual_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        ],
+        "weights_read_for_hash_only": true
+      }
+    },
+    {
+      "name": "g4_derived_data_ready",
+      "status": "PASS",
+      "details": {
+        "gate_id": "G4-DERIVED",
+        "decision": "DATA_READY",
+        "dataset_id": "cardiffnlp--tweet_sentiment_multilingual-606156db529f327fd871515cccbe14dcbafef682-transformation-v1",
+        "training_authorized": false
+      }
+    },
+    {
+      "name": "dataset_manifest_identity",
+      "status": "PASS",
+      "details": {
+        "dataset_id": "cardiffnlp--tweet_sentiment_multilingual-606156db529f327fd871515cccbe14dcbafef682-transformation-v1",
+        "source_revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+        "transformation_version": "transformation-v1",
+        "paths_are_external": true
+      }
+    },
+    {
+      "name": "dataset_directory_external",
+      "status": "PASS",
+      "details": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1"
+    },
+    {
+      "name": "external_jsonl_schema_counts_hashes",
+      "status": "PASS",
+      "details": {
+        "train.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\train.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 388398,
+          "actual_size_bytes": 388398,
+          "expected_sha256": "391ec9f5f38a125c16d31e1ceaed8002754f93864702ca3881904be510c70e6a",
+          "actual_sha256": "391ec9f5f38a125c16d31e1ceaed8002754f93864702ca3881904be510c70e6a",
+          "record_count": 1792,
+          "class_counts": {
+            "negativo": 586,
+            "neutro": 603,
+            "positivo": 603
+          },
+          "expected_class_counts": {
+            "negativo": 586,
+            "neutro": 603,
+            "positivo": 603
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        },
+        "validation.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\validation.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 66838,
+          "actual_size_bytes": 66838,
+          "expected_sha256": "30eafeccdce67b3b990422bb29876187853e4f754d8a238c97d48bfff3df74cc",
+          "actual_sha256": "30eafeccdce67b3b990422bb29876187853e4f754d8a238c97d48bfff3df74cc",
+          "record_count": 314,
+          "class_counts": {
+            "negativo": 104,
+            "neutro": 105,
+            "positivo": 105
+          },
+          "expected_class_counts": {
+            "negativo": 104,
+            "neutro": 105,
+            "positivo": 105
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        },
+        "frozen-test.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\frozen-test.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 184167,
+          "actual_size_bytes": 184167,
+          "expected_sha256": "5dc1cb34988cf6227e13d6e3480d97cb75894e328861db81de1ddcb78f3e91b6",
+          "actual_sha256": "5dc1cb34988cf6227e13d6e3480d97cb75894e328861db81de1ddcb78f3e91b6",
+          "record_count": 854,
+          "class_counts": {
+            "negativo": 279,
+            "neutro": 289,
+            "positivo": 286
+          },
+          "expected_class_counts": {
+            "negativo": 279,
+            "neutro": 289,
+            "positivo": 286
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        }
+      }
+    },
+    {
+      "name": "lineage_hashes_and_completeness",
+      "status": "PASS",
+      "details": {
+        "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\lineage.jsonl",
+        "status": "PASS",
+        "expected_size_bytes": 1294697,
+        "actual_size_bytes": 1294697,
+        "expected_sha256": "636079ae07db25a166e373627e87e72a08ba0bbf4c284346245df05edc5f8125",
+        "actual_sha256": "636079ae07db25a166e373627e87e72a08ba0bbf4c284346245df05edc5f8125",
+        "record_count": 3033,
+        "split_counts": {
+          "frozen-test": 854,
+          "null": 73,
+          "train": 1792,
+          "validation": 314
+        },
+        "retained_split_counts": {
+          "frozen-test": 854,
+          "train": 1792,
+          "validation": 314
+        },
+        "excluded_rows": 73,
+        "parse_errors": []
+      }
+    },
+    {
+      "name": "config_yaml_parse",
+      "status": "PASS",
+      "details": {
+        "path": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\experiments\\001-resource-efficient-finetune\\configs\\sft-lora-proposal.yaml",
+        "sha256": "e15d06916a16dab34e4c524b550c57798f7876c41fa3ca651b7256bf2edfa7c8"
+      }
+    },
+    {
+      "name": "config_paths_external_and_no_overwrite",
+      "status": "PASS",
+      "details": {
+        "model_name_or_path": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775",
+          "external": true,
+          "exists": true,
+          "no_overwrite": true
+        },
+        "cache_dir": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model",
+          "external": true,
+          "exists": true,
+          "no_overwrite": true
+        },
+        "dataset_dir": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1",
+          "external": true,
+          "exists": true,
+          "no_overwrite": true
+        },
+        "output_dir": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\runs\\g5-sft-lora-transformation-v1-20260822",
+          "external": true,
+          "exists": false,
+          "no_overwrite": true
+        },
+        "logging_dir": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\runs\\g5-sft-lora-transformation-v1-20260822\\logs",
+          "external": true,
+          "exists": false,
+          "no_overwrite": true
+        }
+      }
+    },
+    {
+      "name": "config_matches_approved_inputs",
+      "status": "PASS",
+      "details": {
+        "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "template": "qwen",
+        "stage": "sft",
+        "finetuning_type": "lora"
+      }
+    },
+    {
+      "name": "llamafactory_config_parser",
+      "status": "PASS",
+      "details": {
+        "model_name_or_path": "C:/Users/mdbaa/AppData/Local/alura-llama-factory/001-resource-efficient-finetune/cache/model/Qwen--Qwen2.5-0.5B-Instruct/7ae557604adf67be50417f59c2c2f167def9a775",
+        "dataset_dir": "C:/Users/mdbaa/AppData/Local/alura-llama-factory/001-resource-efficient-finetune/data-derived/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682/transformation-v1",
+        "dataset": [
+          "train"
+        ],
+        "eval_dataset": [
+          "validation"
+        ],
+        "template": "qwen",
+        "do_train": true,
+        "do_eval": true,
+        "finetuning_type": "lora"
+      }
+    },
+    {
+      "name": "llamafactory_dataset_info_registration",
+      "status": "PASS",
+      "details": {
+        "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\dataset_info.json",
+        "exists": true,
+        "keys": [
+          "frozen-test",
+          "train",
+          "validation"
+        ],
+        "attributes": [
+          {
+            "name": "train.jsonl",
+            "formatting": "alpaca",
+            "file": "train.jsonl"
+          },
+          {
+            "name": "validation.jsonl",
+            "formatting": "alpaca",
+            "file": "validation.jsonl"
+          }
+        ]
+      }
+    },
+    {
+      "name": "llamafactory_alpaca_converter",
+      "status": "PASS",
+      "details": {
+        "formatting": "alpaca",
+        "converted_prompt_role": "user"
+      }
+    },
+    {
+      "name": "config_and_tokenizer_identity",
+      "status": "PASS",
+      "details": {
+        "config_json_model_type": "qwen2",
+        "loaded_config_model_type": "qwen2",
+        "tokenizer_class": "Qwen2Tokenizer",
+        "tokenizer_vocab_size": 151643,
+        "config_vocab_size": 151936,
+        "special_tokens": {
+          "eos_token": "<|im_end|>",
+          "pad_token": "<|endoftext|>"
+        },
+        "config_loaded_without_weights": true,
+        "tokenizer_loaded_from_local_files": true,
+        "config_vocab_padding": 293
+      }
+    },
+    {
+      "name": "llamafactory_qwen_template",
+      "status": "PASS",
+      "details": {
+        "requested": "qwen",
+        "resolved_class": "Template",
+        "stop_words": [
+          "<|im_end|>"
+        ],
+        "tokenizer_mutated_in_memory_only": true
+      }
+    }
+  ],
+  "blocking_issues": [],
+  "evidence": {
+    "model": {
+      "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+      "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "cache_path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775",
+      "parameter_count": 490000000,
+      "file_hashes": [
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\.gitattributes",
+          "status": "PASS",
+          "expected_size_bytes": 1519,
+          "actual_size_bytes": 1519,
+          "expected_sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+          "actual_sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\LICENSE",
+          "status": "PASS",
+          "expected_size_bytes": 11343,
+          "actual_size_bytes": 11343,
+          "expected_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "actual_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\README.md",
+          "status": "PASS",
+          "expected_size_bytes": 4917,
+          "actual_size_bytes": 4917,
+          "expected_sha256": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15",
+          "actual_sha256": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\config.json",
+          "status": "PASS",
+          "expected_size_bytes": 659,
+          "actual_size_bytes": 659,
+          "expected_sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+          "actual_sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\generation_config.json",
+          "status": "PASS",
+          "expected_size_bytes": 242,
+          "actual_size_bytes": 242,
+          "expected_sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+          "actual_sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\merges.txt",
+          "status": "PASS",
+          "expected_size_bytes": 1671839,
+          "actual_size_bytes": 1671839,
+          "expected_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "actual_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\model.safetensors",
+          "status": "PASS",
+          "expected_size_bytes": 988097824,
+          "actual_size_bytes": 988097824,
+          "expected_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+          "actual_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\tokenizer.json",
+          "status": "PASS",
+          "expected_size_bytes": 7031645,
+          "actual_size_bytes": 7031645,
+          "expected_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "actual_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\tokenizer_config.json",
+          "status": "PASS",
+          "expected_size_bytes": 7305,
+          "actual_size_bytes": 7305,
+          "expected_sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+          "actual_sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583"
+        },
+        {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\model\\Qwen--Qwen2.5-0.5B-Instruct\\7ae557604adf67be50417f59c2c2f167def9a775\\vocab.json",
+          "status": "PASS",
+          "expected_size_bytes": 2776833,
+          "actual_size_bytes": 2776833,
+          "expected_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "actual_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ]
+    },
+    "dataset": {
+      "dataset_info_manifest": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\experiments\\001-resource-efficient-finetune\\manifests\\dataset-info.json",
+      "external_dataset_dir": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1",
+      "artifacts": {
+        "train.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\train.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 388398,
+          "actual_size_bytes": 388398,
+          "expected_sha256": "391ec9f5f38a125c16d31e1ceaed8002754f93864702ca3881904be510c70e6a",
+          "actual_sha256": "391ec9f5f38a125c16d31e1ceaed8002754f93864702ca3881904be510c70e6a",
+          "record_count": 1792,
+          "class_counts": {
+            "negativo": 586,
+            "neutro": 603,
+            "positivo": 603
+          },
+          "expected_class_counts": {
+            "negativo": 586,
+            "neutro": 603,
+            "positivo": 603
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        },
+        "validation.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\validation.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 66838,
+          "actual_size_bytes": 66838,
+          "expected_sha256": "30eafeccdce67b3b990422bb29876187853e4f754d8a238c97d48bfff3df74cc",
+          "actual_sha256": "30eafeccdce67b3b990422bb29876187853e4f754d8a238c97d48bfff3df74cc",
+          "record_count": 314,
+          "class_counts": {
+            "negativo": 104,
+            "neutro": 105,
+            "positivo": 105
+          },
+          "expected_class_counts": {
+            "negativo": 104,
+            "neutro": 105,
+            "positivo": 105
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        },
+        "frozen-test.jsonl": {
+          "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\frozen-test.jsonl",
+          "status": "PASS",
+          "expected_size_bytes": 184167,
+          "actual_size_bytes": 184167,
+          "expected_sha256": "5dc1cb34988cf6227e13d6e3480d97cb75894e328861db81de1ddcb78f3e91b6",
+          "actual_sha256": "5dc1cb34988cf6227e13d6e3480d97cb75894e328861db81de1ddcb78f3e91b6",
+          "record_count": 854,
+          "class_counts": {
+            "negativo": 279,
+            "neutro": 289,
+            "positivo": 286
+          },
+          "expected_class_counts": {
+            "negativo": 279,
+            "neutro": 289,
+            "positivo": 286
+          },
+          "parse_errors": [],
+          "schema": "PASS"
+        }
+      },
+      "lineage": {
+        "path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\data-derived\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682\\transformation-v1\\lineage.jsonl",
+        "status": "PASS",
+        "expected_size_bytes": 1294697,
+        "actual_size_bytes": 1294697,
+        "expected_sha256": "636079ae07db25a166e373627e87e72a08ba0bbf4c284346245df05edc5f8125",
+        "actual_sha256": "636079ae07db25a166e373627e87e72a08ba0bbf4c284346245df05edc5f8125",
+        "record_count": 3033,
+        "split_counts": {
+          "frozen-test": 854,
+          "null": 73,
+          "train": 1792,
+          "validation": 314
+        },
+        "retained_split_counts": {
+          "frozen-test": 854,
+          "train": 1792,
+          "validation": 314
+        },
+        "excluded_rows": 73,
+        "parse_errors": []
+      }
+    },
+    "config_yaml": {
+      "path": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\experiments\\001-resource-efficient-finetune\\configs\\sft-lora-proposal.yaml",
+      "sha256": "e15d06916a16dab34e4c524b550c57798f7876c41fa3ca651b7256bf2edfa7c8",
+      "keys": [
+        "bf16",
+        "cache_dir",
+        "cutoff_len",
+        "dataloader_num_workers",
+        "dataset",
+        "dataset_dir",
+        "do_eval",
+        "do_train",
+        "eval_dataset",
+        "eval_strategy",
+        "finetuning_type",
+        "fp16",
+        "gradient_accumulation_steps",
+        "gradient_checkpointing",
+        "learning_rate",
+        "logging_dir",
+        "logging_steps",
+        "logging_strategy",
+        "lora_alpha",
+        "lora_dropout",
+        "lora_rank",
+        "lora_target",
+        "lr_scheduler_type",
+        "max_grad_norm",
+        "model_name_or_path",
+        "model_revision",
+        "num_train_epochs",
+        "optim",
+        "output_dir",
+        "overwrite_output_dir",
+        "per_device_eval_batch_size",
+        "per_device_train_batch_size",
+        "pure_bf16",
+        "quantization_bit",
+        "report_to",
+        "save_only_model",
+        "save_strategy",
+        "save_total_limit",
+        "seed",
+        "stage",
+        "template",
+        "warmup_ratio",
+        "weight_decay"
+      ]
+    },
+    "llamafactory_args": {
+      "parsed": true
+    },
+    "model_metadata_loads": {
+      "config_loaded": true,
+      "tokenizer_loaded": true,
+      "weights_loaded": false,
+      "details": {
+        "config_json_model_type": "qwen2",
+        "loaded_config_model_type": "qwen2",
+        "tokenizer_class": "Qwen2Tokenizer",
+        "tokenizer_vocab_size": 151643,
+        "config_vocab_size": 151936,
+        "special_tokens": {
+          "eos_token": "<|im_end|>",
+          "pad_token": "<|endoftext|>"
+        },
+        "config_loaded_without_weights": true,
+        "tokenizer_loaded_from_local_files": true,
+        "config_vocab_padding": 293
+      }
+    }
+  },
+  "execution_flags": {
+    "model_loaded": false,
+    "training_run": false,
+    "inference_run": false,
+    "dry_run": false,
+    "forward_run": false,
+    "backward_run": false,
+    "weights_deserialized": false
+  },
+  "prohibited_scope_confirmed": [
+    "principal training",
+    "dry run",
+    "inference",
+    "baseline",
+    "forward",
+    "backward",
+    "checkpoint creation"
+  ]
+}
