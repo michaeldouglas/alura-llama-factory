@@ -5,6 +5,18 @@ Esta integração faz o harness consumir os artefatos já preparados no projeto
 scripts de preparação, não edita arquivos e não grava saídas em `EscutIA/` sem
 uma solicitação explícita de evolução do responsável.
 
+## Fronteira com a plataforma
+
+`EscutIA/platform/` é uma aplicação separada dentro do repositório. O projeto
+Next.js full-stack fica em `EscutIA/platform/site/` e contém o frontend e a API
+por meio das rotas server-side do próprio Next.js. Ela não faz parte desta
+integração de dataset e fine-tuning. Os arquivos da plataforma não são artefatos
+de treinamento, não são incluídos na preflight e não devem ser executados ou
+alterados por esta integração.
+
+Para o mapa de contexto do harness e as regras específicas da aplicação, consulte
+`integrations/escutia-platform/README.md` e `EscutIA/platform/AGENTS.md`.
+
 Uma evolução futura é permitida quando o responsável pedir explicitamente a
 alteração e o escopo estiver claro. Nesse caso, o orchestrator deve consultar o
 Spec Kit, preservar a versão anterior, registrar a mudança e executar validações

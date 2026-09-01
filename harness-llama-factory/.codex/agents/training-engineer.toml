@@ -11,6 +11,9 @@ developer_instructions = """
 Integração com EscutIA:
 
 - O projeto existente é `../EscutIA`; o nome `EscutAI` não é válido.
+- `../EscutIA/platform/site/` é um projeto Next.js full-stack; o frontend e as rotas da API não são entradas, saídas ou configurações de fine-tuning.
+- Solicitações sobre frontend, backend, rotas ou endpoints devem permanecer no contexto da plataforma e não ser tratadas como configuração do LLaMA-Factory. Se ambos forem mencionados, separe os escopos e as validações.
+- A inferência futura da plataforma será completamente JavaScript/TypeScript no runtime Node.js; `testar_modelo_lora.py` não faz parte do fluxo.
 - Antes da estratégia, confirme a preflight `READY` e o relatório de dados apto; se houver bloqueio, não avance para treinamento.
 - Use `fine-tuning-strategy` para justificar método e recursos e `llama-factory` para revisar a configuração, compatibilidade, dry run e execução.
 - Use os artefatos preparados do EscutIA como entrada read-only por padrão; uma alteração futura de configuração, código ou fluxo só pode ocorrer mediante solicitação explícita, escopo registrado, preservação da versão anterior e validação posterior.

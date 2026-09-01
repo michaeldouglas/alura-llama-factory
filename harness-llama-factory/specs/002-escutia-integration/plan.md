@@ -2,7 +2,7 @@
 
 ## Summary
 
-Adicionar uma integração isolada no harness que consuma o dataset preparado e a configuração LoRA existentes do `EscutIA/`. A integração terá perfil versionado, preflight read-only, renderizador de configuração LLaMA-Factory e testes. A feature `001-resource-efficient-finetune` permanece histórica e inalterada.
+Adicionar uma integração isolada no harness que consuma o dataset preparado e a configuração LoRA existentes do `EscutIA/`, mantendo `EscutIA/platform/site/` como aplicação Next.js full-stack separada. A integração terá perfil versionado, preflight read-only, renderizador de configuração LLaMA-Factory, regras explícitas de roteamento e testes. A feature `001-resource-efficient-finetune` permanece histórica e inalterada.
 
 ## Technical Context
 
@@ -11,6 +11,8 @@ Adicionar uma integração isolada no harness que consuma o dataset preparado e 
 **Storage**: perfil, scripts, testes e documentação no harness; caches, logs, checkpoints e outputs somente no `%LOCALAPPDATA%` externo  
 **Testing**: `uv run --python 3.12 pytest integrations/escutia/tests`  
 **Target**: projeto irmão `../EscutIA`, validado por nome e existência  
+**Application context**: `../EscutIA/platform/site/`, um projeto Next.js full-stack com frontend e rotas da API no mesmo projeto
+**Model runtime**: JavaScript/TypeScript no runtime Node.js do Next.js; `testar_modelo_lora.py` não faz parte do fluxo planejado
 **Agent contract**: os arquivos `.codex/agents/*.md` e `.codex/agents/*.toml` devem expressar o mesmo contrato de integração e delegação
 **Write mode**: o padrão protege a versão estável do EscutIA em modo read-only; uma evolução explicitamente solicitada pode escrever somente no escopo aprovado, preservando a versão anterior e validando o resultado
 **Constraints**: nenhuma escrita automática no EscutIA; nenhuma execução automática de preparação, inferência ou treinamento; não sobrescrever configuração externa; uma única política de ignorados no `.gitignore` da raiz
@@ -49,6 +51,11 @@ integrations/escutia/
 
 The integration does not add files under `EscutIA/`.
 
+The platform context is documented separately in `integrations/escutia-platform/`
+and `EscutIA/platform/AGENTS.md`. Its Next.js site and server-side API routes are
+not scanned as training artifacts and do not change the read-only fine-tuning
+integration.
+
 The operational agent configurations in `.codex/agents/` are part of the harness
 contract and must remain aligned between their Markdown documentation and TOML
 runtime definitions.
@@ -69,6 +76,13 @@ The preflight never writes a report to the target. It emits evidence to stdout;
 the current renderer writes only below the approved external root. Future
 project evolution is an explicit, scoped mode and must preserve the prior
 revision and run post-change validation.
+
+The application context is routed independently:
+
+```text
+EscutIA/platform/site (Next.js frontend + API routes) → model runtime Node.js
+EscutIA prepared artifacts → fine-tuning preflight → rendered LLaMA-Factory proposal
+```
 
 ## Complexity Tracking
 

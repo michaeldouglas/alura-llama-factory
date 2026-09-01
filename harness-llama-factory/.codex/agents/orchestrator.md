@@ -68,10 +68,53 @@ Garantir que o processo de fine-tuning seja organizado, reproduzível e executad
 
 ## Modo de integração com EscutIA
 
+### Separação de contextos
+
+`EscutIA/platform/` é a aplicação do produto, separada dos artefatos estáveis
+de fine-tuning em `EscutIA/`. O projeto Next.js full-stack fica em
+`EscutIA/platform/site/` e contém as rotas da API em `site/app/api/`. Solicitações
+sobre site, frontend, páginas, componentes, backend, rotas ou API devem ser roteadas para a plataforma e não
+devem ser interpretadas como tarefas de dataset ou treinamento. Consulte
+`integrations/escutia-platform/README.md` e as instruções locais da plataforma.
+Não use arquivos da plataforma como entradas da preflight ou como evidência de
+prontidão do treinamento. Se a solicitação abranger os dois contextos, divida o
+escopo antes de delegar e valide cada parte separadamente.
+
 Quando o alvo for o projeto existente `../EscutIA`, use o perfil e a preflight em
 `integrations/escutia/`. O modo padrão é somente leitura para proteger a versão
 estável atual: não execute scripts do EscutIA nem grave nele sem uma solicitação
 explícita de evolução do responsável.
+
+Quando o alvo for `EscutIA/platform/`, trate-o como uma tarefa exclusiva do site
+e use as skills `frontend-design`, `vercel-composition-patterns`,
+`vercel-react-best-practices` e `web-design-guidelines`, nessa ordem, quando a
+tarefa envolver UI ou código React/Next.js. Essas skills não devem ser usadas em
+tarefas de datasets, modelos, treinamento ou LLaMA-Factory. A
+`web-design-guidelines` deve consultar sua fonte atual antes de cada revisão.
+Para páginas de marketing, use também `copywriting` para revisar a mensagem,
+benefícios, CTAs e metadados editoriais, seguido de `seo-audit` para validar
+conteúdo e SEO técnico. Ambas são exclusivas da plataforma.
+Para animações, transições, estados de carregamento e microinterações, use
+também `interaction-design`, respeitando `prefers-reduced-motion` e priorizando
+`transform` e `opacity`.
+
+### Stripe sob demanda
+
+As skills Stripe e o MCP Stripe pertencem somente ao contexto
+`EscutIA/platform/site/`. Só use essas capacidades quando o pedido mencionar
+explicitamente Stripe, pagamentos, billing, Connect, marketplace, onboarding/KYC,
+Stripe Apps ou o planejamento de uma funcionalidade Stripe para o site. Não as
+ative em uma alteração comum do site e nunca em tarefas de dataset, modelo,
+treinamento ou LLaMA-Factory.
+
+Carregue apenas a skill correspondente ao pedido: `stripe-docs` para
+documentação, `stripe-best-practices` para decisões de integração,
+`connect-recommend` para Connect, `connect-required-verification-information`
+para KYC, `stripe-apps` para Stripe Apps, `stripe-projects` para provisionamento,
+`stripe-directory` para selecionar ou engajar provedores e `upgrade-stripe` para
+upgrades de API/SDK. O MCP pode estar configurado no projeto, mas não deve ser
+chamado automaticamente; operações externas e escritas exigem autorização da
+tarefa.
 
 Quando houver uma solicitação explícita de evolução, confirme o escopo dos
 arquivos, consulte os artefatos do Spec Kit, preserve a versão anterior, registre

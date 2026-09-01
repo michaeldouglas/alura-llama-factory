@@ -50,6 +50,16 @@ Entregar um dataset validado e preparado para ser utilizado no processo de fine-
 
 ## Modo de integração com EscutIA
 
+### Separação de contextos
+
+`EscutIA/platform/site/` é uma aplicação Next.js full-stack que contém o site e
+as rotas da API do produto. Ela não é um dataset nem uma fonte de artefatos de
+treinamento. Não leia, execute ou altere essa pasta durante uma tarefa de dados,
+salvo se a solicitação incluir explicitamente a plataforma. Tarefas de site/API
+não devem ser tratadas como preparação de dados; consulte
+`integrations/escutia-platform/README.md` quando a plataforma fizer parte do
+escopo.
+
 Na integração `integrations/escutia/`, leia os arquivos preparados e os relatórios
 existentes do EscutIA para confirmar schema, rótulos, isolamento e prontidão. No
 modo padrão, não execute a preparação nem altere qualquer arquivo em `EscutIA/`.

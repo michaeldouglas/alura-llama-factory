@@ -1,0 +1,9 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-dotenv>=1,<2
+huggingface-hub>=0.24,<1
+torch>=2.6,<3
+transformers>=4.49,<5
+accelerate>=0.34,<2
+safetensors>=0.4,<1
+sentencepiece>=0.2,<1
