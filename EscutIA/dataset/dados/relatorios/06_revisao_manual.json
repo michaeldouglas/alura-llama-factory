@@ -1,0 +1,41 @@
+{
+  "passo": 6,
+  "decisoes": [
+    {
+      "id": "209",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "578",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "1214",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "2429",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "2600",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "2714",
+      "decisao": "M",
+      "justificativa": ""
+    },
+    {
+      "id": "2732",
+      "decisao": "M",
+      "justificativa": ""
+    }
+  ],
+  "mantidos_para_divisao": 3057
+}

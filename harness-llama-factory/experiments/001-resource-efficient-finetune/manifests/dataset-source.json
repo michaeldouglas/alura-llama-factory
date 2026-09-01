@@ -1,0 +1,44 @@
+{
+  "repository_id": "cardiffnlp/tweet_sentiment_multilingual",
+  "revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+  "configuration": "portuguese",
+  "license_id": "CC-BY-3.0",
+  "approval_state": "APPROVED_RETRIEVED",
+  "retrieved_at": "2026-08-22T21:56:50.4818087Z",
+  "cache_path": "C:\\Users\\mdbaa\\AppData\\Local\\alura-llama-factory\\001-resource-efficient-finetune\\cache\\dataset-source\\cardiffnlp--tweet_sentiment_multilingual\\606156db529f327fd871515cccbe14dcbafef682",
+  "source_format": "JSONL files as retrieved; no decoding or transformation performed",
+  "transformation": "NONE",
+  "analysis_performed": false,
+  "source_text_in_repository": false,
+  "read_only": true,
+  "expected_download_bytes": 340595,
+  "retrieved_bytes": 340595,
+  "file_count": 3,
+  "file_manifest": [
+    {
+      "path": "data/portuguese/test.jsonl",
+      "size_bytes": 97981,
+      "sha256": "274fa27f495b42485698b49775bfa07226dc6acc8795bc350ad367234905fee8",
+      "git_blob_oid": "65d8c9947c0161fa8e4492cb162f3c1f0c1a731f",
+      "lfs_oid": "274fa27f495b42485698b49775bfa07226dc6acc8795bc350ad367234905fee8",
+      "url": "https://huggingface.co/datasets/cardiffnlp/tweet_sentiment_multilingual/resolve/606156db529f327fd871515cccbe14dcbafef682/data/portuguese/test.jsonl?download=true"
+    },
+    {
+      "path": "data/portuguese/train.jsonl",
+      "size_bytes": 207443,
+      "sha256": "95262fd2bf0e30657cf990ed9141aca8d9c0b0b18cdd35ef84b0488e2de9de09",
+      "git_blob_oid": "44f6a9671e4a0c24455a1b63ccc5cccaa00f891f",
+      "lfs_oid": "95262fd2bf0e30657cf990ed9141aca8d9c0b0b18cdd35ef84b0488e2de9de09",
+      "url": "https://huggingface.co/datasets/cardiffnlp/tweet_sentiment_multilingual/resolve/606156db529f327fd871515cccbe14dcbafef682/data/portuguese/train.jsonl?download=true"
+    },
+    {
+      "path": "data/portuguese/validation.jsonl",
+      "size_bytes": 35171,
+      "sha256": "906d1bd07d39e7bed4d5d22697986652c8a1b778a9107f1e62a31f81d7ade9ac",
+      "git_blob_oid": "9fbf337d20cab5a0bac393777ac4a0c1dcebe535",
+      "lfs_oid": "906d1bd07d39e7bed4d5d22697986652c8a1b778a9107f1e62a31f81d7ade9ac",
+      "url": "https://huggingface.co/datasets/cardiffnlp/tweet_sentiment_multilingual/resolve/606156db529f327fd871515cccbe14dcbafef682/data/portuguese/validation.jsonl?download=true"
+    }
+  ],
+  "free_bytes_after": 595224731648
+}

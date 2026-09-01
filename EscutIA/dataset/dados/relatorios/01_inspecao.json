@@ -1,0 +1,24 @@
+{
+  "passo": 1,
+  "arquivo": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\dataset.csv",
+  "dataset_local": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\dados\\dataset_local.csv",
+  "script_unificacao": "c:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\EscutIA\\dataset\\scripts\\baixar_dataset.py",
+  "sha256_dataset_local": "f81b32c82a9984dc9b0d78cbbb1dc8ae96abcea4369bb15fbcedb2e6cb35bfb0",
+  "sha256": "74c0c3b15ad86a6f54afb8fc9837d4e717f7894a4a9f85c5d58527705b70f81c",
+  "registros": 3063,
+  "campos": [
+    "id",
+    "texto",
+    "rotulo"
+  ],
+  "vazios": {
+    "id": 0,
+    "texto": 0,
+    "rotulo": 0
+  },
+  "distribuicao_rotulos": {
+    "positivo": 1021,
+    "neutro": 1021,
+    "negativo": 1021
+  }
+}

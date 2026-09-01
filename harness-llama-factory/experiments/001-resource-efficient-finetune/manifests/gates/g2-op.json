@@ -1,0 +1,52 @@
+{
+  "gate_id": "G2-OP",
+  "decision": "APPROVED",
+  "approved_at": "2026-08-22",
+  "approved_by": "experiment owner",
+  "scope": "Retrieve and verify only the ten files from the pinned Qwen/Qwen2.5-0.5B-Instruct revision into the approved external cache.",
+  "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "license_id": "Apache-2.0",
+  "parameter_count": 490000000,
+  "gated": false,
+  "cache_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/cache/model/Qwen--Qwen2.5-0.5B-Instruct/7ae557604adf67be50417f59c2c2f167def9a775",
+  "expected_download_bytes": 999604126,
+  "expected_file_count": 10,
+  "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen2.5-0.5B-Instruct/tree/7ae557604adf67be50417f59c2c2f167def9a775?recursive=true&expand=true",
+  "allowed_hosts": ["huggingface.co", "us.aws.cdn.hf.co"],
+  "allowed_methods": ["GET", "HEAD"],
+  "expected_files": [
+    {"path": ".gitattributes", "size": 1519, "metadata_oid": "a6344aac8c09253b3b630fb776ae94478aa0275b"},
+    {"path": "LICENSE", "size": 11343, "metadata_oid": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"},
+    {"path": "README.md", "size": 4917, "metadata_oid": "4b8373851d093eb9f3017443f27781c6971eff24"},
+    {"path": "config.json", "size": 659, "metadata_oid": "0dbb161213629a23f0fc00ef286e6b1e366d180f"},
+    {"path": "generation_config.json", "size": 242, "metadata_oid": "dfc11073787daf1b0f9c0f1499487ab5f4c93738"},
+    {"path": "merges.txt", "size": 1671839, "metadata_oid": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"},
+    {"path": "model.safetensors", "size": 988097824, "metadata_oid": "d7db405a3f0d9bf1ba5bdd4e4211db8022ebe4eb", "expected_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe"},
+    {"path": "tokenizer.json", "size": 7031645, "metadata_oid": "443909a61d429dff23010e5bddd28ff530edda00"},
+    {"path": "tokenizer_config.json", "size": 7305, "metadata_oid": "07bfe0640cb5a0037f9322287fbfc682806cf672"},
+    {"path": "vocab.json", "size": 2776833, "metadata_oid": "4783fe10ac3adce15ac8f358ef5462739852c569"}
+  ],
+  "storage_policy": {
+    "external_root_required": true,
+    "repository_internal_artifacts_prohibited": true,
+    "overwrite": "DENY",
+    "minimum_free_bytes_after": 2000000000
+  },
+  "authorized_actions": [
+    "retrieve_pinned_model_source",
+    "verify_model_metadata",
+    "verify_model_file_sizes",
+    "verify_model_file_hashes",
+    "write_model_source_manifest"
+  ],
+  "prohibited_actions": [
+    "dataset_retrieval",
+    "data_preparation",
+    "model_loading",
+    "inference",
+    "run_baseline",
+    "dry_validation",
+    "training"
+  ]
+}

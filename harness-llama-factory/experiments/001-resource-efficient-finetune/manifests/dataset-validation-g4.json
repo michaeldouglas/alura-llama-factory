@@ -1,0 +1,159 @@
+{
+  "report_type": "G4_DATA_READINESS",
+  "source_manifest": "C:\\Users\\mdbaa\\development\\alura\\alura-llama-factory\\experiments\\001-resource-efficient-finetune\\manifests\\dataset-source.json",
+  "source_revision": "606156db529f327fd871515cccbe14dcbafef682",
+  "decision": "DATA_BLOCKED",
+  "result": {
+    "decision": "DATA_BLOCKED",
+    "blockers": [
+      "cross_split_exact_or_normalized_overlap",
+      "cross_split_near_duplicates",
+      "non_portuguese_heuristic_records",
+      "direct_pii_indicators",
+      "sensitive_content_indicators"
+    ],
+    "record_counts": {
+      "test": 870,
+      "train": 1839,
+      "validation": 324
+    },
+    "label_counts": {
+      "negativo": 1011,
+      "neutro": 1011,
+      "positivo": 1011
+    },
+    "label_mapping": {
+      "0": "negativo",
+      "1": "neutro",
+      "2": "positivo"
+    },
+    "split_label_counts": {
+      "test": {
+        "negativo": 290,
+        "neutro": 290,
+        "positivo": 290
+      },
+      "train": {
+        "negativo": 613,
+        "neutro": 613,
+        "positivo": 613
+      },
+      "validation": {
+        "negativo": 108,
+        "neutro": 108,
+        "positivo": 108
+      }
+    },
+    "text_lengths_unicode_codepoints": {
+      "test": {
+        "min": 19,
+        "max": 141,
+        "mean": 72.522,
+        "over_280": 0
+      },
+      "train": {
+        "min": 18,
+        "max": 146,
+        "mean": 73.823,
+        "over_280": 0
+      },
+      "validation": {
+        "min": 19,
+        "max": 140,
+        "mean": 70.435,
+        "over_280": 0
+      }
+    },
+    "language_heuristic": {
+      "counts": {
+        "NON_PT_HEURISTIC": 1,
+        "PT_HEURISTIC": 2789,
+        "UNKNOWN_SHORT_OR_SLANG": 243
+      },
+      "method": "conservative token-marker heuristic; unknown short/slang text is not classified as non-Portuguese"
+    },
+    "duplicate_isolation": {
+      "pairs": {
+        "test__train": {
+          "exact_text_overlap": 0,
+          "normalized_text_overlap": 1,
+          "near_duplicate_pairs": 2
+        },
+        "test__validation": {
+          "exact_text_overlap": 0,
+          "normalized_text_overlap": 0,
+          "near_duplicate_pairs": 0
+        },
+        "train__validation": {
+          "exact_text_overlap": 0,
+          "normalized_text_overlap": 1,
+          "near_duplicate_pairs": 1
+        }
+      },
+      "near_duplicate_pairs_total": 3,
+      "near_duplicate_examples": [
+        {
+          "left_split": "test",
+          "left_index": 629,
+          "right_split": "train",
+          "right_index": 539,
+          "similarity": 0.9321
+        },
+        {
+          "left_split": "test",
+          "left_index": 676,
+          "right_split": "train",
+          "right_index": 592,
+          "similarity": 0.975
+        },
+        {
+          "left_split": "train",
+          "left_index": 19,
+          "right_split": "validation",
+          "right_index": 94,
+          "similarity": 0.9367
+        }
+      ]
+    },
+    "privacy_indicators": {
+      "direct_pii_records_by_category": {
+        "phone": 1
+      },
+      "records_with_urls": 0,
+      "records_with_social_handles": 561,
+      "note": "URLs and handles are reported separately; no source text is emitted."
+    },
+    "sensitive_content_indicators": {
+      "records_by_category": {
+        "hate_or_abuse": 10,
+        "profanity": 37,
+        "violence": 20
+      },
+      "method": "conservative keyword indicators requiring review; no source text is emitted."
+    },
+    "structural_validation": {
+      "global_errors": {},
+      "splits": {
+        "test": {
+          "records_seen": 870,
+          "valid_records": 870,
+          "errors": {}
+        },
+        "train": {
+          "records_seen": 1839,
+          "valid_records": 1839,
+          "errors": {}
+        },
+        "validation": {
+          "records_seen": 324,
+          "valid_records": 324,
+          "errors": {}
+        }
+      }
+    },
+    "source_records_analyzed": 3033,
+    "source_unchanged": true,
+    "derived_data_created": false
+  },
+  "derived_data_created": false
+}

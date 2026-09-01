@@ -1,0 +1,117 @@
+{
+  "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822",
+  "status": "PROPOSAL_ONLY",
+  "issued_at": "2026-08-22",
+  "owner_authorization": null,
+  "g7_authorization_required": true,
+  "principal_training_authorized": false,
+  "model": {
+    "repository_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision_sha": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "cache_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/cache/model/Qwen--Qwen2.5-0.5B-Instruct/7ae557604adf67be50417f59c2c2f167def9a775",
+    "manifest_sha256": "104c7f3e32eda38d55e9bc1848a727037588016f037d22e31b531f7416555b5c",
+    "license": "Apache-2.0",
+    "parameter_count": 494032768
+  },
+  "dataset": {
+    "repository_id": "cardiffnlp/tweet_sentiment_multilingual",
+    "revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+    "configuration": "portuguese",
+    "transformation_version": "transformation-v1",
+    "dataset_id": "cardiffnlp--tweet_sentiment_multilingual-606156db529f327fd871515cccbe14dcbafef682-transformation-v1",
+    "derived_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/data-derived/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682/transformation-v1",
+    "manifest_sha256": "5622f6d24c631abfa3ccfd42d6c2598ca73a741f330083faed5a7a310972b5c6",
+    "gate_sha256": "68c57cc1d357412096390e622addb4b359455b5d2a7f535075d742a61694b2f1",
+    "license_and_terms": "CC BY 3.0 with applicable X/Twitter terms preserved",
+    "training_records": 1792,
+    "validation_records": 314,
+    "frozen_test_records": 854,
+    "frozen_baseline_subset": {
+      "records": 90,
+      "class_counts": {"negativo": 30, "neutro": 30, "positivo": 30},
+      "selection_sha256": "517bab9d543de6f1e07b7ba5717f5b871dcafa8e14701c5dcffb237a0e2ed6f6"
+    },
+    "artifact_sha256": {
+      "train.jsonl": "391ec9f5f38a125c16d31e1ceaed8002754f93864702ca3881904be510c70e6a",
+      "validation.jsonl": "30eafeccdce67b3b990422bb29876187853e4f754d8a238c97d48bfff3df74cc",
+      "frozen-test.jsonl": "5dc1cb34988cf6227e13d6e3480d97cb75894e328861db81de1ddcb78f3e91b6",
+      "lineage.jsonl": "636079ae07db25a166e373627e87e72a08ba0bbf4c284346245df05edc5f8125"
+    }
+  },
+  "runtime": {
+    "environment_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/environments/py312-xpu",
+    "python": "3.12.12",
+    "torch": "2.9.1+xpu",
+    "llamafactory": "0.9.5",
+    "xpu_device_count": 1,
+    "hardware": "Intel Arc 140V shared 16GB XPU memory",
+    "runtime_report_sha256": "a566e7ed517369dc37b3a5626dfb87572e4c08cbb3c8bd0d24778779d6c0c5ba"
+  },
+  "configuration": {
+    "config_path": "experiments/001-resource-efficient-finetune/configs/sft-lora-proposal.yaml",
+    "config_sha256": "e15d06916a16dab34e4c524b550c57798f7876c41fa3ca651b7256bf2edfa7c8",
+    "entrypoint": "llamafactory-cli train",
+    "stage": "sft",
+    "finetuning_type": "lora",
+    "template": "qwen",
+    "seed": 42,
+    "cutoff_len": 256,
+    "per_device_train_batch_size": 1,
+    "per_device_eval_batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0001,
+    "num_train_epochs": 2.0,
+    "lr_scheduler_type": "cosine",
+    "warmup_ratio": 0.05,
+    "optim": "adamw_torch",
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "lora_target": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "bf16": true,
+    "gradient_checkpointing": true,
+    "dataloader_num_workers": 0,
+    "eval_strategy": "epoch",
+    "save_strategy": "epoch",
+    "save_total_limit": 2,
+    "save_only_model": false,
+    "overwrite_output_dir": false,
+    "report_to": "none",
+    "format_policy": "LLaMA-Factory parser-compatible default; save_safetensors was omitted because v0.9.5 rejects that key"
+  },
+  "prompt_and_parsing": {
+    "instruction": "Classifique o sentimento do texto em exatamente uma palavra: positivo, neutro ou negativo.",
+    "labels": ["negativo", "neutro", "positivo"],
+    "parsing": "trim surrounding whitespace, case-fold, accept exactly one of the three labels; any explanation or other text is invalid",
+    "evaluation": "same deterministic 90-record frozen subset for base and adapted comparison"
+  },
+  "outputs": {
+    "output_dir": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/runs/g5-sft-lora-transformation-v1-20260822",
+    "logging_dir": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/runs/g5-sft-lora-transformation-v1-20260822/logs",
+    "repository_output_forbidden": true,
+    "overwrite_output_dir": false,
+    "checkpoints_external_only": true
+  },
+  "estimates_and_stop_conditions": {
+    "principal_training_estimate_minutes": {"low": 25, "high": 50},
+    "hard_stop_minutes": 60,
+    "stop_on_oom_or_nonfinite": true,
+    "stop_on_cpu_fallback": true,
+    "stop_on_output_collision": true,
+    "stop_on_hash_or_gate_mismatch": true,
+    "stop_on_material_configuration_change": true,
+    "g6_benchmark_report_sha256": "a9aa5ab5683615ef3f54f961272e2a4f4002543886fdd27b4db516f99376d5b0",
+    "g5_compatibility_gate_sha256": "2403194c26163d944bc78e708ab7e581ae44d6df2f23a94cd8ef17087b1effc4",
+    "g6_validation_gate_sha256": "6e9df94e5f53216d65dc92e69d9f010adb0bb6496d3c34203f8295a5d150742e"
+  },
+  "authorization_boundary": {
+    "dry_validation_completed": true,
+    "optimizer_update_authorized": false,
+    "checkpoint_creation_authorized": false,
+    "inference_authorized": false,
+    "principal_training_authorized": false,
+    "next_required_artifact": "experiments/001-resource-efficient-finetune/manifests/gates/g7.json"
+  }
+}

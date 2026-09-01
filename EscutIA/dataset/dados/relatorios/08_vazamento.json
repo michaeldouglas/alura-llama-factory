@@ -1,0 +1,9 @@
+{
+  "passo": 8,
+  "status": "PASS",
+  "sobreposicoes": {
+    "treino_x_validacao": 0,
+    "treino_x_avaliacao": 0,
+    "validacao_x_avaliacao": 0
+  }
+}

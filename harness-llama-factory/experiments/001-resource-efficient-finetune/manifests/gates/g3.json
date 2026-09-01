@@ -1,0 +1,118 @@
+{
+  "gate_id": "G3",
+  "decision": "APPROVED",
+  "approved_at": "2026-08-22",
+  "approved_by": "experiment owner",
+  "authorization_basis": "Explicit owner authorization after review of reports/data-compliance-g3.md.",
+  "scope": "Recover only the unchanged Portuguese source files from the exact approved dataset revision into the approved external cache and record source metadata.",
+  "repository_id": "cardiffnlp/tweet_sentiment_multilingual",
+  "revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+  "configuration": "portuguese",
+  "license_id": "CC-BY-3.0",
+  "license_acceptance": {
+    "accepted": true,
+    "accepted_by": "experiment owner",
+    "accepted_at": "2026-08-22",
+    "obligations": [
+      "Preserve appropriate attribution and a link to CC BY 3.0.",
+      "Indicate changes for any separately derived artifact.",
+      "Do not imply endorsement by the authors or Cardiff NLP."
+    ],
+    "reference": "https://creativecommons.org/licenses/by/3.0/"
+  },
+  "x_twitter_terms_acceptance": {
+    "accepted": true,
+    "accepted_by": "experiment owner",
+    "accepted_at": "2026-08-22",
+    "scope": "Current X/Twitter Terms of Service, Privacy Policy, Developer Agreement and Developer Policy applicable at the time of approval.",
+    "references": [
+      "https://x.com/en/tos",
+      "https://developer.x.com/developer-terms/agreement",
+      "https://docs.x.com/developer-terms/policy"
+    ],
+    "operational_constraints_accepted": [
+      "No scraping or use outside the applicable terms and authorized interfaces.",
+      "Respect privacy expectations and removal, protected, blocked and private states.",
+      "Do not redistribute X content or derived artifacts publicly or to third parties from this step."
+    ]
+  },
+  "cache_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/cache/dataset-source/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682",
+  "metadata_url": "https://huggingface.co/api/datasets/cardiffnlp/tweet_sentiment_multilingual/tree/606156db529f327fd871515cccbe14dcbafef682?recursive=true",
+  "allowed_hosts": [
+    "huggingface.co",
+    "hf.co",
+    "cdn-lfs.huggingface.co",
+    "cdn-lfs-us-1.hf.co",
+    "cdn-lfs-eu-1.hf.co",
+    "us.aws.cdn.hf.co",
+    "cas-bridge.xethub.hf.co",
+    "cas-server.xethub.hf.co"
+  ],
+  "allowed_methods": ["GET", "HEAD"],
+  "expected_download_bytes": 340595,
+  "expected_file_count": 3,
+  "expected_files": [
+    {
+      "path": "data/portuguese/test.jsonl",
+      "size_bytes": 97981,
+      "git_blob_oid": "65d8c9947c0161fa8e4492cb162f3c1f0c1a731f",
+      "lfs_oid": "274fa27f495b42485698b49775bfa07226dc6acc8795bc350ad367234905fee8"
+    },
+    {
+      "path": "data/portuguese/train.jsonl",
+      "size_bytes": 207443,
+      "git_blob_oid": "44f6a9671e4a0c24455a1b63ccc5cccaa00f891f",
+      "lfs_oid": "95262fd2bf0e30657cf990ed9141aca8d9c0b0b18cdd35ef84b0488e2de9de09"
+    },
+    {
+      "path": "data/portuguese/validation.jsonl",
+      "size_bytes": 35171,
+      "git_blob_oid": "9fbf337d20cab5a0bac393777ac4a0c1dcebe535",
+      "lfs_oid": "906d1bd07d39e7bed4d5d22697986652c8a1b778a9107f1e62a31f81d7ade9ac"
+    }
+  ],
+  "excluded_repository_paths": [
+    ".gitattributes",
+    "data/arabic/**",
+    "data/english/**",
+    "data/french/**",
+    "data/german/**",
+    "data/hindi/**",
+    "data/italian/**",
+    "data/spanish/**",
+    "any repository path not listed in expected_files"
+  ],
+  "storage_policy": {
+    "external_root_required": true,
+    "repository_internal_artifacts_prohibited": true,
+    "overwrite": "DENY",
+    "minimum_free_bytes_after": 2000000000,
+    "source_files_read_only_after_retrieval": true
+  },
+  "authorized_actions": [
+    "validate_g3_gate",
+    "retrieve_pinned_dataset_source",
+    "verify_dataset_revision",
+    "verify_dataset_file_set",
+    "verify_dataset_lfs_identities",
+    "verify_dataset_file_sizes",
+    "verify_dataset_file_hashes",
+    "make_retrieved_source_read_only",
+    "write_dataset_source_manifest"
+  ],
+  "prohibited_actions": [
+    "read_dataset_records_for_analysis",
+    "validate_dataset_content",
+    "clean_dataset",
+    "normalize_dataset",
+    "filter_or_remove_records",
+    "sample_dataset",
+    "convert_dataset",
+    "create_derived_data",
+    "publish_or_redistribute_source",
+    "inference",
+    "baseline",
+    "dry_validation",
+    "training"
+  ]
+}

@@ -1,218 +1,107 @@
-# Byte-compiled / optimized / DLL files
+# Graphify é gerado a partir do código e mantido localmente
+**/graphify-out/
+
+# Ambientes Python e caches locais
+.venv/
+venv/
+env/
 __pycache__/
 *.py[codz]
-*$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-#   Usually these files are written by a python script from a template
-#   before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .tox/
 .nox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
 coverage.xml
-*.cover
-*.py.cover
+htmlcov/
 .hypothesis/
-.pytest_cache/
-cover/
+.cache/
 
-# Translations
-*.mo
-*.pot
+# Cache local do serviço FastAPI de inferência
+EscutIA/platform/api-modelos/modelo/
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# Checkpoints automáticos dos notebooks
+.ipynb_checkpoints/
 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-# Pipfile.lock
-
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-# uv.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-# poetry.lock
-# poetry.toml
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-# pdm.lock
-# pdm.toml
-.pdm-python
-.pdm-build/
-
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-# pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# Redis
-*.rdb
-*.aof
-*.pid
-
-# RabbitMQ
-mnesia/
-rabbitmq/
-rabbitmq-data/
-
-# ActiveMQ
-activemq-data/
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# Ambientes locais, segredos e arquivos temporários
 .env
-.envrc
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#   be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#   and can be added to the global gitignore or merged into this file.  For a more nuclear
-#   option (not recommended) you can uncomment the following to ignore the entire idea folder.
-# .idea/
-
-# Abstra
-#   Abstra is an AI-powered process automation framework.
-#   Ignore directories containing user credentials, local state, and settings.
-#   Learn more at https://abstra.io/docs
-.abstra/
-
-# Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#   you could uncomment the following to ignore the entire vscode folder
-# .vscode/
-# Temporary file for partial code execution
+.env.*
+!.env.example
+.pypirc
+*.pem
+*.key
+*.p12
+*.pfx
+Thumbs.db
+.DS_Store
 tempCodeRunnerFile.py
 
-# Ruff stuff:
-.ruff_cache/
+# Artefatos gerados pelo fine-tuning; os marcadores .gitkeep permanecem versionados
+EscutIA/fine_tuning_lora/resultados/*
+!EscutIA/fine_tuning_lora/resultados/.gitkeep
+EscutIA/fine_tuning_lora/logs/*
+!EscutIA/fine_tuning_lora/logs/.gitkeep
+EscutIA/fine_tuning_lora/checkpoints/*
+!EscutIA/fine_tuning_lora/checkpoints/.gitkeep
 
-# PyPI configuration file
-.pypirc
+# Nova organização: todos os artefatos gerados ficam sob outputs/
+EscutIA/fine_tuning_lora/outputs/resultados/*
+!EscutIA/fine_tuning_lora/outputs/resultados/.gitkeep
+EscutIA/fine_tuning_lora/outputs/logs/*
+!EscutIA/fine_tuning_lora/outputs/logs/.gitkeep
+EscutIA/fine_tuning_lora/outputs/checkpoints/*
+!EscutIA/fine_tuning_lora/outputs/checkpoints/.gitkeep
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# Experimentos locais do MLflow
+EscutIA/mlflow/*
+!EscutIA/mlflow/.gitkeep
+!EscutIA/mlflow/README.md
 
-# Streamlit
-.streamlit/secrets.toml
+# Backends e artefatos locais do MLflow
+mlruns/
+**/mlruns/
+EscutIA/mlflow.db
+EscutIA/mlflow.db-*
+EscutIA/mlflow-artifacts/
+
+# Artefatos locais da publicação no Hugging Face
+# O modelo completo e o download local são gerados novamente quando necessário.
+EscutIA/huggingface/EscutIA_Modelo/
+EscutIA/huggingface/EscutIA_Modelo_QLoRA/
+EscutIA/huggingface/modelos/completos/
+EscutIA/huggingface/modelos/testes/
+EscutIA/huggingface/modelos/*.zip
+**/.cache/
+
+# Pesos e checkpoints de modelos em qualquer parte do repositório
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Saídas geradas pelos notebooks QLoRA e pelas avaliações locais
+EscutIA/fine_tuning_qlora/outputs/*
+!EscutIA/fine_tuning_qlora/outputs/.gitkeep
+EscutIA/fine_tuning_lora/outputs/avaliacao/
+EscutIA/fine_tuning_lora/outputs/comparacao/
+
+*.log
+EscutIA/CURSO_FINE_TUNING_LLAMА_FACTORY.md
+
+# Artefatos pesados dos experimentos do harness
+harness-llama-factory/experiments/**/environments/
+harness-llama-factory/experiments/**/cache/
+harness-llama-factory/experiments/**/dataset-source/
+harness-llama-factory/experiments/**/data-derived/
+harness-llama-factory/experiments/**/runs/
+
+# Estado local do Spec Kit do harness
+harness-llama-factory/.specify/feature.json
+harness-llama-factory/.specify/extensions/*/local-config.yml

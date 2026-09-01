@@ -1,0 +1,33 @@
+{
+  "gate_id": "G7",
+  "decision": "APPROVED",
+  "issued_at": "2026-08-22",
+  "issued_by": "orchestrator",
+  "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822",
+  "proposal_sha256": "0014e5bd1d577bcabf72278f72922919af21e9c49152716b48ab5ab7741c573f",
+  "owner_authorization": {
+    "received_at": "2026-08-22",
+    "authorization_text": "Eu autorizo o G7 para executar uma única vez a proposta 001-resource-efficient-finetune-g7-proposal-20260822, hash 0014e5bd1d577bcabf72278f72922919af21e9c49152716b48ab5ab7741c573f, usando o modelo e dataset registrados, a configuração aprovada, saída externa e limite rígido de 60 minutos.",
+    "proposal_id": "001-resource-efficient-finetune-g7-proposal-20260822",
+    "proposal_sha256": "0014e5bd1d577bcabf72278f72922919af21e9c49152716b48ab5ab7741c573f",
+    "single_principal_run": true,
+    "external_output_only": true,
+    "hard_stop_minutes": 60
+  },
+  "authorization_requirements": {
+    "must_name_proposal_id": true,
+    "must_match_proposal_sha256": true,
+    "must_match_model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "must_match_dataset_revision": "606156db529f327fd871515cccbe14dcbafef682",
+    "must_match_transformation_version": "transformation-v1",
+    "must_match_config_sha256": "e15d06916a16dab34e4c524b550c57798f7876c41fa3ca651b7256bf2edfa7c8",
+    "must_match_output_dir": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/runs/g5-sft-lora-transformation-v1-20260822",
+    "must_accept_hard_stop_minutes": 60,
+    "must_authorize_one_principal_run": true
+  },
+  "principal_training_authorized": true,
+  "optimizer_update_authorized": true,
+  "checkpoint_creation_authorized": true,
+  "execution_block_reason": null,
+  "next_action": "Execute exactly one guarded principal run and preserve its run manifest."
+}

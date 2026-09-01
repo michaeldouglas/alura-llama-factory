@@ -1,0 +1,29 @@
+{
+  "gate_id": "G4-DERIVED",
+  "decision": "DATA_READY",
+  "issued_at": "2026-08-22",
+  "issued_by": "orchestrator",
+  "scope_hash": "36af525435b7e280364dd86b31e6ecbdc4b29ba8d8f53717e2805af53d346cfa",
+  "scope": "The separately prepared transformation-v1 derivative is ready for the next gated strategy review. This decision does not replace the original G4 DATA_BLOCKED source decision and does not authorize training.",
+  "source_report": "experiments/001-resource-efficient-finetune/reports/data-remediation-g4.md",
+  "readiness_report": "experiments/001-resource-efficient-finetune/reports/data-readiness-g4-derived.md",
+  "dataset_info": "experiments/001-resource-efficient-finetune/manifests/dataset-info.json",
+  "dataset_id": "cardiffnlp--tweet_sentiment_multilingual-606156db529f327fd871515cccbe14dcbafef682-transformation-v1",
+  "source_revision_sha": "606156db529f327fd871515cccbe14dcbafef682",
+  "transformation_version": "transformation-v1",
+  "external_output_path": "%LOCALAPPDATA%/alura-llama-factory/001-resource-efficient-finetune/data-derived/cardiffnlp--tweet_sentiment_multilingual/606156db529f327fd871515cccbe14dcbafef682/transformation-v1",
+  "counts": {"train": 1792, "validation": 314, "frozen_test": 854, "lineage_rows": 3033},
+  "checks": {
+    "alpaca_schema": "PASS",
+    "class_distribution": "PASS",
+    "train_range_200_to_2000": "PASS",
+    "frozen_test_minimum_30_per_class": "PASS",
+    "cross_split_exact_normalized_near_duplicate_isolation": "PASS",
+    "lineage_complete": "PASS",
+    "source_unchanged": "PASS",
+    "artifact_hashes": "PASS"
+  },
+  "authorized_actions": ["use_derived_dataset_for_strategy_review", "use_derived_dataset_for_model_compatibility_review"],
+  "prohibited_actions": ["replace_original_g4_decision", "model_loading", "inference", "baseline", "dry_validation", "training"],
+  "training_authorized": false
+}
