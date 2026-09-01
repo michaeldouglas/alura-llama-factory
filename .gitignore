@@ -41,5 +41,19 @@ EscutIA/mlflow.db
 EscutIA/mlflow.db-*
 EscutIA/mlflow-artifacts/
 
+# Artefatos locais da publicação no Hugging Face
+# O modelo completo e o download local são gerados novamente quando necessário.
+EscutIA/huggingface/EscutIA_Modelo/
+EscutIA/huggingface/EscutIA_Modelo_QLoRA/
+EscutIA/huggingface/modelos/completos/
+EscutIA/huggingface/modelos/testes/
+**/.cache/
+
+# Saídas geradas pelos notebooks QLoRA e pelas avaliações locais
+EscutIA/fine_tuning_qlora/outputs/*
+!EscutIA/fine_tuning_qlora/outputs/.gitkeep
+EscutIA/fine_tuning_lora/outputs/avaliacao/
+EscutIA/fine_tuning_lora/outputs/comparacao/
+
 *.log
 EscutIA/CURSO_FINE_TUNING_LLAMА_FACTORY.md

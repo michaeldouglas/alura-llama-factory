@@ -1,0 +1,12 @@
+# Dependências do aplicativo de terminal EscutAI Modelos.
+# O restante do script utiliza somente a biblioteca padrão do Python.
+questionary>=2.1,<3
+rich>=13.7,<15
+huggingface-hub>=0.24,<1
+hf_xet>=1,<2
+torch>=2.6,<3
+transformers>=4.49,<5
+peft>=0.14,<1
+accelerate>=0.34,<2
+safetensors>=0.4,<1
+sentencepiece>=0.2,<1
